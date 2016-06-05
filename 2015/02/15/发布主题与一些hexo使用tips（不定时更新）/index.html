@@ -1,0 +1,401 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>发布主题与一些hexo使用tips（不定时更新） | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="已经半个月没写博客了，上次折腾得差不多之后，又添加了百度统计、rss、sitemap等等。然后参照这个教程，搞了Hexo多Repo部署，现在国内外有github和gitcafe双保险，至少不用担心博客因托管处挂掉而挂啦。
+本来我只想把Tinny这个主题fork下来自己整些私人定制的修改，没想到缝缝补补地填了不少坑。现在有童鞋建议我把修改好的主题发布一下，考虑到原作者说Tinny is not pretty，已经在整新主题，那估计Tinny不会再更新了。所以我就厚着脸皮把我折腾出来的主题放github上了，c之后有cpp，Tinny之后有Tinnypp，各位亲们如果有什么问题欢迎给我发issue哈。
+最后，自己折腾博客以来，经历了不少教训也攒了些tips。因为来源复杂，除了直接百度或者以前文章提到的教程里有，还些需要花不少功夫才发现。为了方便自己，也方便各位hexoer，现在把它们贴出来share一下，需要者自取咯~
+
+修改样式文件时，要注意保留某些空格与原来相同，要不然会报错。
+
+HexoError解决方法：将主题language下的有空格的项都加上双引号。
+
+删除标签：先在文章里删除标签，然后执行：hexo clean和hexo g重新生成就好了。
+
+主页文章显示摘要:编辑md文件的时候，在要作为摘要的文字后面添加">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/02/15/发布主题与一些hexo使用tips（不定时更新）/" title="发布主题与一些hexo使用tips（不定时更新）" itemprop="url">发布主题与一些hexo使用tips（不定时更新）</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2015-02-15T06:54:10.000Z" itemprop="datePublished">2015年 2月 15日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		
+		</div>
+		
+		<p>已经半个月没写博客了，上次折腾得差不多之后，又添加了百度统计、rss、sitemap等等。然后参照<a href="http://blog.yuanbin.me/posts/2014/05/multi-deployment-with-hexo.html" target="_blank" rel="external">这个教程</a>，搞了Hexo多Repo部署，现在国内外有github和gitcafe双保险，至少不用担心博客因托管处挂掉而挂啦。</p>
+<p>本来我只想把Tinny这个主题fork下来自己整些私人定制的修改，没想到缝缝补补地填了不少坑。现在有童鞋建议我把修改好的主题发布一下，考虑到原作者说Tinny is not pretty，已经在整新主题，那估计Tinny不会再更新了。所以我就厚着脸皮把我折腾出来的主题放github上了，c之后有cpp，Tinny之后有<a href="https://github.com/levonlin/Tinnypp" target="_blank" rel="external">Tinnypp</a>，各位亲们如果有什么问题欢迎给我发<a href="https://github.com/levonlin/Tinnypp/issues" target="_blank" rel="external">issue</a>哈。</p>
+<p>最后，自己折腾博客以来，经历了不少教训也攒了些tips。因为来源复杂，除了直接百度或者以前文章提到的教程里有，还些需要花不少功夫才发现。为了方便自己，也方便各位hexoer，现在把它们贴出来share一下，需要者自取咯~</p>
+<ul>
+<li><p>修改样式文件时，要注意保留某些空格与原来相同，要不然会报错。</p>
+</li>
+<li><p>HexoError解决方法：将主题language下的有空格的项都加上双引号。</p>
+</li>
+<li><p>删除标签：先在文章里删除标签，然后执行：hexo clean和hexo g重新生成就好了。</p>
+</li>
+<li><p>主页文章显示摘要:编辑md文件的时候，在要作为摘要的文字后面添加<a id="more"></a>即可。</p>
+</li>
+<li><p>插入图片的格式为<code>![图片名称](链接地址)</code>，有两种方式：</p>
+<ul>
+<li>使用本地路径：在hexo/source目录下新建一个img文件夹，将图片放入该文件夹下，插入图片时链接即为/img/图片名称。  </li>
+<li>使用<a href="http://weibotuchuang.sinaapp.com/" target="_blank" rel="external">微博图床</a>：将图片拖入区域中，会生成图片的URL，这就是链接地址。不过所需火狐插件貌似不能用，而chrome插件又非官方，会被chrome强制停用，要用需要<a href="http://tieba.baidu.com/p/3091171066" target="_blank" rel="external">修改组策略模板</a>或者使用其他云存储平台的图床。</li>
+</ul>
+</li>
+</ul>
+<p>强烈建议使用图床服务，本地路径加载不是一般地慢，而且每次要push这么多图也要push很久。最关键地，pages服务好像有空间限制的，要是不停地在git文件里传高清图，时间久了你懂的。</p>
+<ul>
+<li><p>想在首页文章预览添加图片可以在文章开头添加photo参数，如下:<br><code>photos:http://xxx.com/photo.jpg</code><br>然而因为pacman主题的文章预览有字数限制，所以基于pacman的一系列主题一般是用不了这个功能滴。</p>
+</li>
+<li><p>从github切换到gitcafe的时候最好先把.deploy文件夹删除后重新hexo d一下，不然可能上传不到gitcafe。</p>
+</li>
+<li><p>gitcafe-pages设置域名时大小写需与dns里的一致。</p>
+</li>
+<li><p>因为markdown中的html会被直接解析，所以用于展示的html标签要么用`括起来；要么把<code>&lt;</code>和<code>&gt;</code>用<code>&amp;lt;</code>和<code>&amp;gt;</code>替代。</p>
+</li>
+<li><p>由于hexo升级等原因，导致hexo-renderer-marked和hexo-renderer-stylus与hexo2.x不兼容。现在装hexo2.x时<code>npm install</code>后还需执行<code>npm install hexo-renderer-marked@0.1</code>和<code>npm install hexo-renderer-stylus@0.1</code>才能正常使用。</p>
+</li>
+<li><p>目前使用的hexo版本中，使用markdown表格时必须在表格和上文间空有一行。此外如果表头、控制行（就是<code>---</code>+<code>|</code>）、表体缺了一个或者三者的<code>|</code>数目和位置不能对应上都会导致无法正常解析。在markdown语法中，控制行用来控制表头和标题内容的对齐方式，<code>---</code>和<code>:---</code>表示左对齐，<code>:---:</code>表示居中，<code>---:</code>表示右对齐。</p>
+</li>
+<li><p>使用默认代码高亮时，代码中不要有空白行，否则这些空白行会给挤到高亮块的开头和结尾。</p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Tinnypp/">Tinnypp</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/博客之路/">博客之路</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2015/02/15/发布主题与一些hexo使用tips（不定时更新）/" data-title="发布主题与一些hexo使用tips（不定时更新） | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/27/探索ubuntu如何下快速启动印象笔记（网页版）/" title="探索ubuntu如何下快速启动印象笔记（网页版）">
+  <strong>新一篇:</strong><br/>
+  <span>
+  探索ubuntu如何下快速启动印象笔记（网页版）</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/31/装修记再续与折腾域名/"  title="装修记再续与折腾域名">
+ <strong>旧一篇:</strong><br/> 
+ <span>装修记再续与折腾域名
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="发布主题与一些hexo使用tips（不定时更新）" data-thread-key="发布主题与一些hexo使用tips（不定时更新）" data-author-key="null" data-url="http://levonlin.info/post/发布主题与一些hexo使用tips（不定时更新）"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

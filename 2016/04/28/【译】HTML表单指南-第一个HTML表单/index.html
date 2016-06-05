@@ -1,0 +1,461 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】HTML表单指南---第一个HTML表单 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="前言这个系列译自mdn上的一份表单指南，原文详尽阐述了表单相关的基础知识。而表单作为一个经典的页面交互方式，是每个前端工程师绕不开的话题，通过翻译这个系列的文章既是有助于扫清自己的知识盲区，也希望借此能让更多人受惠吧~
+先列下目录：
+
+第一个HTML表单
+怎样构建HTML表单
+原生表单组件
+HTML">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/28/【译】HTML表单指南-第一个HTML表单/" title="【译】HTML表单指南---第一个HTML表单" itemprop="url">【译】HTML表单指南---第一个HTML表单</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-04-28T11:30:09.000Z" itemprop="datePublished">2016年 4月 28日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一个HTML表单"><span class="toc-number">2.</span> <span class="toc-text">第一个HTML表单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始之前"><span class="toc-number">2.1.</span> <span class="toc-text">开始之前</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#啥是HTML表单？"><span class="toc-number">2.1.1.</span> <span class="toc-text">啥是HTML表单？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理表单需要什么？"><span class="toc-number">2.1.2.</span> <span class="toc-text">处理表单需要什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计你的表单"><span class="toc-number">2.2.</span> <span class="toc-text">设计你的表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尽情地写一波HTML吧"><span class="toc-number">2.3.</span> <span class="toc-text">尽情地写一波HTML吧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#form元素："><span class="toc-number">2.3.1.</span> <span class="toc-text">form元素：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加label、input和textarea元素"><span class="toc-number">2.3.2.</span> <span class="toc-text">添加label、input和textarea元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再加个button来完成表单"><span class="toc-number">2.3.3.</span> <span class="toc-text">再加个button来完成表单</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用CSS装扮漂亮点"><span class="toc-number">2.4.</span> <span class="toc-text">用CSS装扮漂亮点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据发给你的web服务器"><span class="toc-number">2.5.</span> <span class="toc-text">将数据发给你的web服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">2.6.</span> <span class="toc-text">结论</span></a></li></ol></li></ol>
+		</div>
+		
+		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这个系列译自<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Forms" target="_blank" rel="external">mdn上的一份表单指南</a>，原文详尽阐述了表单相关的基础知识。而表单作为一个经典的页面交互方式，是每个前端工程师绕不开的话题，通过翻译这个系列的文章既是有助于扫清自己的知识盲区，也希望借此能让更多人受惠吧~</p>
+<p>先列下目录：</p>
+<ul>
+<li><a href="./#第一个HTML表单">第一个HTML表单</a></li>
+<li><a href="">怎样构建HTML表单</a></li>
+<li><a href="">原生表单组件</a></li>
+<li>HTML表单的CSS<ul>
+<li><a href="">HTML表单样式</a></li>
+<li><a href="">HTML表单高级样式</a></li>
+<li><a href="">表单组件的属性兼容表</a></li>
+</ul>
+</li>
+<li><a href="">发送表单数据</a></li>
+<li><a href="">表单数据验证</a></li>
+<li><a href="">怎样创建定制表单组件</a></li>
+<li><a href="">通过JavaScript发送表单</a><ul>
+<li><a href="">使用FormData对象</a></li>
+</ul>
+</li>
+<li><a href="">遗留浏览器中的表单</a></li>
+</ul>
+<blockquote>
+<p><strong>声明</strong>：本文源于mdn，遵循mdn的<a href="https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses" target="_blank" rel="external">相关协议</a>，翻译过程可能会加入我个人的理解，转载请注明出处。</p>
+</blockquote>
+<p>好，该说的都说完了，正文开始~</p>
+<h1 id="第一个HTML表单"><a href="#第一个HTML表单" class="headerlink" title="第一个HTML表单"></a>第一个HTML表单</h1><blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/My_first_HTML_form" target="_blank" rel="external">原文</a></p>
+</blockquote>
+<p>这是一篇介绍HTML表单的文章，通过一个简单的contact表单，我们可以看到构建HTML表单的所有基本知识。本文假设你已掌握基本的HTML和CSS，但还不了解HTML表单。</p>
+<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><h3 id="啥是HTML表单？"><a href="#啥是HTML表单？" class="headerlink" title="啥是HTML表单？"></a>啥是HTML表单？</h3><p>HTML表单是用户和网站或引用的一个主要交互点。表单允许用户发送数据给网站，大多数时候数据会发到服务器上，然而页面也可以把数据拦下来给自己用。</p>
+<p>一个HTML表单由一或多个部件组成，这些部件可以是文本框（单行或多行）、选择框、按钮、复选框、或单选按钮。通常，部件们会伴随一个描述它们使用目的的label出现。</p>
+<h3 id="处理表单需要什么？"><a href="#处理表单需要什么？" class="headerlink" title="处理表单需要什么？"></a>处理表单需要什么？</h3><p>处理HTML时，你只需一个文本编辑器和一个浏览器即可。当然，你也也可以使用诸如<a href="http://www.microsoft.com/visualstudio" target="_blank" rel="external">Visual Studio</a>、 <a href="http://www.eclipse.org/" target="_blank" rel="external">Eclipse</a>，<a href="http://www.aptana.com/" target="_blank" rel="external">Aptana</a>之类的IDE。</p>
+<p>此外，HTML表单和常规的HTML的主要区别在于表单收集的数据往往会被发送到服务器，这时你就需要搭个服务器来接受和处理这些数据了。至于如何搭建服务器，本文不作讨论，欲知详情，你可以看一篇这方面的文章：<a href="">发送表单数据</a>。</p>
+<h2 id="设计你的表单"><a href="#设计你的表单" class="headerlink" title="设计你的表单"></a>设计你的表单</h2><p>在开始撸代码前，最好先花点时间来构思下我们的表单。一个快速设计模型有助于你定义希望从用户那获得的数据集。从用户体验（UX）的观点来看，要知道你的表单越大，你越有可能失去用户。所以你应该保持简单和专注，只问你真想要的内容。要具体讨论表单的用户体验已超出本文的范围，给几篇这方面的文章把：</p>
+<ul>
+<li>Smashing Magazine有不少<a href="http://uxdesign.smashingmagazine.com/tag/forms/" target="_blank" rel="external">和表单UX有关的好文章</a>，但其中最重要的莫属<a href="Extensive Guide To Web Form Usability">Extensive Guide To Web Form Usability</a>啦。</li>
+<li>UXMatters上的资源也蛮丰富的，从<a href="http://www.uxmatters.com/mt/archives/2012/05/7-basic-best-practices-for-buttons.php" target="_blank" rel="external">基本的最佳实践</a>到类似<a href="http://www.uxmatters.com/mt/archives/2010/03/pagination-in-web-forms-evaluating-the-effectiveness-of-web-forms.php" target="_blank" rel="external">多页表单</a>复杂内容都有。</li>
+</ul>
+<p>在本文，我们将建立一个简单的contact表单，草图如下：</p>
+<p><img src="https://developer.mozilla.org/files/4579/form-sketch-low.jpg" alt=""></p>
+<p>在我们的表单里，有三个文本框和一个按钮。文本框用来询问用户的名字、邮箱和他们想发送的消息，点击按钮则会把数据发给服务器。</p>
+<h2 id="尽情地写一波HTML吧"><a href="#尽情地写一波HTML吧" class="headerlink" title="尽情地写一波HTML吧"></a>尽情地写一波HTML吧</h2><p>现在我们要开始编码了，建立起我们的contact表单，一共需要这几个的HTML元素： <code>&lt;form&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;button&gt;</code>。</p>
+<h3 id="form元素："><a href="#form元素：" class="headerlink" title="form元素："></a>form元素：</h3><p>所有的HTML表单都和下面代码一样以<code>&lt;form&gt;</code>元素开头：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/my-handling-form-page"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;form&gt;</code>元素让我们定义了一个表单。虽然它也是个类似<code>&lt;div&gt;</code>或<code>&lt;p&gt;</code>一样的容器元素，但它还支持一些特有属性来定义表单行为。这些属性是可选的，而最佳实践是至少得设置<code>action</code>和<code>method</code>属性：</p>
+<ul>
+<li><code>action</code>属性定义了表单收集的数据会被送往的地址（URL）</li>
+<li><code>method</code>属性则定义了用什么http方式来发送数据（比如”get”或”post”方式）</li>
+</ul>
+<p>若你还想知道这些属性是如何工作的，请阅读<a href="">发送和表单数据</a>。</p>
+<h3 id="添加label、input和textarea元素"><a href="#添加label、input和textarea元素" class="headerlink" title="添加label、input和textarea元素"></a>添加label、input和textarea元素</h3><p>我们简单的contact表单只有三个带label的文本框：用于姓名输入域的是个基本的单行文本框；用于邮箱的输入域也是单行文本框，不过它只能填入邮箱地址；最后用于发生消息的输入域则是个基本的多行文本框。</p>
+<p>HTML代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/my-handling-form-page"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>Name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span>E-mail:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"msg"</span>&gt;</span>Message:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;div&gt;</code>元素在这里用于结构化我们的代码并方便我们定义样式。此外还要注意<code>&lt;label&gt;</code>元素<code>for</code>属性的使用，该属性是一种显式联系label和表单组件的方法，可以给它赋予想要关联组件的<code>id</code>值。这样一来，用户就可以通过点击label来激活表单组件了。如果你还想了解<code>for</code><br>属性的其他好处，就参考这篇文章吧：<a href="">怎样构建HTML表单</a></p>
+<p>至于<code>&lt;input&gt;</code>元素，<code>type</code>属性是其最重要的属性，因为该属性定义了<code>input</code>元素的行为。欲知更多，请阅读<a href="">原生表单组件</a>。</p>
+<p>在我们的示例里，一个文本框中用了该属性的默认值<code>text</code>，该值表示一个基本的单行文本框，用于接收无控制或验证的任何文本。而另外一个文本框则使用了值<code>email</code>，表示定义一个只接收合法邮箱地址单行文本框，也就是说它会对用户输入的数据进行一些检查。我们会在<a href="">表单数据验证</a>这篇文章里讨论更多和表单验证有关的内容，</p>
+<p>最后，我们来比较下<code>&lt;input/&gt;</code>和<code>&lt;textarea&gt;&lt;/textarea&gt;</code>间的语法差别。<code>&lt;input/&gt;</code>就是所谓的自动闭合元素，这种元素需要你加个”/“而不是结束标签来闭合（译注：这只是xhtml的强制要求，但在html里不用”/“也是可以的）；而<code>&lt;textarea&gt;</code>与之相反，并非自动闭合，这时你就得乖乖加上结束标签来闭合了。这点语法差别，其实决定了这两种元素在表单上设定默认值方法有所不同。</p>
+<p>若要定义<code>&lt;input&gt;</code>元素的默认值，你得和下面的示例一样使用<code>value</code>属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"by default this element is filled with this text"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>至于<code>&lt;textarea&gt;</code>，你只需像下面一般，把默认值放进它的起止标签间即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span>&gt;</span>by default this element is filled with this text<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="再加个button来完成表单"><a href="#再加个button来完成表单" class="headerlink" title="再加个button来完成表单"></a>再加个button来完成表单</h3><p>我们的表单代码已经快准备好了，只差个让用户发送数据的按钮而已，再加个<code>&lt;button&gt;</code>元素就可以很简单地完成任务：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/my-handling-form-page"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>Name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span>E-mail:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"msg"</span>&gt;</span>Message:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Send your message<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>按钮共有三种类型：<code>submit</code>, <code>reset</code>, <code>button</code>。</p>
+<ul>
+<li>点击<code>submit</code>型按钮，会按照我们在<code>&lt;form&gt;</code>元素上定义的<code>action</code>属性，把表单数据发给指定的页面。</li>
+<li>点击<code>reset</code>型按钮，会直接重置所有表单组件为它们的默认值。从用户体验的角度来看，这其实是个不太好的操作。</li>
+<li>点击<code>button</code>型按钮，什么都不会发生。。。听起来有点蠢，但其实这对于用javascript来定义自定义按钮是再好不过啦。</li>
+</ul>
+<p>当然，你也可以用<code>&lt;input&gt;</code>元素来生成上面那几个按钮，和使用<code>&lt;button&gt;</code>相比，最大的区别就是<code>&lt;input&gt;</code>元素只允许使用纯文本作为它的内容，而<code>&lt;button&gt;</code>元素可以使用其他的HTML内容。（译注：比如图片，其实<code>&lt;input&gt;</code>元素通过css也能实现类似效果。此外还有个更大的差别，就是在旧版本IE中会出现<code>&lt;input&gt;</code>构造的按钮提交的是其<code>value</code>属性值，然而<code>&lt;button&gt;</code>按钮提交的不是<code>value</code>值而是元素的文本内容，不过考虑到要把按钮也设置<code>value</code>提交的情况实在少见，这个差别其实也没多大意义）</p>
+<h2 id="用CSS装扮漂亮点"><a href="#用CSS装扮漂亮点" class="headerlink" title="用CSS装扮漂亮点"></a>用CSS装扮漂亮点</h2><p>HTML表单已经有了，在你的浏览器下看看吧，其实还是有点丑的：</p>
+<p><img src="https://developer.mozilla.org/files/4049/form-no-style.png" alt=""></p>
+<p>下面我们给它加点CSS装点装点，先让form元素居中并带上点边框：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">form</span> &#123;</span><br><span class="line">    <span class="comment">/* 用来使表单相对页面居中 */</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="comment">/* 设置表单外沿 */</span></span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#CCC</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来，给表单组件间加些间隔：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">form</span> <span class="selector-tag">div</span> + <span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后再来解决label们，最佳做法是设置所有label为统一大小并沿同一方向对齐。这里我们使用右对齐，但某些情况下使用左对齐也可以：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">label</span> &#123;</span><br><span class="line">    <span class="comment">/* 确保所有label大小相同并适当对齐 */</span></span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实HTML表单的组件样式还是蛮难整的，其中文本框还算简单、但其他组件就难说了，若想深入了解如何设置表单组件样式，可见<a href="">HTML表单样式</a>。</p>
+<p>首先我们进行下一些通用配置：协调字体、大小和边框：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span>, <span class="selector-tag">textarea</span> &#123;</span><br><span class="line">    <span class="comment">/* 确保所有文本框有相同的字体设置</span><br><span class="line">       默认设置一个等宽字体 */</span></span><br><span class="line">    <span class="attribute">font</span>: <span class="number">1em</span> sans-serif;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 给所有文本框设置相同的大小 */</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">-moz-box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 协调文本框边框的外形 */</span></span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HTML表单还支持不少伪类，用以表现各元素的状态。比如，我们可以在组件被激活时作突出显示，这样可以方便用户知道表单填到哪一步了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span>, <span class="selector-tag">textarea</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">    <span class="comment">/* 让元素被激活时突出显示 */</span></span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>多行文本框还需要一些独有的自定义样式，<code>&lt;textarea&gt;</code>这个内联元素会默认让它的底部与别的文本的基线对齐，而我们往往并不想这样。想要完美对齐label和文本框，我们得把<code>&lt;textarea&gt;</code>的<code>vertical-align</code>属性设为<code>top</code>。</p>
+<p>此外还得注意<code>resize</code>属性，它能方便用户缩放<code>&lt;textarea&gt;</code>的大小。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">textarea</span> &#123;</span><br><span class="line">    <span class="comment">/* 对齐多行文本框和他们的label */</span></span><br><span class="line">    <span class="attribute">vertical-align</span>: top;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 给输入文本留下足够的空间 */</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">5em</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 允许用户垂直缩放textarea但这并不会在所有浏览器上有效 */</span></span><br><span class="line">    <span class="attribute">resize</span>: vertical;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按钮也得加点特殊样式才行。为此，我们先将按钮置于一个<code>class</code>设为”button”的<code>&lt;div&gt;</code>中。因为我们还希望按钮能域其他表单组件对齐，所以我们得模仿出一个和其他<code>label</code>一样的效果（译注：在这里就是占同样大小），加上内外边距来实现吧。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.button</span> &#123;</span><br><span class="line">    <span class="comment">/* 将按钮置于和文本框相同的位置 */</span></span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">90px</span>; <span class="comment">/* 和label元素一样大小 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">button</span> &#123;</span><br><span class="line">    <span class="comment">/* 这个额外的外边距大致充当了label和对应文本框间的间距 */</span></span><br><span class="line">    <span class="attribute">margin-left</span>: .<span class="number">5em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们的表单看起来漂亮多了：</p>
+<p><img src="https://developer.mozilla.org/files/4051/form-style.png" alt=""></p>
+<h2 id="将数据发给你的web服务器"><a href="#将数据发给你的web服务器" class="headerlink" title="将数据发给你的web服务器"></a>将数据发给你的web服务器</h2><p>如前所述，HTML表单就是为了方便从用户那获取数据并发送到服务端。所以最后、也是看起来最棘手的，就是在服务端处理这些表单数据了。</p>
+<p>其实<code>action</code>和<code>method</code>属性已经给<code>&lt;form&gt;</code>元素定义了数据发送到哪儿、如何发生数据了。</p>
+<p>然而这还不够，我们还得给我们的数据起个名字。这些名字在两端都是很重要的：在浏览器端，这能告诉浏览器如何给各部分的数据命名；而在服务端，这也让服务器能够依据数据名来处理每块数据。</p>
+<p>要给你的数据命名，就得给那些需要收集特定数据的表单组件加上<code>name</code>属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/my-handling-form-page"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>Name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"user_name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span>E-mail:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"user_email"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"msg"</span>&gt;</span>Message:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"msg"</span> <span class="attr">name</span>=<span class="string">"user_message"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Send your message<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在本例中，表单会发送三组数据，依次命名为user_name、user_email和user_message，他们会以HTTP POST的方式发送到URL”/my-handling-form-page”。</p>
+<p>而在服务端，负责处理URL”/my-handling-form-page”的脚本会从HTTP请求中以3组键/值对的形式接收这些数据。至于脚本如何处理这些数据就取决于你的需求了，各种服务端语言（PHP, Python, Ruby, Java, C#等）有它们自有的机制来做这件事。要深入探究这方面就不是本文的主题了，欲知详情，我们会在<a href="">发送表单数据</a>这篇文章中给你一些例子。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>恭喜！你终于完成你的第一个HTML表单啦~下面就是最终效果的在线演示：</p>
+<p><a href="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/My_first_HTML_form/Example$samples/A_simple_form?revision=1012447" target="_blank" rel="external">演示</a></p>
+<p>接下来是时候更上一层楼了，其实HTML表单远比我们在这里展现的强大，<a href="./#前言">本指南的其他文章</a>将会帮助你掌握剩下的内容。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/html/">html</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/04/28/【译】HTML表单指南-第一个HTML表单/" data-title="【译】HTML表单指南---第一个HTML表单 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/03/【译】怎么样构建HTML表单/" title="【译】怎么样构建HTML表单">
+  <strong>新一篇:</strong><br/>
+  <span>
+  【译】怎么样构建HTML表单</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/04/27/textContent和innerText属性/"  title="textContent和innerText属性">
+ <strong>旧一篇:</strong><br/> 
+ <span>textContent和innerText属性
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】HTML表单指南---第一个HTML表单" data-thread-key="【译】HTML表单指南-第一个HTML表单" data-author-key="null" data-url="http://levonlin.info/post/【译】HTML表单指南-第一个HTML表单"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,386 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】HTML表单样式 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="系列文章说明
+原文
+
+
+本文中，我们将学习如何使用CSS来让HTML表单看起来更漂亮，这可能需要窍门才能做到。由于历史及技术上的原因，表单组件并不太适合使用CSS；而也正因为有这些困难，许多的开发者会选择创建定制表单组件来获得对外观和体验的控制。然而，在现代浏览器中，网页设计师可以拥有更多对表单元素">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/05/【译】HTML表单样式/" title="【译】HTML表单样式" itemprop="url">【译】HTML表单样式</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-06-05T06:13:20.000Z" itemprop="datePublished">2016年 6月 5日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为何难以使用CSS给表单组件添加样式？"><span class="toc-number">1.</span> <span class="toc-text">为何难以使用CSS给表单组件添加样式？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并非所有组件受CSS的影响都是平等的"><span class="toc-number">1.1.</span> <span class="toc-text">并非所有组件受CSS的影响都是平等的</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#还好的"><span class="toc-number">1.1.1.</span> <span class="toc-text">还好的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比较糟糕的"><span class="toc-number">1.1.2.</span> <span class="toc-text">比较糟糕的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#丑陋的"><span class="toc-number">1.1.3.</span> <span class="toc-text">丑陋的</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本样式"><span class="toc-number">2.</span> <span class="toc-text">基本样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索框"><span class="toc-number">2.1.</span> <span class="toc-text">搜索框</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#例子"><span class="toc-number">2.1.1.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字体和文本"><span class="toc-number">2.2.</span> <span class="toc-text">字体和文本</span></a></li></ol></li></ol>
+		</div>
+		
+		<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Styling_HTML_forms" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p>本文中，我们将学习如何使用<a href="https://developer.mozilla.org/en-US/docs/CSS" target="_blank" rel="external">CSS</a>来让<a href="https://developer.mozilla.org/en-US/docs/HTML" target="_blank" rel="external">HTML</a>表单看起来更漂亮，这可能需要窍门才能做到。由于历史及技术上的原因，表单组件并不太适合使用CSS；而也正因为有这些困难，许多的开发者会选择<a href="">创建定制表单组件</a>来获得对外观和体验的控制。然而，在现代浏览器中，网页设计师可以拥有更多对表单元素的控制权了。让我们来深入了解下吧。</p>
+<h2 id="为何难以使用CSS给表单组件添加样式？"><a href="#为何难以使用CSS给表单组件添加样式？" class="headerlink" title="为何难以使用CSS给表单组件添加样式？"></a>为何难以使用CSS给表单组件添加样式？</h2><p>在web发展的早期，大约1995年，表单控件就已经在<a href="http://www.ietf.org/rfc/rfc1866.txt" target="_blank" rel="external">the HTML 2 specification</a>中给添加到HTML了。由于表单组件的复杂性，浏览器开发商们就选择了依靠操作系统来管理和渲染它们。</p>
+<p>几年之后，CSS诞生了，这就在技术上使得用原生组件来实现表单的做法也有了样式需求。然而在CSS的早期，给表单控件添加样式并未被优先考虑。</p>
+<p>由于用户们习惯了在交互平台上的视觉体验，浏览器开发商不得不让表单控件可以被添加样式；而说实话，在今天也依然难以重构所有表单控件让它们可被样式化。</p>
+<p>即使到了现在，也依然没有一个单独的浏览器实现了所有CSS 2.1规范。然而随着时间推移，浏览器开发商们已经改进了表单元素的CSS支持，虽然其可用性仍受诟病，但现在你已经可以使用CSS来给<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms" target="_blank" rel="external">HTML表单</a>添加样式了。</p>
+<h3 id="并非所有组件受CSS的影响都是平等的"><a href="#并非所有组件受CSS的影响都是平等的" class="headerlink" title="并非所有组件受CSS的影响都是平等的"></a>并非所有组件受CSS的影响都是平等的</h3><p>如今在表单使用CSS时依然有一些困难；这些问题可归为三类：</p>
+<h4 id="还好的"><a href="#还好的" class="headerlink" title="还好的"></a>还好的</h4><p>若存在跨平台问题，一些元素可以只添加少许的样式，有如下几个结构元素：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form" target="_blank" rel="external"><code>&lt;form&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset" target="_blank" rel="external"><code>&lt;fieldset&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label" target="_blank" rel="external"><code>&lt;label&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output" target="_blank" rel="external"><code>&lt;output&gt;</code></a></li>
+</ol>
+<p>此外，还有所有的文本框组件（单行或多行），以及按钮。</p>
+<h4 id="比较糟糕的"><a href="#比较糟糕的" class="headerlink" title="比较糟糕的"></a>比较糟糕的</h4><p>一些元素只能使用很少的样式，而且得依赖一些复杂的技巧，偶尔还得用到CSS3的高级知识。</p>
+<p>这其中包括了<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend" target="_blank" rel="external"><code>&lt;legend&gt;</code></a>元素；该元素不能在跨平台时被恰当地定位。此外，复选框及单选框不能直接添加样式；然而有了CSS3之后你就可以做到这点了。<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">placeholder</a>的内容是不能通过标准方法来添加样式的，但所有实现了它的浏览器都会以私有的CSS伪元素或伪类的形式让你能给它添加样式。</p>
+<p>至于要具体如何处理这些特殊情况，我们会在<a href="">HTML表单高级样式</a>一文中讨论。</p>
+<h4 id="丑陋的"><a href="#丑陋的" class="headerlink" title="丑陋的"></a>丑陋的</h4><p>某些元素是不能用CSS添加样式的。它们包括所有的高级UI组件比如范围滑块、颜色、日期控件，以及下拉组件（包括<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" target="_blank" rel="external"><code>&lt;option&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup" target="_blank" rel="external"><code>&lt;optgroup&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" target="_blank" rel="external"><code>&lt;datalist&gt;</code></a> 等元素）。文件选择器组件也被认为是不能添加样式的，而新的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress" target="_blank" rel="external"><code>&lt;progress&gt;</code></a>和<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter" target="_blank" rel="external"><code>&lt;meter&gt;</code></a>元素也在此之列。</p>
+<p>这些组件的主要问题在于，它们拥有非常复杂的结构，而CSS没有足够的表现力来给这些组件的各个细节添加样式。若你非得定制这些组件，就只能依靠Javascript来构建一棵能让你添加样式的DOM树。我们将在<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms/How_to_build_custom_form_widgets" target="_blank" rel="external">如何创建定制表单组件</a>一文中学习如何做到这一点。</p>
+<h2 id="基本样式"><a href="#基本样式" class="headerlink" title="基本样式"></a>基本样式</h2><p>在用CSS给那些<a href="./#还好的">易于添加样式的元素</a>的元素以样式时，你不必面对任何困难，因为它们多数表现得和其它HTML元素一样。然而，每个浏览器的用户代理样式表会导致一些不一致的情况，所以，这里会有几个技巧来帮你轻松地给它们添加样式。</p>
+<h3 id="搜索框"><a href="#搜索框" class="headerlink" title="搜索框"></a>搜索框</h3><p>搜索框是文本框中唯一一种需要点技巧来添加样式的。在基于webkit的浏览器（chrome, safari等）中，你得用<code>-webkit-appearance</code>属性来作下调整。我们将会在<a href="">HTML表单高级样式</a>一文更深入地探讨该属性。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=search]</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> dotted <span class="number">#999</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="attribute">-webkit-appearance</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://developer.mozilla.org/files/4153/search-chrome-macos.png" alt=""></p>
+<p>在上面这张Chrome的搜索框截图中，连个文本框都设置了边框，但第一个文本框没有使用<code>-webkit-appearance</code>属性进行渲染，而第二个贼使用了<code>-webkit-appearance:none</code>。它们间的差别值得注意。</p>
+<h3 id="字体和文本"><a href="#字体和文本" class="headerlink" title="字体和文本"></a>字体和文本</h3><p>CSS字体和文本特性在任何组件中都可以被轻易使用（当然，你也可以在表单组件上使用<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face" target="_blank" rel="external">@font-face</a>）。然而，不同浏览器的行为表现通常是不一样的。某些组件默认不会从父元素那继承<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family" target="_blank" rel="external">font-family</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size" target="_blank" rel="external">font-size</a>，同时许多浏览器会使用系统的默认样式来作为替代。要让你的表单的外观与其他内容保持一致，你可以在样式表中添加如下规则：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">button</span>, <span class="selector-tag">input</span>, <span class="selector-tag">select</span>, <span class="selector-tag">textarea</span> &#123;</span><br><span class="line">  <span class="attribute">font-family </span>: inherit;</span><br><span class="line">  <span class="attribute">font-size   </span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面的截图体现了设置之后的不同；左边是MAC OSX的Firefox中元素的默认渲染效果，其使用了系统的默认字体样式。而右边则是使用了我们的字体协调样式的相同元素。</p>
+<p><img src="https://developer.mozilla.org/files/4157/font-firefox-macos.png" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/html/">html</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/06/05/【译】HTML表单样式/" data-title="【译】HTML表单样式 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/05/24/【译】原生表单组件/"  title="【译】原生表单组件">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】原生表单组件
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】HTML表单样式" data-thread-key="【译】HTML表单样式" data-author-key="null" data-url="http://levonlin.info/post/【译】HTML表单样式"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>
