@@ -1,0 +1,953 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】怎么样构建HTML表单 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="系列文章说明
+原文
+
+
+在建立HTML表单时，最重要的一件事就是如何用正确的方式构建它。而之所以重要，原因有二：一是保证表单能被正确使用、二是这能保证你的表单是无障碍的（可以被能力不同的人使用）。而正因HTML表单的无障碍性很重要，故在本文中我们将了解如何使一个表单无障碍，这并不很难、只是有几个技巧">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/03/【译】怎么样构建HTML表单/" title="【译】怎么样构建HTML表单" itemprop="url">【译】怎么样构建HTML表单</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-05-03T08:04:54.000Z" itemprop="datePublished">2016年 5月 3日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#整体结构"><span class="toc-number">1.</span> <span class="toc-text">整体结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#from元素"><span class="toc-number">1.1.</span> <span class="toc-text">from元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fieldset和legend元素"><span class="toc-number">1.2.</span> <span class="toc-text">fieldset和legend元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label元素"><span class="toc-number">1.3.</span> <span class="toc-text">label元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output元素"><span class="toc-number">1.4.</span> <span class="toc-text">output元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表单的常用HTML结构"><span class="toc-number">1.5.</span> <span class="toc-text">表单的常用HTML结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML组件"><span class="toc-number">2.</span> <span class="toc-text">HTML组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input元素"><span class="toc-number">2.1.</span> <span class="toc-text">input元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#textarea元素"><span class="toc-number">2.2.</span> <span class="toc-text">textarea元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select-option和optgroup元素"><span class="toc-number">2.3.</span> <span class="toc-text">select, option和optgroup元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#datalist元素"><span class="toc-number">2.4.</span> <span class="toc-text">datalist元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#meter和progress元素"><span class="toc-number">2.5.</span> <span class="toc-text">meter和progress元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#button元素"><span class="toc-number">2.6.</span> <span class="toc-text">button元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共属性"><span class="toc-number">2.7.</span> <span class="toc-text">公共属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ARIA来构建HTML表单"><span class="toc-number">3.</span> <span class="toc-text">使用ARIA来构建HTML表单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#aria-labelledby属性"><span class="toc-number">3.1.</span> <span class="toc-text">aria-labelledby属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aria-describedby属性"><span class="toc-number">3.2.</span> <span class="toc-text">aria-describedby属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aria-label属性"><span class="toc-number">3.3.</span> <span class="toc-text">aria-label属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#role属性"><span class="toc-number">3.4.</span> <span class="toc-text">role属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">4.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参见"><span class="toc-number">5.</span> <span class="toc-text">参见</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_structure_an_HTML_form" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p>在建立<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms" target="_blank" rel="external">HTML表单</a>时，最重要的一件事就是如何用正确的方式构建它。而之所以重要，原因有二：一是保证表单能被正确使用、二是这能保证你的表单是无障碍的（可以被能力不同的人使用）。而正因HTML表单的<a href="https://developer.mozilla.org/en-US/docs/Accessibility" target="_blank" rel="external">无障碍性</a>很重要，故在本文中我们将了解如何使一个表单无障碍，这并不很难、只是有几个技巧需要你了解下。</p>
+<p>表单的灵活性决定了它们是<a href="https://developer.mozilla.org/en-US/docs/HTML" target="_blank" rel="external">HTML</a>中最复杂的结构。通过使用专门的表单元素和属性，我们可以建立任何形式的表单。也确实有过一些更丰富多彩的脚本技术如<a href="https://developer.mozilla.org/en-US/docs/XForms" target="_blank" rel="external">XForms</a>（现已过时），但很不幸这些表单技术并未被各大浏览器广泛应用。因此，我们往往得依赖Javascript来处理表单；但在本文中，我们只会详细讨论如何使用表单元素，若你想知道如何构建自定义表单组件，可参阅<a href="">怎样创建定制表单组件</a>。</p>
+<h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><h3 id="from元素"><a href="#from元素" class="headerlink" title="from元素"></a>from元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form" target="_blank" rel="external"><code>&lt;form&gt;</code></a>元素是用来正式定义表单的元素，其属性决定了表单会有什么行为。当你想要建立一个HTML表单时，就必须以该元素开头。很多无障碍技术或浏览器插件能够检测到<code>&lt;form&gt;</code>元素，同时他们也实现了特殊的方式来让表单更易于使用。</p>
+<blockquote>
+<p>注：严禁把一个form元素嵌套在另一个里边。那样会导致不可预知的行为，具体取决于用户使用了何种浏览器。</p>
+</blockquote>
+<p><code>&lt;form&gt;</code>元素支持下列属性，它们全是可选的：</p>
+<p><strong><code>&lt;form&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-accept-charset" target="_blank" rel="external">accept-charset</a></td>
+<td>UNKNOWN</td>
+<td>一个空格分隔或逗号分隔的列表（HTML5中，只有空格可作为分隔符。），这个列表包括了服务器支持的字符编码。浏览器以这些编码被列举的顺序使用它们。默认值是一个保留字符串“UNKNOWN”。这个字符串指的是和包含这个form元素的文档使用相同的编码。</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-action" target="_blank" rel="external">action</a></td>
+<td></td>
+<td>处理这个表单所提交信息的程序所在的URL。</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-autocomplete" target="_blank" rel="external">autocomplete</a></td>
+<td>on</td>
+<td>指示表单组件是否能够拥有被浏览器自动补全的默认值。该属性共有两个可选值：<code>on</code>或<code>off</code>。</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-enctype" target="_blank" rel="external">enctype</a></td>
+<td>application/x-www-form-urlencoded</td>
+<td>当 method 属性值为 post 时, enctype 是提交form给服务器的内容的 <a href="http://en.wikipedia.org/wiki/Mime_type" target="_blank" rel="external">MIME 类型</a> 。可能的取值有：application/x-www-form-urlencoded (默认值)、multipart/form-data (用于一个 type 属性设置为 “file” 的<code>&lt;input&gt;</code>元素)、text/plain (HTML5)。</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-method" target="_blank" rel="external">method</a></td>
+<td>get</td>
+<td>浏览器使用这种 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">HTTP</a> 方式来提交 form。可能的值有:post、get。</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-name" target="_blank" rel="external">name</a></td>
+<td></td>
+<td>这个form的名字。一个文档中的多个form当中，name必须唯一而不仅仅是一个空字符串。作为替代，最好使用<code>id</code>。</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-novalidate" target="_blank" rel="external">novalidate</a></td>
+<td>(false)</td>
+<td>这个布尔类型的属性指示了，当提交时form是否没有被验证。</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-target" target="_blank" rel="external">target</a></td>
+<td>_self</td>
+<td>用一个关键字指示在何处展示提交表单后收到的响应，展示的地方可以是<code>&lt;iframe&gt;</code>、标签页、浏览器窗口等；下面是该属性几个可能的值：<code>_self</code> (把响应加载到同一浏览器环境（<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank" rel="external"><code>&lt;iframe&gt;</code></a>、标签页、浏览器窗口等）)、<code>_blank</code> (把响应加载到一个新的浏览器环境)、<code>_parent</code> (把响应加载到父级浏览器环境，若无父级环境则和<code>_self</code>一致)、<code>_top</code> (把响应加载到最顶层的浏览器环境（即已无父环境的浏览器环境），若无父级环境则和<code>_self</code>一致)</td>
+</tr>
+</tbody>
+</table>
+<p>要注意的是，可能你会经常在<code>&lt;form&gt;</code>元素外使用表单组件，而这样做的话这些组件就和任何表单都没有关系了。虽然这些表单组件确实可以用在表单之外，但如此一来你就得给它们设定好用途了，毕竟它们单独使用时是没有特殊效果的，你必须用Javascript来自定义。</p>
+<p>从技术上讲，HTML5已经引进了一个<code>form</code>属性给各个表单元素，该属性能让你明确绑定一个元素和一个表单，即使元素不再<code>&lt;form&gt;</code>的内部。然而很遗憾，该特性的跨浏览器实现暂时还没能让人觉得它是可靠的。</p>
+<h3 id="fieldset和legend元素"><a href="#fieldset和legend元素" class="headerlink" title="fieldset和legend元素"></a>fieldset和legend元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset" target="_blank" rel="external"><code>&lt;fieldset&gt;</code></a>元素可以很方便地用于创建一组具有相同目的的组件。一个<code>&lt;fieldset&gt;</code>元素可以被一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend" target="_blank" rel="external"><code>&lt;legend&gt;</code></a>元素所标记，<code>&lt;legend&gt;</code>元素用于明确地描述<code>&lt;fieldset&gt;</code>元素的目的。许多无障碍技术会使用<code>&lt;legend&gt;</code>元素作为<code>&lt;fieldset&gt;</code>元素内各组件label的一部分。例如，某些屏幕阅读器如<a href="http://www.freedomscientific.com/products/fs/jaws-product-page.asp" target="_blank" rel="external">jaws</a>或<a href="http://www.nvda-project.org/" target="_blank" rel="external">NVDA</a>会在读出各组件的label前先读出legend里的内容。</p>
+<p>举个小例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Fruit juice size<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"size"</span> <span class="attr">id</span>=<span class="string">"size_1"</span> <span class="attr">value</span>=<span class="string">"small"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"size_1"</span>&gt;</span>Small<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"size"</span> <span class="attr">id</span>=<span class="string">"size_2"</span> <span class="attr">value</span>=<span class="string">"medium"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"size_2"</span>&gt;</span>Medium<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"size"</span> <span class="attr">id</span>=<span class="string">"size_3"</span> <span class="attr">value</span>=<span class="string">"large"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"size_3"</span>&gt;</span>Large<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>本例中，屏幕阅读器会将为第一个组件读出”Fruit juice size small”，为第二个组件读出”Fruit juice size medium”，为第三个组件读出”Fruit juice size large”。</p>
+<p>上面这个例子是最重要的用法之一，当你有一堆单选按钮时，你得保证它们嵌套于<code>&lt;fieldset&gt;</code>元素中。而一般来说，<code>&lt;filedset&gt;</code>元素也能用于给一个表单分段。</p>
+<p>由于该元素对无障碍技术的影响，<code>&lt;fieldset&gt;</code>元素已经成为构建无障碍表单的关键元素；但这也不是说你可以滥用它。当你构建表单时，可以试着听一下屏幕阅读器如何读取它，若听起来很奇怪，那就有必要改进你的表单结构了。</p>
+<p><code>&lt;fieldset&gt;</code>元素支持以下的特有属性：</p>
+<p><strong><code>&lt;fieldset&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset#attr-disabled" target="_blank" rel="external">disable</a></td>
+<td>(false)</td>
+<td>若设置了该布尔值，表单中的后代元素（除了其第一个<code>&lt;legend&gt;</code>元素的后代）将被禁用和禁止编辑。这些元素将不再接收任何浏览器事件，譬如鼠标点击或和输入焦点有关的事件。通常浏览器会将这些元素显示为灰色。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="label元素"><a href="#label元素" class="headerlink" title="label元素"></a>label元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label" target="_blank" rel="external"><code>&lt;label&gt;</code></a>元素用于给某个表单组件定义一个标签。若你想构建一个无障碍表单，这个元素可就是最重要的元素了。</p>
+<p><code>&lt;label&gt;</code>元素支持以下的属性：</p>
+<p><strong><code>&lt;label&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attr-for" target="_blank" rel="external">for</a></td>
+<td></td>
+<td>值取在同一文档中可标记的组件的ID。 文档中第一个ID值匹配该属性值的元素就是被这个label元素标记的元素。</td>
+</tr>
+</tbody>
+</table>
+<p><code>&lt;label&gt;</code>元素用<code>for</code>属性绑定其对应的组件，<code>for</code>属性可引用关联组件的<code>id</code>值。此外组件也可以嵌套于其<code>&lt;label&gt;</code>元素，但即使是这样，设置<code>for</code>属性仍被认为是最佳做法，因为一些无障碍设备无法理解label和组件间的隐性关系（译注：其实嵌套就相当于自动设置了<code>for</code>属性，不存在什么隐性关系，综合下文来看也这应该属于“最佳做法”的范畴吧）。</p>
+<p>而即使不考虑无障碍技术，若有一个指派给特定组件的label，会让用户在点击label时，就能在所有浏览器下激活相应的组件。这就非常有便于使用单选按钮和复选框啦。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"taste_1"</span> <span class="attr">name</span>=<span class="string">"taste_cherry"</span> <span class="attr">value</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"taste_1"</span>&gt;</span>I like cherry<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"taste_2"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"taste_2"</span> <span class="attr">name</span>=<span class="string">"taste_banana"</span> <span class="attr">value</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">      I like banana</span><br><span class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>某些无障碍设备在处理指派多个label的单个组件时会出现问题。因此，你得把组件嵌套进相关联的元素，才能构建一个无障碍的表单（译注：不是很能理解这句话，上面不是说这种做法一些无障碍设备不能理解吗？而且解决方法不应该是不准多对一吗，和嵌套有半毛钱关系？）。</p>
+<p>来看下面这个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Required fields are followed by <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 当你要标记的组件是label的后代时，就没必要在label上使用for属性了。 --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 所以这个： --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>Name: <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 和这个是一样的： --&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"username"</span>&gt;</span>Name: <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"username"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"birth"</span>&gt;</span> <span class="comment">&lt;!-- 在这里，for属性就是多余的了。 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>Date of birth: <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"birth"</span> <span class="attr">name</span>=<span class="string">"userbirth"</span> <span class="attr">maxlength</span>=<span class="string">"10"</span> /&gt;</span> <span class="tag">&lt;<span class="name">em</span>&gt;</span>formated as mm/dd/yyyy<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这个例子中，第一部分代码写的是必填元素的规则。该规则必须在表单头部以保证在用户找到必填元素之前，屏幕阅读器等无障碍设备能将其展示或读给用户。这样用户才能知道他到底该干嘛。</p>
+<p>第一个文本域是必填的，所以在其label元素内指明了该文本域的名字以及该文本域是必填的。如此一来，屏幕阅读器会把label读作”Name star”或”Name required”（这取决于屏幕阅读器的设定，通常与第一段写的那些规则相一致）。而若你使用了两个label，那就不能确保用户会被提示该元素是必填的。</p>
+<p>第二个表单元素（译注：<code>id</code>为<code>birth</code>那个）也采用了同样的手段，使用上面例子的代码后，你就能保证用户在进入该字段时会被告知如何格式化日期数据了。</p>
+<h3 id="output元素"><a href="#output元素" class="headerlink" title="output元素"></a>output元素</h3><p>该元素用于存放计算的输出结果，它定义了用于获取运算数据的输入框和用于展示结果的元素间的联系。对于一些无障碍技术来讲，该元素也可以认为是一个保持活动的区域（也就是说当<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output" target="_blank" rel="external"><code>&lt;output&gt;</code></a>元素的内容发生变化时，无障碍设备就能感知该变化并能对其做出响应）。</p>
+<p>‘<output>`元素支持以下的属性：</output></p>
+<p><strong><code>&lt;output&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output#attr-for" target="_blank" rel="external">for</a></td>
+<td></td>
+<td>一个用空格分隔的其他元素的ID列表，指示那些提供输入值（或其他效应）参与运算的元素</td>
+</tr>
+</tbody>
+</table>
+<h3 id="表单的常用HTML结构"><a href="#表单的常用HTML结构" class="headerlink" title="表单的常用HTML结构"></a>表单的常用HTML结构</h3><p>除了一些表单的具体结构，我们还应知道表单其实就是HTML代码。这就意味着你可以用所有的HTML技术来构建一个表单。</p>
+<p>就如你已经看到的例子中那样，通常我们会把一个label及其对应的组件包裹在一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p" target="_blank" rel="external"><code>&lt;p&gt;</code></a>或<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div" target="_blank" rel="external"><code>&lt;div&gt;</code></a>元素中。</p>
+<p>而除了<code>&lt;fieldset&gt;</code>元素，我们通常也会使用HTML的标题和<code>section</code>来构建复杂的表单。</p>
+<p>HTML的列表则常用在使用复选框和单选框时。</p>
+<p>来看一个简单的支付表单例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Payment form<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Required fields are followed by <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Contact information<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"title_1"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"title_1"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">value</span>=<span class="string">"M."</span> /&gt;</span></span><br><span class="line">            Mister</span><br><span class="line">          <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"title_2"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"title_2"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">value</span>=<span class="string">"Ms."</span> /&gt;</span></span><br><span class="line">            Miss</span><br><span class="line">          <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Name: <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">     <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>E-mail: <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"usermail"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Payment information<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"card"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Card type:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"card"</span> <span class="attr">name</span>=<span class="string">"usercard"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"visa"</span>&gt;</span>Visa<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"mc"</span>&gt;</span>Mastercard<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"amex"</span>&gt;</span>American Express<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"number"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Card number:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"number"</span> <span class="attr">name</span>=<span class="string">"cardnumber"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"date"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Expiration date:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"date"</span> <span class="attr">name</span>=<span class="string">"expiration"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">em</span>&gt;</span>formated as mm/yy<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span>&gt;</span>Validate the payment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看一看执行效果吧（这里加了点CSS）</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_structure_an_HTML_form/Example" target="_blank" rel="external">演示</a></p>
+<h2 id="HTML组件"><a href="#HTML组件" class="headerlink" title="HTML组件"></a>HTML组件</h2><p>构建表单时，我们需要一些组件来从用户那儿收集数据。所以在本文中，我们还将看到如何呈现这些组件；若你想了解这些组件是如何工作的，可参见<a href="">原生表单组件</a>。</p>
+<h3 id="input元素"><a href="#input元素" class="headerlink" title="input元素"></a>input元素</h3><p>这个元素相当特殊，因为它可以变成不少东西。只要简单设置下其<code>type</code>属性，它就能发生大变化。为简单起见，<code>type</code>的值可归为四种类型：单行文本框、无文本输入的控件、日期控件和按钮。而正因这种多样性，<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank" rel="external"><code>&lt;input&gt;</code></a>元素支持众多属性，但我们很难知道其中那个是相关的、哪个是必须的，这取决于<code>type</code>属性的值。</p>
+<p>下面的表格就是一个汇总（要获得完整的属性列表，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank" rel="external"><code>&lt;input&gt;</code></a>元素的页面）：</p>
+<table>
+<thead>
+<tr>
+<th><code>type</code>属性的值</th>
+<th>描述</th>
+<th>必要属性</th>
+<th>可选属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单行文本框</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>text</td>
+<td>这是最基本的文本框，该值也是<code>type</code>属性的默认值，这时不会执行自动校验</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength" target="_blank" rel="external">maxlength</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern" target="_blank" rel="external">pattern</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">placeholder</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size" target="_blank" rel="external">size</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-spellcheck" target="_blank" rel="external">spellcheck</a></td>
+</tr>
+<tr>
+<td>email</td>
+<td>用于编辑一或多个电子邮箱地址的文本框</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength" target="_blank" rel="external">maxlength</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple" target="_blank" rel="external">multiple</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern" target="_blank" rel="external">pattern</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">placeholder</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size" target="_blank" rel="external">size</a></td>
+</tr>
+<tr>
+<td>password</td>
+<td>文本框的值会被隐藏起来</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength" target="_blank" rel="external">maxlength</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size" target="_blank" rel="external">size</a></td>
+</tr>
+<tr>
+<td>search</td>
+<td>用于输入查询字符串的文本框</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autosave" target="_blank" rel="external">autosave</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength" target="_blank" rel="external">maxlength</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern" target="_blank" rel="external">pattern</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">placeholder</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size" target="_blank" rel="external">size</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-spellcheck" target="_blank" rel="external">spellcheck</a></td>
+</tr>
+<tr>
+<td>tel</td>
+<td>用于编辑电话号码的文本框</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength" target="_blank" rel="external">maxlength</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern" target="_blank" rel="external">pattern</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">placeholder</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size" target="_blank" rel="external">size</a></td>
+</tr>
+<tr>
+<td>url</td>
+<td>用于编辑绝对URL的文本框</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength" target="_blank" rel="external">maxlength</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern" target="_blank" rel="external">pattern</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">placeholder</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size" target="_blank" rel="external">size</a></td>
+</tr>
+<tr>
+<td><strong>无文本输入的控件</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>checkbox</td>
+<td>复选框</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked" target="_blank" rel="external">checked</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>color</td>
+<td>用于指定颜色的控件</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>file</td>
+<td>用于让用户选择文件的控件</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept" target="_blank" rel="external">accept</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple" target="_blank" rel="external">multiple</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>不显示的控件，但它的值会被提交给服务器</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>number</td>
+<td>用于获得浮点数的控件</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-step" target="_blank" rel="external">step</a></td>
+</tr>
+<tr>
+<td>radio</td>
+<td>单选框</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked" target="_blank" rel="external">checked</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>range</td>
+<td>用于获得非精确值的控件</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-step" target="_blank" rel="external">step</a></td>
+</tr>
+<tr>
+<td><strong>时间和日期控件</strong>（尚未支持，译注：最新的浏览器已实现了部分控件）</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>用于获得日期（年月日，没有钟点）的控件</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>用于获得日期和时间（时分秒，及二分之一秒）的控件，基于UTC时区</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>datetime-local</td>
+<td>用于获得日期和时间的控件，不含时区</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>month</td>
+<td>用于获得年份和月份的控件，不含时区</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>time</td>
+<td>用于获得时间的控件，不含时区</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td>month</td>
+<td>用于获得年份和周数的控件，不含时区</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete" target="_blank" rel="external">autocomplete</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external">list</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">readonly</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a></td>
+</tr>
+<tr>
+<td><strong>按钮</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>button</td>
+<td>无默认行为的按钮</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formaction" target="_blank" rel="external">formaction</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formenctype" target="_blank" rel="external">formenctype</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formmethod" target="_blank" rel="external">formmethod</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formnovalidate" target="_blank" rel="external">formnovalidate</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formtarget" target="_blank" rel="external">formtarget</a></td>
+</tr>
+<tr>
+<td>image</td>
+<td>图片按钮</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-src" target="_blank" rel="external">src</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-alt" target="_blank" rel="external">alt</a></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-width" target="_blank" rel="external">width</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-height" target="_blank" rel="external">height</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formaction" target="_blank" rel="external">formaction</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formenctype" target="_blank" rel="external">formenctype</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formmethod" target="_blank" rel="external">formmethod</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formnovalidate" target="_blank" rel="external">formnovalidate</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formtarget" target="_blank" rel="external">formtarget</a></td>
+</tr>
+<tr>
+<td>reset</td>
+<td>用于将表单内容重置为默认值的按钮</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formaction" target="_blank" rel="external">formaction</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formenctype" target="_blank" rel="external">formenctype</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formmethod" target="_blank" rel="external">formmethod</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formnovalidate" target="_blank" rel="external">formnovalidate</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formtarget" target="_blank" rel="external">formtarget</a></td>
+</tr>
+<tr>
+<td>submmit</td>
+<td>用于提交表单的按钮</td>
+<td></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formaction" target="_blank" rel="external">formaction</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formenctype" target="_blank" rel="external">formenctype</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formmethod" target="_blank" rel="external">formmethod</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formnovalidate" target="_blank" rel="external">formnovalidate</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formtarget" target="_blank" rel="external">formtarget</a></td>
+</tr>
+</tbody>
+</table>
+<p>如果我们给<code>type</code>属性设置的值不被浏览器支持，那它就会把<code>&lt;input&gt;</code>元素渲染为和使用<code>text</code>值一样的效果。这样能确保表单可以使用，即使它看起来不那么吸引人。</p>
+<p>虽然<code>&lt;input&gt;</code>元素是个强大的工具，但它也并非万能，所以还得一些其他元素来处理这些<code>&lt;input&gt;</code>力不能及的情况。</p>
+<h3 id="textarea元素"><a href="#textarea元素" class="headerlink" title="textarea元素"></a>textarea元素</h3><p>该元素用于声明多行文本框。其行为与单行文本框基本一致，除了能让用户在输入文本时换行。此外该元素也接受几个额外的属性，以控制其在渲染时能占多大地方：</p>
+<p><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea" target="_blank" rel="external"><code>&lt;textarea&gt;</code></a>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-cols" target="_blank" rel="external">cols</a></td>
+<td>20</td>
+<td>文本控件的可视宽度，单位是字符的平均宽度</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-rows" target="_blank" rel="external">rows</a></td>
+<td></td>
+<td>文本控件的可视文本行数</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap" target="_blank" rel="external">wrap</a></td>
+<td>soft</td>
+<td>表明控件如何包含文本，可取值为<code>hard</code>或<code>soft</code></td>
+</tr>
+</tbody>
+</table>
+<p>注意<code>&lt;textarea&gt;</code>元素的用法与<code>&lt;input&gt;</code>元素稍有不同。<code>&lt;input&gt;</code>元素是个自闭合元素，这意味着它不能包含任何子元素。而另一方面，<code>&lt;textarea&gt;</code>元素则是个可以直接包含文本内容的普通元素。</p>
+<p>这就造成两个影响：</p>
+<ul>
+<li>若你想给<code>&lt;input&gt;</code>元素定义默认值，你得使用<code>valur</code>属性；而对于<code>&lt;textarea&gt;</code>元素，你只需把默认文本置于其起始标签之间即可。</li>
+<li>默认地，<code>&lt;textarea&gt;</code>元素只接受文本内容；也就是说任何输入到<code>&lt;textarea&gt;</code>元素内的HTML内容都会以纯文本的形式显示出来。</li>
+</ul>
+<p>下面这个例子中，<code>&lt;textarea&gt;</code>元素会以相同形式渲染出来：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"text_1"</span>&gt;</span>With regular HTML<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"text_1"</span> <span class="attr">name</span>=<span class="string">"regular"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>I'm a paragraphe<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"text_2"</span>&gt;</span>With escaped HTML<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"text_2"</span> <span class="attr">name</span>=<span class="string">"escaped"</span>&gt;</span>&amp;lt;p&amp;gt;I'm a paragraphe&amp;lt;/p&amp;gt;<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>Send me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="select-option和optgroup元素"><a href="#select-option和optgroup元素" class="headerlink" title="select, option和optgroup元素"></a>select, option和optgroup元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素能让你构建选择框（也叫组合框）。选择框是一种让用户选择一或多个预定义的值的组件。单值和多值选择框的不同将在<a href="">原生表单组件</a>一文中进行讨论。</p>
+<p>选择框中的每个值都会用一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" target="_blank" rel="external"><code>&lt;option&gt;</code></a>元素进行定义，而这些<code>&lt;option&gt;</code>元素也可以置于<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup" target="_blank" rel="external"><code>&lt;optgroup&gt;</code></a>元素中进行分组。</p>
+<p>来看个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"myFruit"</span>&gt;</span>Pick a fruit<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"myFruit"</span> <span class="attr">name</span>=<span class="string">"fruit"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 这里耍了个小把戏，你以为你选择了根香蕉，其实你是吃了个橘子 &gt;:-) --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"orange"</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">optgroup</span> <span class="attr">label</span>=<span class="string">"berries"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Blueberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Raspberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Strawberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">optgroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>若<code>&lt;option&gt;</code>元素设置了<code>value</code>属性，那么在表单提交时该值就会被提交。若<code>value</code>属性未设置，则使用<code>&lt;option&gt;</code>元素的内容作为整个选择框的值。</p>
+<p>至于<code>&lt;optgroup&gt;</code>元素，其<code>label</code>属性将会先于其内容进行展示。而且它虽然看起来像一个选项，但实质上它是不可选的。</p>
+<p><strong><code>&lt;option&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#attr-label" target="_blank" rel="external">label</a></td>
+<td></td>
+<td>该属性是用于描述选项的文本，若<code>label</code>属性未被定义，那它的值就默认取元素的文本内容</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#attr-selected" target="_blank" rel="external">selected</a></td>
+<td>(false)</td>
+<td>目前来讲，该布尔值表明选项是否在一开始就被选中</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>&lt;optgroup&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup#attr-label" target="_blank" rel="external">label</a></td>
+<td></td>
+<td>一组选项的名字。<strong>该属性是强制要有的</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="datalist元素"><a href="#datalist元素" class="headerlink" title="datalist元素"></a>datalist元素</h3><p>该元素通过为给定的组件预设值，实现了对已有组件的拓展，最广为人知的例子就是文本框的自动补全列表了。这些用于填充的值实际上是通过<code>&lt;datalist&gt;</code>元素里的<code>&lt;option&gt;</code>元素进行设置的。</p>
+<p>要把<code>&lt;datalist&gt;</code>元素和某个组件绑定起来，你得先设置目标组件的<code>list</code>属性；该属性需指定为相应的<code>&lt;datalist&gt;</code>元素的<code>id</code>属性。</p>
+<p><code>&lt;datalist&gt;</code>元素是最近才被加入到HTML表单中的，故仍有些浏览器不支持它。这里有一个巧妙的兼容技巧，用于应对这些浏览器：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"myFruit"</span>&gt;</span>What is your favorite fruit?<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"myFruit"</span> <span class="attr">name</span>=<span class="string">"fruit"</span> <span class="attr">list</span>=<span class="string">"fruitList"</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">datalist</span> <span class="attr">id</span>=<span class="string">"fruitList"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"suggestion"</span>&gt;</span>or pick a fruit<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"suggestion"</span> <span class="attr">name</span>=<span class="string">"altFruit"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"banana"</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"cherry"</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"strawberry"</span>&gt;</span>Strawberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">datalist</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>支持<code>&lt;datalist&gt;</code>的浏览器将会忽略其中那些非<code>&lt;option&gt;</code>元素，且最终效果和预期的一样。而支持<code>&lt;datalist&gt;</code>的浏览器将会显示label和选择框。当然，也有别的方法来处理<code>&lt;datalist&gt;</code>缺乏支持的问题，但那得用到javascript，而这通常不是个好的选择。</p>
+<p><img src="https://developer.mozilla.org/files/4583/datalist-safari.png" alt="datalist-demo"></p>
+<h3 id="meter和progress元素"><a href="#meter和progress元素" class="headerlink" title="meter和progress元素"></a>meter和progress元素</h3><p>这两个元素常用于图形化展示给定的数字值，两者的区别主要是语义上的：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter" target="_blank" rel="external"><code>&lt;meter&gt;</code></a>元素代表一个静态值，其相对位置在最大值和最小值之间。</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress" target="_blank" rel="external"><code>progress</code></a>元素代表一个在最大值和最小值间随时间变化的值。值得注意的是，改变该元素的值（也就是显示进度）必须交给Javascript来完成，该元素自身没有任何机制来做到这一点。</li>
+</ul>
+<p>默认的，这俩元素支持下列特有属性：</p>
+<p><strong><code>&lt;meter&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-min" target="_blank" rel="external">min</a></td>
+<td>0</td>
+<td>度量范围的数值下界</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-max" target="_blank" rel="external">max</a></td>
+<td>1</td>
+<td>度量范围的数值上界</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-low" target="_blank" rel="external">low</a></td>
+<td><code>min</code>值</td>
+<td>比度量范围的下界要高的数值界限</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-high" target="_blank" rel="external">high</a></td>
+<td><code>max</code>值</td>
+<td>比度量范围的上界要低的数值界限</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-optimum" target="_blank" rel="external">optimum</a></td>
+<td></td>
+<td>最佳数字值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>译注：溢出low、high间的范围时，浏览器会以特殊样式显示<code>&lt;metter&gt;</code>数值</strong></p>
+<p><strong><code>&lt;progress&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#attr-max" target="_blank" rel="external">max</a></td>
+<td></td>
+<td>该属性用于描述<code>&lt;progress&gt;</code>对应的任务完成前需要做多少工作量</td>
+</tr>
+</tbody>
+</table>
+<h3 id="button元素"><a href="#button元素" class="headerlink" title="button元素"></a>button元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button" target="_blank" rel="external"><code>&lt;button&gt;</code></a>元素是最便于创建表单按钮的方式。一个按钮可以是三种类型质疑，由以下<code>type</code>属性值决定：</p>
+<ul>
+<li><code>submmit</code>按钮会把表单数据发送给由<code>&lt;form&gt;</code>元素的<code>action</code>属性定义的页面。</li>
+<li><code>reset</code>按钮会立即把所有表单组件重置为默认值。从用户体验的角度看，现在认为使用这种按钮是一种糟糕的、应该避免的做法，因为它很容易让用户不小心就丢掉他们已填写的内容。</li>
+<li>匿名（<code>button</code>）按钮就没有固有属性了，你得使用Javascript来给其实现功能。</li>
+</ul>
+<p><strong><code>&lt;button&gt;</code>元素的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type" target="_blank" rel="external">type</a></td>
+<td>submit</td>
+<td>按钮的类型。可能的值有：<code>button</code>, <code>reset</code>, <code>submit</code></td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formaction" target="_blank" rel="external">formaction</a></td>
+<td></td>
+<td>如果按钮是个提交按钮，该属性的值会重写<code>&lt;form&gt;</code>元素的<code>action</code>属性</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formentype" target="_blank" rel="external">formentype</a></td>
+<td></td>
+<td>如果按钮是个提交按钮，该属性的值会重写<code>&lt;form&gt;</code>元素的<code>enctype</code>属性</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formmethod" target="_blank" rel="external">formmethod</a></td>
+<td></td>
+<td>如果按钮是个提交按钮，该属性的值会重写<code>&lt;form&gt;</code>元素的<code>method</code>属性</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formnovalidate" target="_blank" rel="external">formnovalidate</a></td>
+<td></td>
+<td>如果按钮是个提交按钮，该属性的值会重写<code>&lt;form&gt;</code>元素的<code>novalidate</code>属性</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formtarget" target="_blank" rel="external">formtarget</a></td>
+<td></td>
+<td>如果按钮是个提交按钮，该属性的值会重写<code>&lt;form&gt;</code>元素的<code>target</code>属性</td>
+</tr>
+</tbody>
+</table>
+<p>从技术上讲，用<code>&lt;button&gt;</code>或<code>&lt;input&gt;</code>元素定义的按钮间基本是没有区别的。只在按钮的标记上有一个值得注意的区别：在<code>&lt;input&gt;</code>元素内标记只能是字符数据；而在<code>&lt;button&gt;</code>元素内，标记的内容可以是HTML，所以此处按钮的样式可以被按需定制。</p>
+<blockquote>
+<p><strong>注意</strong>：因为一些历史原因，<code>&lt;button&gt;</code>元素一直不被大量使用，且许多表单开发者更倾向于使用由<code>&lt;input&gt;</code>构建的按钮。而罪魁祸首就是旧版本IE的一个bug，在IE6和IE7中，若你给<code>&lt;button&gt;</code>元素加了<code>name</code>和<code>value</code>属性，表单就不会发送该<code>value</code>属性而是直接发送按钮的内容。但这个bug已经在IE8之后给修复了，所以现在不再有什么理由来回避使用<code>&lt;button&gt;</code>元素了。</p>
+</blockquote>
+<h3 id="公共属性"><a href="#公共属性" class="headerlink" title="公共属性"></a>公共属性</h3><p>许多用来定义表单组件的元素拥有一些自己的属性，而这里还有一个所有表单元素的公共属性汇总，它们能给你跨组件的控制能力。下面就是这些公共属性的列表：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>autofocus</td>
+<td>(false)</td>
+<td>这个布尔属性让你能够指定在页面加载时需要自动获得输入焦点的元素，除非用户重写了它，比如在另一控件上输入。在一个文档中，只能有唯一一个表单元素能指定该值。</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>(false)</td>
+<td>这个布尔属性表明用户不能与某个元素交互。如该属性未指定，则会继承自容器元素如<code>&lt;fieldset&gt;</code>的设置；若无容器元素设置了<code>disabled</code>属性，则该元素就是可用的</td>
+</tr>
+<tr>
+<td>form</td>
+<td></td>
+<td>和组件关联的form元素。这个属性的值必须是同一文档下某<code>&lt;form&gt;</code>元素的<code>id</code>值。理论上，这能让你在<code>&lt;form&gt;</code>元素外设置表单组件。但在实际应用中，并没有浏览器支持该特性。</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td>元素的名字，该属性会随表单数据提交</td>
+</tr>
+<tr>
+<td>value</td>
+<td></td>
+<td>指定元素初始值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="使用ARIA来构建HTML表单"><a href="#使用ARIA来构建HTML表单" class="headerlink" title="使用ARIA来构建HTML表单"></a>使用ARIA来构建HTML表单</h2><p><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA" target="_blank" rel="external">ARIA</a>是一项<a href="http://www.w3.org/TR/wai-aria/" target="_blank" rel="external">W3C候选推荐标准</a>，用于添加到HTML以增强富Internet应用的可访问性。我们将在<a href="">怎样创建定制表单组件</a>一文中更具体地讨论它的使用，但这里有一些基础知识需要先知道。</p>
+<p>在开始之前，要注意浏览器上对ARIA和无障碍技术的支持虽然还远称不上完美，但也已在持续改进之中了。出现这种问题就是因为，浏览器在遇到ARIA属性时，必须给操作系统的无障碍访问层发送消息，而并不是所有浏览器都能跨平台地做好这点。同时无障碍设备自身只能链接到操作系统的无障碍访问层去处理浏览器传来的消息。让人吃惊的是，有些无障碍设备连这点都做不好。</p>
+<p>所以使用无障碍技术并不意味着你的web应用就是无障碍的，而是意味着你已经尽力来做到这点了。暂时来讲，ARIA只是尽最大努力的技术，但还是聊胜于无吧。</p>
+<p>若你还想深入了解ARIA和HTML表单的结合使用，请自行阅读<a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/forms" target="_blank" rel="external">ARIA文档的相关章节</a>。</p>
+<h3 id="aria-labelledby属性"><a href="#aria-labelledby属性" class="headerlink" title="aria-labelledby属性"></a><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute" target="_blank" rel="external">aria-labelledby</a>属性</h3><p>该属性便于在不适用<code>&lt;label&gt;</code>元素时定义一个label。可将其放在组件元素上并引用要作为label的元素的<code>id</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"fruitLabel"</span>&gt;</span>What's your favorite fruit<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"fruit"</span> <span class="attr">aria-labelledby</span>=<span class="string">"fruitLabel"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>从概念上，这个属性与<code>&lt;label&gt;</code>元素的<code>for</code>属性正好相反。使用<code>for</code>属性时引用的是组件的<code>id</code>，而使用<code>aria-labelledby</code>时则引用label的<code>id</code>。</p>
+<h3 id="aria-describedby属性"><a href="#aria-describedby属性" class="headerlink" title="aria-describedby属性"></a><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute" target="_blank" rel="external">aria-describedby</a>属性</h3><p>该属性和<code>aria-labelledby</code>作用类似，主要就是语义上有不同。label用于定义对象的本质内容，而描述则提供更多用户可能要用到的信息。这个属性不建议直接用在表单元素上；最好还是使用<code>aria-labelledby</code>属性，除非你想为当前元素提供额外信息。毕竟该属性就是用来提供大段描述的。</p>
+<h3 id="aria-label属性"><a href="#aria-label属性" class="headerlink" title="aria-label属性"></a><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute" target="_blank" rel="external">aria-label</a>属性</h3><p>该属性用于给定的组件在DOM中没有明确的label时，它能让你提供一个能通过无障碍设备使用的组件，而无需专门为其创建一个节点来做到这点。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span> <span class="attr">name</span>=<span class="string">"q"</span> <span class="attr">aria-label</span>=<span class="string">"Search"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Go"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="role属性"><a href="#role属性" class="headerlink" title="role属性"></a><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques" target="_blank" rel="external">role</a>属性</h3><p>这是最重要的一个ARIA属性了，它能让你为给定的HTML元素提供无障碍设备可理解的、特定的语义信息。现在已经有不少可用的role了，且其中一些是表单专用的。</p>
+<p>ARIA致力于给那些在HTML中尚不可用的组件、或已经存在的元素提供语法，我们将会在<a href="">怎样创建定制表单组件</a>一文中看到如何使用这些role。</p>
+<p>用于表单组件的role有：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role" target="_blank" rel="external">Button</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_checkbox_role" target="_blank" rel="external">Checkbox</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_progressbar_role" target="_blank" rel="external">Progressbar</a></li>
+<li>Radio</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_slider_role" target="_blank" rel="external">Slider</a></li>
+<li>Spinbutton</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_textbox_role" target="_blank" rel="external">textbox</a></li>
+</ul>
+<p>值得注意的还有几个复合的role：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_listbox_role" target="_blank" rel="external">Listbox</a></li>
+<li>Radiogroup</li>
+</ul>
+<p>若你觉得这些role很好用，可在这里了解更多；ARIA是个很庞大的规范，深入探索它能帮你为远超HTML表单之外的领域增强无障碍性。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>现在你已经拥有了所有可用于构建你的HTML表单的知识；下篇文章将会深入其实现细节和功能需求：<a href="">原生表单组件</a>。</p>
+<h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><ul>
+<li><a href="http://www.alistapart.com/articles/sensibleforms/" target="_blank" rel="external">A List Apart: Sensible Forms: A Form Usability Checklist</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/html/">html</a><a href="/tags/前端/">前端</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/05/03/【译】怎么样构建HTML表单/" data-title="【译】怎么样构建HTML表单 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/13/元素auto宽高的影响因素/" title="元素auto宽高的影响因素">
+  <strong>新一篇:</strong><br/>
+  <span>
+  元素auto宽高的影响因素</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/04/28/【译】HTML表单指南-第一个HTML表单/"  title="【译】HTML表单指南---第一个HTML表单">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】HTML表单指南---第一个HTML表单
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】怎么样构建HTML表单" data-thread-key="【译】怎么样构建HTML表单" data-author-key="null" data-url="http://levonlin.info/post/【译】怎么样构建HTML表单"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

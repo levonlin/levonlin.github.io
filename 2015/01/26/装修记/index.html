@@ -1,0 +1,385 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>装修记 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="本博基本搭起来后，自我感觉Tinny这个主题的一些体验还不太好，于是这几天修修补补地搞得自己头都大了。当然这里面自己强迫症发作不明就里地到处修补也做了不少无用功；所以还是拿出来share一下，做个作死的经验总结。
+主题文件结构Tinny是基于pacman的一个主题，基本的设置与其他主题一样都在主题的">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/26/装修记/" title="装修记" itemprop="url">装修记</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2015-01-26T15:23:28.000Z" itemprop="datePublished">2015年 1月 26日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主题文件结构"><span class="toc-number">1.</span> <span class="toc-text">主题文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汉化"><span class="toc-number">2.</span> <span class="toc-text">汉化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#去掉作者和更新日期"><span class="toc-number">3.</span> <span class="toc-text">去掉作者和更新日期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#侧边栏优化"><span class="toc-number">4.</span> <span class="toc-text">侧边栏优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#去footer"><span class="toc-number">5.</span> <span class="toc-text">去footer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遗憾与教训"><span class="toc-number">6.</span> <span class="toc-text">遗憾与教训</span></a></li></ol>
+		</div>
+		
+		<p>本博基本搭起来后，自我感觉<a href="https://github.com/zhanglun/hexo-theme/tree/master/Tinny" target="_blank" rel="external">Tinny这个主题</a>的一些体验还不太好，于是这几天修修补补地搞得自己头都大了。当然这里面自己强迫症发作不明就里地到处修补也做了不少无用功；所以还是拿出来share一下，做个作死的经验总结。</p>
+<h2 id="主题文件结构"><a href="#主题文件结构" class="headerlink" title="主题文件结构"></a>主题文件结构</h2><p>Tinny是基于<a href="https://github.com/A-limon/pacman" target="_blank" rel="external">pacman</a>的一个主题，基本的设置与其他主题一样都在主题的<code>_config.yml</code>里；其他分别为文件夹</p>
+<ol>
+<li><code>language</code>很明显嘛</li>
+<li><code>layout</code>主要的样式设置都在这里啦</li>
+<li><code>scripts</code>存放诸如fancybox的工具组件</li>
+<li><code>sources</code>图片、js、css等</li>
+</ol>
+<p>了解总体情况还是很有必要的，当然如果修改时还迷糊就<code>hexo s</code>直接上浏览器调试咯。接下来说说我搞的几样修改，我js学的渣，里面槽点多多，请各位（如果有人看得到的话）轻拍。</p>
+<h2 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h2><p>一开始不知道<code>language</code>里中文文件为<code>zh-CN</code>,以为和默认主题一样是<code>zh-cn</code>，填进<code>_config.yml</code>后发现汉化很差，半中不洋地巨讨厌。但一着手改就有点蛋疼了，因为网页的加载不同于直接的html和js、css。<code>layout</code>里的那一堆.ejs文件看了看才知道是html和js的杂合体，一个个点开后对着浏览器抠出要替换的文字所在地,然后代之以中文；后来在发现中文文件原来为<code>zh-CN</code>并且.ejs文件里有的替换代码为<code>__(&#39;文字在language文件夹内对应名称&#39;)</code>后，又改回设置，才知道自己白忙了。但是强迫症让我一发不可收拾了，于是在<code>pagination.ejs</code>、<code>archive.ejs</code>、<code>head.ejs</code>···里如法炮制，基本能改的都实现语言可替换了。</p>
+<h2 id="去掉作者和更新日期"><a href="#去掉作者和更新日期" class="headerlink" title="去掉作者和更新日期"></a>去掉作者和更新日期</h2><p>作者还能有谁？没又有人会关心什么时候更新。<code>_config.yml</code>里改不了，so用同样的手法找出代码位置<code>Tinny\layout\_partial\post\header.ejs</code>，还是删删删。</p>
+<p>##去掉导航栏里的按钮##<br>pacman里的侧边栏按钮改造而来，但是太高端了，一点就让侧边栏先卡在底部一会再归位，所以在<code>Tinny\layout\_partial\header.ejs</code>里把它干掉了。</p>
+<h2 id="侧边栏优化"><a href="#侧边栏优化" class="headerlink" title="侧边栏优化"></a>侧边栏优化</h2><p>最蛋疼的一步，一开始想让侧边栏只在首页出现，而文章页只有随鼠标滚动的标题导航。还是找代码位置，找了好久发现侧边栏和标题导航都在<code>sidebar.ejs</code>里，这回可就不只是一个删字了；还得回到上层去理解<code>layout</code>里的调用关系，又弄了半天才搞懂<strong><code>Tinny\layout\layout.ejs</code>是分配样式的大总管，同位于<code>layout</code>的各页面.ejs文件去<code>_partial</code>或<code>_widget</code>文件夹里认领组件来组成页面主体部分，最后到<code>layout.ejs</code>组装成一个个页面</strong>。在<code>layout</code>里发现了文章页为<code>page.layout==&#39;post&#39;</code>，于是将<code>sidebar.ejs</code>里的</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby"> <span class="keyword">if</span>( table&amp;&amp;(item.toc !== <span class="literal">false</span>) &amp;&amp; theme.toc.aside)&#123; </span><span class="xml"><span class="tag">%&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"toc"</span> <span class="attr">class</span>=<span class="string">"toc-aside"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">strong</span> <span class="attr">class</span>=<span class="string">"toc-title"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span></span></span><span class="ruby"> _<span class="number">_</span>(<span class="string">'contents'</span>) </span><span class="xml"><span class="tag">%&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%-</span></span></span><span class="ruby"> toc(item.content) </span><span class="xml"><span class="tag">%&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby"> &#125; </span><span class="xml"><span class="tag">%&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>拿出来另外建立个<code>toc.ejs</code>;并在<code>layout.ejs</code>中将post样式的<code>&lt;%- partial(&#39;_partial/sidebar&#39;,{item: page,table: true}) %&gt;</code>换为<code>&lt;%- partial(&#39;_partial/toc&#39;,{item: page,table: true}) %&gt;</code>。</p>
+<p>但是侧边栏是消掉了，文章却还是卡在右边没到中间，标题导航也没有出来；我傻眼了，好在还有个about页面文章是在中间的；此时我又逗逼了，没在chrome调试器里找问题却在<code>layout.ejs</code>一通乱改，浪费不少时间，后来将两者的css两相对比一下就知道问题了；about页面多了这个</p>
+<pre><code>.page
+@media tablet
+margin-left 10% !important
+</code></pre><p>所以去找css的源头<code>Tinny\source\css\_partial\index.styl</code>加了个    </p>
+<pre><code>div.post
+@media tablet
+margin-left 10% !important
+</code></pre><p>而之所以写<code>div.post</code>是因为还有些section元素也是post样式，以此防止它们也改变为居中使样式打乱。</p>
+<p>好了，文章顺利居中，标题导航却还有出来；想再对比一下css，于是傻傻把导航栏里的按钮请出来，其实代码里很明显就有个display属性了。在<code>helper.styl</code>改了改，又嫌它在手机端太难看，还是最终关了它，算是白忙了。</p>
+<p>至此，侧边栏终于合我心意了···</p>
+<h2 id="去footer"><a href="#去footer" class="headerlink" title="去footer"></a>去footer</h2><p>Tinny改了pacman那个信息量比较大的footer后，如果没有被container撑到底下footer就会停在中间；嗯，一开始我是想保留它的，但改样式却没有使他沉底的效果，一怒之下还是在<code>layout.ejs</code>中把它砍了。<strong>注意footer-later不要砍，要不然文章加载不了。</strong></p>
+<h2 id="遗憾与教训"><a href="#遗憾与教训" class="headerlink" title="遗憾与教训"></a>遗憾与教训</h2><p>以上的折腾终于装修出一个还算可以的界面了，当然也有几处强迫症看来的遗憾，比如归档页侧边栏的月份列表就没有实现汉化、多说评论框在手机端会挡住返回顶部按钮，这些都是因为代码够不到而改不了。或许还有其他坑，就待我以后慢慢补了。</p>
+<p>这几天忙乱中也有不少教训，首先强迫症是罪魁祸首，搞的自己活受罪；其次基本没有看清调用关系就乱改大体样式，越改越乱；还有不好好用网页调试器找代码位置白白浪费时间。嗯，就这样咯，接下来再继续完成装修吧！</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/初体验/">初体验</a><a href="/tags/Tinnypp/">Tinnypp</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/博客之路/">博客之路</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2015/01/26/装修记/" data-title="装修记 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/28/装修记续/" title="装修记续">
+  <strong>新一篇:</strong><br/>
+  <span>
+  装修记续</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/22/hello_world/"  title="Hello World">
+ <strong>旧一篇:</strong><br/> 
+ <span>Hello World
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="装修记" data-thread-key="装修记" data-author-key="null" data-url="http://levonlin.info/post/装修记"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

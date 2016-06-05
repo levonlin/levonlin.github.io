@@ -1,0 +1,382 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>装修记续 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="在上一次弄出个基本满意的界面后，又改了改字体和行内代码的背景色颜色（都在Tinny\source\css\_base\variable.styl内），以及一些小细节。但是调着调着就发现主题内的样式还是有一些比较难处理的显示问题的，除了上文提到的两个遗憾，还有几个坑也浮现了出来。尤其在移动端下问题会被">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/28/装修记续/" title="装修记续" itemprop="url">装修记续</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2015-01-28T06:57:33.000Z" itemprop="datePublished">2015年 1月 28日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解决使用webkit内核浏览器查看时行内代码不会自动换行问题"><span class="toc-number">1.</span> <span class="toc-text">解决使用webkit内核浏览器查看时行内代码不会自动换行问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决toc-article在只有一级标题情况下一闪而过的问题"><span class="toc-number">2.</span> <span class="toc-text">解决toc-article在只有一级标题情况下一闪而过的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手机端导航栏收回时时间过长"><span class="toc-number">3.</span> <span class="toc-text">手机端导航栏收回时时间过长</span></a></li></ol>
+		</div>
+		
+		<p>在上一次弄出个基本满意的界面后，又改了改字体和行内代码的背景色颜色（都在<code>Tinny\source\css\_base\variable.styl</code>内），以及一些小细节。但是调着调着就发现主题内的样式还是有一些比较难处理的显示问题的，除了<a href="http://levonlin.github.io/2015/01/26/%E8%A3%85%E4%BF%AE%E8%AE%B0/" target="_blank" rel="external">上文</a>提到的两个遗憾，还有几个坑也浮现了出来。尤其在移动端下问题会被放大得更明显，而一个立志高远的响应式主题怎么可以容忍移动端的糟糕体验？所以特别针对移动端的体验做了点优化，但是能力有限，还是有些坑填不上额。</p>
+<h2 id="解决使用webkit内核浏览器查看时行内代码不会自动换行问题"><a href="#解决使用webkit内核浏览器查看时行内代码不会自动换行问题" class="headerlink" title="解决使用webkit内核浏览器查看时行内代码不会自动换行问题"></a>解决使用webkit内核浏览器查看时行内代码不会自动换行问题</h2><p>在火狐和chrome下对markdown的<code>行内代码</code>展现效果有很大不同；在<code>行内代码</code>处在一行最右且跨行时，火狐里会直接让<code>行内代码</code>整个到行而chrome会把上一行<code>行内代码</code>左边一个字扯下来一起到下一行，看图：</p>
+<p><img src="http://ww4.sinaimg.cn/large/85ad0d9cgw1eopk9n40bnj20mv01naa4.jpg" alt="火狐"></p>
+<p><img src="http://ww2.sinaimg.cn/large/85ad0d9cgw1eopk93nqr5j20mv01pmx8.jpg" alt="chrome"></p>
+<p>经过和其他博客的对比，发现这是pacman主题的通病，在该主题说明文档里也有这种情况出现。关键在于<code>Tinny\source\css\_partial\article.styl</code>文件里一个white-space属性，w3c解释该属性：</p>
+<blockquote>
+<p>用于规定如何处理元素中的空白</p>
+</blockquote>
+<p>但是这里什么空白都没有啊亲！好吧，我只能理解为<code>行内代码</code>会在其中带来一个神奇的空白咯。而将原有的值<code>white-space nowrap</code>改为且只能改为<code>white-space pre</code>后在chrome里就实现<code>行内代码</code>的顺利换行了，如图：</p>
+<p><img src="http://ww3.sinaimg.cn/large/85ad0d9cgw1eopkbogbyrj20ow01qdfy.jpg" alt="chrome"></p>
+<p>可是</p>
+<blockquote>
+<p>normal    默认。空白会被浏览器忽略。<br>pre    空白会被浏览器保留。其行为方式类似 HTML 中的 &lt;pre&gt; 标签。<br>nowrap    文本不会换行，文本会在在同一行上继续，直到遇到 &lt;br&gt; 标签为止。<br>pre-wrap    保留空白符序列，但是正常地进行换行。<br>pre-line    合并空白符序列，但是保留换行符。</p>
+</blockquote>
+<p>nowrap是明明是文本不会换行没有说会把上一行的文字带下来啊亲！chrome你肿么了。。。而此时再用火狐打开，发现在火狐底下pre的表现和nowrap一模一样，而其他三个属性值却与chrome里的pre一样，我凌乱了。。。</p>
+<p>嗯，我已经被这个不知道在哪里的“空白”打败了，不想再深究下去。而既然是针对移动端的体验，考虑到webkit内核在移动端的绝对优势，还是以改成<code>white-space pre</code>作为最终解决方案吧，而且毕竟在火狐下这样也还是不错的。</p>
+<p><strong>2016.5.28更新</strong><br>其实上面吐槽了这么多，现在突然发现问题还是没有解决啊喂。。。深入学习前端后再来看之前写的吐槽文字真觉得好笑，当时就是所谓的少见多怪吧。</p>
+<p>以前不能理解的<code>white-space</code>属性现在理解了，不就是处理空白和换行方式嘛；但仅靠配置该属性是不行的，因为这个换行是以单词为单位的，也就是说遇到超长单词或超长行内元素时还是不会自动换行。而要实现如原来贴的第三张图那些的彻底自动换行，就得加上<code>word-break: break-all</code>属性才行（更详细的讨论参见<a href="http://levonlin.info/2016/05/13/%E5%85%83%E7%B4%A0auto%E5%AE%BD%E9%AB%98%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0/#auto宽度-1">元素auto宽高的影响因素</a>）。所以，当时会出现这个结果要么是chrome出了bug、要么是胡乱试出来的吧。。。</p>
+<h2 id="解决toc-article在只有一级标题情况下一闪而过的问题"><a href="#解决toc-article在只有一级标题情况下一闪而过的问题" class="headerlink" title="解决toc-article在只有一级标题情况下一闪而过的问题"></a>解决toc-article在只有一级标题情况下一闪而过的问题</h2><p>toc的坑还蛮大的啊，在上次toc-aside搞得焦头烂额时就已经注意到这个问题了，而且这个问题在网速慢的情况下，比如手机2g网，更为明显———导航不仅仅一闪而过，会停留更久时间后消失，十分诡异。这次我不想删掉它了，于是开始寻找解决方案，又发现这是pacman主题的通病，参考别的博客无望，就只能自己对照自己的，因为在有二级标题时toc-article还是会正常显示导航的。</p>
+<p>对比结果：还是display在作祟，在只有一级标题情况下会出现个</p>
+<pre><code>element.style {
+                display：none
+              }
+</code></pre><p>而且这回可就和浏览器没关系了，百度了一下，<code>element.style</code>是浏览器自己加上去的，优先级还挺大，解决方案是自己在<code>Tinny\source\css\_partial\helper.styl</code>里对.toc-article手动添加<code>display block !important</code>，其中<code>!important</code>用于提高优先级。</p>
+<p>此时问题只解决了一半，因为这种简单粗暴的办法让toc-article失去判断能力，在所有文章里都会出现。对于没有内部标题的文章，那一坨堵在开头简直让人不爽。既然简单粗暴了，那我就简单粗暴到底，把toc-article里多余文字删掉，并让它内外边距皆为0；这样文章没标题时就不会有再出现toc-article了。</p>
+<h2 id="手机端导航栏收回时时间过长"><a href="#手机端导航栏收回时时间过长" class="headerlink" title="手机端导航栏收回时时间过长"></a>手机端导航栏收回时时间过长</h2><p>pacman通病，收回导航栏的等待时间实在太长，但目前仍无解，已向作者反映。期待他的更新吧。</p>
+<p>移动端优化至此告一段落。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Tinnypp/">Tinnypp</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/博客之路/">博客之路</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2015/01/28/装修记续/" data-title="装修记续 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/31/装修记再续与折腾域名/" title="装修记再续与折腾域名">
+  <strong>新一篇:</strong><br/>
+  <span>
+  装修记再续与折腾域名</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/26/装修记/"  title="装修记">
+ <strong>旧一篇:</strong><br/> 
+ <span>装修记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="装修记续" data-thread-key="装修记续" data-author-key="null" data-url="http://levonlin.info/post/装修记续"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>
