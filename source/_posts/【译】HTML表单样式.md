@@ -79,6 +79,274 @@ button, input, select, textarea {
 }
 ```
 
-下面的截图体现了设置之后的不同；左边是MAC OSX的Firefox中元素的默认渲染效果，其使用了系统的默认字体样式。而右边则是使用了我们的字体协调样式的相同元素。
+下面的截图体现了设置之后的不同；左边是MAC OSX的Firefox中元素的默认渲染效果，其使用了系统的默认字体样式。而右边则是使用了上面的字体协调样式后的相同元素。
 
 ![](https://developer.mozilla.org/files/4157/font-firefox-macos.png)
+
+要使用系统默认样式还是自定义样式以适应页面内容，仍存在很多争议。这个决定权在于身为网页或web应用设计师的你身上。
+
+### 盒模型
+所有的文本框都完全支持CSS盒模型相关的属性（[width](https://developer.mozilla.org/en-US/docs/Web/CSS/width), [height](https://developer.mozilla.org/en-US/docs/Web/CSS/height), [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding), [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin), [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border)）。然而以前要呈现这些组件时，浏览器都得依赖系统的默认样式。至于如何把这些样式混用到你的页面中，这得取决于你。
+
+若你想保持这些原生组件的样子和体验，你会在给它们实现一致的样式时遇到点困难。这是因为每个组件都有它们独有的边框、内边距和外边距的规定。所以，如果你希望在几个不同的组件间保持相同的大小，你就得使用[box-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)属性：
+
+```css
+input, textarea, select, button {
+  width : 150px;
+  margin: 0;
+
+  -webkit-box-sizing: border-box; /* 兼容基于Webkit的旧版浏览器 */
+     -moz-box-sizing: border-box; /* 兼容基于Gecko的旧版浏览器（Firefox < 29） */
+          box-sizing: border-box;
+}
+```
+
+![](https://developer.mozilla.org/files/4161/size-chrome-win7.png)
+
+上面的截图中，左边一列是不使用`box-sizing`构建的，而右边一列则使用了该属性并赋予其值`border-box`。可见设置该属性让所有的元素都占据了相同的空间大小，而覆盖了系统给各种组件的默认规则。
+
+### 定位
+定位HTML表单元素通常不是什么大问题，然而有两个特殊元素值得你关注一下：
+
+#### legend
+`<legend>`元素可以很好地支持样式，除了定位。在每种浏览器中，`<legend>`元素都位于其父`<fieldset>`元素的上边框以上，根本没办法在HTML文档流中改变其定位、让其远离那个上边框。你只能使用[position](https://developer.mozilla.org/en-US/docs/Web/CSS/position)属性来让其绝对或相对定位，否则它就只能视作是fieldset边框的一部分。
+
+以为无障碍技术的原因，使得`<legend>`成为很重要的元素（它作为fieldset中各个表单组件的label，并以此被无障碍设备读出），通常他会和一个标题做搭配，并以无障碍技术可识别的形式隐藏起来，就像这样：
+
+```html
+<fieldset>
+  <legend>Hi!</legend>
+  <h1>Hello</h1>
+</fieldset>
+```
+
+```css
+legend {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+```
+
+#### textarea
+所有浏览器都默认将[textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea)元素当作内联元素，并让它与文本的底线对齐。而这种设定通常并不是我们想要的，使用[display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)属性可以很容易就将其从`inline-block`改为`block`。但若你还想把它当内联元素使用，那通常得改变其垂直对齐方式：
+
+```css
+textarea {
+  vertical-align: top;
+}
+```
+
+## 实例
+来看一个给表单以样式的例子吧，通过例子，许多相关的知识点会更容易理解些。而我们要构建的，是如下图所示的contact表单：
+
+![](https://developer.mozilla.org/files/4149/screenshot.png)
+
+### HTML
+相比[本指南第一篇文章]()，这里的HTML稍微多了点内容；只有几个额外的字段和一个标题而已。
+
+```html
+<form>
+  <h1>to: Mozilla</h1>
+
+  <div id="from">
+    <label for="name">from:</label>
+    <input type="text" id="name" name="user_name">
+  </div>
+
+  <div id="reply">
+    <label for="mail">reply:</label>
+    <input type="email" id="mail" name="user_email">
+  </div>
+
+  <div id="message">
+    <label for="msg">Your message:</label>
+    <textarea id="msg" name="user_message"></textarea>
+  </div>
+ 
+  <div class="button">
+    <button type="submit">Send your message</button>
+  </div>
+</form>
+```
+
+### CSS
+有趣的部分开始了，但在我们编码之前，还需要三个额外的资源：
+
+1. 明信片[背景](https://developer.mozilla.org/files/4151/background.jpg)
+2. 一套打字机字体：[fontsquirrel.com上的"Secret Typewriter"](http://www.fontsquirrel.com/fonts/Secret-Typewriter)
+3. 一套手写字体：[fontsquirrel.com上的"Journal"](http://www.fontsquirrel.com/fonts/Journal)
+
+现在我们可以投入写代码了。首先，我们要准备好[@font-face](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)的定义以及`<body>`、`<form>`元素的基本样式：
+
+```css
+@font-face{
+  font-family : "handwriting";
+
+  src : url('journal.eot');
+  src : url('journal.eot?') format('eot'),
+        url('journal.woff') format('woff'),
+        url('journal.ttf') format('truetype');
+}
+
+@font-face{
+  font-family : "typewriter";
+
+  src : url('veteran_typewriter.eot');
+  src : url('veteran_typewriter.eot?') format('eot'),
+        url('veteran_typewriter.woff') format('woff'),
+        url('veteran_typewriter.ttf') format('truetype');
+}
+
+body {
+  font  : 21px sans-serif;
+
+  padding : 2em;
+  margin  : 0;
+
+  background : #222;
+}
+
+form {
+  position: relative;
+
+  width  : 740px;
+  height : 498px;
+  margin : 0 auto;
+
+  background: #FFF url(background.jpg);
+}
+```
+
+然后我们来定位标题和所有表单元素：
+
+```css
+h1 {
+  position : absolute;
+  left : 415px;
+  top  : 185px;
+ 
+  font : 1em "typewriter", sans-serif;
+}
+
+#from {
+  position: absolute;
+  left : 398px;
+  top  : 235px;
+}
+
+#reply {
+  position: absolute;
+  left : 390px;
+  top  : 285px;
+}
+
+#message {
+  position: absolute;
+  left : 20px;
+  top  : 70px;
+}
+```
+
+接下来，我们得开始对表单元素自身做配置了。首先，确保`<label>`使用了正确的字体：
+
+```css
+label {
+  font : .8em "typewriter", sans-serif;
+}
+```
+
+文本框需要使用一些公共样式。简单起见，可以移除它们的边框和背景，然后重新定义其内外边距：
+
+```css
+input, textarea {
+  font    : .9em/1.5em "handwriting", sans-serif;
+
+  border  : none;
+  padding : 0 10px;
+  margin  : 0;
+  width   : 240px;
+
+  background: none;
+}
+```
+
+而当这些输入框获得焦点时，还得让它们用一个浅灰色、半透明背景做高亮。注意为了移除一些浏览器自带默认的高亮，还需要配置[outline](https://developer.mozilla.org/en-US/docs/Web/CSS/outline)属性：
+
+```css
+input:focus, textarea:focus {
+  background   : rgba(0,0,0,.1);
+  border-radius: 5px;
+  outline      : none;
+}
+```
+
+现在我们的文本框已经整好了，但我们还得调整单行和多行文本框以作适配，因为通常它们看起来是一点都不相同的。
+
+对单行文本框需要一些微调以让其在IE下看起来漂亮点。IE不是基于字体的自然高度来定义文本框高度的（但其它所有浏览器都这么做），要修复这点，我们得给文本框指定一个明确的高度，如下所示：
+
+```css
+input {
+    height: 2.5em; /* 针对IE */
+    vertical-align: middle; /* 可选配置，能在旧版IE中看起来漂亮点 */
+}
+```
+
+`<textarea>`元素应被预设置为块级元素进行渲染。这里还有两个重要的属性，[resize](https://developer.mozilla.org/en-US/docs/Web/CSS/resize)和[overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)。由于我们采用固定大小的设计，所以得使用`resize`属性来防止用户改变多行文本框的大小。而`overflow`属性则让文本框在不同浏览器下的效果趋于一致；因为有的浏览器默认使用值`auto`而另一些使用值`scroll`。本例中，最好得保证各个浏览器下都使用`auto`：
+
+```css
+textarea {
+  display : block;
+
+  padding : 10px;
+  margin  : 10px 0 0 -10px;
+  width   : 340px;
+  height  : 360px;
+
+  resize  : none;
+  overflow: auto;
+}
+```
+
+[`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)元素可以很方便地使用CSS；这样你就可以尽情发挥了，即使用上[伪元素](https://developer.mozilla.org/en-US/docs/CSS/Pseudo-elements)也没问题！
+
+```css
+button {
+  position     : absolute;
+  left         : 440px;
+  top          : 360px;
+
+  padding      : 5px;
+
+  font         : bold .6em sans-serif;
+  border       : 2px solid #333;
+  border-radius: 5px;
+  background   : none;
+
+  cursor       : pointer;
+
+-webkit-transform: rotate(-1.5deg);
+   -moz-transform: rotate(-1.5deg);
+    -ms-transform: rotate(-1.5deg);
+     -o-transform: rotate(-1.5deg);
+        transform: rotate(-1.5deg);
+}
+
+button:after {
+  content: " >>>";
+}
+
+button:hover,
+button:focus {
+  outline   : none;
+  background: #000;
+  color   : #FFF;
+}
+```
+
+随意尝试下吧，试了你才知道你可以做到！
+
+## 结论
+如你所见，如果我们想构建只含文本框和按钮的表单，那么用CSS来提供样式是件很容易的事。若你还想了解多些能让你更轻松地处理表单组件的CSS技巧，可以参见[normalize.css项目](http://necolas.github.com/normalize.css)的表单部分。
+
+[下篇文章]()，我们会学习如何处理那些属于“比较糟糕的”和“丑陋的”类别的表单组件。
