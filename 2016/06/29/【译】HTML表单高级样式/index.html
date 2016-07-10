@@ -180,7 +180,7 @@ var _hmt = _hmt || [];
 <p>于是它们使用了私有属性：<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-appearance" target="_blank" rel="external">-webkit-appearance</a> 或 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/-moz-appearance" target="_blank" rel="external">-moz-appearance</a>。<strong>这些属性是非标准的，也不应被使用</strong>。实际上，它们在Webkit和Gecko上的表现也不尽相同。但是，有一个值是应该知道的：<code>none</code>，使用该值你就可以获得对组件样式的（几乎所有）控制权。</p>
 <p>所以，若你在一个元素上应用样式时遇到问题，可以试着使用这些私有属性（译注：用<code>none</code>值覆盖默认值）。下面我们会看到几个例子，但最为人熟知的用例是重置Webkit浏览器上搜索框的样式。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span><br><span class="line">input[type=search] &#123;</span><br><span class="line">    border: 1px dotted #999;</span><br><span class="line">    border-radius: 0;</span><br><span class="line">    </span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=search]</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> dotted <span class="number">#999</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">-webkit-appearance</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>注意：</strong>在我们讨论Web技术时，是难于预测未来的，但拓展CSS的表现力确实很难。另一些做了探索工作的标准如<a href="http://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html" target="_blank" rel="external">Shadow DOM</a>提供了新的视角。我们对完全可配置样式的表单的追求还远未结束。</p>
 </blockquote>
@@ -239,7 +239,7 @@ var _hmt = _hmt || [];
 <p>最后也是很重要的一步：当用户使用键盘在不同表单组件间浏览时，每个组件应该能看到聚焦的效果。由于我们隐藏了原生的复选框，所以只能自己实现这一特性来让用户知晓他们正处于何处。下列的CSS实现了对我们的定制复选框的聚焦：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> <span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span><span class="selector-pseudo">:focus</span> + <span class="selector-tag">label</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">outline</span>: <span class="number">1px</span> dotted black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最终效果如下：</p>
-<iframe frameborder="0" height="130" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms$samples/A_more_complex_example?revision=784065" width="250"></iframe>
+<p><iframe height="130" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms$samples/A_more_complex_example?revision=784065" width="250"></iframe></p>
 
 <h3 id="处理选择框噩梦"><a href="#处理选择框噩梦" class="headerlink" title="处理选择框噩梦"></a>处理选择框噩梦</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素被认为是一个“丑陋的”组件，因为不太可能给它添加跨平台的样式。当然，还是有一些可以探讨的东西的，这里就不长篇大论了，先看个例子：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Strawberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -331,7 +331,7 @@ var _hmt = _hmt || [];
 <li><a href="http://afarkas.github.com/webshim/demos/demos/webforms.html" target="_blank" rel="external">WebShim</a>是一个庞大的工具，用于处理那些支持HTML5的浏览器。其web表单部分挺有用的。</li>
 </ul>
 <p>要知道，绑定CSS和Javascript会引起副作用。所以若你选择了上述的一种库，就得时常保证在脚本失效时会可回退的样式表。造成脚本失效的原因很多，特别在移动端，故你的Web站点或app设计得能最好地处理这些情况。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>当在HTML表单上使用CSS仍存在许多坑时，有很多方法可以绕过这些坑。原本是没有确切、通用的解决方案的，但现代浏览器带来了新可能。现在，最佳方案是研究不同浏览器对用在HTML表单组件的CSS的支持程度。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>当在HTML表单上使用CSS仍存在许多坑时，有很多方法可以绕过这些坑。本来是没有确切、通用的解决方案的，但现代浏览器带来了新可能。而现在，最佳方案是研究不同浏览器对用在HTML表单组件的CSS的支持程度。</p>
 <p>下篇文章，我们将探索各种HTML表单组件对那些最重要的CSS属性的支持程度：<a href="">表单组件的属性兼容表</a>。</p>
 <h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><ul>
 <li><a href="http://diveintohtml5.info/forms.html" target="_blank" rel="external">Dive into HTML5: Forms</a></li>
@@ -343,7 +343,7 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/html/">html</a>
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/css/">css</a><a href="/tags/html/">html</a>
   </div>
 
 

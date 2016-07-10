@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://levonlin.info/"/>
-  <updated>2016-07-10T05:45:58.302Z</updated>
+  <updated>2016-07-10T06:26:04.436Z</updated>
   <id>http://levonlin.info/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/"/>
     <id>http://levonlin.info/2016/06/29/【译】HTML表单高级样式/</id>
     <published>2016-06-29T07:44:25.000Z</published>
-    <updated>2016-07-10T05:45:58.302Z</updated>
+    <updated>2016-07-10T06:26:04.436Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;ul&gt;
@@ -88,7 +88,7 @@
 &lt;p&gt;于是它们使用了私有属性：&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-appearance&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;-webkit-appearance&lt;/a&gt; 或 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/-moz-appearance&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;-moz-appearance&lt;/a&gt;。&lt;strong&gt;这些属性是非标准的，也不应被使用&lt;/strong&gt;。实际上，它们在Webkit和Gecko上的表现也不尽相同。但是，有一个值是应该知道的：&lt;code&gt;none&lt;/code&gt;，使用该值你就可以获得对组件样式的（几乎所有）控制权。&lt;/p&gt;
 &lt;p&gt;所以，若你在一个元素上应用样式时遇到问题，可以试着使用这些私有属性（译注：用&lt;code&gt;none&lt;/code&gt;值覆盖默认值）。下面我们会看到几个例子，但最为人熟知的用例是重置Webkit浏览器上搜索框的样式。&lt;/p&gt;
 &lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;search&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;input[type=search] &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    border: 1px dotted #999;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    border-radius: 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    -webkit-appearance: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;css&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=search]&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;border&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; dotted &lt;span class=&quot;number&quot;&gt;#999&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;border-radius&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;-webkit-appearance&lt;/span&gt;: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;在我们讨论Web技术时，是难于预测未来的，但拓展CSS的表现力确实很难。另一些做了探索工作的标准如&lt;a href=&quot;http://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Shadow DOM&lt;/a&gt;提供了新的视角。我们对完全可配置样式的表单的追求还远未结束。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -147,7 +147,7 @@
 &lt;p&gt;最后也是很重要的一步：当用户使用键盘在不同表单组件间浏览时，每个组件应该能看到聚焦的效果。由于我们隐藏了原生的复选框，所以只能自己实现这一特性来让用户知晓他们正处于何处。下列的CSS实现了对我们的定制复选框的聚焦：&lt;/p&gt;
 &lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:focus&lt;/span&gt; + &lt;span class=&quot;selector-tag&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:before&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;outline&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; dotted black;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;最终效果如下：&lt;/p&gt;
-&lt;iframe frameborder=&quot;0&quot; height=&quot;130&quot; src=&quot;https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms$samples/A_more_complex_example?revision=784065&quot; width=&quot;250&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;&lt;iframe height=&quot;130&quot; src=&quot;https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms$samples/A_more_complex_example?revision=784065&quot; width=&quot;250&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;处理选择框噩梦&quot;&gt;&lt;a href=&quot;#处理选择框噩梦&quot; class=&quot;headerlink&quot; title=&quot;处理选择框噩梦&quot;&gt;&lt;/a&gt;处理选择框噩梦&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt;&lt;/a&gt;元素被认为是一个“丑陋的”组件，因为不太可能给它添加跨平台的样式。当然，还是有一些可以探讨的东西的，这里就不长篇大论了，先看个例子：&lt;/p&gt;
 &lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;select&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Cherry&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Banana&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Strawberry&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;select&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -239,7 +239,7 @@
 &lt;li&gt;&lt;a href=&quot;http://afarkas.github.com/webshim/demos/demos/webforms.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;WebShim&lt;/a&gt;是一个庞大的工具，用于处理那些支持HTML5的浏览器。其web表单部分挺有用的。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;要知道，绑定CSS和Javascript会引起副作用。所以若你选择了上述的一种库，就得时常保证在脚本失效时会可回退的样式表。造成脚本失效的原因很多，特别在移动端，故你的Web站点或app设计得能最好地处理这些情况。&lt;/p&gt;
-&lt;h2 id=&quot;结论&quot;&gt;&lt;a href=&quot;#结论&quot; class=&quot;headerlink&quot; title=&quot;结论&quot;&gt;&lt;/a&gt;结论&lt;/h2&gt;&lt;p&gt;当在HTML表单上使用CSS仍存在许多坑时，有很多方法可以绕过这些坑。原本是没有确切、通用的解决方案的，但现代浏览器带来了新可能。现在，最佳方案是研究不同浏览器对用在HTML表单组件的CSS的支持程度。&lt;/p&gt;
+&lt;h2 id=&quot;结论&quot;&gt;&lt;a href=&quot;#结论&quot; class=&quot;headerlink&quot; title=&quot;结论&quot;&gt;&lt;/a&gt;结论&lt;/h2&gt;&lt;p&gt;当在HTML表单上使用CSS仍存在许多坑时，有很多方法可以绕过这些坑。本来是没有确切、通用的解决方案的，但现代浏览器带来了新可能。而现在，最佳方案是研究不同浏览器对用在HTML表单组件的CSS的支持程度。&lt;/p&gt;
 &lt;p&gt;下篇文章，我们将探索各种HTML表单组件对那些最重要的CSS属性的支持程度：&lt;a href=&quot;&quot;&gt;表单组件的属性兼容表&lt;/a&gt;。&lt;/p&gt;
 &lt;h2 id=&quot;参见&quot;&gt;&lt;a href=&quot;#参见&quot; class=&quot;headerlink&quot; title=&quot;参见&quot;&gt;&lt;/a&gt;参见&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://diveintohtml5.info/forms.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Dive into HTML5: Forms&lt;/a&gt;&lt;/li&gt;
@@ -262,6 +262,8 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
   </entry>
@@ -271,7 +273,7 @@
     <link href="http://levonlin.info/2016/06/05/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%A0%B7%E5%BC%8F/"/>
     <id>http://levonlin.info/2016/06/05/【译】HTML表单样式/</id>
     <published>2016-06-05T06:13:20.000Z</published>
-    <updated>2016-06-08T10:40:17.933Z</updated>
+    <updated>2016-07-10T06:30:22.219Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;ul&gt;
@@ -367,6 +369,8 @@
     
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
@@ -1765,11 +1769,11 @@
       <category term="求职" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/%E6%B1%82%E8%81%8C/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
@@ -1851,9 +1855,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -2705,9 +2709,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -2787,9 +2791,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -2933,9 +2937,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3026,9 +3030,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3096,9 +3100,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3131,9 +3135,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
@@ -3228,9 +3232,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3303,11 +3307,11 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3344,11 +3348,11 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
