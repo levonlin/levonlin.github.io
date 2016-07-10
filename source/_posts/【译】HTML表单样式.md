@@ -1,6 +1,6 @@
 title: 【译】HTML表单样式
 date: 2016-06-05 14:13:20
-tags: [html,前端]
+tags: [html,前端,css]
 categories: [前端,翻译]
 ---
 > * [系列文章说明](http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/)
