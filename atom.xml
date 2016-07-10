@@ -5,10 +5,266 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://levonlin.info/"/>
-  <updated>2016-06-08T10:40:17.933Z</updated>
+  <updated>2016-07-10T05:45:58.302Z</updated>
   <id>http://levonlin.info/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【译】HTML表单高级样式</title>
+    <link href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/"/>
+    <id>http://levonlin.info/2016/06/29/【译】HTML表单高级样式/</id>
+    <published>2016-06-29T07:44:25.000Z</published>
+    <updated>2016-07-10T05:45:58.302Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/&quot;&gt;系列文章说明&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Styling_HTML_forms&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在本文中，我们将了解如何在&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;HTML&lt;/a&gt;表单上使用&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/HTML&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSS&lt;/a&gt;，为那些难于自定义的表单组件加以样式。如&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/HTML/Forms/Styling_HTML_forms&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;前文&lt;/a&gt;所述，文本框和按钮很适合使用CSS，而现在我们得来探索HTML表单样式的那些坑了。&lt;/p&gt;
+&lt;p&gt;在进一步讨论前，先回顾下两种HTML表单组件：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;比较糟糕的&lt;/strong&gt;&lt;br&gt;一些元素只能使用很少的样式，而且得依赖一些复杂的技巧，偶尔还得用到CSS3的高级知识。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;丑陋的&lt;/strong&gt;&lt;br&gt;别指望用CSS给这些元素添加样式了。在最好的情况，你还能写一点不能跨浏览器支持的代码，而且还不可能完全控制这些元素的样式。&lt;/p&gt;
+&lt;h2 id=&quot;CSS的表现力&quot;&gt;&lt;a href=&quot;#CSS的表现力&quot; class=&quot;headerlink&quot; title=&quot;CSS的表现力&quot;&gt;&lt;/a&gt;CSS的表现力&lt;/h2&gt;&lt;p&gt;除了文本框和按钮，表单组件面临的最大问题，是CSS在多数情况下没有足够的表现力来恰当地给复杂组件添加样式。&lt;/p&gt;
+&lt;p&gt;近来HTML和CSS的演进已在拓展CSS的表现力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.w3.org/TR/CSS21/selector.html#dynamic-pseudo-classes&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSS2.1&lt;/a&gt;很受限，只提供了三个伪类：&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:active&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:active&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:focus&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:focus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:hover&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:hover&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.w3.org/TR/css3-selectors/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSS Selector Level 3&lt;/a&gt;新增了几个和HTML表单相关的伪类：&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:enabled&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:disabled&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:disabled&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:checked&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:checked&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:indeterminate&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:indeterminate&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://dev.w3.org/csswg/css3-ui/#pseudo-classes&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSS Basic UI Level 3&lt;/a&gt;也添加了几个伪类用于描述组件状态：&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:default&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:default&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:valid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:valid&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:invalid&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:in-range&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:in-range&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:out-of-range&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:required&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:required&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:optional&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:optional&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:read-only&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:read-only&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:read-write&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:read-write&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://dev.w3.org/csswg/selectors4/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSS Selector Level 4&lt;/a&gt;正处于开发状态，而且讨论的重点并不在于增加更多内容以改进表单：&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:user-error&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:user-error&lt;/a&gt;只是&lt;code&gt;:invalid&lt;/code&gt;伪类的一个增强版、&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;虽然上述这些都是个好的开始，但其中仍有两个问题：第一，某些浏览器并不会实现CSS2.1之外的特性。第二，这些改进并未好到能处理诸如日期选择器之类的复杂组件。&lt;/p&gt;
+&lt;p&gt;浏览器厂商也为拓展CSS在表单上的表现力做了些试验，最好得了解下哪些可以使用。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;警告：&lt;/strong&gt;虽然这些实验挺有趣的，但&lt;strong&gt;它们并非标准、并不可靠&lt;/strong&gt;。若你要使用它们（通常你也不会这么做），你得自己担起风险，而且使用非标准属性也是&lt;a href=&quot;http://www.alistapart.com/articles/every-time-you-call-a-proprietary-feature-css3-a-kitten-dies/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;可能阻碍Web发展的做法&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Mozilla的CSS拓展&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-placeholder&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:-moz-placeholder&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-submit-invalid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:-moz-submit-invalid&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:-moz-ui-invalid&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-valid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:-moz-ui-valid&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Webkit_Extensions&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Webkit的CSS拓展&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-input-placeholder&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;::-webkit-input-placeholder&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://trac.webkit.org/wiki/Styling%20Form%20Controls&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;更多拓展&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ie/hh869403%28v=vs.85%29.aspx&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Microsoft的CSS拓展&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ie/hh772745%28v=vs.85%29.aspx&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:-ms-input-placeholder&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.opera.com/docs/specs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Opera没有和HTML表单相关的拓展&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;控制表单元素的外观&quot;&gt;&lt;a href=&quot;#控制表单元素的外观&quot; class=&quot;headerlink&quot; title=&quot;控制表单元素的外观&quot;&gt;&lt;/a&gt;控制表单元素的外观&lt;/h3&gt;&lt;p&gt;基于 WebKit- (Chrome, Safari) 和 Gecko- (Firefox) 的浏览器为HTML组件提供了最高等级的定制。这些定制也是跨平台的，所以浏览器需要一个机制来转换那些能被改变样式的表单组件的原生外观和体验。&lt;/p&gt;
+&lt;p&gt;于是它们使用了私有属性：&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-appearance&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;-webkit-appearance&lt;/a&gt; 或 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/-moz-appearance&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;-moz-appearance&lt;/a&gt;。&lt;strong&gt;这些属性是非标准的，也不应被使用&lt;/strong&gt;。实际上，它们在Webkit和Gecko上的表现也不尽相同。但是，有一个值是应该知道的：&lt;code&gt;none&lt;/code&gt;，使用该值你就可以获得对组件样式的（几乎所有）控制权。&lt;/p&gt;
+&lt;p&gt;所以，若你在一个元素上应用样式时遇到问题，可以试着使用这些私有属性（译注：用&lt;code&gt;none&lt;/code&gt;值覆盖默认值）。下面我们会看到几个例子，但最为人熟知的用例是重置Webkit浏览器上搜索框的样式。&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;search&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;input[type=search] &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    border: 1px dotted #999;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    border-radius: 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    -webkit-appearance: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;在我们讨论Web技术时，是难于预测未来的，但拓展CSS的表现力确实很难。另一些做了探索工作的标准如&lt;a href=&quot;http://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Shadow DOM&lt;/a&gt;提供了新的视角。我们对完全可配置样式的表单的追求还远未结束。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h2&gt;&lt;h3 id=&quot;多选框和单选框&quot;&gt;&lt;a href=&quot;#多选框和单选框&quot; class=&quot;headerlink&quot; title=&quot;多选框和单选框&quot;&gt;&lt;/a&gt;多选框和单选框&lt;/h3&gt;&lt;p&gt;给多选框和单选框添加样式是很让人凌乱的。例如，多选框和单选框的大小往往不会发生改变，而且不同浏览器的表现相当不同。&lt;/p&gt;
+&lt;h4 id=&quot;一个简单例子&quot;&gt;&lt;a href=&quot;#一个简单例子&quot; class=&quot;headerlink&quot; title=&quot;一个简单例子&quot;&gt;&lt;/a&gt;一个简单例子&lt;/h4&gt;&lt;p&gt;考虑如下示例：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;span&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;display&lt;/span&gt;: inline-block;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;background&lt;/span&gt;: red;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;width &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;100px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;100px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;不同浏览器的处理如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;浏览器&lt;/th&gt;
+&lt;th&gt;渲染效果&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Firefox 16 (Mac OSX)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4165/checkbox-firefox-macos.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Chrome 22 (Mac OSX)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4163/checkbox-chrome-macos.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Opera 12.01 (Mac OSX)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4167/checkbox-opera-macos.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Internet Explorer 9 (Windows 7)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4169/checkbox-IE9-win7.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Internet Explorer 7 (Windows XP)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4171/checkbox-IE7-winxp.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&quot;复杂点的例子&quot;&gt;&lt;a href=&quot;#复杂点的例子&quot; class=&quot;headerlink&quot; title=&quot;复杂点的例子&quot;&gt;&lt;/a&gt;复杂点的例子&lt;/h4&gt;&lt;p&gt;由于Opera和IE没有诸如&lt;code&gt;-webkit-appearance&lt;/code&gt;和&lt;code&gt;-moz-appearance&lt;/code&gt;之类的特性，所以使用这类特性是不太合适的。幸运的是，在这种情况下用CSS还能找出解决办法来。举一个常见的例子：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;fieldset&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;first&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;fruit-1&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;value&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;cherry&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;for&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;first&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;I like cherry&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;label&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;second&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;fruit-2&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;value&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;banana&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;disabled&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;for&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;second&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;I can&#39;t like banana&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;label&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;third&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;fruit-3&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;value&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;strawberry&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;for&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;third&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;I like strawberry&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;label&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;fieldset&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;加一些基本样式：&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;body&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1em&lt;/span&gt; sans-serif;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;form&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;display&lt;/span&gt;: inline-block;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;padding&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;margin &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;fieldset&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;border &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; solid &lt;span class=&quot;number&quot;&gt;#CCC&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;border-radius&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;5px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;margin &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;padding&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1em&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;label&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;cursor &lt;/span&gt;: pointer;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;p&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;margin &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;p&lt;/span&gt;+&lt;span class=&quot;selector-tag&quot;&gt;p&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;margin &lt;/span&gt;: .&lt;span class=&quot;number&quot;&gt;5em&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;现在，我们来加样式以获得一个定制的复选框。&lt;/p&gt;
+&lt;p&gt;我们的计划是用我们自己的图像来替换原生的复选框。首先得准备一张具有所有复选框所需状态的图像，这些状态有：未勾选、已勾选、禁用未勾选、禁用已勾选。该图像可用CSS雪碧图来做：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4173/checkbox-sprite.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;先从隐藏原生的复选框开始，我们只是简单地把它们从页面的可视范围中挪出。这里有两个要重点考虑的事：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;别使用&lt;code&gt;display:none&lt;/code&gt;来隐藏复选框，因为如前面提到的，我们需要保证复选框对用户可用。使用&lt;code&gt;display:none&lt;/code&gt;的话，复选框就不再是用户可访问的，即不能再勾选或者不勾选它。&lt;/li&gt;
+&lt;li&gt;我们将使用一些CSS3选择器来实现我们的样式。为支持老旧浏览器，可以在我们要用的选择器前加&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:root&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:root&lt;/a&gt;伪类。在已有的实现中，支持我们需要的选择器的浏览器也支持&lt;code&gt;:root&lt;/code&gt;伪类，而剩下的浏览器就不支持了。所以这是一种用来识别老旧浏览器的方便做法，老旧浏览器中将会看到普通的复选框、而现代浏览器中将会看到定制的复选框。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 原生的复选框会从页面的可视范围中被挪出 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;position&lt;/span&gt;: absolute;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;left&lt;/span&gt;: -&lt;span class=&quot;number&quot;&gt;1000em&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;现在我们已经移除了原生的复选框，可以添加我们自己的了，这里会在原生复选框后面的&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt;&lt;/a&gt;元素使用&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:before&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:before&lt;/a&gt;伪元素。下面的选择器中，我们先用&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;属性选择器&lt;/a&gt;来获取复选框；然后使用&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS/Adjacent_sibling_selectors&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;相邻兄弟选择器&lt;/a&gt;来获取原来复选框后的&lt;code&gt;label&lt;/code&gt;。最后我们通过给&lt;code&gt;:before&lt;/code&gt;伪元素添加样式，用其来显示我们定制的复选框。&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt; + &lt;span class=&quot;selector-tag&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:before&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;content&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;display&lt;/span&gt;: inline-block;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width  &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;16px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;height &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;16px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;margin &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; .&lt;span class=&quot;number&quot;&gt;5em&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;url&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;https://developer.mozilla.org/files/4173/checkbox-sprite.png&quot;&lt;/span&gt;) no-repeat &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* 下一属性用于在文本基线调整复选框的位置 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;vertical-align&lt;/span&gt;: bottom;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;position&lt;/span&gt;: relative;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;bottom&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;接下来用原来复选框的&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:checked&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:checked&lt;/a&gt;和&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:disabled&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;:disabled&lt;/a&gt;伪类来改变我们定制的复选框的状态。由于我们使用了CSS雪碧图，我们只需要调整背景的位置而已。&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:checked&lt;/span&gt; + &lt;span class=&quot;selector-tag&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:before&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background-position&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; -&lt;span class=&quot;number&quot;&gt;16px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:disabled&lt;/span&gt; + &lt;span class=&quot;selector-tag&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:before&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background-position&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; -&lt;span class=&quot;number&quot;&gt;32px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:checked&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:disabled&lt;/span&gt; + &lt;span class=&quot;selector-tag&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:before&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background-position&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; -&lt;span class=&quot;number&quot;&gt;48px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;最后也是很重要的一步：当用户使用键盘在不同表单组件间浏览时，每个组件应该能看到聚焦的效果。由于我们隐藏了原生的复选框，所以只能自己实现这一特性来让用户知晓他们正处于何处。下列的CSS实现了对我们的定制复选框的聚焦：&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;selector-attr&quot;&gt;[type=checkbox]&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:focus&lt;/span&gt; + &lt;span class=&quot;selector-tag&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:before&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;outline&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; dotted black;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;最终效果如下：&lt;/p&gt;
+&lt;iframe frameborder=&quot;0&quot; height=&quot;130&quot; src=&quot;https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms$samples/A_more_complex_example?revision=784065&quot; width=&quot;250&quot;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&quot;处理选择框噩梦&quot;&gt;&lt;a href=&quot;#处理选择框噩梦&quot; class=&quot;headerlink&quot; title=&quot;处理选择框噩梦&quot;&gt;&lt;/a&gt;处理选择框噩梦&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt;&lt;/a&gt;元素被认为是一个“丑陋的”组件，因为不太可能给它添加跨平台的样式。当然，还是有一些可以探讨的东西的，这里就不长篇大论了，先看个例子：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;select&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Cherry&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Banana&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Strawberry&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;select&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;select&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width   &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;80px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;padding &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;10px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;option&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;padding &lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;5px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;color   &lt;/span&gt;: red;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;后面的表格展示了不同浏览器如何在两种情况下处理这一样式。（渲染效果中）前两列只是简单的例子，后两列则使用了些定制的CSS来获得对组件外观的更多控制，如下所示：&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;select&lt;/span&gt;, &lt;span class=&quot;selector-tag&quot;&gt;option&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;-webkit-appearance &lt;/span&gt;: none; &lt;span class=&quot;comment&quot;&gt;/* 获得对Webkit浏览器里外观的控制 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;-moz-appearance &lt;/span&gt;: none; &lt;span class=&quot;comment&quot;&gt;/* 获得对Gecko浏览器里外观的控制 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 获得对Presto (Opera) 和 Trident (IE)浏览器里外观的控制&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     注意这也能在Gecko浏览器里起作用，且对Webkit浏览器有副作用 */&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background &lt;/span&gt;: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;浏览器&lt;/th&gt;
+&lt;th&gt;普通渲染（关闭）&lt;/th&gt;
+&lt;th&gt;普通渲染（打开）&lt;/th&gt;
+&lt;th&gt;调整后渲染（关闭）&lt;/th&gt;
+&lt;th&gt;调整后渲染（打开）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Firefox 16 (Mac OSX)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4201/select-firefox-macos.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4199/select-firefox-macos-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4197/select-firefox-macos-custom.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4195/select-firefox-macos-custom-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Firefox 16 (Windows 7)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4209/select-firefox-win7.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4207/select-firefox-win7-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4205/select-firefox-win7-custom.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4203/select-firefox-win7-custom-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Chrome 22 (Mac OSX)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4183/select-chrome-macos.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4181/select-chrome-macos-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4179/select-chrome-macos-custom.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4177/select-chrome-macos-custom-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Chrome 22 (Windows 7)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4191/select-chrome-win7.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4189/select-chrome-win7-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4187/select-chrome-win7-custom.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4185/select-chrome-win7-custom-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Opera 12.01 (Mac OSX)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4225/select-opera-macos.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4223/select-opera-macos-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4221/select-opera-macos-custom.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4219/select-opera-macos-custom-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Internet Explorer 9 (Windows 7)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4217/select-IE9-win7.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4215/select-IE9-win7-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Internet Explorer 7 (Windows XP)&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4213/select-IE7-winxp.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://developer.mozilla.org/files/4211/select-IE7-winxp-open.png&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如你所见，即使使用了 &lt;code&gt;-*-qppearance&lt;/code&gt; 属性，仍会有问题存在：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/padding&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;padding&lt;/a&gt;属性在不同操作系统和浏览器中的处理是不一致的。&lt;/li&gt;
+&lt;li&gt;老旧的IE不支持平滑的样式。&lt;/li&gt;
+&lt;li&gt;火狐没有能给予下拉箭头样式的方式。&lt;/li&gt;
+&lt;li&gt;若想要给下拉菜单中的&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt;&lt;/a&gt;元素以样式，则Chrome和Opera在不同系统下的表现不尽相同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;同时，在本例中，我们只讨论了三个CSS属性；想想要考虑更多的CSS属性会有多么混乱。可见，CSS确实不太适合用来改变这些组件的外观和体验，但它仍让你能做些调整，如果你愿意忍受不同浏览器或不同操作系统上的不同的话。&lt;/p&gt;
+&lt;p&gt;我们将在下篇文章：&lt;a href=&quot;&quot;&gt;表单组件的属性兼容表&lt;/a&gt;中尝试指出哪些属性是可用的。&lt;/p&gt;
+&lt;h2 id=&quot;通向漂亮表单之路：一些有用的库和拓展工具&quot;&gt;&lt;a href=&quot;#通向漂亮表单之路：一些有用的库和拓展工具&quot; class=&quot;headerlink&quot; title=&quot;通向漂亮表单之路：一些有用的库和拓展工具&quot;&gt;&lt;/a&gt;通向漂亮表单之路：一些有用的库和拓展工具&lt;/h2&gt;&lt;p&gt;尽管CSS在复选框和单选框上的表现力已经够用了，但离其支持高级表单组件仍然遥遥无期。即使在&lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt;元素上有一些可能，但文件组件、日期选择器等仍不能被添加样式。&lt;/p&gt;
+&lt;p&gt;若你想获得对表单组件的完整控制权，你就得依赖Javascript，别无选择。在&lt;a href=&quot;&quot;&gt;怎样创建定制表单组件&lt;/a&gt;一文中，我们将了解如何自己实现它，而如今有一些很有用的库可以帮到你：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://sprawsm.com/uni-form/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Uni-form&lt;/a&gt;是一个规范了表单格式和使用CSS给予表单样式的框架。在和jQuery一起使用时，它也提供了些额外的可选特性。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://formalize.me/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Formalize&lt;/a&gt;是一些常见Javascript框架（如jQuery、Dojo、YUI等）的一个插件，用于规范化和定制表单。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.emblematiq.com/lab/niceforms/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Niceforms&lt;/a&gt;是个提供了完整web表单定制的独立Javascript方法。你可以使用一些内建的主题、也可自己创建。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面几个库则不止用于处理表单，但它们在处理HTML表单时有很多有趣的特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;jQuery UI&quot;&gt;jQuery UI&lt;/a&gt;提供了些非常有趣的可定制高级组件，比如日期选择器（特别关注了无障碍访问）。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://twitter.github.com/bootstrap/base-css.html#forms&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Twitter Bootstrap&lt;/a&gt;非常有用，如果你想规范化你的表单的话。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://afarkas.github.com/webshim/demos/demos/webforms.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;WebShim&lt;/a&gt;是一个庞大的工具，用于处理那些支持HTML5的浏览器。其web表单部分挺有用的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;要知道，绑定CSS和Javascript会引起副作用。所以若你选择了上述的一种库，就得时常保证在脚本失效时会可回退的样式表。造成脚本失效的原因很多，特别在移动端，故你的Web站点或app设计得能最好地处理这些情况。&lt;/p&gt;
+&lt;h2 id=&quot;结论&quot;&gt;&lt;a href=&quot;#结论&quot; class=&quot;headerlink&quot; title=&quot;结论&quot;&gt;&lt;/a&gt;结论&lt;/h2&gt;&lt;p&gt;当在HTML表单上使用CSS仍存在许多坑时，有很多方法可以绕过这些坑。原本是没有确切、通用的解决方案的，但现代浏览器带来了新可能。现在，最佳方案是研究不同浏览器对用在HTML表单组件的CSS的支持程度。&lt;/p&gt;
+&lt;p&gt;下篇文章，我们将探索各种HTML表单组件对那些最重要的CSS属性的支持程度：&lt;a href=&quot;&quot;&gt;表单组件的属性兼容表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;参见&quot;&gt;&lt;a href=&quot;#参见&quot; class=&quot;headerlink&quot; title=&quot;参见&quot;&gt;&lt;/a&gt;参见&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://diveintohtml5.info/forms.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Dive into HTML5: Forms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.smashingmagazine.com/2011/06/27/useful-ideas-and-guidelines-for-good-web-form-design/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Useful ideas and guidelines for good web form design&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC
+    
+    </summary>
+    
+      <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="翻译" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/%E7%BF%BB%E8%AF%91/"/>
+    
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+  </entry>
   
   <entry>
     <title>【译】HTML表单样式</title>
@@ -1404,7 +1660,7 @@
     <link href="http://levonlin.info/2016/05/18/%E7%99%BE%E5%BA%A6%E9%9D%A2%E8%AF%95%E7%9A%84%E6%80%BB%E7%BB%93/"/>
     <id>http://levonlin.info/2016/05/18/百度面试的总结/</id>
     <published>2016-05-18T12:10:40.000Z</published>
-    <updated>2016-06-19T13:57:59.929Z</updated>
+    <updated>2016-06-19T13:59:53.385Z</updated>
     
     <content type="html">&lt;p&gt;今天接到百度的电话面试了，人生中第一次电话面试啊，感觉有很多做不好的地方，必须来好好总结整理下。&lt;/p&gt;
 &lt;h2 id=&quot;关于面试准备&quot;&gt;&lt;a href=&quot;#关于面试准备&quot; class=&quot;headerlink&quot; title=&quot;关于面试准备&quot;&gt;&lt;/a&gt;关于面试准备&lt;/h2&gt;&lt;p&gt;之前由于一直没有消息，还以为自己笔试没通过来着，直到昨天晚上偶然翻了下才知道自己被安排面试了。而且一直都没有好好刷过面试题，本来还想趁这几天好好查漏补缺下的，结果今天就来了电话。&lt;/p&gt;
@@ -1463,13 +1719,13 @@
 &lt;li&gt;由于技术来自实际的生产环境，要创造机会多了解生产环境。毕竟现在的前端可不只是切切图，而是整个web开发流程中的一环，所以得把自己当成一个web开发者而不是只守着前端，才能对实际的工作和具体业务场景有更深的体会。比如要真正掌握&lt;code&gt;ajax&lt;/code&gt;，就可以把它和用&lt;code&gt;node.js&lt;/code&gt;搭建后台、&lt;code&gt;mysql&lt;/code&gt;操作数据库等结合起来学习；这样掌握的可就是一个web应用的开发流程，而不是仅有前端这点ajax操作，这对于你的工作，不论是想从事全栈开发还是和后端的同事沟通，想来也是大有裨益的。&lt;/li&gt;
 &lt;li&gt;最后对于新技术，虽然说没必要步步紧跟、也没时间步步紧跟的，但作为一个工程师怎么能丧失好奇心呢？多了解一些总不是坏事，至于何时深入使用，还是得看时机和需求吧。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;更新：第二次电面&lt;/strong&gt;&lt;br&gt;没想到第二次面试隔了一天就来了，当然也就难有长足点的准备了，但是吸取上次的经验，也没犯什么低级错误。这次面试主要是考察项目经历，但我毕竟还是写静态页面比较多，能上线的应用真没怎么做过。所以面试官也只能问问简历上写的东西了，比如在IFE学习到了什么、python的学习经历、用node来做什么、以及对node和python间的比较等等。当然也还问了些技术细节上的问题，这里就把我觉得当时回答不太好的整理下：&lt;/p&gt;
-&lt;h2 id=&quot;应对移动端高ppi屏幕：&quot;&gt;&lt;a href=&quot;#应对移动端高ppi屏幕：&quot; class=&quot;headerlink&quot; title=&quot;应对移动端高ppi屏幕：&quot;&gt;&lt;/a&gt;应对移动端高ppi屏幕：&lt;/h2&gt;&lt;p&gt;高像素密度会导致物理像素和css像素间的比值（即缩放比window.devicePixelRatio = dip / px）变大，这样就让页面上的内容看起来缩小了。要解决这个问题，最常想到的思路是不使用&lt;code&gt;px&lt;/code&gt;做长度单位而使用相对单位&lt;code&gt;rem&lt;/code&gt;，只要针对不同屏幕去修改html元素的&lt;code&gt;font-size&lt;/code&gt;属性即可。&lt;/p&gt;
+&lt;h2 id=&quot;更新：第二次电面&quot;&gt;&lt;a href=&quot;#更新：第二次电面&quot; class=&quot;headerlink&quot; title=&quot;更新：第二次电面&quot;&gt;&lt;/a&gt;更新：第二次电面&lt;/h2&gt;&lt;p&gt;没想到第二次面试隔了一天就来了，当然也就难有长足点的准备了，但是吸取上次的经验，也没犯什么低级错误。这次面试主要是考察项目经历，但我毕竟还是写静态页面比较多，能上线的应用真没怎么做过。所以面试官也只能问问简历上写的东西了，比如在IFE学习到了什么、python的学习经历、用node来做什么、以及对node和python间的比较等等。当然也还问了些技术细节上的问题，这里就把我觉得当时回答不太好的整理下：&lt;/p&gt;
+&lt;h3 id=&quot;应对移动端高ppi屏幕：&quot;&gt;&lt;a href=&quot;#应对移动端高ppi屏幕：&quot; class=&quot;headerlink&quot; title=&quot;应对移动端高ppi屏幕：&quot;&gt;&lt;/a&gt;应对移动端高ppi屏幕：&lt;/h3&gt;&lt;p&gt;高像素密度会导致物理像素和css像素间的比值（即缩放比window.devicePixelRatio = dip / px）变大，这样就让页面上的内容看起来缩小了。要解决这个问题，最常想到的思路是不使用&lt;code&gt;px&lt;/code&gt;做长度单位而使用相对单位&lt;code&gt;rem&lt;/code&gt;，只要针对不同屏幕去修改html元素的&lt;code&gt;font-size&lt;/code&gt;属性即可。&lt;/p&gt;
 &lt;p&gt;对那些缩放不改变清晰度的内容，上面采用相对单位的方法是没有问题的。但对于高清图片，这样随便缩放大小便失去了高清屏的意义了。而使用html5的&lt;code&gt;picture&lt;/code&gt;标签就解决该问题，常用格式如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;picture&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;srcset&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;图像文件名, n倍像素密度图像文件名 nx&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;media&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;媒体查询&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;picture&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;该标签会根据媒体查询结果按需下载我们准备好的不同像素密度图片。&lt;/p&gt;
-&lt;h2 id=&quot;解析JSON字符串&quot;&gt;&lt;a href=&quot;#解析JSON字符串&quot; class=&quot;headerlink&quot; title=&quot;解析JSON字符串&quot;&gt;&lt;/a&gt;解析JSON字符串&lt;/h2&gt;&lt;p&gt;当然是用&lt;code&gt;JSON.parse&lt;/code&gt;了，但面试官还问我对老旧浏览器如何实现，当时思路有点混乱没讲明白。翻了翻高程，发现简单用个&lt;code&gt;eval&lt;/code&gt;就可以了，因为JSON本身就是用的js语法嘛。如果觉得用&lt;code&gt;eval&lt;/code&gt;不优雅，那就使用老道亲自写的&lt;a href=&quot;https://github.com/douglascrockford/JSON-js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;js脚本&lt;/a&gt;吧。&lt;/p&gt;
-&lt;h2 id=&quot;关于HTTP协议&quot;&gt;&lt;a href=&quot;#关于HTTP协议&quot; class=&quot;headerlink&quot; title=&quot;关于HTTP协议&quot;&gt;&lt;/a&gt;关于HTTP协议&lt;/h2&gt;&lt;p&gt;只是有点印象，全称超文本传输协议，无连接、无状态等。至于为什么是无连接、无状态，就不清楚了，摘了计算机网络课本上的解释：&lt;/p&gt;
+&lt;h3 id=&quot;解析JSON字符串&quot;&gt;&lt;a href=&quot;#解析JSON字符串&quot; class=&quot;headerlink&quot; title=&quot;解析JSON字符串&quot;&gt;&lt;/a&gt;解析JSON字符串&lt;/h3&gt;&lt;p&gt;当然是用&lt;code&gt;JSON.parse&lt;/code&gt;了，但面试官还问我对老旧浏览器如何实现，当时思路有点混乱没讲明白。翻了翻高程，发现简单用个&lt;code&gt;eval&lt;/code&gt;就可以了，因为JSON本身就是用的js语法嘛。如果觉得用&lt;code&gt;eval&lt;/code&gt;不优雅，那就使用老道亲自写的&lt;a href=&quot;https://github.com/douglascrockford/JSON-js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;js脚本&lt;/a&gt;吧。&lt;/p&gt;
+&lt;h3 id=&quot;关于HTTP协议&quot;&gt;&lt;a href=&quot;#关于HTTP协议&quot; class=&quot;headerlink&quot; title=&quot;关于HTTP协议&quot;&gt;&lt;/a&gt;关于HTTP协议&lt;/h3&gt;&lt;p&gt;只是有点印象，全称超文本传输协议，无连接、无状态等。至于为什么是无连接、无状态，就不清楚了，摘了计算机网络课本上的解释：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;超文本传送协议 HTTP (HyperText Transfer Protocol)是一个应用层协议，它使用 TCP 连接进行可靠的传送。 &lt;/p&gt;
 &lt;p&gt;HTTP 的主要特点 :&lt;/p&gt;
@@ -1488,13 +1744,13 @@
 &lt;blockquote&gt;
 &lt;p&gt;1xx 表示通知信息，如请求收到了或正在进行处理。&lt;br&gt;2xx 表示成功，如接受或知道了。&lt;br&gt;3xx 表示重定向，表示要完成请求还必须采取进一步的行动。&lt;br&gt;4xx 表示客户的差错，如请求中有错误的语法或不能完成。&lt;br&gt;5xx 表示服务器的差错，如服务器失效无法完成请求。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;get和post请求的区别&quot;&gt;&lt;a href=&quot;#get和post请求的区别&quot; class=&quot;headerlink&quot; title=&quot;get和post请求的区别&quot;&gt;&lt;/a&gt;get和post请求的区别&lt;/h2&gt;&lt;p&gt;经典的面试题了，上面也稍微提及了下，摘个比较全点的答案：&lt;/p&gt;
+&lt;h3 id=&quot;get和post请求的区别&quot;&gt;&lt;a href=&quot;#get和post请求的区别&quot; class=&quot;headerlink&quot; title=&quot;get和post请求的区别&quot;&gt;&lt;/a&gt;get和post请求的区别&lt;/h3&gt;&lt;p&gt;经典的面试题了，上面也稍微提及了下，摘个比较全点的答案：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在2000个字符。&lt;br&gt;POST：一般用于修改服务器上的资源，对所发送的信息没有限制。&lt;br&gt;也就是说Get是通过地址栏来传值，而Post是通过提交表单来传值。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;数组去重&quot;&gt;&lt;a href=&quot;#数组去重&quot; class=&quot;headerlink&quot; title=&quot;数组去重&quot;&gt;&lt;/a&gt;数组去重&lt;/h2&gt;&lt;p&gt;也是经典面试题，写出来也不难：&lt;/p&gt;
+&lt;h3 id=&quot;数组去重&quot;&gt;&lt;a href=&quot;#数组去重&quot; class=&quot;headerlink&quot; title=&quot;数组去重&quot;&gt;&lt;/a&gt;数组去重&lt;/h3&gt;&lt;p&gt;也是经典面试题，写出来也不难：&lt;/p&gt;
 &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;uniqArray&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;arr&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; newArr = [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; , len = arr.length; i &amp;lt; len; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (newArr.indexOf(arr[i]) === &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            newArr.push(arr[i]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; newArr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;如何获取浏览器UA&quot;&gt;&lt;a href=&quot;#如何获取浏览器UA&quot; class=&quot;headerlink&quot; title=&quot;如何获取浏览器UA&quot;&gt;&lt;/a&gt;如何获取浏览器UA&lt;/h2&gt;&lt;p&gt;记错了，应该是&lt;code&gt;navigator.userAgent&lt;/code&gt;。与此相关的还有&lt;code&gt;navigator.appCodeName&lt;/code&gt;（基本都是&lt;code&gt;Mozilla&lt;/code&gt;）、&lt;code&gt;navigator.appVersion&lt;/code&gt;（获取UA中&lt;code&gt;Mozilla&lt;/code&gt;后面的部分）等等。&lt;/p&gt;
+&lt;h3 id=&quot;如何获取浏览器UA&quot;&gt;&lt;a href=&quot;#如何获取浏览器UA&quot; class=&quot;headerlink&quot; title=&quot;如何获取浏览器UA&quot;&gt;&lt;/a&gt;如何获取浏览器UA&lt;/h3&gt;&lt;p&gt;记错了，应该是&lt;code&gt;navigator.userAgent&lt;/code&gt;。与此相关的还有&lt;code&gt;navigator.appCodeName&lt;/code&gt;（基本都是&lt;code&gt;Mozilla&lt;/code&gt;）、&lt;code&gt;navigator.appVersion&lt;/code&gt;（获取UA中&lt;code&gt;Mozilla&lt;/code&gt;后面的部分）等等。&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -1509,13 +1765,13 @@
       <category term="求职" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/%E6%B1%82%E8%81%8C/"/>
     
     
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="求职" scheme="http://levonlin.info/tags/%E6%B1%82%E8%81%8C/"/>
     
@@ -1595,9 +1851,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -2429,7 +2685,7 @@
     <updated>2016-04-27T11:43:51.892Z</updated>
     
     <content type="html">&lt;p&gt;在DOM操作中，我们如果要获取和修改节点的的文本，就离不开&lt;code&gt;textContent&lt;/code&gt;或&lt;code&gt;innerText&lt;/code&gt;属性。其中&lt;code&gt;textContent&lt;/code&gt;作为标准方法，但无奈要IE8+；而&lt;code&gt;innerText&lt;/code&gt;属性最近也被火狐支持了，已经成了不是标准的标准（&lt;a href=&quot;http://caniuse.com/#search=innerText&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考&lt;/a&gt;）。也就是说，如果只考虑最新浏览器的话这两个方法都是可以使用的，那他们到底使用时有何不同呢？先上代码：&lt;/p&gt;
-&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;test&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;test&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;test&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;display:none&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;test&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; testDiv = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;test&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(testDiv.textContent);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(testDiv.innerText);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;test&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;test&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;test&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;display:none&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;test&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var testDiv = document.getElementById(&#39;test&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    console.log(testDiv.textContent);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    console.log(testDiv.innerText);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;运行上述代码，结果为：&lt;/p&gt;
 &lt;p&gt;可看到存在两个差异：&lt;/p&gt;
 &lt;ol&gt;
@@ -2449,9 +2705,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -2531,9 +2787,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -2677,9 +2933,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -2770,9 +3026,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -2840,9 +3096,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -2875,11 +3131,11 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -2972,9 +3228,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -3047,11 +3303,11 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3088,76 +3344,11 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>原生js练习题---第二课（上）</title>
-    <link href="http://levonlin.info/2016/02/28/%E5%8E%9F%E7%94%9Fjs%E7%BB%83%E4%B9%A0%E9%A2%98-%E7%AC%AC%E4%BA%8C%E8%AF%BE%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
-    <id>http://levonlin.info/2016/02/28/原生js练习题-第二课（上）/</id>
-    <published>2016-02-28T06:28:57.000Z</published>
-    <updated>2016-06-03T12:12:33.953Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;0x1百度输入法&quot;&gt;&lt;a href=&quot;#0x1百度输入法&quot; class=&quot;headerlink&quot; title=&quot;0x1百度输入法&quot;&gt;&lt;/a&gt;0x1百度输入法&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;bpGMLK&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/bpGMLK/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-01百度输入法&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;主要是切换的判断条件，一开始我还用点击次数的奇偶性来判断-_-||，其实直接检查菜单有没有显示即可。检查的时候有个小trick，初始状态菜单的&lt;code&gt;style&lt;/code&gt;属性为空，因为我们接下来要点按钮显示，所以把这种情况和&lt;code&gt;style.display&lt;/code&gt;为&lt;code&gt;none&lt;/code&gt;的情况归为一类丢到&lt;code&gt;else&lt;/code&gt;里最省事。&lt;/p&gt;
-&lt;h2 id=&quot;0x2点击Div，显示其innerHTML&quot;&gt;&lt;a href=&quot;#0x2点击Div，显示其innerHTML&quot; class=&quot;headerlink&quot; title=&quot;0x2点击Div，显示其innerHTML&quot;&gt;&lt;/a&gt;0x2点击Div，显示其innerHTML&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;XdJrBM&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/XdJrBM/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-02点击Div，显示其innerHTML&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;这里遍历了div绑上事件，也可以用事件代理来做。&lt;/p&gt;
-&lt;h2 id=&quot;0x3求出数组中所有数字的和&quot;&gt;&lt;a href=&quot;#0x3求出数组中所有数字的和&quot; class=&quot;headerlink&quot; title=&quot;0x3求出数组中所有数字的和&quot;&gt;&lt;/a&gt;0x3求出数组中所有数字的和&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;wGBPQz&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/wGBPQz/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-03求出数组中所有数字的和&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;简单地的表单数据获取和处理，注意对直接对字符串使用加号就是拼接，想用加法还得手动转换为数字。&lt;/p&gt;
-&lt;h2 id=&quot;0x4弹出层效果&quot;&gt;&lt;a href=&quot;#0x4弹出层效果&quot; class=&quot;headerlink&quot; title=&quot;0x4弹出层效果&quot;&gt;&lt;/a&gt;0x4弹出层效果&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;EKaovB&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/EKaovB/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-04弹出层效果&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;经典的弹出层效果，关键在CSS上，js只监听个样式的显示与否就ok。&lt;/p&gt;
-&lt;h2 id=&quot;0x5函数传参，改变Div任意属性的值&quot;&gt;&lt;a href=&quot;#0x5函数传参，改变Div任意属性的值&quot; class=&quot;headerlink&quot; title=&quot;0x5函数传参，改变Div任意属性的值&quot;&gt;&lt;/a&gt;0x5函数传参，改变Div任意属性的值&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;xVGKLR&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/xVGKLR/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-05函数传参，改变Div任意属性的值&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;依然是对&lt;code&gt;style&lt;/code&gt;对象做文章，既可直接设置&lt;code&gt;style&lt;/code&gt;对象，也可以用DOM2的&lt;code&gt;setProperty()&lt;/code&gt;方法。同样，清空&lt;code&gt;style&lt;/code&gt;对象里的样式既可以直接将它置&lt;code&gt;null&lt;/code&gt;，也可将其&lt;code&gt;cssText&lt;/code&gt;属性清空。&lt;/p&gt;
-&lt;h2 id=&quot;0x6图片列表：鼠标移入移出改变图片透明度&quot;&gt;&lt;a href=&quot;#0x6图片列表：鼠标移入移出改变图片透明度&quot; class=&quot;headerlink&quot; title=&quot;0x6图片列表：鼠标移入移出改变图片透明度&quot;&gt;&lt;/a&gt;0x6图片列表：鼠标移入移出改变图片透明度&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;pyJOBO&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/pyJOBO/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-06图片列表：鼠标移入移出改变图片透明度&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;还是用js模仿css的hover效果（何苦这样-_-||），老套路，事件代理+增删类名搞定。因为事件代理是挂在祖先元素上的，现在就只能监听&lt;code&gt;mouseover&lt;/code&gt;和&lt;code&gt;mouseout&lt;/code&gt;事件了，因为&lt;code&gt;mouseenter&lt;/code&gt;和&lt;code&gt;mouseleave&lt;/code&gt;在光标进出子元素时是不会触发的。所以这样看来，&lt;code&gt;mouseover&lt;/code&gt;和&lt;code&gt;mouseout&lt;/code&gt;在子元素上也能触发这个特点简直就是为事件代理而生的嘛。&lt;/p&gt;
-&lt;h2 id=&quot;0x7简易选项卡&quot;&gt;&lt;a href=&quot;#0x7简易选项卡&quot; class=&quot;headerlink&quot; title=&quot;0x7简易选项卡&quot;&gt;&lt;/a&gt;0x7简易选项卡&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;LNppBr&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/LNppBr/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-07简易选项卡&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;继续模仿hover效果，还要加上对另一个div的样式控制。但是这次光标离开也仍要保持hover的状态，直到另一选项被hover，所以不能借助&lt;code&gt;mouseout&lt;/code&gt;事件、只能遍历元素移除样式了，顺便也在遍历过程中取得另一个div要激活的内容。&lt;/p&gt;
-&lt;h2 id=&quot;0x8简易JS年历&quot;&gt;&lt;a href=&quot;#0x8简易JS年历&quot; class=&quot;headerlink&quot; title=&quot;0x8简易JS年历&quot;&gt;&lt;/a&gt;0x8简易JS年历&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-theme-id=&quot;17410&quot; data-slug-hash=&quot;jqbxaw&quot; data-default-tab=&quot;result&quot; data-user=&quot;levonlin&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/levonlin/pen/jqbxaw/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2-08简易JS年历&lt;/a&gt; by levonlin (&lt;a href=&quot;http://codepen.io/levonlin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@levonlin&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;和上一题差不多，只是这次把修改类名换成修改数据而已。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x1百度输入法&quot;&gt;&lt;a href=&quot;#0x1百度输入法&quot; class=&quot;headerlink&quot; title=&quot;0x1百度输入法&quot;&gt;&lt;/a&gt;0x1百度输入法&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;257&quot; data-the
-    
-    </summary>
-    
-      <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   

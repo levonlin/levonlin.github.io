@@ -1,0 +1,581 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】HTML表单高级样式 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="系列文章说明
+原文
+
+
+在本文中，我们将了解如何在HTML表单上使用CSS，为那些难于自定义的表单组件加以样式。如前文所述，文本框和按钮很适合使用CSS，而现在我们得来探索HTML表单样式的那些坑了。
+在进一步讨论前，先回顾下两种HTML表单组件：
+比较糟糕的一些元素只能使用很少的样式，而且得依赖一">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/29/【译】HTML表单高级样式/" title="【译】HTML表单高级样式" itemprop="url">【译】HTML表单高级样式</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-06-29T07:44:25.000Z" itemprop="datePublished">2016年 6月 29日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS的表现力"><span class="toc-number">1.</span> <span class="toc-text">CSS的表现力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#控制表单元素的外观"><span class="toc-number">1.1.</span> <span class="toc-text">控制表单元素的外观</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多选框和单选框"><span class="toc-number">2.1.</span> <span class="toc-text">多选框和单选框</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个简单例子"><span class="toc-number">2.1.1.</span> <span class="toc-text">一个简单例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复杂点的例子"><span class="toc-number">2.1.2.</span> <span class="toc-text">复杂点的例子</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理选择框噩梦"><span class="toc-number">2.2.</span> <span class="toc-text">处理选择框噩梦</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通向漂亮表单之路：一些有用的库和拓展工具"><span class="toc-number">3.</span> <span class="toc-text">通向漂亮表单之路：一些有用的库和拓展工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">4.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参见"><span class="toc-number">5.</span> <span class="toc-text">参见</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Styling_HTML_forms" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p>在本文中，我们将了解如何在<a href="https://developer.mozilla.org/en-US/docs/CSS" target="_blank" rel="external">HTML</a>表单上使用<a href="https://developer.mozilla.org/en-US/docs/HTML" target="_blank" rel="external">CSS</a>，为那些难于自定义的表单组件加以样式。如<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms/Styling_HTML_forms" target="_blank" rel="external">前文</a>所述，文本框和按钮很适合使用CSS，而现在我们得来探索HTML表单样式的那些坑了。</p>
+<p>在进一步讨论前，先回顾下两种HTML表单组件：</p>
+<p><strong>比较糟糕的</strong><br>一些元素只能使用很少的样式，而且得依赖一些复杂的技巧，偶尔还得用到CSS3的高级知识。</p>
+<p><strong>丑陋的</strong><br>别指望用CSS给这些元素添加样式了。在最好的情况，你还能写一点不能跨浏览器支持的代码，而且还不可能完全控制这些元素的样式。</p>
+<h2 id="CSS的表现力"><a href="#CSS的表现力" class="headerlink" title="CSS的表现力"></a>CSS的表现力</h2><p>除了文本框和按钮，表单组件面临的最大问题，是CSS在多数情况下没有足够的表现力来恰当地给复杂组件添加样式。</p>
+<p>近来HTML和CSS的演进已在拓展CSS的表现力：</p>
+<ul>
+<li><a href="http://www.w3.org/TR/CSS21/selector.html#dynamic-pseudo-classes" target="_blank" rel="external">CSS2.1</a>很受限，只提供了三个伪类：<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:active" target="_blank" rel="external">:active</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus" target="_blank" rel="external">:focus</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:hover" target="_blank" rel="external">:hover</a></li>
+</ul>
+</li>
+<li><a href="http://www.w3.org/TR/css3-selectors/" target="_blank" rel="external">CSS Selector Level 3</a>新增了几个和HTML表单相关的伪类：<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled" target="_blank" rel="external">:enabled</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:disabled" target="_blank" rel="external">:disabled</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:checked" target="_blank" rel="external">:checked</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:indeterminate" target="_blank" rel="external">:indeterminate</a></li>
+</ul>
+</li>
+<li><a href="http://dev.w3.org/csswg/css3-ui/#pseudo-classes" target="_blank" rel="external">CSS Basic UI Level 3</a>也添加了几个伪类用于描述组件状态：<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:default" target="_blank" rel="external">:default</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:valid" target="_blank" rel="external">:valid</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:in-range" target="_blank" rel="external">:in-range</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range" target="_blank" rel="external">:out-of-range</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:required" target="_blank" rel="external">:required</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:optional" target="_blank" rel="external">:optional</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:read-only" target="_blank" rel="external">:read-only</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:read-write" target="_blank" rel="external">:read-write</a></li>
+</ul>
+</li>
+<li><a href="http://dev.w3.org/csswg/selectors4/" target="_blank" rel="external">CSS Selector Level 4</a>正处于开发状态，而且讨论的重点并不在于增加更多内容以改进表单：<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:user-error" target="_blank" rel="external">:user-error</a>只是<code>:invalid</code>伪类的一个增强版、</li>
+</ul>
+</li>
+</ul>
+<p>虽然上述这些都是个好的开始，但其中仍有两个问题：第一，某些浏览器并不会实现CSS2.1之外的特性。第二，这些改进并未好到能处理诸如日期选择器之类的复杂组件。</p>
+<p>浏览器厂商也为拓展CSS在表单上的表现力做了些试验，最好得了解下哪些可以使用。</p>
+<blockquote>
+<p><strong>警告：</strong>虽然这些实验挺有趣的，但<strong>它们并非标准、并不可靠</strong>。若你要使用它们（通常你也不会这么做），你得自己担起风险，而且使用非标准属性也是<a href="http://www.alistapart.com/articles/every-time-you-call-a-proprietary-feature-css3-a-kitten-dies/" target="_blank" rel="external">可能阻碍Web发展的做法</a>。</p>
+</blockquote>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Mozilla_Extensions" target="_blank" rel="external">Mozilla的CSS拓展</a><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-placeholder" target="_blank" rel="external">:-moz-placeholder</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-submit-invalid" target="_blank" rel="external">:-moz-submit-invalid</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid" target="_blank" rel="external">:-moz-ui-invalid</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-valid" target="_blank" rel="external">:-moz-ui-valid</a></li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference/Webkit_Extensions" target="_blank" rel="external">Webkit的CSS拓展</a><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-input-placeholder" target="_blank" rel="external">::-webkit-input-placeholder</a></li>
+<li><a href="http://trac.webkit.org/wiki/Styling%20Form%20Controls" target="_blank" rel="external">更多拓展</a></li>
+</ul>
+</li>
+<li><a href="http://msdn.microsoft.com/en-us/library/ie/hh869403%28v=vs.85%29.aspx" target="_blank" rel="external">Microsoft的CSS拓展</a><ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/ie/hh772745%28v=vs.85%29.aspx" target="_blank" rel="external">:-ms-input-placeholder</a></li>
+</ul>
+</li>
+<li><a href="http://www.opera.com/docs/specs/" target="_blank" rel="external">Opera没有和HTML表单相关的拓展</a></li>
+</ul>
+<h3 id="控制表单元素的外观"><a href="#控制表单元素的外观" class="headerlink" title="控制表单元素的外观"></a>控制表单元素的外观</h3><p>基于 WebKit- (Chrome, Safari) 和 Gecko- (Firefox) 的浏览器为HTML组件提供了最高等级的定制。这些定制也是跨平台的，所以浏览器需要一个机制来转换那些能被改变样式的表单组件的原生外观和体验。</p>
+<p>于是它们使用了私有属性：<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-appearance" target="_blank" rel="external">-webkit-appearance</a> 或 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/-moz-appearance" target="_blank" rel="external">-moz-appearance</a>。<strong>这些属性是非标准的，也不应被使用</strong>。实际上，它们在Webkit和Gecko上的表现也不尽相同。但是，有一个值是应该知道的：<code>none</code>，使用该值你就可以获得对组件样式的（几乎所有）控制权。</p>
+<p>所以，若你在一个元素上应用样式时遇到问题，可以试着使用这些私有属性（译注：用<code>none</code>值覆盖默认值）。下面我们会看到几个例子，但最为人熟知的用例是重置Webkit浏览器上搜索框的样式。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span><br><span class="line">input[type=search] &#123;</span><br><span class="line">    border: 1px dotted #999;</span><br><span class="line">    border-radius: 0;</span><br><span class="line">    </span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong>在我们讨论Web技术时，是难于预测未来的，但拓展CSS的表现力确实很难。另一些做了探索工作的标准如<a href="http://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html" target="_blank" rel="external">Shadow DOM</a>提供了新的视角。我们对完全可配置样式的表单的追求还远未结束。</p>
+</blockquote>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="多选框和单选框"><a href="#多选框和单选框" class="headerlink" title="多选框和单选框"></a>多选框和单选框</h3><p>给多选框和单选框添加样式是很让人凌乱的。例如，多选框和单选框的大小往往不会发生改变，而且不同浏览器的表现相当不同。</p>
+<h4 id="一个简单例子"><a href="#一个简单例子" class="headerlink" title="一个简单例子"></a>一个简单例子</h4><p>考虑如下示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span> &#123;</span><br><span class="line">    <span class="attribute">width </span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不同浏览器的处理如下：</p>
+<table>
+<thead>
+<tr>
+<th>浏览器</th>
+<th>渲染效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firefox 16 (Mac OSX)</td>
+<td><img src="https://developer.mozilla.org/files/4165/checkbox-firefox-macos.png" alt=""></td>
+</tr>
+<tr>
+<td>Chrome 22 (Mac OSX)</td>
+<td><img src="https://developer.mozilla.org/files/4163/checkbox-chrome-macos.png" alt=""></td>
+</tr>
+<tr>
+<td>Opera 12.01 (Mac OSX)</td>
+<td><img src="https://developer.mozilla.org/files/4167/checkbox-opera-macos.png" alt=""></td>
+</tr>
+<tr>
+<td>Internet Explorer 9 (Windows 7)</td>
+<td><img src="https://developer.mozilla.org/files/4169/checkbox-IE9-win7.png" alt=""></td>
+</tr>
+<tr>
+<td>Internet Explorer 7 (Windows XP)</td>
+<td><img src="https://developer.mozilla.org/files/4171/checkbox-IE7-winxp.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<h4 id="复杂点的例子"><a href="#复杂点的例子" class="headerlink" title="复杂点的例子"></a>复杂点的例子</h4><p>由于Opera和IE没有诸如<code>-webkit-appearance</code>和<code>-moz-appearance</code>之类的特性，所以使用这类特性是不太合适的。幸运的是，在这种情况下用CSS还能找出解决办法来。举一个常见的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"first"</span> <span class="attr">name</span>=<span class="string">"fruit-1"</span> <span class="attr">value</span>=<span class="string">"cherry"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"first"</span>&gt;</span>I like cherry<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"second"</span> <span class="attr">name</span>=<span class="string">"fruit-2"</span> <span class="attr">value</span>=<span class="string">"banana"</span> <span class="attr">disabled</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"second"</span>&gt;</span>I can't like banana<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"third"</span> <span class="attr">name</span>=<span class="string">"fruit-3"</span> <span class="attr">value</span>=<span class="string">"strawberry"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"third"</span>&gt;</span>I like strawberry<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>加一些基本样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font</span>: <span class="number">1em</span> sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">form</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line"></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin </span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">fieldset</span> &#123;</span><br><span class="line">  <span class="attribute">border </span>: <span class="number">1px</span> solid <span class="number">#CCC</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">margin </span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">label</span> &#123;</span><br><span class="line">  <span class="attribute">cursor </span>: pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">margin </span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span>+<span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">margin </span>: .<span class="number">5em</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们来加样式以获得一个定制的复选框。</p>
+<p>我们的计划是用我们自己的图像来替换原生的复选框。首先得准备一张具有所有复选框所需状态的图像，这些状态有：未勾选、已勾选、禁用未勾选、禁用已勾选。该图像可用CSS雪碧图来做：</p>
+<p><img src="https://developer.mozilla.org/files/4173/checkbox-sprite.png" alt=""></p>
+<p>先从隐藏原生的复选框开始，我们只是简单地把它们从页面的可视范围中挪出。这里有两个要重点考虑的事：</p>
+<ul>
+<li>别使用<code>display:none</code>来隐藏复选框，因为如前面提到的，我们需要保证复选框对用户可用。使用<code>display:none</code>的话，复选框就不再是用户可访问的，即不能再勾选或者不勾选它。</li>
+<li>我们将使用一些CSS3选择器来实现我们的样式。为支持老旧浏览器，可以在我们要用的选择器前加<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:root" target="_blank" rel="external">:root</a>伪类。在已有的实现中，支持我们需要的选择器的浏览器也支持<code>:root</code>伪类，而剩下的浏览器就不支持了。所以这是一种用来识别老旧浏览器的方便做法，老旧浏览器中将会看到普通的复选框、而现代浏览器中将会看到定制的复选框。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> <span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span> &#123;</span><br><span class="line">  <span class="comment">/* 原生的复选框会从页面的可视范围中被挪出 */</span></span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">1000em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们已经移除了原生的复选框，可以添加我们自己的了，这里会在原生复选框后面的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label" target="_blank" rel="external"><code>&lt;label&gt;</code></a>元素使用<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:before" target="_blank" rel="external">:before</a>伪元素。下面的选择器中，我们先用<a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors" target="_blank" rel="external">属性选择器</a>来获取复选框；然后使用<a href="https://developer.mozilla.org/en-US/docs/CSS/Adjacent_sibling_selectors" target="_blank" rel="external">相邻兄弟选择器</a>来获取原来复选框后的<code>label</code>。最后我们通过给<code>:before</code>伪元素添加样式，用其来显示我们定制的复选框。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> <span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span> + <span class="selector-tag">label</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">width  </span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">height </span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">margin </span>: <span class="number">0</span> .<span class="number">5em</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">"https://developer.mozilla.org/files/4173/checkbox-sprite.png"</span>) no-repeat <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 下一属性用于在文本基线调整复选框的位置 */</span></span><br><span class="line"></span><br><span class="line">  <span class="attribute">vertical-align</span>: bottom;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来用原来复选框的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:checked" target="_blank" rel="external">:checked</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:disabled" target="_blank" rel="external">:disabled</a>伪类来改变我们定制的复选框的状态。由于我们使用了CSS雪碧图，我们只需要调整背景的位置而已。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> <span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span><span class="selector-pseudo">:checked</span> + <span class="selector-tag">label</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> -<span class="number">16px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">:root</span> <span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span><span class="selector-pseudo">:disabled</span> + <span class="selector-tag">label</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> -<span class="number">32px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">:root</span> <span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span><span class="selector-pseudo">:checked</span><span class="selector-pseudo">:disabled</span> + <span class="selector-tag">label</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> -<span class="number">48px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后也是很重要的一步：当用户使用键盘在不同表单组件间浏览时，每个组件应该能看到聚焦的效果。由于我们隐藏了原生的复选框，所以只能自己实现这一特性来让用户知晓他们正处于何处。下列的CSS实现了对我们的定制复选框的聚焦：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> <span class="selector-tag">input</span><span class="selector-attr">[type=checkbox]</span><span class="selector-pseudo">:focus</span> + <span class="selector-tag">label</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">outline</span>: <span class="number">1px</span> dotted black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终效果如下：</p>
+<iframe frameborder="0" height="130" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms$samples/A_more_complex_example?revision=784065" width="250"></iframe>
+
+<h3 id="处理选择框噩梦"><a href="#处理选择框噩梦" class="headerlink" title="处理选择框噩梦"></a>处理选择框噩梦</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素被认为是一个“丑陋的”组件，因为不太可能给它添加跨平台的样式。当然，还是有一些可以探讨的东西的，这里就不长篇大论了，先看个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Strawberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">select</span> &#123;</span><br><span class="line">  <span class="attribute">width   </span>: <span class="number">80px</span>;</span><br><span class="line">  <span class="attribute">padding </span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">option</span> &#123;</span><br><span class="line">  <span class="attribute">padding </span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">color   </span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后面的表格展示了不同浏览器如何在两种情况下处理这一样式。（渲染效果中）前两列只是简单的例子，后两列则使用了些定制的CSS来获得对组件外观的更多控制，如下所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">select</span>, <span class="selector-tag">option</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-appearance </span>: none; <span class="comment">/* 获得对Webkit浏览器里外观的控制 */</span></span><br><span class="line">  <span class="attribute">-moz-appearance </span>: none; <span class="comment">/* 获得对Gecko浏览器里外观的控制 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 获得对Presto (Opera) 和 Trident (IE)浏览器里外观的控制</span><br><span class="line">     注意这也能在Gecko浏览器里起作用，且对Webkit浏览器有副作用 */</span>  </span><br><span class="line">  <span class="attribute">background </span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>浏览器</th>
+<th>普通渲染（关闭）</th>
+<th>普通渲染（打开）</th>
+<th>调整后渲染（关闭）</th>
+<th>调整后渲染（打开）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firefox 16 (Mac OSX)</td>
+<td><img src="https://developer.mozilla.org/files/4201/select-firefox-macos.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4199/select-firefox-macos-open.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4197/select-firefox-macos-custom.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4195/select-firefox-macos-custom-open.png" alt=""></td>
+</tr>
+<tr>
+<td>Firefox 16 (Windows 7)</td>
+<td><img src="https://developer.mozilla.org/files/4209/select-firefox-win7.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4207/select-firefox-win7-open.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4205/select-firefox-win7-custom.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4203/select-firefox-win7-custom-open.png" alt=""></td>
+</tr>
+<tr>
+<td>Chrome 22 (Mac OSX)</td>
+<td><img src="https://developer.mozilla.org/files/4183/select-chrome-macos.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4181/select-chrome-macos-open.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4179/select-chrome-macos-custom.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4177/select-chrome-macos-custom-open.png" alt=""></td>
+</tr>
+<tr>
+<td>Chrome 22 (Windows 7)</td>
+<td><img src="https://developer.mozilla.org/files/4191/select-chrome-win7.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4189/select-chrome-win7-open.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4187/select-chrome-win7-custom.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4185/select-chrome-win7-custom-open.png" alt=""></td>
+</tr>
+<tr>
+<td>Opera 12.01 (Mac OSX)</td>
+<td><img src="https://developer.mozilla.org/files/4225/select-opera-macos.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4223/select-opera-macos-open.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4221/select-opera-macos-custom.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4219/select-opera-macos-custom-open.png" alt=""></td>
+</tr>
+<tr>
+<td>Internet Explorer 9 (Windows 7)</td>
+<td><img src="https://developer.mozilla.org/files/4217/select-IE9-win7.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4215/select-IE9-win7-open.png" alt=""></td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Internet Explorer 7 (Windows XP)</td>
+<td><img src="https://developer.mozilla.org/files/4213/select-IE7-winxp.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4211/select-IE7-winxp-open.png" alt=""></td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p>如你所见，即使使用了 <code>-*-qppearance</code> 属性，仍会有问题存在：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding" target="_blank" rel="external">padding</a>属性在不同操作系统和浏览器中的处理是不一致的。</li>
+<li>老旧的IE不支持平滑的样式。</li>
+<li>火狐没有能给予下拉箭头样式的方式。</li>
+<li>若想要给下拉菜单中的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" target="_blank" rel="external"><code>&lt;option&gt;</code></a>元素以样式，则Chrome和Opera在不同系统下的表现不尽相同。</li>
+</ul>
+<p>同时，在本例中，我们只讨论了三个CSS属性；想想要考虑更多的CSS属性会有多么混乱。可见，CSS确实不太适合用来改变这些组件的外观和体验，但它仍让你能做些调整，如果你愿意忍受不同浏览器或不同操作系统上的不同的话。</p>
+<p>我们将在下篇文章：<a href="">表单组件的属性兼容表</a>中尝试指出哪些属性是可用的。</p>
+<h2 id="通向漂亮表单之路：一些有用的库和拓展工具"><a href="#通向漂亮表单之路：一些有用的库和拓展工具" class="headerlink" title="通向漂亮表单之路：一些有用的库和拓展工具"></a>通向漂亮表单之路：一些有用的库和拓展工具</h2><p>尽管CSS在复选框和单选框上的表现力已经够用了，但离其支持高级表单组件仍然遥遥无期。即使在<code>&lt;select&gt;</code>元素上有一些可能，但文件组件、日期选择器等仍不能被添加样式。</p>
+<p>若你想获得对表单组件的完整控制权，你就得依赖Javascript，别无选择。在<a href="">怎样创建定制表单组件</a>一文中，我们将了解如何自己实现它，而如今有一些很有用的库可以帮到你：</p>
+<ul>
+<li><a href="http://sprawsm.com/uni-form/" target="_blank" rel="external">Uni-form</a>是一个规范了表单格式和使用CSS给予表单样式的框架。在和jQuery一起使用时，它也提供了些额外的可选特性。</li>
+<li><a href="http://formalize.me/" target="_blank" rel="external">Formalize</a>是一些常见Javascript框架（如jQuery、Dojo、YUI等）的一个插件，用于规范化和定制表单。</li>
+<li><a href="http://www.emblematiq.com/lab/niceforms/" target="_blank" rel="external">Niceforms</a>是个提供了完整web表单定制的独立Javascript方法。你可以使用一些内建的主题、也可自己创建。</li>
+</ul>
+<p>下面几个库则不止用于处理表单，但它们在处理HTML表单时有很多有趣的特性：</p>
+<ul>
+<li><a href="jQuery UI">jQuery UI</a>提供了些非常有趣的可定制高级组件，比如日期选择器（特别关注了无障碍访问）。</li>
+<li><a href="http://twitter.github.com/bootstrap/base-css.html#forms" target="_blank" rel="external">Twitter Bootstrap</a>非常有用，如果你想规范化你的表单的话。</li>
+<li><a href="http://afarkas.github.com/webshim/demos/demos/webforms.html" target="_blank" rel="external">WebShim</a>是一个庞大的工具，用于处理那些支持HTML5的浏览器。其web表单部分挺有用的。</li>
+</ul>
+<p>要知道，绑定CSS和Javascript会引起副作用。所以若你选择了上述的一种库，就得时常保证在脚本失效时会可回退的样式表。造成脚本失效的原因很多，特别在移动端，故你的Web站点或app设计得能最好地处理这些情况。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>当在HTML表单上使用CSS仍存在许多坑时，有很多方法可以绕过这些坑。原本是没有确切、通用的解决方案的，但现代浏览器带来了新可能。现在，最佳方案是研究不同浏览器对用在HTML表单组件的CSS的支持程度。</p>
+<p>下篇文章，我们将探索各种HTML表单组件对那些最重要的CSS属性的支持程度：<a href="">表单组件的属性兼容表</a>。</p>
+<h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><ul>
+<li><a href="http://diveintohtml5.info/forms.html" target="_blank" rel="external">Dive into HTML5: Forms</a></li>
+<li><a href="http://www.smashingmagazine.com/2011/06/27/useful-ideas-and-guidelines-for-good-web-form-design/" target="_blank" rel="external">Useful ideas and guidelines for good web form design</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/html/">html</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/06/29/【译】HTML表单高级样式/" data-title="【译】HTML表单高级样式 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/06/05/【译】HTML表单样式/"  title="【译】HTML表单样式">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】HTML表单样式
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】HTML表单高级样式" data-thread-key="【译】HTML表单高级样式" data-author-key="null" data-url="http://levonlin.info/post/【译】HTML表单高级样式"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>
