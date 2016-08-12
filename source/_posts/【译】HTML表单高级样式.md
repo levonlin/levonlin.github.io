@@ -4,7 +4,7 @@ tags: [html,前端,css]
 categories: [前端,翻译]
 ---
 > * [系列文章说明](http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/)
-> * [原文](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Styling_HTML_forms)
+> * [原文](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms)
 
 在本文中，我们将了解如何在[HTML](https://developer.mozilla.org/en-US/docs/CSS)表单上使用[CSS](https://developer.mozilla.org/en-US/docs/HTML)，为那些难于自定义的表单组件加以样式。如[前文](https://developer.mozilla.org/en-US/docs/HTML/Forms/Styling_HTML_forms)所述，文本框和按钮很适合使用CSS，而现在我们得来探索HTML表单样式的那些坑了。
 
