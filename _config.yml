@@ -74,9 +74,3 @@ deploy:
   repo:
     github: git@github.com:levonlin/levonlin.github.io.git,master
     coding: git@git.coding.net:levonlin/levonlin.git,coding-pages
-
-# Backup
-backup:
-    type: git
-    repository:
-      origin: git@github.com:levonlin/levonlin.github.io.git,hexo
