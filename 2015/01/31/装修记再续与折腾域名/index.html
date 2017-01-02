@@ -1,0 +1,372 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>装修记再续与折腾域名 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="汉化续上回在搞完移动端优化后，偶然发现一个主题jacman的归档页里月份显示为中文，于是果断clone下来，在jacman\layout\_partial\archives.ejs里发现了这个：
+12345678&amp;lt;div class=&quot;archive-title&quot; &amp;gt;  &amp;lt;h2 c">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/31/装修记再续与折腾域名/" title="装修记再续与折腾域名" itemprop="url">装修记再续与折腾域名</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2015-01-30T17:55:02.000Z" itemprop="datePublished">2015年 1月 31日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#汉化续"><span class="toc-number">1.</span> <span class="toc-text">汉化续</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名与dns配置"><span class="toc-number">2.</span> <span class="toc-text">域名与dns配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#站内搜索"><span class="toc-number">3.</span> <span class="toc-text">站内搜索</span></a></li></ol>
+		</div>
+		
+		<h2 id="汉化续"><a href="#汉化续" class="headerlink" title="汉化续"></a>汉化续</h2><p>上回在搞完移动端优化后，偶然发现一个主题<a href="https://github.com/wuchong/jacman" target="_blank" rel="external">jacman</a>的归档页里月份显示为中文，于是果断clone下来，在<code>jacman\layout\_partial\archives.ejs</code>里发现了这个：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"archive-title"</span> &gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"&lt;%= icon %&gt;-icon"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">title</span> %&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>(<span class="attr">page.archive</span>)&#123; %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"archiveslist archive-float clearfix"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">%-</span> <span class="attr">list_archives</span>(&#123;<span class="attr">format:__</span>('<span class="attr">archive_date</span>')&#125;) %&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>额，原来传个格式参数就能解决日期显示问题，真是踏破铁鞋无觅处···再按<code>__(&#39;archive_date&#39;)</code>去language文件夹里翻，格式控制是这样的：<code>archive_date: YYYY年 MM月</code>。于是依照此方法顺利解决这一大问题，并顺便把<code>Hexo\_config.yml</code>里的日期格式也汉化了。然后想趁胜追击，把回到顶部按钮也改正常，但弄了好久也没进展，不过倒是发现pacman主题的原生多说评论框代码和我自己添加的不一样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">theme.duoshuo.enable</span> &amp;&amp; <span class="attr">page.comments</span>)&#123; %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"comment"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">page.slug</span>)&#123; %&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ds-thread"</span> <span class="attr">data-title</span>=<span class="string">"&lt;%= page.title %&gt;"</span> <span class="attr">data-thread-key</span>=<span class="string">"&lt;%= page.slug %&gt;"</span> <span class="attr">data-author-key</span>=<span class="string">"&lt;%= page.author ? page.author : config.author %&gt;"</span> <span class="attr">data-url</span>=<span class="string">"&lt;%- config.url %&gt;/post/&lt;%- page.slug %&gt;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span>&#123;%&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ds-thread"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></div></pre></td></tr></table></figure>
+<p>拿过来贴了一下，嗯，还是原装的看起来舒服啊，想想自己走上这条改装之路也是够坎坷曲折、柳暗花明的(┬＿┬)。。。</p>
+<h2 id="域名与dns配置"><a href="#域名与dns配置" class="headerlink" title="域名与dns配置"></a>域名与dns配置</h2><p>为了保证博客访问速度和防止哪天github在国内又上不了，顺着zippera的<a href="http://zipperary.com/2013/05/28/hexo-guide-1/" target="_blank" rel="external">教程</a>，我把博客挪窝到几个月前注册后就没去过的<a href="https://gitcafe.com/levonlin/levonlin" target="_blank" rel="external">Gitcafe</a>上，现在访问速度嗖嗖的。</p>
+<p>有了速度保证，就心血来潮想弄个域名玩玩，先是去<a href="http://www.dot.tk/en/index.html" target="_blank" rel="external">dot.tk</a>上搞了几个免费域名，但是因为不能用dnspod的dns服务，其本身提供的在天朝又卡的要命，试了一早上曲线救国方法都不顶用。在此不得不吐槽它的注册机制和登录设计，太古老的又让人蛋疼模式了，就算那个具有浓浓bootstrap风格的新站，也是不停地提交后登不上，尤其那个按钮实在是让人抓狂，继承了老站那个让人不知道有没有按下去的风格，弄个active样式会shi吗，非得只弄一个样式，这还是按钮吗？果然免费没好货，体验还让人心烦。</p>
+<p>所以还是去找<a href="https://www.godaddy.com/" target="_blank" rel="external">godaddy</a>吧，发现<a href="http://levonlin.info/">levonlin.info</a>这个域名只要二十几块后，当即买买买。<a href="http://jingyan.baidu.com/article/358570f6198a9ece4724fcf7.html" target="_blank" rel="external">配好dns</a>后，以为又可以体验飞一般的感觉了，但是页面却总加载不了。以为是域名转接要时间，但等了好几个小时还不行，于是把域名指向到github，等了一回就ok了。我就不信邪，又转回gitcafe，又见404，是不是该找客服了？结果进到很多次被我无视的<a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9#wiki" target="_blank" rel="external">gitcafe帮助文档</a>才发现gitcafe比起github绑定域名要多一步项目上添加绑定的域名，于是问题就这样解决了。</p>
+<p>ps.还是得吐槽一下gitcafe自定义域名的选项太难找了，首先经过改版，文档的图片却没改，新版全绿色的选项、按钮无法突出功能重点，如下图：</p>
+<p><img src="http://ww3.sinaimg.cn/large/85ad0d9cgw1eosp0lxkp7j211f05ft9l.jpg" alt="是不是很考眼力？"></p>
+<p><img src="http://ww2.sinaimg.cn/large/85ad0d9cgw1eosp6mpqrhj20r90gt0u3.jpg" alt="是不是很考眼力？"></p>
+<h2 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h2><p>本主题原先的内置搜索是谷歌，但毕竟本博做了这么多使用我国国情的调整，所以搜索这块本想<a href="http://gengbiao.me/2014/10/22/hexo%E6%B7%BB%E5%8A%A0%E7%99%BE%E5%BA%A6%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2/#" target="_blank" rel="external">用百度实现</a>。后来把发现百度挂上后风格实在太不和谐，便依照<a href="http://www.jerryfu.net/post/search-engine-for-hexo-with-swiftype.html" target="_blank" rel="external">JerryFu童鞋的教程</a>改用了swiftype为hexo添加站内搜索，这回可就和谐多了。</p>
+<p>但是本着爱折腾的原则，搜索框样式还是得改一改的，因为Tinny的导航栏和原生的pacman主题不一样，是和textlogo放在同一行的，而添加那个一有输入焦点就变长的搜索框后，一输入文字导航栏就会掉到下面。所以在<code>Tinny\source\css\_partial\header.styl</code>的<code>#textlogo</code>下添加</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@media tablet</div><div class="line">  <span class="attribute">width</span> <span class="number">50%</span></div></pre></td></tr></table></figure>
+<p>保证导航栏在非移动端屏幕下都不会被挤下去，当然每个人的导航栏各不相同，width的取值看你自己的情况调咯。</p>
+<p>本文最后ps.这回没吐槽了，赞一下swiftype官网的设计风格，体验很舒服，和我今天的遭遇形成鲜明对比。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Tinnypp/">Tinnypp</a><a href="/tags/域名/">域名</a><a href="/tags/站内搜索/">站内搜索</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/博客之路/">博客之路</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2015/01/31/装修记再续与折腾域名/" data-title="装修记再续与折腾域名 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/02/15/发布主题与一些hexo使用tips（不定时更新）/" title="发布主题与一些hexo使用tips（不定时更新）">
+  <strong>新一篇:</strong><br/>
+  <span>
+  发布主题与一些hexo使用tips（不定时更新）</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/28/装修记续/"  title="装修记续">
+ <strong>旧一篇:</strong><br/> 
+ <span>装修记续
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="装修记再续与折腾域名" data-thread-key="装修记再续与折腾域名" data-author-key="null" data-url="http://levonlin.info/post/装修记再续与折腾域名"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,446 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>百度面试的总结 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="今天接到百度的电话面试了，人生中第一次电话面试啊，感觉有很多做不好的地方，必须来好好总结整理下。
+关于面试准备之前由于一直没有消息，还以为自己笔试没通过来着，直到昨天晚上偶然翻了下才知道自己被安排面试了。而且一直都没有好好刷过面试题，本来还想趁这几天好好查漏补缺下的，结果今天就来了电话。
+而在这种情">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/18/百度面试的总结/" title="百度面试的总结" itemprop="url">百度面试的总结</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-05-18T12:10:40.000Z" itemprop="datePublished">2016年 5月 18日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于面试准备"><span class="toc-number">1.</span> <span class="toc-text">关于面试准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于面试谈话"><span class="toc-number">2.</span> <span class="toc-text">关于面试谈话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面试的内容"><span class="toc-number">3.</span> <span class="toc-text">面试的内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写在最后"><span class="toc-number">4.</span> <span class="toc-text">写在最后</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新：第二次电面"><span class="toc-number">5.</span> <span class="toc-text">更新：第二次电面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应对移动端高ppi屏幕："><span class="toc-number">5.1.</span> <span class="toc-text">应对移动端高ppi屏幕：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解析JSON字符串"><span class="toc-number">5.2.</span> <span class="toc-text">解析JSON字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于HTTP协议"><span class="toc-number">5.3.</span> <span class="toc-text">关于HTTP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get和post请求的区别"><span class="toc-number">5.4.</span> <span class="toc-text">get和post请求的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组去重"><span class="toc-number">5.5.</span> <span class="toc-text">数组去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何获取浏览器UA"><span class="toc-number">5.6.</span> <span class="toc-text">如何获取浏览器UA</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>今天接到百度的电话面试了，人生中第一次电话面试啊，感觉有很多做不好的地方，必须来好好总结整理下。</p>
+<h2 id="关于面试准备"><a href="#关于面试准备" class="headerlink" title="关于面试准备"></a>关于面试准备</h2><p>之前由于一直没有消息，还以为自己笔试没通过来着，直到昨天晚上偶然翻了下才知道自己被安排面试了。而且一直都没有好好刷过面试题，本来还想趁这几天好好查漏补缺下的，结果今天就来了电话。</p>
+<p>而在这种情况下第一个电话我还漏接了T_T…，这种情况下回拨回去是根本就打不通的，幸好下午面试官再打来了一遍。然而此时我又犯了个错，原以为在图书馆楼梯间里接电话应该没问题，结果偏偏那时人来人往，在嘈杂的环境中本身就听不太清，同时好像面试官感冒得有点严重，所以很多问题都得重复几遍才听得清，这样双方都挺累的，严重影响面试效果。</p>
+<p>总之面试的准备挺糟糕的，事后好好反思了下，其实在知道面试那一刻就要好好准备、同时保持通信畅通，这种电话要是错过了只能干着急。至于面试环境，好的环境必须保证安静无干扰，同时还得准备在面前准备好纸笔以备不时之需；此外最好备点水喝，在电话里长谈近一个小时免不了口干舌燥、影响发挥的。</p>
+<h2 id="关于面试谈话"><a href="#关于面试谈话" class="headerlink" title="关于面试谈话"></a>关于面试谈话</h2><p>前面说了环境很嘈杂，说话得重复，这就导致在紧张的面试过程中情绪有点急躁，估计降低给面试官的印象分了吧。</p>
+<p>而且在谈话过程中，若需要思考、或者回答完成时，应该有所反馈。要不然你突然间就不说话，不仅气氛很尴尬，而且面试官还得来不断确认你是否还在线，这也会拉低印象分的。</p>
+<p>最后在谈话结束时，还忘了问结果何时出来、后续面试安排等问题，没有好好利用好面试的时间显示对该工作的关心、显得过于随意了。</p>
+<h2 id="面试的内容"><a href="#面试的内容" class="headerlink" title="面试的内容"></a>面试的内容</h2><p>一开始先自我介绍一番，然后问我做过什么项目，我就把我简历上写的念了一遍。</p>
+<p>然后就直入主题了，问题以基础题为主吧，认真把<a href="https://github.com/baidu-ife/ife/tree/master/2015_spring/task/task0001" target="_blank" rel="external">百度IFE的第一期</a>做下就基本涵盖了，当然。顺带还插了点前端工程化、<code>node</code>和<code>es6</code>的内容。</p>
+<p>首先问的都是css上的问题，第一个就是<code>position</code>有几个值，不就是<code>absolute</code>, <code>relative</code>, <code>static</code>, <code>fixed</code>吗？最多再加个万金油<code>inherit</code>。但是面试官说还有，然而我闻所未闻，回来查了下，发现css3里居然还有个<code>sticky</code>值。该属性在其容器尚在视口内时，相当于<code>relative</code>，而当容器滚动出视口时其行为又相当于<code>fixed</code>，不过目前只有火狐和Safari可以用。。。</p>
+<p>接下来是问居中的处理，分几种情况：已知div宽高、div宽高未知、文本元素居中。我把我知道的方式全说了一遍，但div高度未知时的垂直居中我就只能想想出flexbox布局的<code>align-item</code>了，但是面试官说还有，我就傻了。万没想到平时不怎么用的<code>transform</code>用百分比值时也有此奇效，一直只把它和<code>margin</code>负值一起记作居中微调的工具而已。</p>
+<p>再接下来给了一个场景：页面内有许多背景图，问如何优化。一开始我有点不知所措，然后面试官提醒了下雪碧图，这下才我才恍然大悟，赶紧把原理和我知道的雪碧图优点诸如减少http请求、在老旧浏览器上模拟css圆角或阴影等统统说了一遍。然后面试官再问：“知道字体文件吗？”，这里所谓字体点含糊不清，不过由于刚问了雪碧图，我就猜是在问字体图标了，便把字体图标的缩放不失真、只支持纯色、文件小、可多个图标合并为一个文件特点说了，面试官也没做回应，估计猜对了吧。</p>
+<p>然后问我一段文字太长如何把超出部分用几个点替代，但我忘了使用哪个属性了。其实就是设置一个<code>text-overflow:ellipsis</code>；然而这样还不够，必须按实际情况搭配其他属性。如果文字要求多行那情况就复杂了，可参见<a href="http://www.zhangxinxu.com/wordpress/2009/09/%E5%85%B3%E4%BA%8E%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E6%BA%A2%E5%87%BA%E7%94%A8%E7%82%B9%E7%82%B9%E7%82%B9-%E7%9C%81%E7%95%A5%E5%8F%B7%E8%A1%A8%E7%A4%BA/" target="_blank" rel="external">张鑫旭文章中给出的方法</a>。但如果文字只要求单行，采用如下样式即可：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">xx</span> &#123;</div><div class="line"> <span class="attribute">overflow</span>:hidden;</div><div class="line"> <span class="attribute">white-space</span>:nowrap;</div><div class="line"> <span class="attribute">text-overflow</span>:ellipsis;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着再问了个a元素有几个伪类，当时回答少个了<code>link</code>，所以还是得罗列下备忘：</p>
+<ul>
+<li>a:link - 普通的、未被访问的链接</li>
+<li>a:hover - 鼠标指针位于链接的上方</li>
+<li>a:active - 链接被点击的时刻</li>
+<li>a:visited - 用户已访问的链接</li>
+<li>a:target - 向链接访问的锚点元素添加样式</li>
+</ul>
+<p>预处理器稍微提及了下，因为我说只是了解点<code>sass</code>，便没有细问。</p>
+<p>差点忘了，还问了清除浮动，这个直接上<code>clearfix</code>大法呀。</p>
+<p>然后就轮到js了，首先要我说出数组和字符串各自带有的方法，这个虽然经常用但是要集中报出来还是得想一想的，最好就想一想平时处理数组和字符串的各种场景，需求只要出现、那解决方法就自然冒出来了。</p>
+<p>下一个问题是对是否用过js的模块化，然而我只能说我对模块化的认识尽停留在node下用过的<code>exports</code>、<code>require</code>（标准叫CommonJS吧）。听到我在node下用过，面试官便再问了下：“你没在浏览器环境下用过吗？”，真没有，我只能如实说就听过两个词RequireJS（AMD标准）、seajs（CMD标准），平时开发小打小闹，还没深入模块化这么高端的东西。</p>
+<p>然后还是工程化的问题，问构建工具的使用。因为真没用过，这个也只能报名词：grunt、gulp、webpack…</p>
+<p>接下来问我是否了解XSS，然而我只记得这是种攻击方式（中文意思都想不起来了，叫跨站脚本攻击），安全方面只是偶尔有点好奇去整点hacker的行为，也没深入研究过，囧。</p>
+<p>回到js，问如何实现继承，有好多种方法吧，可以有绑定父类型的构造函数、原型链继承、组合式继承、原型式继承、寄生式继承、寄生组合式继承等等，平常用的多的也就是原型链继承或组合式继承。</p>
+<p>接着问了<code>call</code>和<code>apply</code>的作用、事件冒泡、事件委托等，比较基础，也没啥好说。不过当面试官问我老版本IE下的事件是否有<code>event</code>对象时，我答不上来了，印象中得通过<code>window</code>来调用才行，回来一查果然是这样。。。</p>
+<p>接下来是<code>ajax</code>方面的问题，因为一直做静态页面，这竟成我的短板了。首先问跨域的解决方案，只记得高程上列了不少方法，有点印象的也就是<code>CORS</code>、<code>JSONP</code>了，现在查了下，还有图像PING、Comet（有长轮询、http流两种方式，以SSE为代表）、Web Sockets等技术。然后问<code>ajax</code>有几种状态，光知道http的状态了，而这个真答不上来，罗列如下：</p>
+<ul>
+<li>0：未初始化。未调用<code>open()</code>方法。</li>
+<li>1：启动。已调用<code>open()</code>方法，未调用<code>send()</code>方法。</li>
+<li>2：发送。已调用<code>send()</code>方法，未调收到响应。</li>
+<li>3：接收。已接收到部分响应。</li>
+<li>4：完成、已接收到全部响应。</li>
+</ul>
+<p>接下来问我对node的使用、及es6的了解程度，这两个我现在还处于入门阶段，也实在没什么好说，但也是该找时间深入学习下了，现在做前端不了解这个都不能和人谈笑风生。。。</p>
+<p>至于jquery，面试官问我有没有看过源码，我说我只是偶尔偷懒用用选择器，不太依赖框架，于是他就问我jquery选择器中<code>eq</code>和<code>get</code>，<code>eq</code>简单，但<code>get</code>是什么选择器？现在查了下，觉得他应该是问我jquery对象<code>eq</code>和<code>get</code>方法的区别才对（答案是返回值不同，<code>eq</code>返回jquery对象，而<code>get</code>返回dom元素），只是环境太吵我听不清、而且也没用过。。。T_T</p>
+<p>还问我知道哪些浏览器存储技术，也就是<code>cookie</code>、<code>sessionStorage</code>、<code>globalStorage</code>、<code>localStorage</code>。翻翻书，发现还忘了<code>IndexDB</code>这东西。</p>
+<p>最后问了下我的实习的时间安排，面试就结束了。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>其实我估计面试官不是看简历（或者只看招聘系统上那个没写技能点的简历）在面试，虽然我简历上写的前端技术点都有问到，但并不是直接点出来而是在谈话中慢慢给带出来的。</p>
+<p>而就这些提及的技术点来说，如果刨去面试过程中的环境等因素，因为自己面试经验和准备不足，其实对上面提及的内容回答的也不是很好：</p>
+<ul>
+<li>css的问题出现在细节上了解不充分</li>
+<li>而原生js写了那么多题目，但其实做的都是偏应用方向的，对js主干的面向对象、闭包等知识到有点生疏了；尤其是<code>ajax</code>，因为基本没怎么做过，导致现在成为一大短板</li>
+<li>对主流的jquery等框架，虽然最近正在重新了解和用起来，但还是得翻翻api才能上手，经验的缺乏这点也不是几天就能突击提升的</li>
+<li>而对于新技术，往往就只是有个印象而已。</li>
+</ul>
+<p>所以感觉要通过有点够呛啊，但通过这次面试和上面的总结，也算是给自己提了个醒吧，接下来的学习和开发也得有点针对性了：</p>
+<ul>
+<li>对于基础的css和原生js还是要多看看经典著作，老老实实把基础打牢，而且要在平时的开发中尝试融入这些特性才能掌握得全面。</li>
+<li>对于主流技术和框架，和上面一样，多练多攒经验才是真理。</li>
+<li>由于技术来自实际的生产环境，要创造机会多了解生产环境。毕竟现在的前端可不只是切切图，而是整个web开发流程中的一环，所以得把自己当成一个web开发者而不是只守着前端，才能对实际的工作和具体业务场景有更深的体会。比如要真正掌握<code>ajax</code>，就可以把它和用<code>node.js</code>搭建后台、<code>mysql</code>操作数据库等结合起来学习；这样掌握的可就是一个web应用的开发流程，而不是仅有前端这点ajax操作，这对于你的工作，不论是想从事全栈开发还是和后端的同事沟通，想来也是大有裨益的。</li>
+<li>最后对于新技术，虽然说没必要步步紧跟、也没时间步步紧跟的，但作为一个工程师怎么能丧失好奇心呢？多了解一些总不是坏事，至于何时深入使用，还是得看时机和需求吧。</li>
+</ul>
+<h2 id="更新：第二次电面"><a href="#更新：第二次电面" class="headerlink" title="更新：第二次电面"></a>更新：第二次电面</h2><p>没想到第二次面试隔了一天就来了，当然也就难有长足点的准备了，但是吸取上次的经验，也没犯什么低级错误。这次面试主要是考察项目经历，但我毕竟还是写静态页面比较多，能上线的应用真没怎么做过。所以面试官也只能问问简历上写的东西了，比如在IFE学习到了什么、python的学习经历、用node来做什么、以及对node和python间的比较等等。当然也还问了些技术细节上的问题，这里就把我觉得当时回答不太好的整理下：</p>
+<h3 id="应对移动端高ppi屏幕："><a href="#应对移动端高ppi屏幕：" class="headerlink" title="应对移动端高ppi屏幕："></a>应对移动端高ppi屏幕：</h3><p>高像素密度会导致物理像素和css像素间的比值（即缩放比window.devicePixelRatio = dip / px）变大，这样就让页面上的内容看起来缩小了。要解决这个问题，最常想到的思路是不使用<code>px</code>做长度单位而使用相对单位<code>rem</code>，只要针对不同屏幕去修改html元素的<code>font-size</code>属性即可。</p>
+<p>对那些缩放不改变清晰度的内容，上面采用相对单位的方法是没有问题的。但对于高清图片，这样随便缩放大小便失去了高清屏的意义了。而使用html5的<code>picture</code>标签就解决该问题，常用格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">picture</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">srcset</span>=<span class="string">"图像文件名, n倍像素密度图像文件名 nx"</span> <span class="attr">media</span>=<span class="string">"媒体查询"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">picture</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>该标签会根据媒体查询结果按需下载我们准备好的不同像素密度图片。</p>
+<h3 id="解析JSON字符串"><a href="#解析JSON字符串" class="headerlink" title="解析JSON字符串"></a>解析JSON字符串</h3><p>当然是用<code>JSON.parse</code>了，但面试官还问我对老旧浏览器如何实现，当时思路有点混乱没讲明白。翻了翻高程，发现简单用个<code>eval</code>就可以了，因为JSON本身就是用的js语法嘛。如果觉得用<code>eval</code>不优雅，那就使用老道亲自写的<a href="https://github.com/douglascrockford/JSON-js" target="_blank" rel="external">js脚本</a>吧。</p>
+<h3 id="关于HTTP协议"><a href="#关于HTTP协议" class="headerlink" title="关于HTTP协议"></a>关于HTTP协议</h3><p>只是有点印象，全称超文本传输协议，无连接、无状态等。至于为什么是无连接、无状态，就不清楚了，摘了计算机网络课本上的解释：</p>
+<blockquote>
+<p>超文本传送协议 HTTP (HyperText Transfer Protocol)是一个应用层协议，它使用 TCP 连接进行可靠的传送。 </p>
+<p>HTTP 的主要特点 :</p>
+<ol>
+<li>面向事务的客户服务器协议。</li>
+<li>无状态的协议</li>
+<li>无连接的协议，虽然它使用了面向连接的 TCP 向上提供的服务。</li>
+</ol>
+<p>HTTP 有两类报文：<br>请求报文——从客户向服务器发送请求报文。<br>响应报文——从服务器到客户的回答。<br>报文由三个部分组成，即开始行、首部行和实体主体。</p>
+</blockquote>
+<p>请求报文的一些方法：</p>
+<blockquote>
+<p>OPTION： 请求一些选项的信息<br>GET： 请求读取由 URL所标志的信息<br>HEAD： 请求读取由 URL所标志的信息的首部<br>POST： 给服务器添加信息（例如，注释）<br>PUT： 在指明的 URL下存储一个文档<br>DELETE： 删除指明的 URL所标志的资源<br>TRACE： 用来进行环回测试的请求报文<br>CONNECT： 用于代理服务器</p>
+</blockquote>
+<p>至于各种响应码的含义，也附送如下：</p>
+<blockquote>
+<p>1xx 表示通知信息，如请求收到了或正在进行处理。<br>2xx 表示成功，如接受或知道了。<br>3xx 表示重定向，表示要完成请求还必须采取进一步的行动。<br>4xx 表示客户的差错，如请求中有错误的语法或不能完成。<br>5xx 表示服务器的差错，如服务器失效无法完成请求。</p>
+</blockquote>
+<h3 id="get和post请求的区别"><a href="#get和post请求的区别" class="headerlink" title="get和post请求的区别"></a>get和post请求的区别</h3><p>经典的面试题了，上面也稍微提及了下，摘个比较全点的答案：</p>
+<blockquote>
+<p>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在2000个字符。<br>POST：一般用于修改服务器上的资源，对所发送的信息没有限制。<br>也就是说Get是通过地址栏来传值，而Post是通过提交表单来传值。</p>
+</blockquote>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><p>也是经典面试题，写出来也不难：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">uniqArray</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> newArr = [];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> , len = arr.length; i &lt; len; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (newArr.indexOf(arr[i]) === <span class="number">-1</span>) &#123;</div><div class="line">            newArr.push(arr[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> newArr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="如何获取浏览器UA"><a href="#如何获取浏览器UA" class="headerlink" title="如何获取浏览器UA"></a>如何获取浏览器UA</h3><p>记错了，应该是<code>navigator.userAgent</code>。与此相关的还有<code>navigator.appCodeName</code>（基本都是<code>Mozilla</code>）、<code>navigator.appVersion</code>（获取UA中<code>Mozilla</code>后面的部分）等等。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a><a href="/tags/html/">html</a><a href="/tags/css/">css</a><a href="/tags/求职/">求职</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/求职/">求职</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/05/18/百度面试的总结/" data-title="百度面试的总结 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/24/【译】原生表单组件/" title="【译】原生表单组件">
+  <strong>新一篇:</strong><br/>
+  <span>
+  【译】原生表单组件</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/14/原生js练习题-杂项-md/"  title="原生js练习题---杂项.md">
+ <strong>旧一篇:</strong><br/> 
+ <span>原生js练习题---杂项.md
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="百度面试的总结" data-thread-key="百度面试的总结" data-author-key="null" data-url="http://levonlin.info/post/百度面试的总结"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

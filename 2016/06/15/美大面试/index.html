@@ -1,0 +1,421 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>美大面试 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="相比百度，美大的面试官似乎很关注标准方面的问题、同时也问了一些体现综合能力的题目。总结如下：
+hover控制显隐的级联菜单这个常见于导航条和电商网站的侧边栏，也可以用于实现自定义的右键菜单，最简单的一个思路就是用hover伪类+子菜单绝对定位来做，但感觉回答得挺勉强的，模拟大众点评的侧边栏形式再实现">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/15/美大面试/" title="美大面试" itemprop="url">美大面试</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-06-15T12:00:00.000Z" itemprop="datePublished">2016年 6月 15日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hover控制显隐的级联菜单"><span class="toc-number">1.</span> <span class="toc-text">hover控制显隐的级联菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取股票价格"><span class="toc-number">2.</span> <span class="toc-text">获取股票价格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现轮播图"><span class="toc-number">3.</span> <span class="toc-text">实现轮播图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序算法"><span class="toc-number">4.</span> <span class="toc-text">排序算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几个标准"><span class="toc-number">5.</span> <span class="toc-text">几个标准</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM"><span class="toc-number">5.1.</span> <span class="toc-text">DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css3"><span class="toc-number">5.2.</span> <span class="toc-text">css3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器如何渲染css"><span class="toc-number">6.</span> <span class="toc-text">浏览器如何渲染css</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#es6新的数组遍历方法"><span class="toc-number">7.</span> <span class="toc-text">es6新的数组遍历方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素和内联元素有何不同"><span class="toc-number">8.</span> <span class="toc-text">块级元素和内联元素有何不同</span></a></li></ol>
+		</div>
+		
+		<p>相比百度，美大的面试官似乎很关注标准方面的问题、同时也问了一些体现综合能力的题目。总结如下：</p>
+<h2 id="hover控制显隐的级联菜单"><a href="#hover控制显隐的级联菜单" class="headerlink" title="hover控制显隐的级联菜单"></a>hover控制显隐的级联菜单</h2><p>这个常见于导航条和电商网站的侧边栏，也可以用于实现自定义的右键菜单，最简单的一个思路就是用<code>hover</code>伪类+子菜单绝对定位来做，但感觉回答得挺勉强的，模拟大众点评的侧边栏形式再实现一遍吧：</p>
+<p></p><p data-height="300" data-theme-id="17410" data-slug-hash="XKjaWe" data-default-tab="html,result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/XKjaWe/" target="_blank" rel="external">sidebar</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="获取股票价格"><a href="#获取股票价格" class="headerlink" title="获取股票价格"></a>获取股票价格</h2><p>给定一个表格，每行的几个单元格分别放置股票代码、名称和待获取的股票价格以及一个按钮。要求点击一个按钮就获取改行的股票价格，数据交换格式自定。</p>
+<p>核心思路就是通过点击事件发送请求，并显示回传数据而已。因为按钮可能很多，就想到了使用事件代理减少性能损耗。原生实现如下（用了新浪财经的数据）：</p>
+<p></p><p data-height="309" data-theme-id="17410" data-slug-hash="YWGQWY" data-default-tab="js,result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/YWGQWY/" target="_blank" rel="external">Get Stocks Price</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="实现轮播图"><a href="#实现轮播图" class="headerlink" title="实现轮播图"></a>实现轮播图</h2><p>就是经典的带自动播放、进度显示、左右方向控制的轮播图啦，而且要求封装接口实现批量导入图片生成轮播图。</p>
+<p>其实自己也实现过几次了，但是回答时还是思路很不清晰，说明还是没有学到位，构建的能力不足啊。重新研究了一下：</p>
+<p>轮播图的主要有三个组件（图片、箭头、原点），而这三个组件又对应三个切换（自动切换、左右切换、任意切换）的操作。这里此采用了构造函数+原型对象来封装整个功能，构造函数主要做三件事：</p>
+<ul>
+<li>获取配置的属性（三个切换的开关）</li>
+<li>输出整个组件初始结构、获取UI属性</li>
+<li>初始化三个切换动作</li>
+</ul>
+<p>构造函数中各种实例属性配置完后，接下来就只要在对象的原型里，把输出组件、切换动作这两类方法实现就好了。难点就是切换的实现，为简单起见，这里用了个<code>_moveTo</code>方法一步到位，没有过渡；同时原点状态的切换也是重新渲染后直接替换，减少了频繁琐碎的类名切换操作。</p>
+<p>最后，只要new一下构造函数，把资源、配置传进去，一个轮播图就可以轻松生成：</p>
+<p></p><p data-height="320" data-theme-id="17410" data-slug-hash="dpWjdV" data-default-tab="js,result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/dpWjdV/" target="_blank" rel="external">carousel</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><p>记得最清楚的是冒泡，其他的就不太熟悉了，将常用的几种贴下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 冒泡 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> last = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i = last) &#123;</div><div class="line">        last = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</div><div class="line">                <span class="keyword">var</span> temp = arr[j];</div><div class="line">                arr[j] = arr[j + <span class="number">1</span>];</div><div class="line">                arr[j+<span class="number">1</span>] = temp;</div><div class="line">                last = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 选择 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</div><div class="line">        <span class="keyword">var</span> maxIndex = i;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (arr[maxIndex] &lt; arr[j]) &#123;</div><div class="line">                maxIndex = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (maxIndex !== i) &#123;</div><div class="line">            <span class="keyword">var</span> temp = arr[i];</div><div class="line">            arr[i] = arr[maxIndex];</div><div class="line">            arr[maxIndex] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 插入 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</div><div class="line">        <span class="keyword">var</span> temp = arr[i - <span class="number">1</span>];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = i; j &lt; arr.length; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (arr[j] &lt; temp) &#123;</div><div class="line">                arr[j - <span class="number">1</span>] = arr[j];</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        arr[j - <span class="number">1</span>] = temp;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> arr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="几个标准"><a href="#几个标准" class="headerlink" title="几个标准"></a>几个标准</h2><p>标准这东西，除非遇到实在不能解决的问题，自己平常是很少去深究的。而这次面试问了好多这方面的问题，让我感觉这方面的认知真的很匮乏。其实想想未来的职业发展，研究并掌握标准是一种保障，也是自己升值潜力的所在，毕竟前端界千变万化还是基于标准的，这就是所谓内功吧：</p>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><p>问了DOM0级别事件和DOM2级事件的不同，这个还好，DOM0级在元素上只能一个事件加一个处理函数，而DOM2可以添加多个嘛。然而接下来再问DOM3级的内容、有没有DOM4等我就懵了，印象中DOM3多了些xml方面的api，但具体也说不上了，翻了翻高程，大概有这么几个方面：</p>
+<ul>
+<li>引入用于比较节点的方法：<code>isSameNode</code>（DOM4已废弃）和<code>isEqualNode</code>，这两者间其实就是<code>==</code>和<code>===</code>的区别。</li>
+<li>节点上数据的get和set操作:<code>getUserData</code>、<code>setUserData</code>。（DOM4已废弃）</li>
+<li>DOM3级新支持的事件：<code>focusin</code>、<code>focusout</code>、<code>texInput</code>、<code>mouseenter</code>、<code>mouseleave</code>、<code>compositionstart</code>、<code>compositioninupdate</code>、<code>compositionend</code>。以及键盘事件的新属性：<code>key</code>、<code>char</code>、<code>location</code>、<code>getModifierState()</code>等。</li>
+<li>XML节点的几个命名空间方法：isDefaultNameSpace(nameSpace)、lookupNamespaceURI(prefix)、lookupPrefix(nameSpace)</li>
+<li>新增了Xpath的API。</li>
+</ul>
+<p>要了解更多内容还是参见<a href="https://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/" target="_blank" rel="external">官网</a>吧。至于DOM4，去年也已经<a href="https://www.w3.org/TR/2015/REC-dom-20151119/" target="_blank" rel="external">发布</a>了。</p>
+<h3 id="css3"><a href="#css3" class="headerlink" title="css3"></a>css3</h3><p>问我css3的发布机制，平常也是只用不深究，故也不甚了解。查了下，为避免规范过于庞大，css3是将整个规范拆分为一个个模块的形式发布的。</p>
+<p>有几个比较重要的模块：</p>
+<blockquote>
+<p>选择器、颜色、背景和边框、数值和单位、文字特效、2D/3D转换、动画、多列布局、用户界面</p>
+</blockquote>
+<h2 id="浏览器如何渲染css"><a href="#浏览器如何渲染css" class="headerlink" title="浏览器如何渲染css"></a>浏览器如何渲染css</h2><p>参见<a href="http://blog.jobbole.com/68208/" target="_blank" rel="external">这篇文章</a>可知大致流程如下：</p>
+<ol>
+<li>解析HTML构建DOM树</li>
+<li>结合css构建渲染树</li>
+<li>渲染树布局（reflow，这一步产生了盒模型）</li>
+<li>渲染树绘制（rasterizing）</li>
+</ol>
+<p>由于每一步都要耗费时间进行计算，所以这也前端性能优化的重点，比如要避免触发浏览器重构、重绘等。</p>
+<h2 id="es6新的数组遍历方法"><a href="#es6新的数组遍历方法" class="headerlink" title="es6新的数组遍历方法"></a>es6新的数组遍历方法</h2><p>最窘的是把<code>forEach</code>当成es6的。。。，还说出了个<code>for-of</code>，但这不止适用于数组，还可用于字符串和<code>Map</code>、<code>Set</code>等新类型的遍历。</p>
+<p>事后想起来专门用于数组的还有<code>map</code>和<code>filter</code>，但它们还是早在es5里就有了，只是自己长期没用，潜意识里就把它们划进“未来标准”里去了。查了下才知道，es6提供了三个用来遍历数组的新方法：<code>entries()</code>、<code>keys()</code>和<code>values()</code>，它们都将遍历结果保存于一个遍历器对象中返回。区别如下：</p>
+<ul>
+<li><code>keys()</code>是对数组的键名的遍历。</li>
+<li><code>values()</code>是对数组键值的遍历。</li>
+<li><code>entries()</code>方法是对数值的键值对的遍历。</li>
+</ul>
+<p>顺便附上自己不常用的<code>map</code>和<code>filter</code>：</p>
+<ul>
+<li><code>arr.map(callback[, thisArg])</code>: callback以元素、索引、数组本身作参数，thisArg设置回调函数的this；返回一个处理后的新数组（这点和forEach只返回undefined不同，意味着该方法可以链式调用）。</li>
+<li><code>arr.filter(callback[, thisArg])</code>：callback以元素、索引、数组本身作参数，返回true则保留该元素，false则舍去，thisArg设置回调函数的this；返回一个处理后的新数组（也可链式调用）。</li>
+</ul>
+<h2 id="块级元素和内联元素有何不同"><a href="#块级元素和内联元素有何不同" class="headerlink" title="块级元素和内联元素有何不同"></a>块级元素和内联元素有何不同</h2><p>回答得不全，得考虑容纳性、换行、盒模型上的差别：</p>
+<ul>
+<li>块级元素：可容纳内联元素和其他块状元素；排斥其他元素与其位于同一行；拥有完整的盒模型特性。</li>
+<li>内联元素：只能容纳文本或内联元素；允许其他内联元素与其位于同一行；不设宽高（高度和行高有关）、上下margin无效、上下padding、border溢出。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a><a href="/tags/html/">html</a><a href="/tags/css/">css</a><a href="/tags/求职/">求职</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/求职/">求职</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/06/15/美大面试/" data-title="美大面试 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/06/29/【译】HTML表单高级样式/" title="【译】HTML表单高级样式">
+  <strong>新一篇:</strong><br/>
+  <span>
+  【译】HTML表单高级样式</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/06/05/【译】HTML表单样式/"  title="【译】HTML表单样式">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】HTML表单样式
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="美大面试" data-thread-key="美大面试" data-author-key="null" data-url="http://levonlin.info/post/美大面试"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

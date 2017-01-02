@@ -1,0 +1,1615 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】原生表单组件 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="系列文章说明
+原文
+
+
+HTML表单是由组件构成的，这些组件是各种浏览器都支持的内置控件。本文中我们将深入探讨它们、了解它们的作用、学习如何让各种浏览器更好地支持它们。
+虽然这里我们只探讨内建表单组件，但由于HTML表单有诸多限制、以及不同浏览器间的实现有很多的不同，故web开发者有时也得构建自定义">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/24/【译】原生表单组件/" title="【译】原生表单组件" itemprop="url">【译】原生表单组件</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-05-24T09:52:28.000Z" itemprop="datePublished">2016年 5月 24日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文本输入框"><span class="toc-number">1.</span> <span class="toc-text">文本输入框</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单行文本框"><span class="toc-number">1.1.</span> <span class="toc-text">单行文本框</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#E-mail输入框"><span class="toc-number">1.1.1.</span> <span class="toc-text">E-mail输入框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#密码输入框"><span class="toc-number">1.1.2.</span> <span class="toc-text">密码输入框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索框"><span class="toc-number">1.1.3.</span> <span class="toc-text">搜索框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#电话号码输入框"><span class="toc-number">1.1.4.</span> <span class="toc-text">电话号码输入框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#URL输入框"><span class="toc-number">1.1.5.</span> <span class="toc-text">URL输入框</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多行文本框"><span class="toc-number">1.2.</span> <span class="toc-text">多行文本框</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下拉组件"><span class="toc-number">2.</span> <span class="toc-text">下拉组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选择框"><span class="toc-number">2.1.</span> <span class="toc-text">选择框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多选下拉框"><span class="toc-number">2.2.</span> <span class="toc-text">多选下拉框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动补全组件"><span class="toc-number">2.3.</span> <span class="toc-text">自动补全组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可勾选组件"><span class="toc-number">3.</span> <span class="toc-text">可勾选组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#复选框"><span class="toc-number">3.1.</span> <span class="toc-text">复选框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单选框"><span class="toc-number">3.2.</span> <span class="toc-text">单选框</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#按钮"><span class="toc-number">4.</span> <span class="toc-text">按钮</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#提交按钮"><span class="toc-number">4.1.</span> <span class="toc-text">提交按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重置按钮"><span class="toc-number">4.2.</span> <span class="toc-text">重置按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名按钮"><span class="toc-number">4.3.</span> <span class="toc-text">匿名按钮</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高级表单组件"><span class="toc-number">5.</span> <span class="toc-text">高级表单组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数字"><span class="toc-number">5.1.</span> <span class="toc-text">数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑块"><span class="toc-number">5.2.</span> <span class="toc-text">滑块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日期和时间选择器"><span class="toc-number">5.3.</span> <span class="toc-text">日期和时间选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#date"><span class="toc-number">5.3.1.</span> <span class="toc-text">date</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#datetime"><span class="toc-number">5.3.2.</span> <span class="toc-text">datetime</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#datetime-local"><span class="toc-number">5.3.3.</span> <span class="toc-text">datetime-local</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#month"><span class="toc-number">5.3.4.</span> <span class="toc-text">month</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#time"><span class="toc-number">5.3.5.</span> <span class="toc-text">time</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#week"><span class="toc-number">5.3.6.</span> <span class="toc-text">week</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#颜色选择器"><span class="toc-number">5.4.</span> <span class="toc-text">颜色选择器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他组件"><span class="toc-number">6.</span> <span class="toc-text">其他组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件选择器"><span class="toc-number">6.1.</span> <span class="toc-text">文件选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏内容"><span class="toc-number">6.2.</span> <span class="toc-text">隐藏内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图像按钮"><span class="toc-number">6.3.</span> <span class="toc-text">图像按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#度量和进度条"><span class="toc-number">6.4.</span> <span class="toc-text">度量和进度条</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参见"><span class="toc-number">7.</span> <span class="toc-text">参见</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/The_native_form_widgets" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/HTML/Forms" target="_blank" rel="external">HTML表单</a>是由组件构成的，这些组件是各种浏览器都支持的内置控件。本文中我们将深入探讨它们、了解它们的作用、学习如何让各种浏览器更好地支持它们。</p>
+<p>虽然这里我们只探讨内建表单组件，但由于HTML表单有诸多限制、以及不同浏览器间的实现有很多的不同，故web开发者有时也得构建自定义的表单组件。这部分内容将会在<a href="">怎样创建定制表单组件</a>一文中详细讨论。</p>
+<h2 id="文本输入框"><a href="#文本输入框" class="headerlink" title="文本输入框"></a>文本输入框</h2><p>文本输入框是最基本的表单组件，它便于用户输入各种数据。然而一些文本框也可以专门用来实现一些特定需求。</p>
+<p>值得注意的是，HTML文本框只是个纯文本输入控件。这就意味着你不能用它来进行<a href="https://developer.mozilla.org/en-US/docs/Rich-Text_Editing_in_Mozilla" target="_blank" rel="external">富文本编辑</a>（如加粗、斜体等）。所谓的富文本编辑器其实都是自定义的组件。</p>
+<p>所有文本框都共享一些公共行为：</p>
+<ul>
+<li>它们可以被标记为<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly" target="_blank" rel="external">只读</a>（用户不可修改输入的值）或者<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled" target="_blank" rel="external">禁用</a>（输入的值不会随着表单的其他部分一起提交）。</li>
+<li>它们可拥有一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">占位符</a>；这是一小段在文本输入框内的、用于简明描述文本框作用的文本。</li>
+<li>它们都受<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size" target="_blank" rel="external">size</a>（输入框的物理尺寸）和<a href="https://developer.mozilla.org/en-US/docs/HTML/Element/input#attr-maxlength" target="_blank" rel="external">length</a>（文本框能输入的最大字符数）的约束。</li>
+<li>它们可以有<a href="https://developer.mozilla.org/en-US/docs/HTML/Element/input#attr-spellcheck" target="_blank" rel="external">拼写检查</a>，如果浏览器支持的话。</li>
+</ul>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.readonly</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>6</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.disabled</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>6</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.placeholder</td>
+<td>10.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>11.10</td>
+<td>4.0</td>
+</tr>
+<tr>
+<td><code>&lt;textarea&gt;</code>.placeholder</td>
+<td>10.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>11.50</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.size</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.maxlength</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.spellcheck</td>
+<td>10.0</td>
+<td>Unknown (3.6)</td>
+<td>10</td>
+<td>11.0</td>
+<td>4.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.readonly</td>
+<td>(Yes)</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.disabled</td>
+<td>(Yes)</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.placeholder</td>
+<td>2.3</td>
+<td>4.0 (4.0)</td>
+<td>?</td>
+<td>11.10</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>&lt;textarea&gt;</code>.placeholder</td>
+<td>?</td>
+<td>4.0 (4.0)</td>
+<td>?</td>
+<td>11.50</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.size</td>
+<td>(Yes)</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.maxlength</td>
+<td>(Yes)</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.spellcheck</td>
+<td>?</td>
+<td>4.0 (4.0)</td>
+<td>?</td>
+<td>11.0</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<h3 id="单行文本框"><a href="#单行文本框" class="headerlink" title="单行文本框"></a>单行文本框</h3><p>单行文本框是用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type" target="_blank" rel="external"><code>type</code></a>属性值为<code>text</code>的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank" rel="external"><code>&lt;input&gt;</code></a>元素创建的（若未提供<code>type</code>属性值，<code>text</code>也是个默认属性）。此外，如果你指定给<code>type</code>属性的值不被浏览器支持，也会使用<code>text</code>作为回退值。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="https://developer.mozilla.org/files/4273/all-single-line-text-field.png" alt=""></p>
+<p>单行文本框只有一个约束：若你输入的文本中有换行，浏览器会在发送数据前将这个换行给移除。</p>
+<p>但是，我们也可以给单行文本框“按需”添加一些约束。这得用到<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern" target="_blank" rel="external"><code>pattern</code></a>属性；该属性会告诉浏览器根据你选择的一个<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">正则表达式</a>来验证值的有效性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">pattern</span>=<span class="string">"^cherry|banana$"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>HTML5添加了几个<code>type</code>属性的值来增强基本的单行文本框。虽然这些值仍会把<code>&lt;input&gt;</code>元素呈现为一个单行文本框，但实际上它们还给文本框添加了几个额外的约束和特性。</p>
+<h4 id="E-mail输入框"><a href="#E-mail输入框" class="headerlink" title="E-mail输入框"></a>E-mail输入框</h4><p>该类型的输入框设置了<code>type</code>值为<code>email</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">multiple</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>它给输入框添加了这样的验证约束：用户需要输入一个有效的e-mail地址；其他任何输入都会导致输入框报错。而通过设置<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple" target="_blank" rel="external"><code>multiple</code></a>属性，这种输入框也可以让用户输入多个e-mail地址。</p>
+<h4 id="密码输入框"><a href="#密码输入框" class="headerlink" title="密码输入框"></a>密码输入框</h4><p>该类型的输入框设置了<code>type</code>值为<code>password</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>它并未给输入文本添加任何特殊的约束，只是把输入框的里值做了隐藏以防止被读取。</p>
+<blockquote>
+<p>注：注意这只是个用户界面的特性；浏览器还是会发送纯文本，除非你用Javascript给文本进行编码。</p>
+</blockquote>
+<h4 id="搜索框"><a href="#搜索框" class="headerlink" title="搜索框"></a>搜索框</h4><p>该类型的输入框设置了<code>type</code>值为<code>search</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span> <span class="attr">autosave</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="https://developer.mozilla.org/files/4269/all-search-field.png" alt=""></p>
+<p>文本框和搜索框的主要区别在于外观和体验上（通常，搜索框会以圆角呈现）。但其实搜索框还增加了一个特性：输入的值可被自动保存，以实现在同一站点的不同页面中给出自动补全。</p>
+<h4 id="电话号码输入框"><a href="#电话号码输入框" class="headerlink" title="电话号码输入框"></a>电话号码输入框</h4><p>该类型的输入框设置了<code>type</code>值为<code>tel</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"tel"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>由于世界上有多种电话号码制式，所以此类型的的文本框不会给用户输入的值强制使用任何约束，主要是一个语义上的区别而已。虽然在某些设备上（尤其是手机）点击该输入框，会出现一个不同的虚拟键盘。</p>
+<h4 id="URL输入框"><a href="#URL输入框" class="headerlink" title="URL输入框"></a>URL输入框</h4><p>该类型的输入框设置了<code>type</code>值为<code>url</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"url"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>为确保只输入有效的URL，它为输入框添加了些特殊的验证约束；若输入的值不是个符合格式的URL，表单将会呈现错误状态。</p>
+<blockquote>
+<p>注：URL符合格式并不意味着它指向确切存在的地址。</p>
+</blockquote>
+<p>有特殊约束并处于错误状态的输入框会阻止表单提交；此外，为让错误提示更明显，也可以为它们加些样式，我们将在<a href="">表单数据校验</a>一文中详细讨论这点。</p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”text”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”email”</td>
+<td>10.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>10.62</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”password”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”search”</td>
+<td>5.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>11.01</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”tel”</td>
+<td>5.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>11.01</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”url”</td>
+<td>10.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>10.62</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”text”</td>
+<td>(Yes)</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”email”</td>
+<td>Not supported</td>
+<td>4.0 (4.0)</td>
+<td>Not supported</td>
+<td>(Yes)</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”password”</td>
+<td>?</td>
+<td>4.0 (4.0)</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”search”</td>
+<td>Not supported</td>
+<td>4.0 (4.0)</td>
+<td>?</td>
+<td>(Yes)</td>
+<td>4.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”tel”</td>
+<td>2.3</td>
+<td>4.0 (4.0)</td>
+<td>?</td>
+<td>(Yes)</td>
+<td>3.1</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”url”</td>
+<td>Not supported</td>
+<td>4.0 (4.0)</td>
+<td>?</td>
+<td>(Yes)</td>
+<td>3.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="多行文本框"><a href="#多行文本框" class="headerlink" title="多行文本框"></a>多行文本框</h3><p>多行文本框使用了<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea" target="_blank" rel="external"><code>&lt;textarea&gt;</code></a>元素而非<code>&lt;input&gt;</code>元素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">cols</span>=<span class="string">"20"</span> <span class="attr">rows</span>=<span class="string">"10"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>多行文本框与普通的单行文本框间的主要不同在于，用户可以输入带有显式换行（即支持回车[CR]和换行[LF]字符）的文本。</p>
+<p>值得注意的是，使用CSS属性<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/resize" target="_blank" rel="external"><code>resize</code></a>，用户可以直接改变多行文本框大小，如果你想让他们这么做的话。</p>
+<p><img src="https://developer.mozilla.org/files/4271/all-multi-lines-text-field.png" alt=""></p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;textarea&gt;</code></td>
+<td>(Yes)</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;textarea&gt;</code></td>
+<td>(Yes)</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="下拉组件"><a href="#下拉组件" class="headerlink" title="下拉组件"></a>下拉组件</h2><p>下拉组件能让用户很方便地从众多选项中作选择。HTML有两种下拉组件：选择框和自动补全组件。这两者的交互方式是一样的，一旦控件被激活，浏览器会展示一列表的值让用户从中选择，这个值列表会覆盖在页面内容之上。</p>
+<h3 id="选择框"><a href="#选择框" class="headerlink" title="选择框"></a>选择框</h3><p>选择框是通过<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素创建的，并使用一或多个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" target="_blank" rel="external"><code>&lt;option&gt;</code></a>元素作为其子元素，每个<code>&lt;option&gt;</code>都指定了一个可能的值。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Lemon<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>若有需要，选择框的默认值可通过为相应的<code>&lt;option&gt;</code>元素设置<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#attr-selected" target="_blank" rel="external"><code>selected</code></a>属性进行指定。为了给值创建分组，<code>&lt;option&gt;</code>元素亦可嵌套于<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup" target="_blank" rel="external"><code>&lt;optgroup&gt;</code></a>元素中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">optgroup</span> <span class="attr">label</span>=<span class="string">"fruits"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">selected</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>Lemon<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">optgroup</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">optgroup</span> <span class="attr">label</span>=<span class="string">"vegetables"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>Carrot<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>Eggplant<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>Potatoe<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">optgroup</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="https://developer.mozilla.org/files/4517/all-select.png" alt=""></p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;select&gt;</code></td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;option&gt;</code></td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;optgroup&gt;</code></td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;select&gt;</code></td>
+<td>1.0</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;option&gt;</code></td>
+<td>1.0</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;optgroup&gt;</code></td>
+<td>1.0</td>
+<td>4.0 (4.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="多选下拉框"><a href="#多选下拉框" class="headerlink" title="多选下拉框"></a>多选下拉框</h3><p>默认的，选择框只允许用户选择一个值。要让用户能选择多个值，可通过给<code>&lt;select&gt;</code>元素添加<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-multiple" target="_blank" rel="external"><code>multiple</code></a>属性实现。但此时，选择框就不再呈现为一个下拉组件了，反而呈现为一个普通的列表框。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">multiple</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Lemon<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="https://developer.mozilla.org/files/4559/all-multi-lines-select.png" alt=""></p>
+<blockquote>
+<p>注：所有支持<code>&lt;select&gt;</code>元素的浏览器也都支持它的<code>multiple</code>属性。</p>
+</blockquote>
+<h3 id="自动补全组件"><a href="#自动补全组件" class="headerlink" title="自动补全组件"></a>自动补全组件</h3><p>通过使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" target="_blank" rel="external"><code>&lt;datalist&gt;</code></a>元素，你可以给表单组件提供说明、自动补全的值，并通过子元素<code>&lt;option&gt;</code>来指定要呈现的值。设置好后，这份数据列表就能绑定到其他使用了<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list" target="_blank" rel="external"><code>list</code></a>属性的组件上了。</p>
+<p>一旦数据列表附加到一个表单组件上，它的选项就能被用于自动补全用户输入的文本；典型的情况是，选项被呈现为一个带有可能匹配的值的下拉框。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"myFruit"</span>&gt;</span>What's your favorite fruit?<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"myFruit"</span> <span class="attr">list</span>=<span class="string">"mySuggestion"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">datalist</span> <span class="attr">id</span>=<span class="string">"mySuggestion"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Apple<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Blackberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Blueberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Lemon<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Lychee<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Peach<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>Pear<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">datalist</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="https://developer.mozilla.org/files/4593/all-datalist.png" alt=""></p>
+<blockquote>
+<p>注：根据<a href="http://www.w3.org/TR/html5/common-input-element-attributes.html#attr-input-list" target="_blank" rel="external">HTML规范</a>，<code>list</code>属性和<code>&lt;datalist&gt;</code>元素可被用于任何需要用户输入的组件上。然而，其并未清楚指明如何在非文本控件上使用，同时不同浏览器的实现也是各有不同。所以，要在非文本控件使用该特性得多加小心。</p>
+</blockquote>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;datalist&gt;</code></td>
+<td>20.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>9.6</td>
+<td>Not supported</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.list</td>
+<td>20.0</td>
+<td>Unknown (4.0)</td>
+<td>10</td>
+<td>9.6</td>
+<td>Not supported</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;datalist&gt;</code></td>
+<td>Not supported</td>
+<td>4.0 (4.0)</td>
+<td>Not supported</td>
+<td>(Yes)</td>
+<td>Not supported</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.list</td>
+<td>Not supported</td>
+<td>4.0 (4.0)</td>
+<td>Not supported</td>
+<td>(Yes)</td>
+<td>Not supported</td>
+</tr>
+</tbody>
+</table>
+<h2 id="可勾选组件"><a href="#可勾选组件" class="headerlink" title="可勾选组件"></a>可勾选组件</h2><p>可勾选组件指的是可以通过点击改变其状态的组件。有两种可勾选组件：复选框和单选框，它们都可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked" target="_blank" rel="external"><code>checked</code></a>属性来指示该组件是否默认被勾选。</p>
+<p>值得注意的是，这些组件的行为和其他表单组件不太一样。对大多数表单组件而言，表单提交后所有具有<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-name" target="_blank" rel="external"><code>name</code></a>属性的组件都会被提交，即使它们没有获值。但对于可勾选组件，它们的值却只有在它们被勾选之后才会提交，如果没有勾选，则不会提交东西，包括其<code>name</code>属性。</p>
+<h3 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h3><p>复选框由设置了<code>type</code>值为<code>checkbox</code>的<code>&lt;input&gt;</code>元素创建：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">checked</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上面的HTML创建的复选框是默认勾选的。</p>
+<p><img src="https://developer.mozilla.org/files/4595/all-checkbox.png" alt=""></p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”checkbox”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”checkbox”</td>
+<td>1.0</td>
+<td>1.0 (1.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="单选框"><a href="#单选框" class="headerlink" title="单选框"></a>单选框</h3><p>单选框由设置了<code>type</code>值为<code>radio</code>的<code>&lt;input&gt;</code>元素创建：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">checked</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>几个单选框可以被绑定在一起，只要它们使用相同的<code>name</code>属性值，它们就被视为同一组选框。而在同一组中，只有一个选框能被勾选；这意味着其中一个勾选之后，其他所有选框会自动不勾选。</p>
+<p>到了表单提交时，也只有被勾选的值会被提交；如果没有勾选，整组单选框会被认为处于未知状态且不会随表单提交。</p>
+<p><img src="https://developer.mozilla.org/files/4597/all-radio.png" alt=""></p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”radio”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”radio”</td>
+<td>1.0</td>
+<td>1.0 (1.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h2><p>HTML表单中，有三种按钮：</p>
+<p><strong>提交按钮</strong><br>用于发送表单数据给服务器。<br><strong>重置按钮</strong><br>用于重置所有表单组件为默认值。<br><strong>匿名按钮</strong><br>这种按钮不自带特效，但也可以通过Javascript代码进行自定义。</p>
+<p>按钮可以由<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button" target="_blank" rel="external"><code>&lt;button&gt;</code></a>元素或<code>&lt;input&gt;</code>元素创建。<code>type</code>属性的值会指定将呈现何种按钮。</p>
+<h3 id="提交按钮"><a href="#提交按钮" class="headerlink" title="提交按钮"></a>提交按钮</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">    This a <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>submit button<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"This is a submit button"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="重置按钮"><a href="#重置按钮" class="headerlink" title="重置按钮"></a>重置按钮</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"reset"</span>&gt;</span></div><div class="line">    This a <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>reset button<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">value</span>=<span class="string">"This is a reset button"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="匿名按钮"><a href="#匿名按钮" class="headerlink" title="匿名按钮"></a>匿名按钮</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span></div><div class="line">    This a <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>anonymous button<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"This is a anonymous button"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>通常使用<code>&lt;button&gt;</code>或<code>&lt;input&gt;</code>创建的按钮行为都是一样的。然而也存在几点不同：</p>
+<ul>
+<li>就如先前的例子所示，<code>&lt;button&gt;</code>元素允许你使用HTML内容作为其标记内容，但<code>&lt;input&gt;</code>元素只接受纯文本内容。</li>
+<li>使用<code>&lt;button&gt;</code>元素是，可以采用和按钮中内容不一样的值。（但在IE8以下的浏览器中这是不可行的）</li>
+</ul>
+<p><img src="https://developer.mozilla.org/files/4599/all-buttons.png" alt=""></p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”number”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”reset”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”button”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>3</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>&lt;button&gt;</code></td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>(Yes)(Buggy before IE8)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”number”</td>
+<td>1.0</td>
+<td>1.0 (1.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”reset”</td>
+<td>1.0</td>
+<td>1.0 (1.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”button”</td>
+<td>1.0</td>
+<td>1.0 (1.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;button&gt;</code></td>
+<td>1.0</td>
+<td>1.0 (1.0)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="高级表单组件"><a href="#高级表单组件" class="headerlink" title="高级表单组件"></a>高级表单组件</h2><p>这一系列的组件能让用户输入一些复杂或高度结构化的数据，包括精确或近似数字、日期和时间、颜色。</p>
+<h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><p>数字组件是通过<code>type</code>设置为<code>number</code>的<code>&lt;input&gt;</code>元素创建的。该控件看起来像文本框，但却只允许输入浮点数，而且通常还会带有几个按钮来增加或减少组件的值。</p>
+<p>我们可以通过设置<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external"><code>min</code></a>和<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external"><code>max</code></a>属性来约束该组件的值。也可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-step" target="_blank" rel="external"><code>step</code></a>属性来指定该组件的增加和减少按钮的改变量。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">min</span>=<span class="string">"1"</span> <span class="attr">max</span>=<span class="string">"10"</span> <span class="attr">step</span>=<span class="string">"2"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上述代码创建了一个取值被限制在1到10之间的数字组件，其增加和减少按钮的改变量为2。</p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”number”</td>
+<td>11.0</td>
+<td>Not supported</td>
+<td>10(recognized but no UI)</td>
+<td>(Yes)</td>
+<td>5.2</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”number”</td>
+<td>2.3</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>(Yes)</td>
+<td>4.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="滑块"><a href="#滑块" class="headerlink" title="滑块"></a>滑块</h3><p>另一种选取数字的方法是使用滑块。由于操作滑块看起来不及文本框输入数字精确，所以滑块常用于选取对值的要求不是很精确的数字。</p>
+<p>滑块组件是通过<code>type</code>设置为<code>range</code>的<code>&lt;input&gt;</code>元素创建的。适当配置滑块是很重要的，强烈推荐你设置其<code>min</code>, <code>max</code>, <code>step</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"range"</span> <span class="attr">min</span>=<span class="string">"1"</span> <span class="attr">max</span>=<span class="string">"5"</span> <span class="attr">step</span>=<span class="string">"1"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>示例中创建了一个取值被限制在1到5之间的滑块组件，其增加和减少按钮的改变量分别为+1和-1。</p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”range”</td>
+<td>5.0</td>
+<td>23.0</td>
+<td>10</td>
+<td>10.62</td>
+<td>4.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”range”</td>
+<td>Not supported</td>
+<td>23.0</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>5.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="日期和时间选择器"><a href="#日期和时间选择器" class="headerlink" title="日期和时间选择器"></a>日期和时间选择器</h3><p>收集日期和时间的值在之前往往是web开发者的噩梦。现在HTML5通过引入一个特殊的控件用于处理这类特定的数据，带来了一些新改进。</p>
+<p>日期和时间控件是通过<code>type</code>设置为特定值的<code>&lt;input&gt;</code>元素创建的。因为你可能希望能收集日期、时间或者两者兼有，所以它提供了几个不同的<code>type</code>属性值：</p>
+<h4 id="date"><a href="#date" class="headerlink" title="date"></a>date</h4><p>创建展示和选取日期、但不含具体时间的组件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"date"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="datetime"><a href="#datetime" class="headerlink" title="datetime"></a>datetime</h4><p>创建展示和选取日期、并带有UTC时区时间的组件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"datetime"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="datetime-local"><a href="#datetime-local" class="headerlink" title="datetime-local"></a>datetime-local</h4><p>创建展示和选取日期、并带有任何指定时区时间的组件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"datetime-local"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="month"><a href="#month" class="headerlink" title="month"></a>month</h4><p>创建展示和选取月份、并带有年份的组件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"month"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="time"><a href="#time" class="headerlink" title="time"></a>time</h4><p>创建展示和选取一个时间值的组件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"time"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="week"><a href="#week" class="headerlink" title="week"></a>week</h4><p>创建展示和选取周数、并带其年份的组件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"week"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>所有的日期与时间控件都可以使用<code>max</code>和<code>min</code>属性进行约束：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"myDate"</span>&gt;</span>When are you available this summer?<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"date"</span> <span class="attr">min</span>=<span class="string">"2013-06-01"</span> <span class="attr">max</span>=<span class="string">"2013-08-31"</span> <span class="attr">id</span>=<span class="string">"myDate"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”date”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”datetime”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”datetime-local”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”month”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”time”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”week”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”date”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”datetime”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”datetime-local”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”month”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”time”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”week”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>10.62</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>警告：日期和时间组件都是很新的组件，甚至那些声称支持它们的浏览器也常有重大的用户界面问题，这让这些组件很难被使用。所以在发布你的内容之前，请先彻底地在不同的浏览器上测试一遍！</p>
+</blockquote>
+<h3 id="颜色选择器"><a href="#颜色选择器" class="headerlink" title="颜色选择器"></a>颜色选择器</h3><p>通常颜色都有点难于处理，因为有许多种方式来表示它们：RGB值（十进制或十六进制）、HSL值、关键字等等。而颜色选择器能方便用户以文本或图形的形式选择颜色。</p>
+<p>颜色组件是通过<code>type</code>设置为<code>color</code>的<code>&lt;input&gt;</code>元素创建的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"color"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”color”</td>
+<td>21.0</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>11.01</td>
+<td>Not supported</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”color”</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>?</td>
+<td>Not supported</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他组件"><a href="#其他组件" class="headerlink" title="其他组件"></a>其他组件</h2><p>还有一些组件难以被归类，因为它们拥有一些非常特殊的行为；但其实它们也是很有用的。</p>
+<h3 id="文件选择器"><a href="#文件选择器" class="headerlink" title="文件选择器"></a>文件选择器</h3><p>HTML表单可以向服务器发送文件，关于这点，在<a href="">发送表单数据</a>一文中有详细的讨论。文件选择器组件是让用户选择一或多个文件进行发送的一种方式。</p>
+<p>文件选择器组件是通过<code>type</code>设置为<code>file</code>的<code>&lt;input&gt;</code>元素创建的。被接收的文件类型可通过使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept" target="_blank" rel="external"><code>accept</code></a>属性进行指定；此外，若你想让用户选择不止一个文件，可以添加<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple" target="_blank" rel="external"><code>multiple</code></a>属性。</p>
+<p>在下面的例子中，我们创建了一个接收图像图形文件的文件选择器，它也允许用户选择多个文件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/*"</span> <span class="attr">multiple</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”file”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>3.02</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”file”</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<h3 id="隐藏内容"><a href="#隐藏内容" class="headerlink" title="隐藏内容"></a>隐藏内容</h3><p>有时因为技术原因，我们得让一些随表单发送的数据对用户不可见。要这样做，你可以在你的表单中添加一个隐藏元素，只需使用<code>type</code>设置为<code>hidden</code>的<code>&lt;input&gt;</code>元素。</p>
+<p>若你创建了这种元素，还必须设置其<code>name</code>和<code>value</code>属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"timestamp"</span> <span class="attr">value</span>=<span class="string">"1286705410"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”hidden”</td>
+<td>1.0</td>
+<td>1.0 (1.7 or earlier)</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”hidden”</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="图像按钮"><a href="#图像按钮" class="headerlink" title="图像按钮"></a>图像按钮</h3><p>图像按钮控件表面看起来就像是<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img" target="_blank" rel="external"><code>&lt;img&gt;</code></a>元素，除非被用户点击，它才会具有提交按钮的行为（参见上文）。</p>
+<p>图像按钮是通过<code>type</code>设置为<code>image</code>的<code>&lt;input&gt;</code>元素创建的。该元素支持与<code>&lt;img&gt;</code>元素相同的属性集，且还加上了表单按钮支持的那些属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"image"</span> <span class="attr">alt</span>=<span class="string">"Click me!"</span> <span class="attr">src</span>=<span class="string">"my-img.png"</span> <span class="attr">width</span>=<span class="string">"80"</span> <span class="attr">height</span>=<span class="string">"30"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>若图像按钮被用于提交表单，它不会提交它的值，而是提交在图片上点击的X和Y坐标（坐标是相对图像而言的，取左上角为(0, 0)坐标）。坐标以两个键/值对的形式发送，X值的键名是<code>name</code>属性的值加上字符串”.x”，Y值的键名是<code>name</code>属性的值加上字符串”.y”。这样就提供了一种便于创建“热点地图”的方式。</p>
+<p>举个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://foo.com"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 译注：原文是value="pos"，明显是错的，下面已改正 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"image"</span> <span class="attr">name</span>=<span class="string">"pos"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">src</span>=<span class="string">"map.png"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当你点击这个表单的图像时，你会发送出如下URL：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">http:</span><span class="comment">//foo.com?pos.x=123&amp;pos.y=456</span></div></pre></td></tr></table></figure>
+<p><code>pos.x</code>和<code>pos.y</code>参数的值取决于你点击了图片上哪个地方。这些数据的发送和检索将在<a href="">发送表单数据</a>一文中讨论。</p>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”image”</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>2</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;input&gt;</code>.type=”image”</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+<td>(Yes)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="度量和进度条"><a href="#度量和进度条" class="headerlink" title="度量和进度条"></a>度量和进度条</h3><p>度量和进度条是数字值的可视化表示。</p>
+<p>进度条代表一个随时间变化、直至达到由<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#attr-max" target="_blank" rel="external"><code>max</code></a>属性指定的最大值的值。进度条使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress" target="_blank" rel="external"><code>&lt;progress&gt;</code></a>元素进行创建，<code>&lt;progress&gt;</code>元素的内容用于让不支持该元素的浏览器作降级处理、也让无障碍设备能读出来。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">progress</span> <span class="attr">max</span>=<span class="string">"100"</span> <span class="attr">value</span>=<span class="string">"75"</span>&gt;</span>75/100<span class="tag">&lt;/<span class="name">progress</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>度量条表示一个处于由<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-min" target="_blank" rel="external"><code>min</code></a>和<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-max" target="_blank" rel="external"><code>max</code></a>值划分的范围的固定值。该值被渲染为一个长条，长条使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter" target="_blank" rel="external"><code>&lt;meter&gt;</code></a>元素进行创建，<code>&lt;meter&gt;</code>元素的内容用于让不支持该元素的浏览器作降级处理、也让无障碍设备能读出来。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meter</span> <span class="attr">min</span>=<span class="string">"0"</span> <span class="attr">max</span>=<span class="string">"100"</span> <span class="attr">value</span>=<span class="string">"75"</span> <span class="attr">low</span>=<span class="string">"33"</span> <span class="attr">high</span>=<span class="string">"66"</span> <span class="attr">optimum</span>=<span class="string">"50"</span>&gt;</span>75<span class="tag">&lt;/<span class="name">meter</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>而要知道该长条长什么样子，我们还得比较它的<code>value</code>值与另外几个值：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-low" target="_blank" rel="external"><code>low</code></a>和<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-high" target="_blank" rel="external"><code>high</code></a>值将一个长条的范围划分了三个部分：<ul>
+<li>范围较低的那部分位于<code>min</code>和<code>low</code>之间（含这两个值）。</li>
+<li>范围的中间部分位于<code>low</code>和<code>high</code>之间（不含这两个值）。</li>
+<li>范围较高的那部分位于<code>high</code>和<code>max</code>之间（含这两个值）。</li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter#attr-optimum" target="_blank" rel="external"><code>optimum</code></a>值定义了<code>&lt;meter&gt;</code>元素的最佳值。结合<code>low</code>和<code>high</code>值，就能确定一个长条范围的哪个部分是最佳的：<ul>
+<li>若<code>optimum</code>值位于范围较低的那部分，则较低的那部分是最佳的部分，中间部分是平均的部分，较高的那部分则是最差的部分。</li>
+<li>若<code>optimum</code>值位于范围的中间部分，则较低的那部分是平均的部分，中间部分是最佳的部分，较高的那部分也还是平均的部分。</li>
+<li>若<code>optimum</code>值位于范围较高的那部分，则较低的那部分是最差的部分，中间部分是平均的部分，较高的那部分是最佳的部分。</li>
+</ul>
+</li>
+</ul>
+<p>所有实现了<code>&lt;meter&gt;</code>元素的浏览器都会使用上述的值来改变度量长条的颜色：</p>
+<ul>
+<li>若现在的值位于范围最佳的部分，则长条显示为绿色。</li>
+<li>若现在的值位于范围平均的部分，则长条显示为黄色。</li>
+<li>若现在的值位于范围最差的部分，则长条显示为红色。</li>
+</ul>
+<p><strong>兼容性表</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（桌面端）</th>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;progress&gt;</code></td>
+<td>6.0</td>
+<td>6.0(6.0)</td>
+<td>10</td>
+<td>10.6</td>
+<td>5.2</td>
+</tr>
+<tr>
+<td><code>&lt;meter&gt;</code></td>
+<td>6.0</td>
+<td>16.0(16.0)</td>
+<td>Not supported</td>
+<td>11.0</td>
+<td>5.2</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性（移动端）</th>
+<th>Android</th>
+<th>Firefox (Gecko)</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;progress&gt;</code></td>
+<td>Not supported</td>
+<td>6.0(6.0)</td>
+<td>Not supported</td>
+<td>11.0</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>&lt;meter&gt;</code></td>
+<td>Not supported</td>
+<td>16.0(16.0)</td>
+<td>Not supported</td>
+<td>11.0</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><p>若要深入了解表单组件的不同，这里还提供了一些你应该看看的有用资源：</p>
+<ul>
+<li><a href="http://wufoo.com/html5/" target="_blank" rel="external">The Current State of HTML5 Forms</a> by Wufoo</li>
+<li><a href="http://www.quirksmode.org/html5/inputs.html" target="_blank" rel="external">HTML5 Tests - inputs</a> on Quirksmode (也可<a href="http://www.quirksmode.org/html5/inputs_mobile.html" target="_blank" rel="external">用于移动端浏览器</a>)</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/html/">html</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/05/24/【译】原生表单组件/" data-title="【译】原生表单组件 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/06/05/【译】HTML表单样式/" title="【译】HTML表单样式">
+  <strong>新一篇:</strong><br/>
+  <span>
+  【译】HTML表单样式</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/18/百度面试的总结/"  title="百度面试的总结">
+ <strong>旧一篇:</strong><br/> 
+ <span>百度面试的总结
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】原生表单组件" data-thread-key="【译】原生表单组件" data-author-key="null" data-url="http://levonlin.info/post/【译】原生表单组件"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

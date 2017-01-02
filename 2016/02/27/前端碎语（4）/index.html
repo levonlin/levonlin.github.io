@@ -1,0 +1,368 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>前端碎语（4） | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="键盘事件与文本框变化的过程键盘事件最基本的应用场合是控制文本框元素，而我们要讨论的，就是几个键盘事件：keydown、keypress、keyup、textInput发生的时机与文本输入的过程的关系。先看一段代码：
+12345678910111213141516&amp;lt;input type=&quot;tex">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/27/前端碎语（4）/" title="前端碎语（4）" itemprop="url">前端碎语（4）</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-02-27T08:47:07.000Z" itemprop="datePublished">2016年 2月 27日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#键盘事件与文本框变化的过程"><span class="toc-number">1.</span> <span class="toc-text">键盘事件与文本框变化的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对用户输入字符进行正则转义"><span class="toc-number">2.</span> <span class="toc-text">对用户输入字符进行正则转义</span></a></li></ol>
+		</div>
+		
+		<h2 id="键盘事件与文本框变化的过程"><a href="#键盘事件与文本框变化的过程" class="headerlink" title="键盘事件与文本框变化的过程"></a>键盘事件与文本框变化的过程</h2><p>键盘事件最基本的应用场合是控制文本框元素，而我们要讨论的，就是几个键盘事件：<code>keydown</code>、<code>keypress</code>、<code>keyup</code>、<code>textInput</code>发生的时机与文本输入的过程的关系。先看一段代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"input"</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'input'</span>);</div><div class="line">    input.addEventListener(<span class="string">'keydown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'keydown'</span>);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">    input.addEventListener(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'keypress'</span>);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">    input.addEventListener(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'keyup'</span>);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">    input.addEventListener(<span class="string">'textInput'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'textInput'</span>);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>查看控制台可以看到键盘事件的执行顺序，这里事件的执行分为两种情况，一种是按下字符键，chrome下执行的顺序为<code>keydown</code>-&gt;<code>keypress</code>-&gt;<code>textInput</code>-&gt;<code>keyup</code>，如果按照不放就交替执行<code>keydown</code>和<code>keypress</code>；另一种是按下非字符键，chrome下执行顺序为<code>keydown</code>-&gt;<code>keyup</code>，如果按着不放就不停地执行<code>keydown</code>。</p>
+<p>事件的顺序搞清楚了，但我们还要看清键盘事件发生与文本框变化的顺序。把上面代码中的每个事件处理程序再加一句<code>console.log(input.value)</code>，按一个字符。可以看到，除了<code>keyup</code>外，<code>keydown</code>、<code>keypress</code>、<code>textInput</code>事件并不会输出刚按下的字符，说明他们在文本框变化之前发生而<code>keyup</code>在之后发生。进一步地，也可以给每个事件加个<code>alert()</code>看看，虽然由于<code>alert()</code>的干扰导致<code>keyup</code>不发生（单步调试得出的结论），但这样一步步执行也能直观看出上面的结论。</p>
+<p>理清这些关系有什么用呢？当然是为了起前端工程的一大目标：做出更好地交互。比如你要做个有关键词提示的搜索框，由于只有<code>keyup</code>事件是在文本框变化后触发的，也就意味着弹出提示的代码只有挂在<code>keyup</code>事件上才能在输入字符后获取到输入框最新的value，而挂在其他事件上就会出现提示与输入慢半拍的诡异现象。</p>
+<p>最后要注意，虽然各浏览器基本遵循上面的事件执行顺序，但不同浏览器对键盘事件的实现仍有差别，比如火狐和IE并不支持<code>textInput</code>事件；而同时对于非字符键，也不一定就按上面提到的只响应<code>keydown</code>和<code>keyup</code>，比如在火狐下按backspace键也具有字符键的行为。</p>
+<h2 id="对用户输入字符进行正则转义"><a href="#对用户输入字符进行正则转义" class="headerlink" title="对用户输入字符进行正则转义"></a>对用户输入字符进行正则转义</h2><p>数据交互的可靠与安全是前端工程需要考虑的重要一环，我们的用户既可能输入一段有歧义的字符，也随时可能给你来段sql注入或xss，这里我也遇到一个简单点的情景：如何拿用户输入的内容来构建有效的正则进行查询。</p>
+<p>考虑到用户可能会输入一些正则的专用符号，如果不对这些符号进行转义就直接把整个字符串拿去构造正则，那势必会使查询结果背离我们的本意。正则表达式里对特殊符号转义只要在前面加<code>\</code>，所以思路就是将源字符串中的特殊符号替换为<code>\待转义字符</code>。实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">transfer</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> string.replace(<span class="regexp">/[\.\/\\\^\$\*\+\?\[\]\(\)]/g</span>, <span class="string">'\\$&amp;'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用到了字符串的<code>replace</code>方法，第一个参数一个是全局匹配所有待转义字符的正则；第二个参数是个$表达式，<code>$&amp;</code>获取所有与正则相匹配的子串，注意这里要在其前面加上<code>\\</code>而非<code>\</code>，因为在普通字符串里使用<code>\</code>也得写为<code>\\</code>进行转义。</p>
+<p>可能有人会问，<code>$&amp;</code>不是相当于<code>RegExp.lastmatch</code>匹配最近一次匹配项吗，为何使用它获取全局正则的所有匹配项？</p>
+<p>可以这么想，<code>replace</code>对全局正则匹配项的替换是逐个进行的，每匹配一个子串就用第二个参数的规则替换一次。所以用<code>$&amp;</code>每次替换最近一次匹配项，也就能到达看起来一次替换了全局正则的所有匹配项效果。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/02/27/前端碎语（4）/" data-title="前端碎语（4） | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/02/28/原生js练习题-第二课（上）/" title="原生js练习题---第二课（上）">
+  <strong>新一篇:</strong><br/>
+  <span>
+  原生js练习题---第二课（上）</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/26/遍历DOM元素的children属性遇到的坑/"  title="遍历DOM元素的children属性遇到的坑">
+ <strong>旧一篇:</strong><br/> 
+ <span>遍历DOM元素的children属性遇到的坑
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="前端碎语（4）" data-thread-key="前端碎语（4）" data-author-key="null" data-url="http://levonlin.info/post/前端碎语（4）"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

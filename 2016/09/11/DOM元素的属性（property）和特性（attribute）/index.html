@@ -1,0 +1,416 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>DOM元素的属性（property）和特性（attribute） | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="从jQuery的prop()和attr()方法说开去jQuery中有两个获取DOM元素属性的方法：prop()和attr()，看似可以互相替换，但若搞不清这两个方法获取的到底是什么“属性”，有时就会出现令人困惑的结果。官方文档中，用了下面的例子来解释这两者的不同：
+1&amp;lt;input type=&quot;">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/09/11/DOM元素的属性（property）和特性（attribute）/" title="DOM元素的属性（property）和特性（attribute）" itemprop="url">DOM元素的属性（property）和特性（attribute）</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-09-11T09:29:50.000Z" itemprop="datePublished">2016年 9月 11日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#从jQuery的prop-和attr-方法说开去"><span class="toc-number">1.</span> <span class="toc-text">从jQuery的prop()和attr()方法说开去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性（property）和特性（attribute）"><span class="toc-number">2.</span> <span class="toc-text">属性（property）和特性（attribute）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用处"><span class="toc-number">3.</span> <span class="toc-text">用处</span></a></li></ol>
+		</div>
+		
+		<h2 id="从jQuery的prop-和attr-方法说开去"><a href="#从jQuery的prop-和attr-方法说开去" class="headerlink" title="从jQuery的prop()和attr()方法说开去"></a>从jQuery的<code>prop()</code>和<code>attr()</code>方法说开去</h2><p>jQuery中有两个获取DOM元素属性的方法：<code>prop()</code>和<code>attr()</code>，看似可以互相替换，但若搞不清这两个方法获取的到底是什么“属性”，有时就会出现令人困惑的结果。<br>官方文档中，用了下面的例子来解释这两者的不同：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">checked</span>=<span class="string">"checked"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>elem.checked</td>
+<td>true (Boolean) Will change with checkbox state</td>
+</tr>
+<tr>
+<td>$( elem ).prop( “checked” )</td>
+<td>true (Boolean) Will change with checkbox state</td>
+</tr>
+<tr>
+<td>elem.getAttribute( “checked” )</td>
+<td>“checked” (String) Initial state of the checkbox; does not change</td>
+</tr>
+<tr>
+<td>$( elem ).attr( “checked” ) (1.6)</td>
+<td>“checked” (String) Initial state of the checkbox; does not change</td>
+</tr>
+<tr>
+<td>$( elem ).attr( “checked” ) (1.6.1+)</td>
+<td>“checked” (String) Will change with checkbox state</td>
+</tr>
+<tr>
+<td>$( elem ).attr( “checked” ) (pre-1.6)</td>
+<td>true (Boolean) Changed with checkbox state</td>
+</tr>
+</tbody>
+</table>
+<p>我们可以看到，使用<code>prop()</code>当于直接使用了DOM元素对象的属性，而<code>attr()</code>相当于使用了DOM元素的<code>getAttribute()</code>或<code>setAttribute()</code>方法（而1.6前和1.6后的效果比较特殊，下面会解释）。这两种不同的实现，决定了两种方法获取到的值并不一样，这就得涉及到DOM元素属性（property）和特性（attribute）间的区别了。</p>
+<h2 id="属性（property）和特性（attribute）"><a href="#属性（property）和特性（attribute）" class="headerlink" title="属性（property）和特性（attribute）"></a>属性（property）和特性（attribute）</h2><p>我们知道DOM的实现就是把一个HTML文档映射为一棵DOM树，而DOM树上的每个节点其实就是一个javascript对象。所以DOM元素属性和普通对象的属性一样，就是DOM对象这个javascript对象上的属性而已，我们可以直接在DOM对象上通过<code>.</code>或<code>[]</code>来获取和设置它们，比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"form-item"</span> <span class="attr">value</span>=<span class="string">"value0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> formItem = <span class="built_in">document</span>.querySelector(<span class="string">'[name=from-item]'</span>);</div><div class="line"><span class="built_in">console</span>.log(formItem.value); <span class="comment">/* value0 */</span></div><div class="line">formItem.value = <span class="string">'value1'</span>; <span class="comment">/* 文本框显示“value1”，但此时HTML中的value特性仍为"value0"  */</span></div><div class="line"><span class="built_in">console</span>.log(formItem.value); <span class="comment">/* value1 */</span></div></pre></td></tr></table></figure>
+<p>而同时在DOM元素节点之外，还有其他类型的节点，比如文本节点、注释节点、还有我们要讨论的特性节点（Attr节点）等等；这些节点当然也是DOM树上的一个js对象。要操作特性节点，可以在DOM元素上通过<code>getAttribute()</code>、<code>setAttribute()</code>、<code>removeAttribute()</code>等方法来实现，或者用<code>attributes</code>属性获取特性节点集合再作操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(formItem.getAttribute(<span class="string">'value'</span>)); <span class="comment">/* value0，不受上面属性设置的影响，仍保持页面加载后html中的值 */</span></div><div class="line"></div><div class="line">formItem.setAttribute(<span class="string">'value'</span>, <span class="string">'value2'</span>); <span class="comment">/* 文本框仍显示“value1”，但此时HTML中的value特性已被改为"value2" */</span></div><div class="line"><span class="built_in">console</span>.log(formItem.getAttribute(<span class="string">'value'</span>)); <span class="comment">/* value2 */</span></div><div class="line"><span class="built_in">console</span>.log(formItem.value); <span class="comment">/* value1，不随特性节点的改变而改变 */</span></div></pre></td></tr></table></figure>
+<p>上面的例子中，尤其要区分两点：</p>
+<ul>
+<li>属性和特性两者不是一一对应的：Attr节点对应的就是HTML各标签中的特性，这些特性有的未必会被内置为DOM元素的属性，比如HTML5的<code>data-*</code>特性等自定义特性；而DOM元素的属性也未必都是HTML中的特性，比如一些DOM元素的操作方法</li>
+<li>即使特性节点名和DOM元素的属性名一致，这两者的操作和行为也是不同的：<ul>
+<li>DOM元素的属性是DOM对象原生实现的，符合一般对象属性的行为；这些属性操作和同名的HTML特性节点无关，但可以在显示上覆盖HTML特性节点的设置</li>
+<li>对于特性节点的操作都是针对HTML文档上的特性；对特性的操作不会改变同名属性值，只是改变HTML的文档内容而已</li>
+</ul>
+</li>
+</ul>
+<p>所以我们可以得到属性和特性的根本区别了：</p>
+<p><strong>DOM元素的属性（property）是该对象所拥有的属性，而特性（attribute）则是该元素在HTML中的所拥有的特性节点。property是对象属性，本身不操作特性节点，但可以覆盖HTML中的同名特性的效果，是js操作；attribute是DOM节点对象，只用于获取和设置HTML特性，是文本操作。</strong></p>
+<h2 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h2><p>通过上面的讨论，既然属性和特性有根本性区别，那也就意味着他们的应用场合不太一样、也不能混淆：</p>
+<ul>
+<li>property的操作是纯js操作，用于获取和设置原生的一些特性；并且对于事件属性如<code>onclick</code>可以获得处理函数、对于<code>style</code>属性可以获得一个对象。</li>
+<li>attribute的操作是文本操作，用于获取和设置HTML文档中的特性内容，注意这些内容都是字符串形式；同时它能操作的特性也不只是原生限定的那几种，对于一些拓展特性如<code>data-*</code>也可以操作。</li>
+</ul>
+<p>回到一开始举的jQuery的例子，<code>elem.checked</code>由于是属性操作，所以可以返回一个布尔值。而<code>elem.getAttribute( &quot;checked&quot; )</code>由于是针对HTML特性的文本操作，所以返回的就是一个字符串，当然这个字符串的值也未必是”checked”，而是由HTML中指定的值决定的。</p>
+<p>至于为什么<code>attr</code>方法会在jQuery 1.6之前的版本、1.6本身和1.6之后出现各种不一致的行为呢？首先<code>prop</code>方法是在1.6版本之后引入的，之前只有<code>attr</code>时，该方法对返回属性是还是特性没有作严格区分；而在1.6版本开始会明确让<code>attr</code>返回特性、<code>prop</code>负责处理属性，同时1.6后为考虑向后兼容，<code>attr</code>返回特性会随属性的改变而改变，但返回的已经只能是“特性形式”的字符串了。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/DOM/">DOM</a><a href="/tags/javascript/">javascript</a><a href="/tags/html/">html</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/09/11/DOM元素的属性（property）和特性（attribute）/" data-title="DOM元素的属性（property）和特性（attribute） | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/09/24/【译】发送表单数据/" title="【译】发送表单数据">
+  <strong>新一篇:</strong><br/>
+  <span>
+  【译】发送表单数据</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/08/06/【译】表单组件的属性兼容性表/"  title="【译】表单组件的属性兼容性表">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】表单组件的属性兼容性表
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="DOM元素的属性（property）和特性（attribute）" data-thread-key="DOM元素的属性（property）和特性（attribute）" data-author-key="null" data-url="http://levonlin.info/post/DOM元素的属性（property）和特性（attribute）"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

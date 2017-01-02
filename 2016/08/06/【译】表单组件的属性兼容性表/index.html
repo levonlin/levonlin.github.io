@@ -1,0 +1,754 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】表单组件的属性兼容性表 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="系列文章说明
+原文
+
+
+下面的兼容性表将总结出HTML表单对CSS的支持程度，由于CSS和HTML表单的复杂性，这几个表不能认为是最佳的参考对象。尽管如此，它们也能让你更了解能做什么、不能做什么，这将有助于你学习如何开发。
+如何阅读这些表格值各个属性都有如下四个可能的值：YES具有可靠而一致的跨浏览">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/06/【译】表单组件的属性兼容性表/" title="【译】表单组件的属性兼容性表" itemprop="url">【译】表单组件的属性兼容性表</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-08-06T12:31:37.000Z" itemprop="datePublished">2016年 8月 6日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何阅读这些表格"><span class="toc-number">1.</span> <span class="toc-text">如何阅读这些表格</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#值"><span class="toc-number">1.1.</span> <span class="toc-text">值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果"><span class="toc-number">1.2.</span> <span class="toc-text">效果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性表"><span class="toc-number">2.</span> <span class="toc-text">兼容性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#统一行为"><span class="toc-number">2.1.</span> <span class="toc-text">统一行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文本框"><span class="toc-number">2.2.</span> <span class="toc-text">文本框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按钮"><span class="toc-number">2.3.</span> <span class="toc-text">按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字"><span class="toc-number">2.4.</span> <span class="toc-text">数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单选框和复选框"><span class="toc-number">2.5.</span> <span class="toc-text">单选框和复选框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择框-单行"><span class="toc-number">2.6.</span> <span class="toc-text">选择框(单行)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择框-多行"><span class="toc-number">2.7.</span> <span class="toc-text">选择框(多行)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件选择器"><span class="toc-number">2.8.</span> <span class="toc-text">文件选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#颜色选择器"><span class="toc-number">2.9.</span> <span class="toc-text">颜色选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#度量和进度条"><span class="toc-number">2.10.</span> <span class="toc-text">度量和进度条</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑块"><span class="toc-number">2.11.</span> <span class="toc-text">滑块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图像按钮"><span class="toc-number">2.12.</span> <span class="toc-text">图像按钮</span></a></li></ol></li></ol>
+		</div>
+		
+		<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Property_compatibility_table_for_form_widgets" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p>下面的兼容性表将总结出HTML表单对CSS的支持程度，由于CSS和HTML表单的复杂性，这几个表不能认为是最佳的参考对象。尽管如此，它们也能让你更了解能做什么、不能做什么，这将有助于你学习如何开发。</p>
+<h2 id="如何阅读这些表格"><a href="#如何阅读这些表格" class="headerlink" title="如何阅读这些表格"></a>如何阅读这些表格</h2><h3 id="值"><a href="#值" class="headerlink" title="值"></a>值</h3><p>各个属性都有如下四个可能的值：<br><strong>YES</strong><br>具有可靠而一致的跨浏览器支持。但你可能还得在某些边际情况下面对一些奇怪的副作用。</p>
+<p><strong>PARTIAL</strong><br>当该属性生效时，你可能会频繁遇见那些奇怪的副作用或者不一致性。最好避免使用这些属性，除非你能掌控这些副作用。</p>
+<p><strong>NO</strong><br>该属性不能生效，或者表现很不一致以至于不可靠。</p>
+<p><strong>N.A</strong><br>该属性对于这类组件来说没有什么意义。</p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>每种属性都有两种可能的效果：<br><strong>N(Normal)</strong><br>指该属性被直接应用。</p>
+<p><strong>T(Tweaked)</strong><br>指该属性和下列额外规则一起使用：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">* &#123;</div><div class="line"><span class="comment">/* 在Webkit浏览器下禁用原生的外观和效果 */</span></div><div class="line">  <span class="attribute">-webkit-appearance</span>: none;</div><div class="line"></div><div class="line"><span class="comment">/* 在Gecko浏览器下禁用原生的外观和效果 */</span></div><div class="line">  <span class="attribute">-moz-appearance</span>: none;</div><div class="line"></div><div class="line"><span class="comment">/* 在几个不同的浏览器下禁用原生的外观和效果，包括Opera,Internet Explorer和Firefox */</span></div><div class="line">  <span class="attribute">background</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="兼容性表"><a href="#兼容性表" class="headerlink" title="兼容性表"></a>兼容性表</h2><h3 id="统一行为"><a href="#统一行为" class="headerlink" title="统一行为"></a>统一行为</h3><p>在整体水平上，一些行为对于多数浏览器来说是一致的：</p>
+<p>border, background, border-radius, height<br>在一些浏览器上，使用这些属性可以部分或者完全禁止组件的原生外观和体验。所以使用时请小心。</p>
+<p>line-height<br>该属性的跨浏览器支持很不一致，得避免使用它。</p>
+<p>text-decoration<br>在表单组件上，Opera不支持该属性。</p>
+<p>text-overflow<br>在表单组件上，Opera，safari 和 IE9不支持该属性。</p>
+<p>text-shadow<br>在表单组件上Opera不支持该属性，而IE9干脆就完全不支持它。</p>
+<blockquote>
+<p><strong>译注：</strong>由于表格内容比较复杂、使用markdown难以表现原有格式，而且考虑到这些表格更多只是让我们做个参考、阅读难度也不是很大。所以下文将只会摘取兼容性表中一些属性的说明作翻译，完整表格请参照原文。^_^</p>
+</blockquote>
+<h3 id="文本框"><a href="#文本框" class="headerlink" title="文本框"></a>文本框</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>1.Webkit浏览器（多数指Mac OSX和iOS上的）对搜索框使用了原生的外观和效果。所以得使用<code>-webkit-appearance:none</code>来让搜索框能使用该属性。<br>2.在Windows7上，IE9不会应用到边框，除非使用了<code>background:none</code>。</td>
+</tr>
+<tr>
+<td>border</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>color</td>
+<td>1.若未设置<code>border-color</code>属性，某些Webkit浏览器会给<code>&lt;textarea&gt;</code>的边框和字体都使用<code>color</code>属性。</td>
+</tr>
+<tr>
+<td>font</td>
+<td>参见<code>line-height</code>的备注</td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td>参见Opera的备注</td>
+</tr>
+<tr>
+<td>text-indent</td>
+<td>1.IE9只在<code>&lt;textarea&gt;</code>上支持该属性，而Opera只在单行文本框上支持它。</td>
+</tr>
+<tr>
+<td>background</td>
+<td>同<code>height</code></td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>1.同<code>height</code>。<br>2.Opera上的<code>border-radius</code>属性只在明确设置了边框后才生效。</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>1.IE9不支持该属性。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>1.该属性不会在Mac OSX上的Webkit浏览器上生效。</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>font</td>
+<td>参见<code>line-height</code>的备注</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>1.Opera上的<code>border-radius</code>属性只在明确设置了边框后才生效。</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>1.IE9不支持该属性。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><p>在实现了number组件的浏览器上，没有统一的方法来改变那个用于调节输入框值的调节器样式。值得注意的是，Safari中该调节器是位于输入框外的。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>1.Opera上的数字调节器被放大了，这会导致输入框的内容被隐藏。</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>font</td>
+<td>参见<code>line-height</code>的备注</td>
+</tr>
+<tr>
+<td>background</td>
+<td>1.虽然被支持，但在不同浏览器间表现很不一致</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="单选框和复选框"><a href="#单选框和复选框" class="headerlink" title="单选框和复选框"></a>单选框和复选框</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>width</td>
+<td>1.某些浏览器会添加额外的外边距，而另一些则会伸展该组件</td>
+</tr>
+<tr>
+<td>height</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="选择框-单行"><a href="#选择框-单行" class="headerlink" title="选择框(单行)"></a>选择框(单行)</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>width</td>
+<td>该属性可被由于<code>&lt;select&gt;</code>元素，但却不能用于<code>&lt;option&gt;</code>或<code>&lt;optgroup&gt;</code>元素</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>1.该属性可用，但在MAC OSX上的一些浏览器存在不一致的表现<br>2.该属性可用于<code>&lt;select&gt;</code>元素，但对于<code>&lt;option&gt;</code>和<code>&lt;optgroup&gt;</code>的处理则存在不一致</td>
+</tr>
+<tr>
+<td>color</td>
+<td>1.在MAC OSX上的Webkit浏览器不支持在原生组件上（译注：指的应是单行选择框这一组件）使用该属性；而且它们和Opera都不在<code>&lt;option&gt;</code>和<code>&lt;optgroup&gt;</code>上支持该属性</td>
+</tr>
+<tr>
+<td>font</td>
+<td>1.在MAC OSX上的Webkit浏览器不支持在原生组件上使用该属性；而且它们和Opera都不在<code>&lt;option&gt;</code>和<code>&lt;optgroup&gt;</code>上支持该属性</td>
+</tr>
+<tr>
+<td>letter-spacing</td>
+<td>1.IE9不支持在<code>&lt;select&gt;</code>, <code>&lt;option&gt;</code>, <code>&lt;optgroup&gt;</code>上使用该属性；Mac OSX上的Webkit浏览器不支持在<code>&lt;option&gt;</code>, <code>&lt;optgroup&gt;</code>上使用该属性</td>
+</tr>
+<tr>
+<td>text-align</td>
+<td>1.Windows7上的IE9和Webkit浏览器不支持在这一组件上使用该属性</td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td>1.只有Firefox实现了对该属性的完全支持，Opera根本不支持该属性，而其他浏览器只支持在<code>&lt;select&gt;</code>元素上使用它</td>
+</tr>
+<tr>
+<td>text-indent</td>
+<td>1.多数浏览器只在<code>&lt;select&gt;</code>元素上支持该属性<br>2.IE9不支持该属性</td>
+</tr>
+<tr>
+<td>text-shadow</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>text-transform</td>
+<td>1.多数浏览器只在<code>&lt;select&gt;</code>元素上支持该属性</td>
+</tr>
+<tr>
+<td>background</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="选择框-多行"><a href="#选择框-多行" class="headerlink" title="选择框(多行)"></a>选择框(多行)</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>padding</td>
+<td>1.Opera不支持在<code>&lt;select&gt;</code>使用padding-top和padding-bottom</td>
+</tr>
+<tr>
+<td>font</td>
+<td>参见<code>line-height</code>的备注</td>
+</tr>
+<tr>
+<td>letter-spacing</td>
+<td>1.IE9不支持在<code>&lt;select&gt;</code>, <code>&lt;option&gt;</code>, <code>&lt;optgroup&gt;</code>上使用该属性；Mac OSX上的Webkit浏览器不支持在<code>&lt;option&gt;</code>, <code>&lt;optgroup&gt;</code>上使用该属性</td>
+</tr>
+<tr>
+<td>text-align</td>
+<td>1.Windows7上的IE9和Webkit浏览器不支持在这一组件上使用该属性</td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td>1.只被FireFox和IE9支持</td>
+</tr>
+<tr>
+<td>text-transform</td>
+<td>1.多数浏览器只在<code>&lt;select&gt;</code>元素上支持该属性</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>1.在Opera上只有明确设置了边框的情况下，border-radius属性才能使用</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>1.IE9不支持该属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件选择器"><a href="#文件选择器" class="headerlink" title="文件选择器"></a>文件选择器</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>font</td>
+<td>1.虽然被支持，但在不同浏览器间表现很不一致</td>
+</tr>
+<tr>
+<td>letter-spacing</td>
+<td>1.多数浏览器将该属性用于选择按钮</td>
+</tr>
+<tr>
+<td>text-indent</td>
+<td>1.该属性表现得像额外的左外边距</td>
+</tr>
+<tr>
+<td>background</td>
+<td>1.虽然被支持，但在不同浏览器间表现很不一致</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>1.IE9不支持该属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="颜色选择器"><a href="#颜色选择器" class="headerlink" title="颜色选择器"></a>颜色选择器</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>1.Opera采用对选择框一样的限制来处理该组件</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>background</td>
+<td>1.虽然被支持，但在不同浏览器间表现很不一致</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="度量和进度条"><a href="#度量和进度条" class="headerlink" title="度量和进度条"></a>度量和进度条</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>padding</td>
+<td>1.当在调整过的元素上使用padding属性时，Chrome会隐藏<code>&lt;progress&gt;</code>和<code>&lt;meter&gt;</code></td>
+</tr>
+<tr>
+<td>background</td>
+<td>1.虽然被支持，但在不同浏览器间表现很不一致</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="滑块"><a href="#滑块" class="headerlink" title="滑块"></a>滑块</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>1.Chrome和Opera在组件周围添加了额外的空间，Windows7上的Opera拉伸了滑块</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>1.可用，但不会有视觉效果</td>
+</tr>
+<tr>
+<td>background</td>
+<td>1.虽然被支持，但在不同浏览器间表现很不一致</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="图像按钮"><a href="#图像按钮" class="headerlink" title="图像按钮"></a>图像按钮</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>border-radius</td>
+<td>1.IE9不支持该属性</td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/html/">html</a><a href="/tags/css/">css</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/08/06/【译】表单组件的属性兼容性表/" data-title="【译】表单组件的属性兼容性表 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/09/11/DOM元素的属性（property）和特性（attribute）/" title="DOM元素的属性（property）和特性（attribute）">
+  <strong>新一篇:</strong><br/>
+  <span>
+  DOM元素的属性（property）和特性（attribute）</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/06/29/【译】HTML表单高级样式/"  title="【译】HTML表单高级样式">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】HTML表单高级样式
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】表单组件的属性兼容性表" data-thread-key="【译】表单组件的属性兼容性表" data-author-key="null" data-url="http://levonlin.info/post/【译】表单组件的属性兼容性表"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

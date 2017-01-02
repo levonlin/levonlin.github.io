@@ -1,0 +1,378 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>遍历DOM元素的children属性遇到的坑 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="问题的引出关于DOM元素的children属性，以前我只在意它和childNodes属性的区别：即children属性只会返回子元素节点集合，而childNodes返回的就不止元素节点，还有文本节点等所有子节点集合。这样看来，children似乎是我们获取子元素而舍弃其他类型的子节点的最佳选择，虽然">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/26/遍历DOM元素的children属性遇到的坑/" title="遍历DOM元素的children属性遇到的坑" itemprop="url">遍历DOM元素的children属性遇到的坑</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-02-26T10:40:18.000Z" itemprop="datePublished">2016年 2月 26日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题的引出"><span class="toc-number">1.</span> <span class="toc-text">问题的引出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于问题1"><span class="toc-number">2.</span> <span class="toc-text">关于问题1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于问题2"><span class="toc-number">3.</span> <span class="toc-text">关于问题2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+		</div>
+		
+		<h2 id="问题的引出"><a href="#问题的引出" class="headerlink" title="问题的引出"></a>问题的引出</h2><p>关于DOM元素的<code>children</code>属性，以前我只在意它和<code>childNodes</code>属性的区别：即<code>children</code>属性只会返回子元素节点集合，而<code>childNodes</code>返回的就不止元素节点，还有文本节点等所有子节点集合。这样看来，<code>children</code>似乎是我们获取子元素而舍弃其他类型的子节点的最佳选择，虽然说在IE8-的浏览器下用它还会返回注释节点，但兼容起来也是很简单的。</p>
+<p>我们知道，<code>children</code>返回的子元素集合实际上是一个类似数组的HTMLCollection对象，那接下来我们要获取每个子元素自然要遍历它咯，但是一遍历，问题就出来了：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ul"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'i'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ii"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    o=<span class="built_in">document</span>.getElementById(<span class="string">'ul'</span>).children;</div><div class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> o) &#123;</div><div class="line">        <span class="built_in">console</span>.log(o[i]);</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上面的代码使用了<code>for-in</code>进行遍历，但我们预料中的结果并未出现，以chrome为例，运行结果是这个：</p>
+<p><img src="http://ww2.sinaimg.cn/large/85ad0d9cjw1f1d5s4skb0j207y04cjrm.jpg" alt=""></p>
+<p>这就是我在前面的<a href="http://levonlin.info/2016/02/17/%E5%8E%9F%E7%94%9Fjs%E7%BB%83%E4%B9%A0%E9%A2%98-%E7%AC%AC%E4%B8%80%E8%AF%BE/">原生js练习题-第一课</a>那篇文章中提到过的坑了，其中有两个奇怪的问题：</p>
+<ol>
+<li>多返回了<code>length</code>等几个在数组应该是不可枚举的属性。</li>
+<li>把有id的元素重复了两次。</li>
+</ol>
+<h2 id="关于问题1"><a href="#关于问题1" class="headerlink" title="关于问题1"></a>关于问题1</h2><p>先说一下，上面提到的第一点在各个浏览器里情况都相同，而第二点关于返回的元素是否重复在各浏览器下情况还不同。</p>
+<p>我们先讨论第一点，这里要考虑<code>for-in</code>循环遍历对象时的规则比较奇葩：对象自身和继承到的可枚举属性都会被遍历到。所以为确定多遍历到的内容到底是自身还是原型上的属性，我们来验证一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(o)); <span class="comment">//["0","1","2","i","ii"]</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(o)); <span class="comment">//["0","1","2","i","ii"]</span></div></pre></td></tr></table></figure>
+<p><code>Object.keys()</code>方法返回的是可枚举的自身属性的属性名组成的数组，而<code>Object.getOwnPropertyNames()</code>返回的是所有自身属性的属性名组成的数组（含可枚举和不可枚举）。在这里我们没有看到<code>length</code>、<code>item()</code>、<code>namedItem()</code>三个属性的身影，由此断定他们不是HTMLCollection对象自身的属性，但既然能被<code>for-in</code>遍历到那就只能是来自HTMLCollection原型的可枚举属性。我们可以用<code>Object.getOwnPropertyDescriptor()</code>来验证其在原型上的可枚举性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(o.__proto__, <span class="string">'length'</span>).enumerable); <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(o.__proto__, <span class="string">'item'</span>).enumerable); <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(o.__proto__, <span class="string">'namedItem'</span>).enumerable); <span class="comment">//true</span></div></pre></td></tr></table></figure>
+<h2 id="关于问题2"><a href="#关于问题2" class="headerlink" title="关于问题2"></a>关于问题2</h2><p>解决了多出来的三个属性的来源，我们再回过头看看为什么会把有id的元素重复了两次。观察用<code>Object.keys()</code>方法返回的数组，这两次一次用下标做属性名、一次用id名作属性名。但其实两个属性名指向的是同一个对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">o[<span class="number">0</span>]===o[<span class="string">'i'</span>] <span class="comment">//true</span></div><div class="line">o[<span class="number">1</span>]===o[<span class="string">'ii'</span>] <span class="comment">//true</span></div></pre></td></tr></table></figure>
+<p>可见之所以<code>for-in</code>会把id的元素重复遍历两次，不是因为有id的元素都添加进HTMLCollection对象两次，只是一个元素有了两个属性名而已，这是chrome的情况（我的版本是48.0.2564.116 m），但放到火狐和IE下结果却还有点所不同：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//FF</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(o)); <span class="comment">//["0", "1", "2"]</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(o)); <span class="comment">// ["0", "1", "2", "i", "ii"]</span></div><div class="line">o[<span class="number">0</span>]===o[<span class="string">'i'</span>] <span class="comment">//true</span></div><div class="line">o[<span class="number">1</span>]===o[<span class="string">'ii'</span>] <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="comment">//IE11</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(o)); <span class="comment">//["i", "ii", "2"]</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(o)); <span class="comment">// ["i", "ii", "2"]</span></div><div class="line">o[<span class="number">0</span>]===o[<span class="string">'i'</span>] <span class="comment">//true</span></div><div class="line">o[<span class="number">1</span>]===o[<span class="string">'ii'</span>] <span class="comment">//true</span></div></pre></td></tr></table></figure>
+<p>可见虽然不同的浏览器返回的HTMLCollection对象都存在有id的子元素有两个属性名的情况，但从<code>Object.keys(o)</code>的结果看，火狐和IE对同一元素默认只取一个属性名。所以如果你在火狐或IE运行一开始那段代码，就会发现<code>for-in</code>遍历时火狐和IE也只对同一元素访问一次，不会像chrome那样重复遍历。然而我们还看到，这两个浏览器间选取的属性名也不同，火狐优先选择下标形式，而IE优先选择id形式，同时由<code>Object.getOwnPropertyNames(o)</code>的结果我们还可以窥探出火狐实现选取属性名的机制可能是通过将id形式的属性名设为不可枚举来实现的，至于IE就不清楚了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这下我们可以得出结论了：<code>children</code>个属性返回的HTMLCollection对象不止能遍历到子元素，还能遍历到来自其原型的<code>length</code>、<code>item()</code>、<code>namedItem()</code>三个属性。而且一旦遍历到的子元素有id，就存在HTMLCollection对象里一个元素会有两个属性名的问题，更让人蛋疼的是各浏览器对这两个属性名的选取各不相同。当然，最根本原因还是因为<code>children</code>属性现在还没被正式纳入标准，在使用这种非标准属性时我们难免遇到一些奇葩的状况。</p>
+<p>所以这也告诫我们，如果对一个非标准属性的特点不是特别了解，还是不要轻易使用它，否则出现的问题往往是你难以控制的。但如果你还是觉得<code>children</code>使用起来方便，那在使用时就得谨记这些问题，比如在遍历子元素时最好放弃<code>for-in</code>循环，老老实实使用基本的for循环去遍历数字索引吧，这样就和遍历数组差不多，不会遍历到那些多出来的属性了。</p>
+<p>而至于<code>for-in</code>，最好只用来遍历数组或简单的对象。既要防止那些添加、修改了原型属性的对象遍历出多余的的结果，也要防止类似<code>children</code>这种非标准属性返回一个属性的枚举性不可控的对象的坑。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/02/26/遍历DOM元素的children属性遇到的坑/" data-title="遍历DOM元素的children属性遇到的坑 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/02/27/前端碎语（4）/" title="前端碎语（4）">
+  <strong>新一篇:</strong><br/>
+  <span>
+  前端碎语（4）</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/24/前端碎语（3）/"  title="前端碎语（3）">
+ <strong>旧一篇:</strong><br/> 
+ <span>前端碎语（3）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="遍历DOM元素的children属性遇到的坑" data-thread-key="遍历DOM元素的children属性遇到的坑" data-author-key="null" data-url="http://levonlin.info/post/遍历DOM元素的children属性遇到的坑"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

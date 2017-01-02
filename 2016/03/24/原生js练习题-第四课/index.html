@@ -1,0 +1,427 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>原生js练习题---第四课 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="0x1setTimeout应用实现效果：
+See the Pen 4-01setTimeout应用 by levonlin (@levonlin) on CodePen.
+
+
+又见导航条，先看下css，这里用的是雪碧图背景做出圆角的效果，虽然是经典的方法、兼容性好，但这种代码写起来实在是有点丑陋。因">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/24/原生js练习题-第四课/" title="原生js练习题---第四课" itemprop="url">原生js练习题---第四课</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-03-24T07:50:26.000Z" itemprop="datePublished">2016年 3月 24日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1setTimeout应用"><span class="toc-number">1.</span> <span class="toc-text">0x1setTimeout应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2自动播放一幻灯片效果"><span class="toc-number">2.</span> <span class="toc-text">0x2自动播放一幻灯片效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x3自动改变方向一幻灯片效果"><span class="toc-number">3.</span> <span class="toc-text">0x3自动改变方向一幻灯片效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x4agruments应用一求出函数参数的总和"><span class="toc-number">4.</span> <span class="toc-text">0x4agruments应用一求出函数参数的总和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x5css函数一设置-读取对象的属性"><span class="toc-number">5.</span> <span class="toc-text">0x5css函数一设置/读取对象的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x6当前输入框高亮显示"><span class="toc-number">6.</span> <span class="toc-text">0x6当前输入框高亮显示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x7数组练习：各种数组方法的使用"><span class="toc-number">7.</span> <span class="toc-text">0x7数组练习：各种数组方法的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x8事件练习：封装兼容性添加、删除事件的函数"><span class="toc-number">8.</span> <span class="toc-text">0x8事件练习：封装兼容性添加、删除事件的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x9星级评分系统"><span class="toc-number">9.</span> <span class="toc-text">0x9星级评分系统</span></a></li></ol>
+		</div>
+		
+		<h2 id="0x1setTimeout应用"><a href="#0x1setTimeout应用" class="headerlink" title="0x1setTimeout应用"></a>0x1setTimeout应用</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="yOoPNd" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/yOoPNd/" target="_blank" rel="external">4-01setTimeout应用</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>又见导航条，先看下css，这里用的是雪碧图背景做出圆角的效果，虽然是经典的方法、兼容性好，但这种代码写起来实在是有点丑陋。因为需要三层嵌套，分别用背景图绘制左圆角、右圆角和中间背景，导致dom结构变复杂了、更进一步影响js的代码简洁。</p>
+<p>而关于ui的动效，用的正是这一系列题目里经常出现的“hover父元素激活子元素”的方法来实现，于是自然又得用<code>mouseover</code>和<code>mouseout</code>这对兄弟了。但是我还是被这题坑了不少时间，因为有两个两点关键的问题想了好久才解决好：</p>
+<p>首先得明白这题和前面题目的不同，前面那些题目其实都可以用css的<code>hover</code>伪类来实现，但这题不行，因为子选单和导航条的主体间是有<strong>间隙</strong>的，在鼠标从导航条到子选单的路上，子选单就会消失，根本到达不了。。。要解决这个bug，就需要题目提到的<code>setTimeout</code>登场了，离开选单时，我们可以让它延迟消失、给用户的鼠标到达子选单或重回导航条的时间；等再回到导航条或子选单就取消掉这个延时即可。</p>
+<p>紧接着第二个大坑出现了，在前面的总结里也提到怎么用好<code>mouseover</code>和<code>mouseout</code>，由于这两个事件会冒泡，同时由于他们只在跨界时触发，而且一旦元素占地过小就会被浏览器忽略；为防止冒上来的事件乱成一团、或者该触发的没触发，就应该做到减少元素嵌套，直接把事件监听绑定在具体元素上。</p>
+<p>然而问题是，这个法则在导航条的主体是可行的、但是子选单因为前面提到的三层嵌套构造圆角，已经无法减少嵌套了，同时还得考虑到子选单也是嵌套在导航条里的啊。。。这样一来某些元素除去子元素的范围、占地就很小了，会出现前面提到的该触发却没触发的问题。具体在这题里的表现，就是当你的鼠标离开子选单时，由于子选单被子元素挤占得只剩一点地方了（具体可以按f12看一下），根本不能靠它触发<code>mouseout</code>了，若要解决这个问题，就不得不接收里面子元素冒泡才会产生<code>mouseout</code>事件，有了事件才能进行元素显隐的控制嘛。</p>
+<p>但这又导致前面提到的另一个问题：举例来说，鼠标离开子选单时，只要鼠标一扫冒泡上来的<code>mouseout</code>、<code>mouseover</code>事件就一大堆，而这时只有鼠标离开子选单那个<code>mouseout</code>才是应该奏效的。既然我们不能阻止和筛选子元素上的<code>mouseout</code>事件，那看来只有让它和<code>mouseover</code>的效果相抵消了，因为只有在导航条里才会触发这对事件，离开导航条后就没有<code>mouseover</code>来和<code>mouseout</code>抵消了。同理，反过来进入子选单时自然就用<code>mouseout</code>来抵消<code>mouseover</code>达到筛选的目的。</p>
+<p>于是就能总结出第二个坑的解决方法了：</p>
+<ol>
+<li>首先要利用子元素的冒泡，这时就不能使用事件代理了（事件代理函数本身就有筛选事件来源的功能，没法获取子元素冒泡上来的事件），只能退而求其次，用一个循环来绑定事件吧。</li>
+<li>通过<code>mouseout</code>和相应的<code>mouseover</code>事件进行抵消，达到变相筛选出事件的效果。但要注意，一般用这种抵消都会引起闪烁的，所以抵消并不是个通用的解决方法，只是因为正好由于这题使用了延时和解除延时，显隐的结果不会立刻显现，天然就防止了子选单闪个不停的结果出现。</li>
+</ol>
+<p>剩下的代码里还要解决几个小问题：如解决使用了延时带来的子选单切换卡顿、依照剩余可占宽度决定子选单该往左还是往右定位、同时让箭头自动保持在中间等等；相比上面两个坑都算简单的啦。</p>
+<p>写到这里才把解题思路捋清了，可见这看似简单的几行js要写出来得有多蛋疼，这里真得吐槽下这个ui的问题：把子选单搞成细细的横向条子其实还好，采用hover作选择本来也ok，但这时你还专门让子选单和导航条主体间有间隙，导致实现起来比较难之外，用户也很容易误操作啊，那么点地方放那么多<code>mouseout</code>和相应的<code>mouseover</code>事件的触发点，手一抖、鼠标一滑很容易就选到别的地方去啊！！</p>
+<h2 id="0x2自动播放一幻灯片效果"><a href="#0x2自动播放一幻灯片效果" class="headerlink" title="0x2自动播放一幻灯片效果"></a>0x2自动播放一幻灯片效果</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="VazJOd" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/VazJOd/" target="_blank" rel="external">4-02自动播放一幻灯片效果</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>这次是做一个轮播图，不同于那种滑动的轮播效果，这里用的是只是将图片叠在一起然后改变透明度而已（我还另外在展示的图片上加了个<code>z-index</code>，防止拖一下图片就现形）。选择控件上，用的仍然是这一系列题目喜闻乐见的“hover一个元素激活其他元素”，只不过这题因dom结构简单，实现起来可比上一题简单多了。</p>
+<p>主要逻辑做起来也就两个方面，通过监听控件来增删类名以改变样式、再加上自动定时播放就可以，这里我把播放和停止都封装在一个单例里了（注意是定义在IIFE里），结构更清晰一点，也减少了全局变量。</p>
+<p>但还有一个问题，那就是淡入效果的实现，思路自然是定时修改透明度，然而由于一开始给图片直接添加类名已经让它的透明度为1，导致图片展示时是不透明–&gt;透明–&gt;不透明的过程，效果很不自然，于是干脆就直接把修改类名展示图片的代码去了，直接用淡入展示，效果更好同时又精简了代码。</p>
+<p>最后再提醒下自己，用<code>RegExp</code>构造正则时，千万别忘记<code>\</code>的转义！</p>
+<h2 id="0x3自动改变方向一幻灯片效果"><a href="#0x3自动改变方向一幻灯片效果" class="headerlink" title="0x3自动改变方向一幻灯片效果"></a>0x3自动改变方向一幻灯片效果</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="jqGVra" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/jqGVra/" target="_blank" rel="external">4-03自动改变方向一幻灯片效果</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>在上面一题多加个方向判断函数而已，同时这里我把和轮播有关的东西全都封装进了<code>autoSlider</code>这个单例里去了，全局变量现在就只剩这个单例，接口也可以写得简洁到只有一个初始化调用，真是清爽啊~</p>
+<h2 id="0x4agruments应用一求出函数参数的总和"><a href="#0x4agruments应用一求出函数参数的总和" class="headerlink" title="0x4agruments应用一求出函数参数的总和"></a>0x4agruments应用一求出函数参数的总和</h2><p>简单体验<code>arguments</code>而已，直接贴代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> result = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</div><div class="line">        result += <span class="built_in">arguments</span>[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>));</div></pre></td></tr></table></figure>
+<h2 id="0x5css函数一设置-读取对象的属性"><a href="#0x5css函数一设置-读取对象的属性" class="headerlink" title="0x5css函数一设置/读取对象的属性"></a>0x5css函数一设置/读取对象的属性</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="ONOrYL" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/ONOrYL/" target="_blank" rel="external">4-05css函数一设置、读取对象的属性</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>简单的样式获取和修改，虽然增删类名方式就可以轻松实现，但其实这题要的不只是效果，而是要模拟jquery的<code>css</code>函数。由于设定上，该函数的参数应该有三种情况：</p>
+<ul>
+<li>接受一个css属性名读取值</li>
+<li>接收一个对象（hash表）批量设置css属性</li>
+<li>传入键、值两个参数直接设置某个css属性</li>
+</ul>
+<p>所以要按参数个数和参数的类型分别进行操作，类型判断最好使用<code>Object.prototype.toString</code>，这样不会出现使用<code>typeof</code>时模棱两可的结果。如果遇到不合法的参数数目和类型，就直接用<code>throw</code>抛出错误。</p>
+<p>至于样式的获取，使用了标准的<code>window.getComputedStyle</code>方法，这个方法的兼容性其实也够用了（IE8+），所以完全可以不用老旧的<code>currentStyle</code>。</p>
+<p>而在设置样式属性时，要明白<code>.</code>和<code>[]</code>操作符的不同，使用点操作符号的属性名必须首先是合法的变量名，而且不能是动态的引用（其实就是字符串了，只是引号可以省略罢了）；中括号操作符就不存在这种问题，所以<code>elelment.sytle[&#39;background-color&#39;]</code>这种用法也能跑。</p>
+<h2 id="0x6当前输入框高亮显示"><a href="#0x6当前输入框高亮显示" class="headerlink" title="0x6当前输入框高亮显示"></a>0x6当前输入框高亮显示</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="WwdxJK" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/WwdxJK/" target="_blank" rel="external">4-06当前输入框高亮显示</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>继续事件模拟css伪类的行为，这次终于不是老冤家<code>hover</code>了，改成了文本框<code>focus</code>，很自然就想到老套路：事件代理+增删类名。但要注意焦点事件也有一对冒泡和不冒泡的事件存在，其中由于火狐不支持冒泡的<code>focusin</code>和<code>focusout</code>，只支持不冒泡的<code>focus</code>和<code>blur</code>，除非只考虑移动端，否则依赖冒泡的事件代理是不能用在处理焦点事件上滴。所以这里只好用一个循环来完成对所有元素的监听了。</p>
+<p>至于修改的样式，其实就相当于自定义文本框背景和<code>outline</code>样式了，原题是用了背景图来做，但这完全可以用css模拟嘛。然而由于这里输入框是圆角的，除了火狐外<a href="http://www.zhangxinxu.com/wordpress/2015/04/css3-radius-outline/" target="_blank" rel="external">并没有浏览器</a>实现<code>outline</code>的圆角，所以不能直接修改<code>outline</code>样式了，只能假借边框来实现该效果。同时还得记得把浏览器默认<code>outline</code>关掉，否则效果可就大打折扣。</p>
+<h2 id="0x7数组练习：各种数组方法的使用"><a href="#0x7数组练习：各种数组方法的使用" class="headerlink" title="0x7数组练习：各种数组方法的使用"></a>0x7数组练习：各种数组方法的使用</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="JXpdpB" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/JXpdpB/" target="_blank" rel="external">4-07数组练习：各种数组方法的使用</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>简单的数组练习，就不按照原题那样分几个数组了，这里直接在一个数组上操作，再搭配一个简单的处理流程：先用一个事件代理来监听和分发按钮的点击事件，处理完再输出到dom即可。</p>
+<p>具体的数组操作是比较简单的，不过要注意<code>concat</code>和<code>slice</code>这两个方法与众不同，它们不是直接在调用数组上操作，而是另外生成新数组进行操作，返回的也是新数组。利用这一点可以实现数组的深拷贝，但若是想作用到原数组就得另外赋值了。</p>
+<h2 id="0x8事件练习：封装兼容性添加、删除事件的函数"><a href="#0x8事件练习：封装兼容性添加、删除事件的函数" class="headerlink" title="0x8事件练习：封装兼容性添加、删除事件的函数"></a>0x8事件练习：封装兼容性添加、删除事件的函数</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="eZVvyN" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/eZVvyN/" target="_blank" rel="external">4-08事件练习：封装兼容性添加、删除事件的函数</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>虽然做这系列的题本不想考虑老旧浏览器，但兼容事件毕竟是个经典问题，权当回顾下js高级程序设计里的内容了。采用的的也是书里的兼容方法，能用DOM2级别<code>addEventListener</code>和<code>removeEventListener</code>就用，再者就是兼容<code>IE8</code>以下的<code>attachEvent</code>和<code>detachEvent</code>（有this指向<code>window</code>、反向执行的坑），这两者都能绑定多个事件处理程序；最后实在不行再用只能绑定一个处理程序、但兼容性最佳的DOM0级。</p>
+<h2 id="0x9星级评分系统"><a href="#0x9星级评分系统" class="headerlink" title="0x9星级评分系统"></a>0x9星级评分系统</h2><p>实现效果：</p>
+<p></p><p data-height="257" data-theme-id="17410" data-slug-hash="PNQywV" data-default-tab="result" data-user="levonlin" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/PNQywV/" target="_blank" rel="external">4-09星级评分系统</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>星星只是使用背景图来改变亮灭而已，所以只要在容器上挂上对星星的<code>click</code>、<code>mouseover</code>、<code>mouseout</code>三个事件代理，剩下的就是一些DOM和数据操作了。</p>
+<p>—第四课完—</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/03/24/原生js练习题-第四课/" data-title="原生js练习题---第四课 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/04/13/原生js练习题-第五课/" title="原生js练习题---第五课">
+  <strong>新一篇:</strong><br/>
+  <span>
+  原生js练习题---第五课</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/14/原生js练习题-第三课/"  title="原生js练习题---第三课">
+ <strong>旧一篇:</strong><br/> 
+ <span>原生js练习题---第三课
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="原生js练习题---第四课" data-thread-key="原生js练习题-第四课" data-author-key="null" data-url="http://levonlin.info/post/原生js练习题-第四课"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>

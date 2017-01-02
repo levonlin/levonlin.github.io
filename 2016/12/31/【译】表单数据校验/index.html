@@ -1,0 +1,561 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】表单数据校验 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="系列文章说明
+原文
+
+
+当你需要经常在服务器上校验数据时，在Web页面上的另加校验就有诸多好处。多数情况下，用户会被表单惹恼。而当用户填完表单时就校验数据，既有助于用户立即发现他们犯的错误，也能减少等待HTTP响应的时间、并减少服务器对错误表单输入的处理。本文介绍的，就是如何在表单所在页面对表单数据">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/12/31/【译】表单数据校验/" title="【译】表单数据校验" itemprop="url">【译】表单数据校验</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-12-31T06:23:42.000Z" itemprop="datePublished">2016年 12月 31日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用浏览器内置的表单校验"><span class="toc-number">1.</span> <span class="toc-text">使用浏览器内置的表单校验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#元素校验不通过时"><span class="toc-number">1.1.</span> <span class="toc-text">元素校验不通过时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input元素的校验约束"><span class="toc-number">1.2.</span> <span class="toc-text">input元素的校验约束</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#举个例子"><span class="toc-number">1.2.1.</span> <span class="toc-text">举个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#required特性"><span class="toc-number">1.2.2.</span> <span class="toc-text">required特性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他校验约束"><span class="toc-number">1.3.</span> <span class="toc-text">其他校验约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制错误信息"><span class="toc-number">1.4.</span> <span class="toc-text">定制错误信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Javascript校验表单"><span class="toc-number">2.</span> <span class="toc-text">使用Javascript校验表单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5约束验证API"><span class="toc-number">2.1.</span> <span class="toc-text">HTML5约束验证API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#约束验证API的属性"><span class="toc-number">2.1.1.</span> <span class="toc-text">约束验证API的属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#约束验证API的方法"><span class="toc-number">2.1.2.</span> <span class="toc-text">约束验证API的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用约束验证API的例子"><span class="toc-number">2.1.3.</span> <span class="toc-text">使用约束验证API的例子</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不使用内置API来校验表单"><span class="toc-number">2.2.</span> <span class="toc-text">不使用内置API来校验表单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#未使用约束验证API的例子"><span class="toc-number">2.2.1.</span> <span class="toc-text">未使用约束验证API的例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远端校验"><span class="toc-number">2.2.2.</span> <span class="toc-text">远端校验</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">3.</span> <span class="toc-text">结论</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p>当你需要经常在服务器上校验数据时，在Web页面上的另加校验就有诸多好处。多数情况下，<a href="http://www.slideshare.net/jwegesin/forms-suck" target="_blank" rel="external">用户会被表单惹恼</a>。而当用户填完表单时就校验数据，既有助于用户立即发现他们犯的错误，也能减少等待HTTP响应的时间、并减少服务器对错误表单输入的处理。本文介绍的，就是如何在表单所在页面对表单数据进行校验。</p>
+<h2 id="使用浏览器内置的表单校验"><a href="#使用浏览器内置的表单校验" class="headerlink" title="使用浏览器内置的表单校验"></a>使用浏览器内置的表单校验</h2><p><a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5" target="_blank" rel="external">HTML5</a>的一大特性，就是在不依赖脚本的情况下校验大多数的用户数据。该特性是通过使用表单元素上的<a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation" target="_blank" rel="external">校验特性</a>来实现的。</p>
+<h3 id="元素校验不通过时"><a href="#元素校验不通过时" class="headerlink" title="元素校验不通过时"></a>元素校验不通过时</h3><p>当一个元素校验不通过时，会发生两件事：</p>
+<ul>
+<li>该元素会匹配到<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>这个CSS伪类，它能让你给校验不过的元素提供特定的样式。类似地，校验通过的元素则会匹配<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:valid" target="_blank" rel="external">:valid</a>伪类。</li>
+<li>当用户要发送数据时，浏览器会阻止这个表单、并展示一段错误信息。</li>
+</ul>
+<h3 id="input元素的校验约束"><a href="#input元素的校验约束" class="headerlink" title="input元素的校验约束"></a><code>input</code>元素的校验约束</h3><p>所有的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank" rel="external"><code>&lt;input&gt;</code></a>元素都能使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern" target="_blank" rel="external">pattern</a>特性来作校验。该特性采用一个区分大小写的<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">正则表达式</a>作为它的值。若元素的值非空、或者不匹配该特性所指定的正则表达式，该元素就会被认为是校验不通过的。</p>
+<h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"choose"</span>&gt;</span>Would you prefer a banana or a cherry?<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"choose"</span> <span class="attr">name</span>=<span class="string">"i_like"</span> <span class="attr">pattern</span>=<span class="string">"banana|cherry"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:invalid</span> &#123;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:valid</span> &#123;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><iframe width="100%" frameborder="0" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation$samples/A_simple_example?revision=1152350" height="50"></iframe></p>
+
+<p>在本例中，<code>&lt;input&gt;</code>元素可以接受如下三种值：空字符串、字符串”banana”或”cherry”。</p>
+<h4 id="required特性"><a href="#required特性" class="headerlink" title="required特性"></a>required特性</h4><p>若某个元素需要在提交表单之前填一个值，那我们可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required" target="_blank" rel="external">required</a>特性来标记该元素。当该特性为<code>true</code>时，所在的文本域不允许为空。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"choose"</span>&gt;</span>Would you prefer a banana or cherry?<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"choose"</span> <span class="attr">name</span>=<span class="string">"i_like"</span> <span class="attr">pattern</span>=<span class="string">"banana|cherry"</span> <span class="attr">required</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:invalid</span> &#123;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:valid</span> &#123;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意文本框相比上个例子有何不同：</p>
+<p><iframe width="100%" frameborder="0" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation$samples/The_required_attribute?revision=1152350" height="50"></iframe></p>
+
+<blockquote>
+<p><strong>注意：</strong><code>&lt;input&gt;</code>元素的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type" target="_blank" rel="external">type</a>特性被设为<code>email</code>或<code>url</code>时，无需再使用<code>pattern</code>特性来坐校验。指定<code>email</code>类型时，文本框的值就得是个正确格式的email地址（同时指定<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple" target="_blank" rel="external">mutiple</a>特性时，还可以是一个逗号分隔的email地址列表）。指定<code>url</code>类型的文本框则会自动匹配一个URL。</p>
+</blockquote>
+<h3 id="其他校验约束"><a href="#其他校验约束" class="headerlink" title="其他校验约束"></a>其他校验约束</h3><p>所有接受用户输入的表单元素（<code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>等）都支持<code>required</code>特性，但要注意<code>&lt;textarea&gt;</code>元素并不支持<code>pattern</code>特性。</p>
+<p>所有的文本输入框（<code>&lt;input&gt;</code>或<code>&lt;textarea&gt;</code>）都可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength" target="_blank" rel="external">maxlength</a>特性来约束文本大小。输入框的值若大于<code>maxlength</code>指定的值，就会校验不通过。但是浏览器通常不会让用户输入超过文本框指定长度的文本。</p>
+<p>对于数字输入框，<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min" target="_blank" rel="external">min</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max" target="_blank" rel="external">max</a>特性也提供了校验约束。若输入框的值小于<code>min</code>的值或大于<code>max</code>的值，输入框就会校验不通过。</p>
+<p>来个完整点的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Title<span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"This field is mandatory"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">legend</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">required</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">id</span>=<span class="string">"r1"</span> <span class="attr">value</span>=<span class="string">"Mr"</span> &gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"r1"</span>&gt;</span>Mr. <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">required</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">id</span>=<span class="string">"r2"</span> <span class="attr">value</span>=<span class="string">"Ms"</span>&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"r2"</span>&gt;</span>Ms.<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"n1"</span>&gt;</span>How old are you?<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- pattern特性可以给没实现number类型input元素但支持pattern特性的浏览器一个向后兼容。</span></div><div class="line">         请注意支持pattern特性的浏览器会使用数字输入框时让该特性失效。</div><div class="line">         该特性在这里的用法仅是做个向后兼容而已。 --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">min</span>=<span class="string">"12"</span> <span class="attr">max</span>=<span class="string">"120"</span> <span class="attr">step</span>=<span class="string">"1"</span> <span class="attr">id</span>=<span class="string">"n1"</span> <span class="attr">name</span>=<span class="string">"age"</span></span></div><div class="line">           <span class="attr">pattern</span>=<span class="string">"\d+"</span>&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"t1"</span>&gt;</span>What's your favorite fruit?<span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"This field is mandatory"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"t1"</span> <span class="attr">name</span>=<span class="string">"fruit"</span> <span class="attr">list</span>=<span class="string">"l1"</span> <span class="attr">required</span></span></div><div class="line">           <span class="attr">pattern</span>=<span class="string">"[Bb]anana|[Cc]herry|[Aa]pple|[Ss]trawberry|[Ll]emon|[Oo]range"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">datalist</span> <span class="attr">id</span>=<span class="string">"l1"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Apple<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Strawberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Lemon<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Orange<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">datalist</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"t2"</span>&gt;</span>What's your e-mail?<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"t2"</span> <span class="attr">name</span>=<span class="string">"email"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"t3"</span>&gt;</span>Leave a short message<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"t3"</span> <span class="attr">name</span>=<span class="string">"msg"</span> <span class="attr">maxlength</span>=<span class="string">"140"</span> <span class="attr">rows</span>=<span class="string">"5"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">font</span>: <span class="number">1em</span> sans-serif;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">margin </span>: <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">form</span> &#123;</div><div class="line">  <span class="attribute">max-width</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">5px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">p</span> &gt; <span class="selector-tag">label</span> &#123;</div><div class="line">  <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=text]</span>,</div><div class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=email]</span>,</div><div class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=number]</span>,</div><div class="line"><span class="selector-tag">textarea</span>,</div><div class="line"><span class="selector-tag">fieldset</span> &#123;</div><div class="line"><span class="comment">/* 需要给Webkit浏览器下的表单元素适当的样式 */</span></div><div class="line">  <span class="attribute">-webkit-appearance</span>: none;</div><div class="line">  </div><div class="line">  <span class="attribute">width </span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#333</span>;</div><div class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line">  </div><div class="line">  <span class="attribute">font-family</span>: inherit;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">90%</span>;</div><div class="line">  </div><div class="line">  <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">  <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:invalid</span> &#123;</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="number">1px</span> red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span><span class="selector-pseudo">:invalid</span> &#123;</div><div class="line">  <span class="attribute">outline</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><iframe width="100%" frameborder="0" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation$samples/Other_validation_constraints?revision=1152350" height="420"></iframe></p>
+
+<h3 id="定制错误信息"><a href="#定制错误信息" class="headerlink" title="定制错误信息"></a>定制错误信息</h3><p>如我们上面看到的几个例子所示，每次用户要发送未通过校验的表单时，浏览器都会展示一段错误信息。该信息的展示方式取决于浏览器本身。</p>
+<p>这些自动生成的信息有两大缺点：</p>
+<ul>
+<li>没有标准的方法来用CSS改变其外观和体验。</li>
+<li>它们还要依赖浏览器本地信息，这意味着你会在使用一种语言的页面中，遇到错误信息使用另一种语言展示的情况。</li>
+</ul>
+<p><strong>使用法语版本的浏览器浏览英文页面</strong></p>
+<table>
+<thead>
+<tr>
+<th>浏览器</th>
+<th>渲染效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firefox 17 (Windows 7)</td>
+<td><img src="https://developer.mozilla.org/files/4329/error-firefox-win7.png" alt=""></td>
+</tr>
+<tr>
+<td>Chrome 22 (Windows 7)</td>
+<td><img src="https://developer.mozilla.org/files/4327/error-chrome-win7.png" alt=""></td>
+</tr>
+<tr>
+<td>Opera 12.10 (Mac OSX)</td>
+<td><img src="https://developer.mozilla.org/files/4331/error-opera-macos.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<p>要定制这些信息的外观和文本，你必须使用JavaScript，没有只使用HTML和CSS的方法。</p>
+<p>HTML5提供了<a href="http://www.w3.org/TR/html5/forms.html#the-constraint-validation-api" target="_blank" rel="external">约束验证API</a>来检查和定制表单元素的状态。此外它也能改变错误信息的文本。来看个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span>I would like you to provide me an e-mail<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"mail"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在Javascript中，你可以调用<a href="https://developer.mozilla.org/en-US/docs/HTML/HTML5/Constraint_validation#Constraint_API&#39;s_element.setCustomValidity(" target="_blank" rel="external">setCustomValidity()</a>)方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var email = document.getElementById(&quot;mail&quot;);</div><div class="line"></div><div class="line">email.addEventListener(&quot;keyup&quot;, function (event) &#123;</div><div class="line">  if (email.validity.typeMismatch) &#123;</div><div class="line">    email.setCustomValidity(&quot;I expect an e-mail, darling!&quot;);</div><div class="line">  &#125; else &#123;</div><div class="line">    email.setCustomValidity(&quot;&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><iframe width="100%" frameborder="0" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation$samples/Customized_error_messages?revision=1152350" height="50"></iframe></p>
+
+<h2 id="使用Javascript校验表单"><a href="#使用Javascript校验表单" class="headerlink" title="使用Javascript校验表单"></a>使用Javascript校验表单</h2><p>若你想要控制错误信息的样式和效果，或者想处理那些不支持HTML5表单验证的浏览器，那你就只能使用Javascript了。</p>
+<h3 id="HTML5约束验证API"><a href="#HTML5约束验证API" class="headerlink" title="HTML5约束验证API"></a>HTML5约束验证API</h3><p>现在越来越多的浏览器开始支持约束验证API，而且也支持得越来越靠谱。该API囊括了各个表单元素上的一系列方法和属性。</p>
+<h4 id="约束验证API的属性"><a href="#约束验证API的属性" class="headerlink" title="约束验证API的属性"></a>约束验证API的属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>validationMessage</td>
+<td>可以是一段本地化的信息，用于描述表单控件所不满足的验证条件（如果有的话）；当控件不支持任何约束验证（<code>willValidae</code>的值为<code>false</code>）、或控件的值满足了约束条件时，也可以是一个空字符串</td>
+</tr>
+<tr>
+<td>validity</td>
+<td>一个用于描述元素校验阶段的<a href="https://developer.mozilla.org/en-US/docs/Web/API/ValidityState" target="_blank" rel="external">validityState</a>对象</td>
+</tr>
+<tr>
+<td>validity.customError</td>
+<td>元素触发了定制的错误时返回<code>true</code>，否则返回<code>false</code></td>
+</tr>
+<tr>
+<td>validity.patternMismatch</td>
+<td>元素的值不匹配提供的模板时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>伪类</td>
+</tr>
+<tr>
+<td>validity.rangeOverflow</td>
+<td>元素的值大于提供的最大值时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range" target="_blank" rel="external">:out-fo-range</a>伪类</td>
+</tr>
+<tr>
+<td>validity.rangeUnderflow</td>
+<td>元素的值小于提供的最小值时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range" target="_blank" rel="external">:out-fo-range</a>伪类</td>
+</tr>
+<tr>
+<td>validity.stepMismatch</td>
+<td>元素的值不符合<code>step</code>特性提供的规则时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range" target="_blank" rel="external">:out-fo-range</a>伪类</td>
+</tr>
+<tr>
+<td>validity.tooLong</td>
+<td>元素的值的长度超过要求的最大长度时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range" target="_blank" rel="external">:out-fo-range</a>伪类</td>
+</tr>
+<tr>
+<td>validity.typeMismatch</td>
+<td>元素的值不是正确的语法时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>伪类</td>
+</tr>
+<tr>
+<td>validity.valid</td>
+<td>元素的值没有校验出的问题时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:valid" target="_blank" rel="external">:valid</a>，否则会匹配<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>伪类</td>
+</tr>
+<tr>
+<td>validity.valueMissing</td>
+<td>元素是必填项但没有值时返回<code>true</code>，否则返回<code>false</code>。当返回<code>true</code>时，该元素会匹配CSS的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>伪类</td>
+</tr>
+<tr>
+<td>willValidate</td>
+<td>元素在表单提交时会被校验则返回<code>true</code>，否则返回<code>false</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="约束验证API的方法"><a href="#约束验证API的方法" class="headerlink" title="约束验证API的方法"></a>约束验证API的方法</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>checkValidity()</td>
+<td>元素的值没有校验出的问题时返回<code>true</code>，否则返回<code>false</code>。当校验不通过时，该方法还会在相应元素上触发<a href="https://developer.mozilla.org/en-US/docs/Web/Events/invalid" target="_blank" rel="external">invalid</a>事件。</td>
+</tr>
+<tr>
+<td>setCustomValidity(message)</td>
+<td>给元素添加一段定制的错误信息；若你手动设置了错误信息，则给元素会被当做校验未通过，并显示出特定的错误。这就能让你摆脱标准的约束验证API提供的错误信息，直接使用Javascript来建立自己的错误信息。该信息在报错时会展示给用户。</td>
+</tr>
+</tbody>
+</table>
+<p>对于老旧浏览器，我们可以使用<a href="https://github.com/ryanseddon/H5F" target="_blank" rel="external">H5F之类的polyfill</a>来弥补其对于约束验证API的不支持。由于这里你已经使用了Javascript，所以使用polyfill也并不会成为你设计或实现网站、Web应用时的额外负担。</p>
+<h4 id="使用约束验证API的例子"><a href="#使用约束验证API的例子" class="headerlink" title="使用约束验证API的例子"></a>使用约束验证API的例子</h4><p>来看下如何使用该API来建立定制的错误信息，首先HTLM如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">novalidate</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>Please enter an email address:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"mail"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"error"</span> <span class="attr">aria-live</span>=<span class="string">"polite"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这个简单的表格用了<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-novalidate" target="_blank" rel="external">novalidate</a>特性来关闭浏览器的自动校验；这样我们的脚本就能控制整个校验过程了。但是这样做却不会禁用掉约束验证API、以及 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:valid" target="_blank" rel="external">:valid</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="external">:invalid</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:in-range" target="_blank" rel="external">:in-range</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range" target="_blank" rel="external">:out-of-range</a> 等一系列CSS伪类。这就意味着，虽然浏览器不会自动在表单发送前校验它的数据，但你仍可自己来做校验、并且按需给予表单样式。</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Live_Regions" target="_blank" rel="external">aria-live</a>特性用来确保我们定制的错误信息能展示给任何人，包括那些使用诸如屏幕阅读器等无障碍设备的人。</p>
+<p><strong>CSS</strong><br>这段CSS用于装饰我们的表单、并让错误的输出看起来更吸引人些。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 这段只是用来美化表单 */</span></div><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">font</span>: <span class="number">1em</span> sans-serif;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">margin </span>: <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">form</span> &#123;</div><div class="line">  <span class="attribute">max-width</span>: <span class="number">200px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">p</span> * &#123;</div><div class="line">  <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=email]</span>&#123;</div><div class="line">  <span class="attribute">-webkit-appearance</span>: none;</div><div class="line"></div><div class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#333</span>;</div><div class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line"></div><div class="line">  <span class="attribute">font-family</span>: inherit;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">90%</span>;</div><div class="line"></div><div class="line">  <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">  <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 这段是给校验未通过的输入框的样式 */</span></div><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:invalid</span>&#123;</div><div class="line">  <span class="attribute">border-color</span>: <span class="number">#900</span>;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#FDD</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span><span class="selector-pseudo">:invalid</span> &#123;</div><div class="line">  <span class="attribute">outline</span>: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 这段是给错误信息的样式 */</span></div><div class="line"><span class="selector-class">.error</span> &#123;</div><div class="line">  <span class="attribute">width  </span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line"> </div><div class="line">  <span class="attribute">font-size</span>: <span class="number">80%</span>;</div><div class="line">  <span class="attribute">color</span>: white;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#900</span>;</div><div class="line">  <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="number">5px</span>;</div><div class="line"> </div><div class="line">  <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">  <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.error</span><span class="selector-class">.active</span> &#123;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0.3em</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>JavaScript</strong><br>下面的Javascript代码用来处理我们自定义的错误校验。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取DOM节点的方法有许多，这里我们获取了表单自身以及email输入框，还有一个让我们放置错误信息的span元素。</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> form  = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'form'</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> email = <span class="built_in">document</span>.getElementById(<span class="string">'mail'</span>);</div><div class="line"><span class="keyword">var</span> error = <span class="built_in">document</span>.querySelector(<span class="string">'.error'</span>);</div><div class="line"></div><div class="line">email.addEventListener(<span class="string">"keyup"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">  <span class="comment">// 每次用户输入时，我们都会检查email输入框是否合法</span></div><div class="line">  <span class="keyword">if</span> (email.validity.valid) &#123;</div><div class="line">    <span class="comment">// 当校验通过时，如果已经有一段错误信息在显示了，就移除掉错误信息</span></div><div class="line">    error.innerHTML = <span class="string">""</span>; <span class="comment">// 重置消息内容</span></div><div class="line">    error.className = <span class="string">"error"</span>; <span class="comment">// 重置消息的显示状态</span></div><div class="line">  &#125;</div><div class="line">&#125;, <span class="literal">false</span>);</div><div class="line">form.addEventListener(<span class="string">"submit"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">  <span class="comment">// 每次用户要提交表单时，我们都会检查email输入框是否合法</span></div><div class="line">  <span class="keyword">if</span> (!email.validity.valid) &#123;</div><div class="line">    <span class="comment">// 如果输入框不合法，我们就展示那段定制的错误信息</span></div><div class="line">    error.innerHTML = <span class="string">"I expect an e-mail, darling!"</span>;</div><div class="line">    error.className = <span class="string">"error active"</span>;</div><div class="line">    <span class="comment">// 通过取消事件来阻止表单提交</span></div><div class="line">    event.preventDefault();</div><div class="line">  &#125;</div><div class="line">&#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
+<p>下面是运行结果：</p>
+<p><iframe width="100%" frameborder="0" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation$samples/Example_using_the_constraint_validation_API?revision=1152350" height="130"></iframe></p>
+
+<p>约束验证API给了我们处理表单校验的强大工具，并让我们能有力地控制其用户界面，这就远超过只用HTML和CSS所能做的事了。</p>
+<h3 id="不使用内置API来校验表单"><a href="#不使用内置API来校验表单" class="headerlink" title="不使用内置API来校验表单"></a>不使用内置API来校验表单</h3><p>有时，面对老旧浏览器和<a href="">定制的组件</a>，你不能（或者不想）使用约束验证API。但在这种情况下，你仍然可以使用Javascript来校验你的表单。表单的校验更多是个用户界面的问题、而非真正的数据校验。</p>
+<p>要校验一个表单，你得先问你自己几个问题：</p>
+<p><strong>我需要进行什么类型的校验？</strong><br>你得先决定如何校验数据，这取决于你：可以用字符串操作、类型转换、正则表达式等等。只要记住表单数据通常是一段文本，而且传到你的脚本里时也是一些字符串就好。</p>
+<p><strong>表单校验未通过时，我应该做什么？</strong><br>这就是个UI的问题了。得靠你决定表单的行为：是不论是否通过都发送数据呢？还是高亮那些出现错误的字段？还是展示一些错误信息？</p>
+<p><strong>如何帮助用户用户纠正非法数据？</strong><br>要减少用户的不满，很重要的是提供尽可能多的帮助信息，以指导用户纠正他们的输入。还应该提供些前置的输入建议、和清晰的错误信息，让用户知道该输入什么。</p>
+<p>若你还想深入了解表单校验的UI要求，可以读读下面这些有用的文章：</p>
+<ul>
+<li>SmashingMagazine: <a href="http://uxdesign.smashingmagazine.com/2012/06/27/form-field-validation-errors-only-approach/" target="_blank" rel="external">Form-Field Validation: The Errors-Only Approach</a></li>
+<li>SmashingMagazine: <a href="http://www.smashingmagazine.com/2009/07/07/web-form-validation-best-practices-and-tutorials/" target="_blank" rel="external">Web Form Validation: Best Practices and Tutorials</a></li>
+<li>Six Revision: <a href="http://sixrevisions.com/user-interface/best-practices-for-hints-and-validation-in-web-forms/" target="_blank" rel="external">Best Practices for Hints and Validation in Web Forms</a></li>
+<li>A List Apart: <a href="http://www.alistapart.com/articles/inline-validation-in-web-forms/" target="_blank" rel="external">Inline Validation in Web Forms</a></li>
+</ul>
+<h4 id="未使用约束验证API的例子"><a href="#未使用约束验证API的例子" class="headerlink" title="未使用约束验证API的例子"></a>未使用约束验证API的例子</h4><p>为了更好地说明，我们接下来要重构上述的例子，让它能在老旧浏览器上运行：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Please enter an email address:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"mail"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"mail"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"error"</span> <span class="attr">aria-live</span>=<span class="string">"polite"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 某些老旧浏览器上button元素的`type`特性不会被默认指定为`submit`--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如你所见，HTML的和之前几乎一模一样；这里只移除了HTML5的部分。要注意的是<a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA" target="_blank" rel="external">ARIA</a>是个并不依赖于HTML5的独立特性，所以我们仍会保留它。</p>
+<p><strong>CSS</strong><br>类似地，CSS不需要做大规模修改；只要把<code>:invalid</code>伪类转为真的类，并且不去使用IE6不支持的特性选择器即可。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 这段只是用来美化表单 */</span></div><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">font</span>: <span class="number">1em</span> sans-serif;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">margin </span>: <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">form</span> &#123;</div><div class="line">  <span class="attribute">max-width</span>: <span class="number">200px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">p</span> * &#123;</div><div class="line">  <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.mail</span> &#123;</div><div class="line">  <span class="attribute">-webkit-appearance</span>: none;</div><div class="line"></div><div class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#333</span>;</div><div class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line"></div><div class="line">  <span class="attribute">font-family</span>: inherit;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">90%</span>;</div><div class="line"></div><div class="line">  <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">  <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 这段是给校验未通过的输入框的样式 */</span></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.invalid</span>&#123;</div><div class="line">  <span class="attribute">border-color</span>: <span class="number">#900</span>;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#FDD</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus.invalid</span> &#123;</div><div class="line">  <span class="attribute">outline</span>: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 这段是给错误信息的样式 */</span></div><div class="line"><span class="selector-class">.error</span> &#123;</div><div class="line">  <span class="attribute">width  </span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line"> </div><div class="line">  <span class="attribute">font-size</span>: <span class="number">80%</span>;</div><div class="line">  <span class="attribute">color</span>: white;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#900</span>;</div><div class="line">  <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="number">5px</span>;</div><div class="line"> </div><div class="line">  <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">  <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.error</span><span class="selector-class">.active</span> &#123;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0.3em</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>JavaScript</strong><br>Javascript代码的改变最大，为了兼容我们需要做更多的事情。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 老旧浏览器上获取DOM节点的方法少了些</span></div><div class="line"><span class="keyword">var</span> form  = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'form'</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> email = <span class="built_in">document</span>.getElementById(<span class="string">'mail'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 下面是个访问DOM里下个兄弟元素节点的的技巧</span></div><div class="line"><span class="comment">// 但这样做很危险，因为很容易就会建立一个死循环</span></div><div class="line"><span class="comment">// 在现代浏览器上，应该使用element.nextElementSibling</span></div><div class="line"><span class="keyword">var</span> error = email;</div><div class="line"><span class="keyword">while</span> ((error = error.nextSibling).nodeType != <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// 按照HTML5的规范来</span></div><div class="line"><span class="keyword">var</span> emailRegExp = <span class="regexp">/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`&#123;|&#125;~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/</span>;</div><div class="line"></div><div class="line"><span class="comment">// 许多老旧浏览器不支持addEventListener方法</span></div><div class="line"><span class="comment">// 下面是个解决该问题的简单方法，当然方法远不止这一种</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addEvent</span>(<span class="params">element, event, callback</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> previousEventCallBack = element[<span class="string">"on"</span>+event];</div><div class="line">  element[<span class="string">"on"</span>+event] = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> output = callback(e);</div><div class="line">    </div><div class="line">    <span class="comment">// 回调返回`false`时会终止回调链并结束事件回调的执行</span></div><div class="line">    <span class="keyword">if</span> (output === <span class="literal">false</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> previousEventCallBack === <span class="string">'function'</span>) &#123;</div><div class="line">      output = previousEventCallBack(e);</div><div class="line">      <span class="keyword">if</span>(output === <span class="literal">false</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 现在可以来重构我们的校验了</span></div><div class="line"><span class="comment">// 由于我们不依赖CSS伪类，故而必须在email字段明确设置valid/invalid类</span></div><div class="line">addEvent(<span class="built_in">window</span>, <span class="string">"load"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 这里我们检验该字段是否为空(注意，该字段不是必填的)</span></div><div class="line">  <span class="comment">// 若不是，我们再检验它的内容是否为正确格式的email地址</span></div><div class="line">  <span class="keyword">var</span> test = email.value.length === <span class="number">0</span> || emailRegExp.test(email.value);</div><div class="line"> </div><div class="line">  email.className = test ? <span class="string">"valid"</span> : <span class="string">"invalid"</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 定义用户在该字段输入时会发生什么</span></div><div class="line">addEvent(email, <span class="string">"keyup"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> test = email.value.length === <span class="number">0</span> || emailRegExp.test(email.value);</div><div class="line">  <span class="keyword">if</span> (test) &#123;</div><div class="line">    email.className = <span class="string">"valid"</span>;</div><div class="line">    error.innerHTML = <span class="string">""</span>;</div><div class="line">    error.className = <span class="string">"error"</span>;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    email.className = <span class="string">"invalid"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 定义用户提交数据时会发生什么</span></div><div class="line">addEvent(form, <span class="string">"submit"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> test = email.value.length === <span class="number">0</span> || emailRegExp.test(email.value);</div><div class="line"> </div><div class="line">  <span class="keyword">if</span> (!test) &#123;</div><div class="line">    email.className = <span class="string">"invalid"</span>;</div><div class="line">    error.innerHTML = <span class="string">"I expect an e-mail, darling!"</span>;</div><div class="line">    error.className = <span class="string">"error active"</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 某些老旧浏览器不支持event.preventDefault()方法</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    email.className = <span class="string">"valid"</span>;</div><div class="line">    error.innerHTML = <span class="string">""</span>;</div><div class="line">    error.className = <span class="string">"error"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>结果如下所示：</p>
+<p><iframe width="100%" frameborder="0" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation$samples/Example_that_doesn't_use_the_constraint_validation_API?revision=1152350" height="130"></iframe></p>
+
+<p>如你所见，自己建立一个校验系统并不是一件难事。难点就在于如何跨平台、并在你创建的任何表单上都能使用它。现在有许多库能执行表单校验，你应该毫不犹豫地使用他们。如下是几个例子：</p>
+<ul>
+<li>独立的库<ul>
+<li><a href="http://validatious.org/" target="_blank" rel="external">Validatious</a></li>
+<li><a href="http://rickharrison.github.com/validate.js/" target="_blank" rel="external">Validate.js</a></li>
+</ul>
+</li>
+<li>jQuery插件<ul>
+<li><a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/" target="_blank" rel="external">Validation</a></li>
+<li><a href="http://unwrongest.com/projects/valid8/" target="_blank" rel="external">Valid8</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="远端校验"><a href="#远端校验" class="headerlink" title="远端校验"></a>远端校验</h4><p>有些情况下使用远端校验还是挺有用的。在用户输入的数据得添加到应用服务器的数据存储时，这种校验是有必要的。一个相应的例子就是需要填用户名的注册表单。为避免用户名重复，更聪明的办法是发送一个AJAX请求来检查用户名的可用性，而不是让用户发送完数据、然后再返回一个带有错误的表单。</p>
+<p>使用这种校验，需要注意以下几点：</p>
+<ul>
+<li>因为需要公开暴露API和一些数据，所以得保证数据不是敏感的。</li>
+<li>由于网络存在延迟，故得进行异步校验。这就得靠一些UI设计来保证校验不能正确执行时，用户操作不至于被阻塞。</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>表单校验并不用靠复杂的Javascript，但它要求我们认真为用户着想，始终得帮用户纠正他们输入的数据。要做到这点，请确保：</p>
+<ul>
+<li>展示明确的错误信息</li>
+<li>约定好输入格式</li>
+<li>指出错误出现的确切位置（特别是在那些巨大的表单中）</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a><a href="/tags/html/">html</a><a href="/tags/css/">css</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>►<a class="article-category-link" href="/categories/前端/翻译/">翻译</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/12/31/【译】表单数据校验/" data-title="【译】表单数据校验 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/09/24/【译】发送表单数据/"  title="【译】发送表单数据">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】发送表单数据
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】表单数据校验" data-thread-key="【译】表单数据校验" data-author-key="null" data-url="http://levonlin.info/post/【译】表单数据校验"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>
