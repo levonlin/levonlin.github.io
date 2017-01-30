@@ -2827,11 +2827,11 @@
   </entry>
   
   <entry>
-    <title>原生js练习题---杂项.md</title>
-    <link href="http://levonlin.info/2016/05/14/%E5%8E%9F%E7%94%9Fjs%E7%BB%83%E4%B9%A0%E9%A2%98-%E6%9D%82%E9%A1%B9-md/"/>
-    <id>http://levonlin.info/2016/05/14/原生js练习题-杂项-md/</id>
+    <title>原生js练习题---杂项</title>
+    <link href="http://levonlin.info/2016/05/14/%E5%8E%9F%E7%94%9Fjs%E7%BB%83%E4%B9%A0%E9%A2%98-%E6%9D%82%E9%A1%B9/"/>
+    <id>http://levonlin.info/2016/05/14/原生js练习题-杂项/</id>
     <published>2016-05-14T07:17:44.000Z</published>
-    <updated>2016-12-24T09:45:38.000Z</updated>
+    <updated>2017-01-30T06:11:37.000Z</updated>
     
     <content type="html"><![CDATA[<p>最后一篇了，来做几个查漏补缺的小练习吧：</p>
 <h2 id="0x1-js条件注释-仅IE执行"><a href="#0x1-js条件注释-仅IE执行" class="headerlink" title="0x1 js条件注释 仅IE执行"></a>0x1 js条件注释 仅IE执行</h2><p>实现效果：</p>

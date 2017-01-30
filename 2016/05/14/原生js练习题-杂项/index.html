@@ -1,0 +1,416 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>原生js练习题---杂项 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="最后一篇了，来做几个查漏补缺的小练习吧：
+0x1 js条件注释 仅IE执行实现效果：
+See the Pen 7-01js条件注释 仅IE执行 by levonlin (@levonlin) on CodePen.
+
+
+这是兼容老旧IE的的常用手段之一，代码里实现了两种方式：
+一是js里的条件注释，">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/14/原生js练习题-杂项/" title="原生js练习题---杂项" itemprop="url">原生js练习题---杂项</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2016-05-14T07:17:44.000Z" itemprop="datePublished">2016年 5月 14日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1-js条件注释-仅IE执行"><span class="toc-number">1.</span> <span class="toc-text">0x1 js条件注释 仅IE执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2-js-实现进制转换"><span class="toc-number">2.</span> <span class="toc-text">0x2 js 实现进制转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x3-js-base64加密转换"><span class="toc-number">3.</span> <span class="toc-text">0x3 js base64加密转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x4-正则应用练习"><span class="toc-number">4.</span> <span class="toc-text">0x4 正则应用练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x5-操作cookie及提取数据"><span class="toc-number">5.</span> <span class="toc-text">0x5 操作cookie及提取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li></ol>
+		</div>
+		
+		<p>最后一篇了，来做几个查漏补缺的小练习吧：</p>
+<h2 id="0x1-js条件注释-仅IE执行"><a href="#0x1-js条件注释-仅IE执行" class="headerlink" title="0x1 js条件注释 仅IE执行"></a>0x1 js条件注释 仅IE执行</h2><p>实现效果：</p>
+<p></p><p data-height="300" data-theme-id="17410" data-slug-hash="zqXpVG" data-default-tab="result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/zqXpVG/" target="_blank" rel="external">7-01js条件注释 仅IE执行</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>这是兼容老旧IE的的常用手段之一，代码里实现了两种方式：</p>
+<p>一是js里的条件注释，可在IE10及以下使用。形如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*@cc_on</span></div><div class="line">    @if (@_jscript)</div><div class="line">        // 注释之内，给IE10及以下执行的javascript</div><div class="line">    @else*/</div><div class="line">        <span class="comment">// 注释之外，给IE11及非IE浏览器执行的javascript</span></div><div class="line">    <span class="comment">/*@end</span></div><div class="line">@*/</div></pre></td></tr></table></figure>
+<p>不过貌似codepen会把js里的注释全去掉，这里看不出效果。。。</p>
+<p>二是html里的条件注释，只能在IE9及以下使用。通过在注释内添加<code>&lt;style&gt;</code>、<code>&lt;script&gt;</code>标签用于给IE指定css或js，还可指定IE版本号，形如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if [! / lt / gt / lte / gte] IE [版本号]]&gt;</span></div><div class="line">&lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+<h2 id="0x2-js-实现进制转换"><a href="#0x2-js-实现进制转换" class="headerlink" title="0x2 js 实现进制转换"></a>0x2 js 实现进制转换</h2><p>实现效果：</p>
+<p></p><p data-height="300" data-theme-id="17410" data-slug-hash="aNrbLG" data-default-tab="result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/aNrbLG/" target="_blank" rel="external">7-02js 实现进制转换</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>虽然可以自己实现，但其实js已经自带了进制转换的方法：</p>
+<ul>
+<li>n进制转十进制使用<code>parseInt(num, base)</code>方法，第二个参数为原来的数制。</li>
+<li>十进制转n进制使用<code>toString(base)</code>方法，参数为目标数制。</li>
+</ul>
+<p>用起来是蛮简单的，但要注意到两者间的区别：</p>
+<ol>
+<li>调用对象不同，<code>parseInt</code>是个全局方法；<code>toString()</code>则必须通过<code>Number</code>对象而不是基本的数字类型的调用，才能实现进制转换，使用诸如<code>10.toString(2)</code>是会报错的。</li>
+<li>返回类型不同，<code>parseInt</code>返回数字而<code>toString()</code>返回字符串。</li>
+<li>两者虽然都只支持2至36进制，但在传入超出这个范围的进制时却有不同的处理，其中<code>parseInt</code>直接返回NaN，而<code>toString()</code>会报<code>Uncaught RangeError</code>。</li>
+</ol>
+<h2 id="0x3-js-base64加密转换"><a href="#0x3-js-base64加密转换" class="headerlink" title="0x3 js base64加密转换"></a>0x3 js base64加密转换</h2><p>实现效果：</p>
+<p></p><p data-height="300" data-theme-id="17410" data-slug-hash="JXqepv" data-default-tab="result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/JXqepv/" target="_blank" rel="external">7-03js base64加密转换</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>这题其实分为两个部分，一个是base64加解密、一个是将图片转为base64加密的dataURI。</p>
+<p><a href="https://zh.wikipedia.org/wiki/Base64" target="_blank" rel="external">关于base64</a></p>
+<p>第一部分很简单，因为现在的浏览器都已经自带了base64的加解密的功能，不用再自己编写js实现了。其中，加密使用<code>btoa()</code>，解密使用<code>atob</code>。而如果只要加密某个子串就再加个正则匹配出来即可。</p>
+<p>至于第二部分，需要使用html5的File Api。这个api有个比较固定的使用模式：</p>
+<ul>
+<li>获取文件集合：首先监听<code>&lt;input type=&quot;file&quot;&gt;</code>元素的<code>change</code>事件获取上传文件的集合<code>files</code>；</li>
+<li>获取文件属性：<code>files</code>是由一系列File对象组成的，所以接下来可以通过File对象的<code>type</code>、<code>size</code>、<code>name</code>、<code>lastModifideDate</code>属性来获取文件的属性；</li>
+<li>保存文件内容：只靠File对象的属性并不能直接读取文件的内容，而是要借助一个<code>FileReader</code>对象来实现。<code>FileReader</code>对象提供了几种读取文件数据的方法，其中就有我们需要的<code>readAsDataURL</code>方法，该方法会将文件内容转为data URI的形式存放于<code>FileReader</code>对象的<code>result</code>属性中。至于其他的读取方法，可参见<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="external">这个</a>。</li>
+<li>获取文件内容：利用<code>FileReader</code>读取文件后我们就可以在其<code>result</code>属性中获取文件内容了。但由于文件读取是个异步的操作，所以我们还需要借助<code>FileReader</code>对象的<code>progress</code>、<code>error</code>、<code>load</code>等事件，才能从<code>result</code>属性中获取完整的文件内容。</li>
+</ul>
+<p>当然，这里获取的文件内容只是图片的data URI，要显示图片还得把URI赋给<code>img</code>元素的<code>src</code>属性。关于data URI的介绍，可参见我写过的<a href="http://levonlin.info/2015/11/19/data-URI%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">data-URI及其应用</a>。</p>
+<h2 id="0x4-正则应用练习"><a href="#0x4-正则应用练习" class="headerlink" title="0x4 正则应用练习"></a>0x4 正则应用练习</h2><p>验证QQ号码的正则表达式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/^[<span class="number">1</span><span class="number">-9</span>]\d&#123;<span class="number">4</span>, <span class="number">10</span>&#125;$/</div></pre></td></tr></table></figure>
+<p>就当了解下目前QQ号的特点：</p>
+<ul>
+<li>以1到9开头</li>
+<li>总共5至11位</li>
+</ul>
+<p>再附赠个<a href="http://pandoraui.github.io/jquery-chm/regexp.html" target="_blank" rel="external">正则速查表</a>。</p>
+<h2 id="0x5-操作cookie及提取数据"><a href="#0x5-操作cookie及提取数据" class="headerlink" title="0x5 操作cookie及提取数据"></a>0x5 操作cookie及提取数据</h2><p>原题的网页不见了，附上高程里的<code>cookieUtil</code>对象吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> CookieUtil = &#123;</div><div class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> cookieName = <span class="built_in">encodeURIComponent</span>(name) + <span class="string">'='</span>,</div><div class="line">            <span class="comment">// 获取名值对起始下标</span></div><div class="line">            cookieStart = <span class="built_in">document</span>.cookie.indexOf(cookieName),</div><div class="line">            cookieValue = <span class="literal">null</span>;</div><div class="line">        <span class="keyword">if</span> (cookieStart &gt; <span class="number">-1</span>) &#123;</div><div class="line">            <span class="comment">// 获取名值对终止下标</span></div><div class="line">            <span class="keyword">var</span> cookieEnd = <span class="built_in">document</span>.cookie.indexOf(<span class="string">';'</span>, cookieStart);</div><div class="line">            <span class="keyword">if</span> (cookieEnd) &#123;</div><div class="line">                cookieEnd = <span class="built_in">document</span>.cookie.length;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 截出并解码</span></div><div class="line">            cookieValue = <span class="built_in">decodeURIComponent</span>(<span class="built_in">document</span>.cookie.substring(cookieStart + cookieName.length, cookieEnd));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cookieValue;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">name, value, expires, path, domain, secure</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> cookieText = <span class="built_in">encodeURIComponent</span>(name) + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(value);</div><div class="line">        <span class="keyword">if</span> (expires <span class="keyword">instanceof</span> Data) &#123;</div><div class="line">            cookieText += <span class="string">'; expires='</span> + expires.toUTCString();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (path) &#123;</div><div class="line">            cookieText += <span class="string">'; path='</span> + path;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (domain) &#123;</div><div class="line">            cookieText += <span class="string">'; domain='</span> + domain;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (secure) &#123;</div><div class="line">            cookieText += <span class="string">'; secure'</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">document</span>.cookie = cookieText;</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 使用相同的路径、域和安全选项，并且将失效时间设为过去时间以删除cookie</span></div><div class="line">    unset: <span class="function"><span class="keyword">function</span> (<span class="params">name, path, domain, secure</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.set(name, <span class="string">''</span>, <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">0</span>), path, domain, secure);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这个系列做了很久了，从寒假到现在整好三个月，几乎成了每天的日常任务。期间既有对基础的巩固、也遇到过各种深坑，但都走过来一一克服了。说实话，在接触到这份习题集时，面对许多没有做过的效果，尤其是后面几个大制作，我实在很难想见自己完成它的一天。但是现在我是真真实实完成了，事实证明，有了扎实的基础、沉下心来对这些效果条分缕析，再复杂的效果也能做出来。</p>
+<p>当然，做出来是一回事，做得好、写出规范优雅的代码则是另一回事。由于历史的原因、原题的实现多写得不够优雅甚至有些混乱。而我一开始就要求自己甩掉历史包袱、轻装上阵，事实上这样做虽然让自己偷了很多兼容性上的懒，但正是这样才让自己更专注于实现功能和写出更好的代码。而且我也坚信这是前端未来的发展方向，毕竟和其他领域一样，能真正流传下来、成为未来标准的，必然是优雅的最佳实践，而不是靠堆砌出来的糟糕代码。</p>
+<p>至于做记录，也坚持下来了，7篇文章也算是总结了不少东西，希望还能帮到更多的人吧！</p>
+<p>这个系列题目主要是针对原生js，虽然这是很重要的基础，但也只是前端知识庞杂体系中的一部分而已。前端能从单纯的切图发展为一个炙手可热的岗位，说明它本身内容就很广博，而且常变常新也是前端界的一大特点。所以仅靠自己小打小闹获得的一点浅见是不能在业界立足的，否则就要面临经验与知识面不够带来的掣肘了。接下来的日子，还是得继续强化主干上的知识点、体验和跟上新变化，以期形成综合的开发能力、构建成自己的技术栈吧！</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2016/05/14/原生js练习题-杂项/" data-title="原生js练习题---杂项 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/18/百度面试的总结/" title="百度面试的总结">
+  <strong>新一篇:</strong><br/>
+  <span>
+  百度面试的总结</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/13/元素auto宽高的影响因素/"  title="元素auto宽高的影响因素">
+ <strong>旧一篇:</strong><br/> 
+ <span>元素auto宽高的影响因素
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="原生js练习题---杂项" data-thread-key="原生js练习题-杂项" data-author-key="null" data-url="http://levonlin.info/post/原生js练习题-杂项"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>
