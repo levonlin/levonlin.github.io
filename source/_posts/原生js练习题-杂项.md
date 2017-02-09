@@ -1,4 +1,4 @@
-title: 原生js练习题---杂项.md
+title: 原生js练习题---杂项
 date: 2016-05-14 15:17:44
 tags: [javascript,前端]
 categories: 前端
