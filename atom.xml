@@ -312,11 +312,11 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -953,9 +953,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -1211,9 +1211,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -1305,11 +1305,11 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="求职" scheme="http://levonlin.info/tags/%E6%B1%82%E8%81%8C/"/>
     
@@ -1415,9 +1415,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -2816,11 +2816,11 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="求职" scheme="http://levonlin.info/tags/%E6%B1%82%E8%81%8C/"/>
     
@@ -2911,7 +2911,7 @@
     <link href="http://levonlin.info/2016/05/13/%E5%85%83%E7%B4%A0auto%E5%AE%BD%E9%AB%98%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0/"/>
     <id>http://levonlin.info/2016/05/13/元素auto宽高的影响因素/</id>
     <published>2016-05-13T11:13:38.000Z</published>
-    <updated>2017-02-25T07:33:59.000Z</updated>
+    <updated>2017-03-13T12:30:08.000Z</updated>
     
     <content type="html"><![CDATA[<p>我们知道，元素在没有设置宽高的情况下，默认的宽高值都为<code>auto</code>。而这个<code>auto</code>到底是如何让元素自动拥有宽高的呢，也就是说，元素的宽度和高度到底会受到什么因素的影响？本文将通过一个例子来对这一问题一探究竟，HTML结构和初始css如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -2964,8 +2964,8 @@
 <h2 id="更新："><a href="#更新：" class="headerlink" title="更新："></a>更新：</h2><h3 id="关于表单元素"><a href="#关于表单元素" class="headerlink" title="关于表单元素"></a>关于表单元素</h3><p>自己原来的想法还是too young了，没有考虑到表单元素这种存在.由于浏览器对一些表单元素的原生实现是基于操作系统的，这就导致表单元素的auto宽高并不符合上面提到的那些规律。</p>
 <p>比如一个按钮，不管是在何种定位之下、也不管容器如何，只要不手动指定宽高它就还是那个样子。而且由于和操作系统有关，所以浏览器并没有给我们提供能够取消这种默认行为的属性，也就是说我们不能采用诸如<code>-webkit-appearance: none;</code>这样的做法来覆盖默认样式。故而上面对auto宽高的讨论对这些表单元素都是不适用的，面对表单元素时我们没必要再auto宽高的问题，有什么需求就老实去去手动指定好了。</p>
 <p>想了解更多关于表单元素原生的内容，可参考我翻译的<a href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">原生表单组件</a>。</p>
-<h3 id="关于img元素"><a href="#关于img元素" class="headerlink" title="关于img元素"></a>关于img元素</h3><p>之前讨论的多是块级元素，但还有一个特殊的元素<code>img</code>。作为一个inline-block元素，其auto宽高的规则和表单元素一样受到浏览器默认规则的影响。</p>
-<p>而这个默认规则的特殊地方在于：auto宽高会等比例缩放，具体来说，就是为了防止失真，图片的宽高只要有一个没指定就会自动等比例缩放来决定最终大小，而不是像别的元素一样宽高各管各的。同时，绝对定位或浮动的图片容器的auto宽高是按图片宽高最大值自适应的，这也符合前面提到的规则。</p>
+<h3 id="关于内联元素"><a href="#关于内联元素" class="headerlink" title="关于内联元素"></a>关于内联元素</h3><p>之前讨论的多是块级元素，而没有考虑到内联元素的情况。其实分析起来也比较简单，只要考虑普通流定位的情况，因为绝对定位和浮动后他们就变成块级元素了。但巧合的是，在普通流定位中，内联元素auto宽度和高度规则却和块级元素绝对定位差不多，都只受内容大小影响。</p>
+<p>当然凡事都有例外，这里的例外就是<code>&lt;img&gt;</code>元素，其auto宽高的规则和表单元素一样受到浏览器默认规则的影响。而该规则的特殊地方在于：auto宽高会等比例缩放，具体来说，就是为了防止失真，图片的宽高只要有一个没指定就会自动等比例缩放来决定最终大小，而不是像别的元素一样宽高各管各的。</p>
 <h3 id="关于伪元素"><a href="#关于伪元素" class="headerlink" title="关于伪元素"></a>关于伪元素</h3><p>当CSS伪元素设置了<code>content</code>和<code>display:block;</code>时，可以看做是原元素作容器的子元素，此时伪元素的auto宽高也会受上面规则的影响。</p>
 ]]></content>
     
