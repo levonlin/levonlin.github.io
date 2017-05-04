@@ -4,12 +4,11 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>多说评论框添加UA及其优化 | 荒村</title>
+    <title>Hello World | 荒村</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     
-    <meta name="description" content="前几天在课件的博客看到多说评论框上有个类似用户头衔、很酷炫的User Agent，于是就动手把自己的博客也装了一下，效果各位可以在下面的评论框看到。实现方法可见这篇文章，接下来我就以我的主题为例做一些补充说明：
-在以前的博文里，我提到过pacman系主题的原装多说代码，其实那段在layout\_pa">
+    <meta name="description" content="想开博客很久了，却一直没能行动。总归是自己太懒又把这事看得太复杂了，平时就光看着各种大牛的blog默默羡慕、默默拉进收藏夹而已。而对于怎么建博，原本想用wp的，但上个学期在sf上看到了关于hexo的介绍，轻便的操作及用markdown写博的满满逼格吸引了我，刚好又已在电脑上捣鼓过git和node.j">
     
     
     
@@ -90,10 +89,10 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/31/多说评论框添加UA及其优化/" title="多说评论框添加UA及其优化" itemprop="url">多说评论框添加UA及其优化</a>
+      <a href="/2015/01/22/Hello-World/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
   <p class="article-time">
-    <time datetime="2015-05-31T15:08:47.000Z" itemprop="datePublished">2015年 5月 31日</time>
+    <time datetime="2015-01-22T12:52:30.000Z" itemprop="datePublished">2015年 1月 22日</time>
   </p>
 </header>
 	<div class="article-content">
@@ -104,16 +103,17 @@ var _hmt = _hmt || [];
 		
 		</div>
 		
-		<p>前几天在<a href="http://ppting.me" target="_blank" rel="external">课件的博客</a>看到多说评论框上有个类似用户头衔、很酷炫的<a href="http://baike.baidu.com/link?url=QnADnFVYJdCfJu-QgXOsqqYXM3P-9rvk2ZqguYWRlwg43mfG7_m3iaVEeKQcOkphMKeJh8kpGaU0kteNtU4U-vQ2btSz4Lde4x2aloqfo7W1ouC-g64acbQXDvDyubyA_sWI526g-XUaQVvI19yE-K" target="_blank" rel="external">User Agent</a>，于是就动手把自己的博客也装了一下，效果各位可以在下面的评论框看到。实现方法可见<a href="http://wsgzao.github.io/post/duoshuo/" target="_blank" rel="external">这篇文章</a>，接下来我就以我的主题为例做一些补充说明：</p>
-<p>在以前的博文里，我提到过pacman系主题的原装多说代码，其实那段在<code>layout\_partial\post\comment.ejs</code>里的代码只是一部分，还有一段js在<code>layout\_partial\after_footer.ejs</code>里。这次我们要修改的就是这段js，找到<code>ds.src</code>后改为<br><code>ds.src = &#39;//你的embed.js文件地址&#39;</code>。如果想偷懒，可以更新一下Tinnypp，我把embed.js放到source/js里了，直接改为<code>ds.src = &#39;&lt;%- config.root %&gt;js/embed.js&#39;</code>，再在你的多说里添加那段自定义css就可以看到效果啦。但是千万记得把embed.js里的<code>e.user_id</code>改为你的多说ID,要不然显示不了你的‘博主’头衔:)</p>
-<p>完成了这些，我发现原文里作者下载的font-awesome字体图标没有派上用场，查找总结出它的用法，就是添加往主题里添加css和字体文件。font-awesome字体文件Tinnypp在<code>source/font</code>就自带了，为了省事，我把<code>font-awesome.min.css</code>也放到<code>source/css</code>里然后把里面调用的fonts文件目录全改为’font’。最后再在<code>layout\_partial\head.ejs</code>里添加如下css调用，图标就加到评论UA上了，是不是很有逼格？以上这段的内容我都在新版主题里做好了，已经加了UA的和想加UA的亲们可以更新体验一下哦。</p>
-<figure class="highlight erb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby"> <span class="keyword">if</span> (theme.duoshuo.enable)&#123; </span><span class="xml"><span class="tag">%&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"&lt;%-</span></span><span class="ruby"> config.root </span><span class="xml"><span class="tag"><span class="string">%&gt;css/font-awesome.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span></span><span class="ruby"> &#125; </span><span class="xml"><span class="tag">%&gt;</span></span></div></pre></td></tr></table></figure>  
+		<p>想开博客很久了，却一直没能行动。总归是自己太懒又把这事看得太复杂了，平时就光看着各种大牛的blog默默羡慕、默默拉进收藏夹而已。而对于怎么建博，原本想用wp的，但上个学期在sf上看到了关于hexo的介绍，轻便的操作及用markdown写博的满满逼格吸引了我，刚好又已在电脑上捣鼓过git和node.js，只能说是冥冥中注定了。于是又默默把这事一直排下去···</p>
+<p>结果就拖到寒假，zippera童鞋的这个<a href="http://zipperary.com/2013/05/28/hexo-guide-1/" target="_blank" rel="external">教程</a>还是蛮业界良心的，再学了点markdown，现在就算是开张了。</p>
+<p>既然随便写了这么多，那也不妨再随便写下去。前几天看到有人说写不下去时就<a href="http://www.phodal.com/blog/think-of-rework-be-a-writer/" target="_blank" rel="external">扯一下怎么开始编程的</a>，想来也是有点道理。但想想才发现自己的经历还是太少，编程纯粹是从大学开始，忽略掉中小学的信息技术课的话。C是第一门语言，先入为主，用的时间和场合最多，但毕竟底层语言，周围没有坚定的hacker群体，还是很难与人share它所带来的成就感。人总归是视觉动物，看到一堆代码在干不知所云的工作，通常是嘴里称赞好流弊，心里却在大喊shenmegui。而除了低调的C，我还是有另一条路的，大一跟着在社团里学了点前端，这可就是直面视觉与设计的啦。但此时一直以来所受教育模式便站出来，告诉自己光是按部就班学就能精通，还没有接受码农精神文化洗礼的我默默装备了整套农具之后，却发现自己怎么下锄头都不知道，于是便原地踏步好久，如今早已落在后头了。期间又夹杂学了c++和java，都是杂而不精罢了。</p>
+<p>这便是我仅有的所谓经历，在不时回看自己这条低效率低产出的路时，也看了不少大牛事迹和编程哲学，慢慢明白只有兴趣推动着、迈开步子去干才能精通一门技术，同时还随便触类旁通多种技术。弄起这个博客，不仅记录些有意思的东西，也正想借此把学过的前端和git、markdown等好好用用，还能用这些酷炫的东西装装逼、杀杀拖延症什么的，既然开始，惟愿这等了许久的荒村能覆以新草、另起新的生机吧。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Tinnypp/">Tinnypp</a><a href="/tags/多说/">多说</a>
+  <span></span> <a href="/tags/心路/">心路</a><a href="/tags/初体验/">初体验</a>
   </div>
 
 
@@ -126,7 +126,7 @@ var _hmt = _hmt || [];
 
 <div class="article-share" id="share">
 
-  <div data-url="http://levonlin.info/2015/05/31/多说评论框添加UA及其优化/" data-title="多说评论框添加UA及其优化 | 荒村" data-tsina="null" class="share clearfix">
+  <div data-url="http://levonlin.info/2015/01/22/Hello-World/" data-title="Hello World | 荒村" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -136,28 +136,20 @@ var _hmt = _hmt || [];
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/06/03/使用github的pages服务为托管在github上的项目建立网页/" title="使用github的pages服务建立项目主页的注意事项">
+ <a href="/2015/01/26/装修记/" title="装修记">
   <strong>新一篇:</strong><br/>
   <span>
-  使用github的pages服务建立项目主页的注意事项</span>
+  装修记</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2015/05/27/探索ubuntu如何下快速启动印象笔记（网页版）/"  title="探索ubuntu如何下快速启动印象笔记（网页版）">
- <strong>旧一篇:</strong><br/> 
- <span>探索ubuntu如何下快速启动印象笔记（网页版）
-</span>
-</a>
-</div>
 
 </nav>
 
 	
 <section class="comment">
 	
-	<div class="ds-thread" data-title="多说评论框添加UA及其优化" data-thread-key="多说评论框添加UA及其优化" data-author-key="null" data-url="http://levonlin.info/post/多说评论框添加UA及其优化"></div>
+	<div class="ds-thread" data-title="Hello World" data-thread-key="Hello-World" data-author-key="null" data-url="http://levonlin.info/post/Hello-World"></div>
 	
 </section>
 
