@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://levonlin.info/"/>
-  <updated>2017-05-04T11:46:11.000Z</updated>
+  <updated>2017-05-04T11:53:55.000Z</updated>
   <id>http://levonlin.info/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,12 +15,12 @@
     <link href="http://levonlin.info/2017/04/28/Promise-Summary/"/>
     <id>http://levonlin.info/2017/04/28/Promise-Summary/</id>
     <published>2017-04-28T07:50:54.000Z</published>
-    <updated>2017-05-04T11:46:11.000Z</updated>
+    <updated>2017-05-04T11:53:55.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>注意，本文主要针对ES6标准实现的Promise语法进行阐述，实例代码也都使用ES6语法，快速入门ES6请参见<a href="http://www.barretlee.com/blog/2016/07/09/a-kickstarter-guide-to-writing-es6/" target="_blank" rel="external">ECMAScript 6 扫盲</a>。</p>
 </blockquote>
-<h2 id="三分钟快速入门"><a href="#三分钟快速入门" class="headerlink" title="三分钟快速入门"></a>三分钟快速入门</h2><p>被回调地狱整怕了？快试Promise吧！。Promise的核心思想其实很简单，就是将异步操作结果处理交给Promise对象的方法注册，然后等到异步操作完了再去取用这些处理操作。至于取用哪个处理操作，就得看Promise对象状态了。Promise对象一共有三种状态：Pending（初始状态）、Fulfilled（异步操作成功）、Rejected（异步操作失败）。而三者间的转换只有两种情况：Pending—&gt;Fulfilled、Pending—&gt;Rejected；详见下图：</p>
+<h2 id="一分钟快速入门"><a href="#一分钟快速入门" class="headerlink" title="一分钟快速入门"></a>一分钟快速入门</h2><p>被回调地狱整怕了？快试Promise吧！。Promise的核心思想其实很简单，就是将异步操作结果处理交给Promise对象的方法注册，然后等到异步操作完了再去取用这些处理操作。至于取用哪个处理操作，就得看Promise对象状态了。Promise对象一共有三种状态：Pending（初始状态）、Fulfilled（异步操作成功）、Rejected（异步操作失败）。而三者间的转换只有两种情况：Pending—&gt;Fulfilled、Pending—&gt;Rejected；详见下图：</p>
 <p><img src="http://ww1.sinaimg.cn/mw690/85ad0d9cgy1ff9jzqcxxxj208u04u74i.jpg" alt="prmoise-sates"></p>
 <p>了解了状态及其转换后，我们就可以来使用Promise对象了：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</div><div class="line">    <span class="comment">// 异步操作</span></div><div class="line">    <span class="comment">// 异步操作成功时调用</span></div><div class="line">    resolve(value)</div><div class="line">    <span class="comment">// 异步操作失败时调用</span></div><div class="line">    reject(error)</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
@@ -111,11 +111,11 @@
       <category term="JavaScript" scheme="http://levonlin.info/categories/JavaScript/"/>
     
     
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="Node.js" scheme="http://levonlin.info/tags/Node-js/"/>
-    
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -419,13 +419,13 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -636,13 +636,13 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
       <category term="DOM" scheme="http://levonlin.info/tags/DOM/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
   </entry>
   
@@ -1062,9 +1062,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -1320,9 +1320,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -1412,13 +1412,13 @@
       <category term="求职" scheme="http://levonlin.info/categories/%E6%B1%82%E8%81%8C/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="求职" scheme="http://levonlin.info/tags/%E6%B1%82%E8%81%8C/"/>
     
@@ -1524,9 +1524,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
-    
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -2923,13 +2923,13 @@
       <category term="求职" scheme="http://levonlin.info/categories/%E6%B1%82%E8%81%8C/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="求职" scheme="http://levonlin.info/tags/%E6%B1%82%E8%81%8C/"/>
     
@@ -3009,9 +3009,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3869,9 +3869,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -3951,9 +3951,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -4097,9 +4097,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
@@ -4190,9 +4190,9 @@
       <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
   </entry>
   
