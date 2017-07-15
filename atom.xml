@@ -5,10 +5,72 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://levonlin.info/"/>
-  <updated>2017-07-09T09:10:33.000Z</updated>
+  <updated>2017-07-15T16:21:21.000Z</updated>
   <id>http://levonlin.info/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【译】使用FormData对象</title>
+    <link href="http://levonlin.info/2017/07/15/%E3%80%90%E8%AF%91%E3%80%91%E4%BD%BF%E7%94%A8FormData%E5%AF%B9%E8%B1%A1/"/>
+    <id>http://levonlin.info/2017/07/15/【译】使用FormData对象/</id>
+    <published>2017-07-15T15:14:58.000Z</published>
+    <updated>2017-07-15T16:21:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData" target="_blank" rel="external">FormData</a>对象能让你生成一系列用于<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest" target="_blank" rel="external">XMLHttpRequest</a>发送的键值对。它主要的目的在于发送表单数据，但也能独立用于传输有键形式的数据。其传输的数据格式和表单使用<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit" target="_blank" rel="external">submit()</a>方法、且编码类型为<code>multipart/form-data</code>所发送的数据格式相同。</p>
+<h2 id="从头开始创建一个FormData对象"><a href="#从头开始创建一个FormData对象" class="headerlink" title="从头开始创建一个FormData对象"></a>从头开始创建一个FormData对象</h2><p>你可以自己建立一个FormData对象，首先进行实例化、再通过<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData/append" target="_blank" rel="external">apppend()</a>方法来添加字段，如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> formData = <span class="built_in">new</span> FormData();</div><div class="line"></div><div class="line">formData.<span class="built_in">append</span>(<span class="string">"username"</span>, <span class="string">"Groucho"</span>);</div><div class="line">formData.<span class="built_in">append</span>(<span class="string">"accountnum"</span>, <span class="number">123456</span>); <span class="comment">// 数字123456会自动转为字符串"123456"</span></div><div class="line"></div><div class="line"><span class="comment">// 用户选择的HTML的文件提交</span></div><div class="line">formData.<span class="built_in">append</span>(<span class="string">"userfile"</span>, fileInputElement.files[<span class="number">0</span>]);</div><div class="line"></div><div class="line"><span class="comment">// JavaScript的类文件对象（Blob）</span></div><div class="line"><span class="keyword">var</span> content = <span class="string">'&lt;a id="a"&gt;&lt;b id="b"&gt;hey!&lt;/b&gt;&lt;/a&gt;'</span>; <span class="comment">// 新文件的主体</span></div><div class="line"><span class="keyword">var</span> blob = <span class="built_in">new</span> Blob([content], &#123; <span class="keyword">type</span>: <span class="string">"text/xml"</span>&#125;);</div><div class="line"></div><div class="line">formData.<span class="built_in">append</span>(<span class="string">"webmasterfile"</span>, blob);</div><div class="line"></div><div class="line"><span class="keyword">var</span> request = <span class="built_in">new</span> XMLHttpRequest();</div><div class="line">request.open(<span class="string">"POST"</span>, <span class="string">"http://foo.com/submitform.php"</span>);</div><div class="line">request.send(formData);</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong>“userfile”字段和“webmasterfile”字段都包含了文件。“accountnum”字段中的数字会自动被FormData.append()方法自动转为字符串。（字段值可以是一个<a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank" rel="external">Blob</a>、<a href="https://developer.mozilla.org/en-US/docs/Web/API/File" target="_blank" rel="external">File</a>或字符串，<strong>若值不是Blob、File之一，就会被转为字符串</strong>）</p>
+</blockquote>
+<p>上面的例子建立了一个包含名为“username”、“accountnum”、“userfile”和“webmasterfile”字段的FormData对象。然后使用了XMLHttpRequest的<a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest#send(" target="_blank" rel="external">send()</a>方法来发送表单数据。“webmasterfile”字段是个Blob对象，该对象代表了一个由不可变的、原始数据组成的类文件对象，里面的的数据不必使用JavaScript的原生数据类型。File对象也是基于Blob对象的，它继承了Blob的基本功能并做了拓展以支持用户操作系统上的文件。要建立一个Blob对象，你可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob/Blob" target="_blank" rel="external">Blob构造函数</a>。</p>
+<h2 id="用HTML表单中创建一个FormData对象"><a href="#用HTML表单中创建一个FormData对象" class="headerlink" title="用HTML表单中创建一个FormData对象"></a>用HTML表单中创建一个FormData对象</h2><p>要用现有的<code>&lt;form&gt;</code>元素建立一个FormData对象，可以在建立FormData对象时传入指定的<code>&lt;form&gt;</code>元素。</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> <span class="type">FormData</span>(someFormElement);</div></pre></td></tr></table></figure>
+<p>举个例子：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var formElement = document.querySelector(<span class="string">"form"</span>);</div><div class="line">var request = new XMLHttpRequest();</div><div class="line">request.open(<span class="string">"<span class="keyword">POST</span>"</span>, <span class="string">"submitform.php"</span>);</div><div class="line">request.send(new FormData(formElement));</div></pre></td></tr></table></figure>
+<p>在用<code>&lt;form&gt;</code>元素建立FromData对象之后、发送它之前，也可以给它添加额外的数据，如下：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var formElement = document.querySelector(<span class="string">"form"</span>);</div><div class="line">var formData = new FormData(formElement);</div><div class="line">var request = new XMLHttpRequest();</div><div class="line">request.open(<span class="string">"<span class="keyword">POST</span>"</span>, <span class="string">"submitform.php"</span>);</div><div class="line">formData.append(<span class="string">"serialnumber"</span>, serialNumber++);</div><div class="line">request.send(formData);</div></pre></td></tr></table></figure>
+<p>这样一来我们就能在发送表单数据前进行配置，以添加一些不需用户编辑的信息。</p>
+<h2 id="用FormData对象发送文件"><a href="#用FormData对象发送文件" class="headerlink" title="用FormData对象发送文件"></a>用FormData对象发送文件</h2><p>你也可以用FormData对象发送文件，只需在你的<code>&lt;form&gt;</code>标签间包含一个<code>file</code>类型的<code>&lt;input&gt;</code>元素：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">form</span> enctype=<span class="string">"multipart/form-data"</span> method=<span class="string">"post"</span> name=<span class="string">"fileinfo"</span>&gt;</div><div class="line">  &lt;<span class="keyword">label</span>&gt;Your email address:&lt;/<span class="keyword">label</span>&gt;</div><div class="line">  &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"email"</span> autocomplete=<span class="string">"on"</span> autofocus name=<span class="string">"userid"</span> placeholder=<span class="string">"email"</span> required size=<span class="string">"32"</span> maxlength=<span class="string">"64"</span> /&gt;&lt;<span class="keyword">br</span> /&gt;</div><div class="line">  &lt;<span class="keyword">label</span>&gt;Custom <span class="keyword">file</span> <span class="keyword">label</span>:&lt;/<span class="keyword">label</span>&gt;</div><div class="line">  &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"text"</span> name=<span class="string">"filelabel"</span> size=<span class="string">"12"</span> maxlength=<span class="string">"32"</span> /&gt;&lt;<span class="keyword">br</span> /&gt;</div><div class="line">  &lt;<span class="keyword">label</span>&gt;<span class="keyword">File</span> to stash:&lt;/<span class="keyword">label</span>&gt;</div><div class="line">  &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"file"</span> name=<span class="string">"file"</span> required /&gt;</div><div class="line">  &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"Stash the file!"</span> /&gt;</div><div class="line">&lt;/<span class="keyword">form</span>&gt;</div><div class="line">&lt;div&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>然后你就能用如下代码发送文件了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> form = <span class="built_in">document</span>.forms.namedItem(<span class="string">"fileinfo"</span>);</div><div class="line">form.addEventListener(<span class="string">'submit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> oOutput = <span class="built_in">document</span>.querySelector(<span class="string">"div"</span>),</div><div class="line">      oData = <span class="keyword">new</span> FormData(form);</div><div class="line"></div><div class="line">  oData.append(<span class="string">"CustomField"</span>, <span class="string">"This is some extra data"</span>);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> oReq = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  oReq.open(<span class="string">"POST"</span>, <span class="string">"stash.php"</span>, <span class="literal">true</span>);</div><div class="line">  oReq.onload = <span class="function"><span class="keyword">function</span>(<span class="params">oEvent</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (oReq.status == <span class="number">200</span>) &#123;</div><div class="line">      oOutput.innerHTML = <span class="string">"Uploaded!"</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      oOutput.innerHTML = <span class="string">"Error "</span> + oReq.status + <span class="string">" occurred when trying to upload your file.&lt;br \/&gt;"</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  oReq.send(oData);</div><div class="line">  ev.preventDefault();</div><div class="line">&#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong>若你传入了一个表单的引用，那么表单指定的方法（译注：应指Post、Get）会覆盖open()方法调用时指定的。</p>
+</blockquote>
+<p>你也可以直接添加File或Blob到FormData对象，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data.<span class="built_in">append</span>(<span class="string">"myfile"</span>, myBlob, <span class="string">"filename.txt"</span>);</div></pre></td></tr></table></figure>
+<p>使用append()方法时，使用第三个可选的参数会指定一个文件名，用于请求头的<code>Content-Disposition</code>字段。若没有指定文件名（或者该参数不被支持），那就默认使用“blob”这个名字。</p>
+<h2 id="通过AJAX提交表单和发送文件而不使用FormData对象"><a href="#通过AJAX提交表单和发送文件而不使用FormData对象" class="headerlink" title="通过AJAX提交表单和发送文件而不使用FormData对象"></a>通过AJAX提交表单和发送文件而不使用FormData对象</h2><p>若你想了解如何基于AJAX进行序列化和发送表单操作，而不使用FormData对象，可阅读<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Submitting_forms_and_uploading_files" target="_blank" rel="external">此文</a>。</p>
+<h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="external">Using XMLHttpRequest</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement" target="_blank" rel="external">HTMLFormElement</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank" rel="external">Blob</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays" target="_blank" rel="external">Typed Arrays</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC
+    
+    </summary>
+    
+      <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+  </entry>
   
   <entry>
     <title>【译】通过JavaScript发送表单</title>
@@ -4240,72 +4302,6 @@
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>css的样式优先级</title>
-    <link href="http://levonlin.info/2016/04/25/css%E7%9A%84%E6%A0%B7%E5%BC%8F%E4%BC%98%E5%85%88%E7%BA%A7/"/>
-    <id>http://levonlin.info/2016/04/25/css的样式优先级/</id>
-    <published>2016-04-25T09:48:39.000Z</published>
-    <updated>2017-04-28T07:53:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>前几天做百度的笔试题，第一题就是关于css优先级的，虽然知道一些规则，但碰上把各条规则相互组合就懵逼了，所以还是得来好好总结一下的。</p>
-<h2 id="首要原则"><a href="#首要原则" class="headerlink" title="首要原则"></a>首要原则</h2><p>就两条：</p>
-<ol>
-<li>优先级高的样式覆盖优先级低的样式</li>
-<li>同一优先级的样式，后定义的覆盖先定义的，即后来居上</li>
-</ol>
-<p>而至于样式的优先级如何确定，就是接下来要讨论的问题：</p>
-<h2 id="多重样式间的优先级"><a href="#多重样式间的优先级" class="headerlink" title="多重样式间的优先级"></a>多重样式间的优先级</h2><p><a href="http://www.w3school.com.cn/css/css_intro.asp" target="_blank" rel="external">w3school</a>给出的优先级顺序从低到高是：</p>
-<blockquote>
-<p>1.浏览器缺省设置<br>2.外部样式表<br>3.内部样式表（位于 <head> 标签内部）<br>4.内联样式（在 HTML 元素内部）</head></p>
-</blockquote>
-<p>但其实外部样式表若放在内部样式表后面其实是会覆盖内部样式表的，举个例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">    <span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>多重样式优先级<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">            #box &#123;</div><div class="line">                width: 100px;</div><div class="line">                height: 100px;</div><div class="line">                background-color: #000;</div><div class="line">            &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">            @import url(higher.css);</div><div class="line">        <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"wider.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span> <span class="attr">style</span>=<span class="string">"background-color: #f00;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">html</span>&gt;</span></div><div class="line"></div><div class="line">---highter.css</div><div class="line">    #box &#123;</div><div class="line">        height: 200px;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">---wider.css</div><div class="line">    #box &#123;</div><div class="line">        width: 200px;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>最终得到的是一个宽高都为200px的红色元素，很明显，内部样式被放在后面的外部样式覆盖了。所以我更倾向于认为外部样式表和内部样式表具有相同的优先级，结论如下：</p>
-<p><strong>浏览器缺省设置 &lt; 外部样式表 = 内部样式表 &lt; 内联样式</strong></p>
-<h2 id="同一样式表内部的优先级"><a href="#同一样式表内部的优先级" class="headerlink" title="同一样式表内部的优先级"></a>同一样式表内部的优先级</h2><p>同一样式表内，样式的优先级主要是由选择器的权重和权重的累加决定的。</p>
-<p>首先，参考<a href="http://www.standardista.com/css3/css-specificity/" target="_blank" rel="external">这篇文章</a>可知选择器的权重排序为：</p>
-<blockquote>
-<p>1.通用选择器* 0-0-0<br>2.标签选择器，伪元素 0-0-1<br>3.类选择器，属性选择器，伪类 0-1-0<br>4.ID 选择器 1-0-0</p>
-</blockquote>
-<p>而对于组合上面几种情况的选择器式而言，就需要将所有出现的权重进行相加，取相加后的结果作为权重，注意相加时：</p>
-<ol>
-<li><strong>不进位</strong>。因为每位权重间相差的数量级是很大的，在正常使用时不会出现低级选择器靠数量的累加提升为高级权重（虽然在某些情况下确实会发生，比如<a href="http://www.zhangxinxu.com/wordpress/2012/08/256-class-selector-beat-id-selector/" target="_blank" rel="external">256个class选择器可以干掉1个id选择器</a>。。。）</li>
-<li><strong>无视<code>+</code>,<code>&gt;</code>,<code>~</code>等组合选择器的符号</strong></li>
-<li><strong><code>not</code>伪类不作为伪类计算权重，而是直接计算其参数的权重</strong>。比如下面的代码中<code>not</code>伪类的权重要高于类选择器：<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>not伪类的优先级<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        div:not(#box) &#123;</div><div class="line">            width: 100px;</div><div class="line">            height: 100px;</div><div class="line">            background-color: #0f0;</div><div class="line">        &#125;</div><div class="line">        div.box &#123;</div><div class="line">            width: 100px;</div><div class="line">            height: 100px;</div><div class="line">            background-color: #f00;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>除了选择器，样式自身还可以继承和提升优先级，规则如下：</p>
-<ol>
-<li>从祖先元素继承来的样式优先级低于通用选择器；甚至低于浏览器的缺省设置，比如最常见的，重置链接的默认样式时必须写在链接元素上，放在祖先元素中是没有卵用滴</li>
-<li>使用大杀器<code>!important</code>可将样式提升到最高等级，不管这个样式在哪个样式表或选择器中；如果在同一样式中出现了多个<code>!important</code>，就得看上面的权重规则进行pk了</li>
-</ol>
-<p>是不是看起来有点晕，附上<a href="http://www.standardista.com/css3/css-specificity/" target="_blank" rel="external">参考文章</a>里的大鱼吃小鱼的图来辅助理解吧：</p>
-<p><img src="http://ww1.sinaimg.cn/large/85ad0d9cgw1f398xi1j5yj20xc16iwo1.jpg" alt=""></p>
-<h2 id="最终结论"><a href="#最终结论" class="headerlink" title="最终结论"></a>最终结论</h2><p>结合上面的讨论，我们可以得出元素的最终样式是由什么决定的：</p>
-<ul>
-<li>多重样式间遵循：<strong>继承来的样式 &lt; 浏览器缺省设置 &lt; 外部样式表 = 内部样式表 &lt; 内联样式</strong></li>
-<li>而在同一样式表中存在：<strong>通用选择器* 0-0-0 &lt; 标签选择器，伪元素 0-0-1 &lt; 类选择器，属性选择器，伪类 0-1-0 &lt; ID 选择器 1-0-0 &lt;&lt; <code>!important</code></strong>，其中对于组合选择器还要用上面提到的方法进行权重累加后才能判断</li>
-<li>首要原则：高优先级覆盖低优先级，同一优先级则后来居上</li>
-</ul>
-<p>最后，要知道了解样式的优先级，最重要的不是为了用来酷炫和装逼，而是能让我们写出更简洁高效的代码，保证在写代码时就知道一定会出来什么样式，而不是等到堆上一堆选择器后样式还出不来时，再一脸懵逼地去排查。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前几天做百度的笔试题，第一题就是关于css优先级的，虽然知道一些规则，但碰上把各条规则相互组合就懵逼了，所以还是得来好好总结一下的。&lt;/p&gt;
-&lt;h2 id=&quot;首要原则&quot;&gt;&lt;a href=&quot;#首要原则&quot; class=&quot;headerlink&quot; title=&quot;首要原则&quot;&gt;&lt;/a&gt;
-    
-    </summary>
-    
-      <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
   </entry>
   
