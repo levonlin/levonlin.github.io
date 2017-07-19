@@ -8,7 +8,7 @@ categories: 前端
 
 在建立[HTML表单](https://developer.mozilla.org/en-US/docs/HTML/Forms)时，最重要的一件事就是如何用正确的方式构建它。而之所以重要，原因有二：一是保证表单能被正确使用、二是这能保证你的表单是无障碍的（可以被能力不同的人使用）。而正因HTML表单的[无障碍性](https://developer.mozilla.org/en-US/docs/Accessibility)很重要，故在本文中我们将了解如何使一个表单无障碍，这并不很难、只是有几个技巧需要你了解下。
 
-表单的灵活性决定了它们是[HTML](https://developer.mozilla.org/en-US/docs/HTML)中最复杂的结构。通过使用专门的表单元素和属性，我们可以建立任何形式的表单。也确实有过一些更丰富多彩的脚本技术如[XForms](https://developer.mozilla.org/en-US/docs/XForms)（现已过时），但很不幸这些表单技术并未被各大浏览器广泛应用。因此，我们往往得依赖Javascript来处理表单；但在本文中，我们只会详细讨论如何使用表单元素，若你想知道如何构建自定义表单组件，可参阅[怎样创建定制表单组件]()。
+表单的灵活性决定了它们是[HTML](https://developer.mozilla.org/en-US/docs/HTML)中最复杂的结构。通过使用专门的表单元素和属性，我们可以建立任何形式的表单。也确实有过一些更丰富多彩的脚本技术如[XForms](https://developer.mozilla.org/en-US/docs/XForms)（现已过时），但很不幸这些表单技术并未被各大浏览器广泛应用。因此，我们往往得依赖Javascript来处理表单；但在本文中，我们只会详细讨论如何使用表单元素，若你想知道如何构建自定义表单组件，可参阅[怎样创建定制表单组件](http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/)。
 
 ## 整体结构
 ### from元素
@@ -251,7 +251,7 @@ HTML的列表则常用在使用复选框和单选框时。
 [演示](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_structure_an_HTML_form/Example)
 
 ## HTML组件
-构建表单时，我们需要一些组件来从用户那儿收集数据。所以在本文中，我们还将看到如何呈现这些组件；若你想了解这些组件是如何工作的，可参见[原生表单组件]()。
+构建表单时，我们需要一些组件来从用户那儿收集数据。所以在本文中，我们还将看到如何呈现这些组件；若你想了解这些组件是如何工作的，可参见[原生表单组件](http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/)。
 
 ### input元素
 这个元素相当特殊，因为它可以变成不少东西。只要简单设置下其`type`属性，它就能发生大变化。为简单起见，`type`的值可归为四种类型：单行文本框、无文本输入的控件、日期控件和按钮。而正因这种多样性，[`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)元素支持众多属性，但我们很难知道其中那个是相关的、哪个是必须的，这取决于`type`属性的值。
@@ -329,7 +329,7 @@ HTML的列表则常用在使用复选框和单选框时。
 ```
 
 ### select, option和optgroup元素
-[`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)元素能让你构建选择框（也叫组合框）。选择框是一种让用户选择一或多个预定义的值的组件。单值和多值选择框的不同将在[原生表单组件]()一文中进行讨论。
+[`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)元素能让你构建选择框（也叫组合框）。选择框是一种让用户选择一或多个预定义的值的组件。单值和多值选择框的不同将在[原生表单组件](http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/)一文中进行讨论。
 
 选择框中的每个值都会用一个[`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option)元素进行定义，而这些`<option>`元素也可以置于[`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup)元素中进行分组。
 
@@ -459,7 +459,7 @@ HTML的列表则常用在使用复选框和单选框时。
 | value |  | 指定元素初始值 |
 
 ## 使用ARIA来构建HTML表单
-[ARIA](https://developer.mozilla.org/en-US/docs/Accessibility/ARIA)是一项[W3C候选推荐标准](http://www.w3.org/TR/wai-aria/)，用于添加到HTML以增强富Internet应用的可访问性。我们将在[怎样创建定制表单组件]()一文中更具体地讨论它的使用，但这里有一些基础知识需要先知道。
+[ARIA](https://developer.mozilla.org/en-US/docs/Accessibility/ARIA)是一项[W3C候选推荐标准](http://www.w3.org/TR/wai-aria/)，用于添加到HTML以增强富Internet应用的可访问性。我们将在[怎样创建定制表单组件](http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/)一文中更具体地讨论它的使用，但这里有一些基础知识需要先知道。
 
 在开始之前，要注意浏览器上对ARIA和无障碍技术的支持虽然还远称不上完美，但也已在持续改进之中了。出现这种问题就是因为，浏览器在遇到ARIA属性时，必须给操作系统的无障碍访问层发送消息，而并不是所有浏览器都能跨平台地做好这点。同时无障碍设备自身只能链接到操作系统的无障碍访问层去处理浏览器传来的消息。让人吃惊的是，有些无障碍设备连这点都做不好。
 
@@ -499,7 +499,7 @@ HTML的列表则常用在使用复选框和单选框时。
 ### [role](https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques)属性
 这是最重要的一个ARIA属性了，它能让你为给定的HTML元素提供无障碍设备可理解的、特定的语义信息。现在已经有不少可用的role了，且其中一些是表单专用的。
 
-ARIA致力于给那些在HTML中尚不可用的组件、或已经存在的元素提供语法，我们将会在[怎样创建定制表单组件]()一文中看到如何使用这些role。
+ARIA致力于给那些在HTML中尚不可用的组件、或已经存在的元素提供语法，我们将会在[怎样创建定制表单组件](http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/)一文中看到如何使用这些role。
 
 用于表单组件的role有：
 * [Button](https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role)
@@ -517,7 +517,7 @@ ARIA致力于给那些在HTML中尚不可用的组件、或已经存在的元素
 若你觉得这些role很好用，可在这里了解更多；ARIA是个很庞大的规范，深入探索它能帮你为远超HTML表单之外的领域增强无障碍性。
 
 ## 结论
-现在你已经拥有了所有可用于构建你的HTML表单的知识；下篇文章将会深入其实现细节和功能需求：[原生表单组件]()。
+现在你已经拥有了所有可用于构建你的HTML表单的知识；下篇文章将会深入其实现细节和功能需求：[原生表单组件](http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/)。
 
 ## 参见
 * [A List Apart: Sensible Forms: A Form Usability Checklist](http://www.alistapart.com/articles/sensibleforms/)

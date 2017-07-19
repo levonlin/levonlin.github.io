@@ -6,7 +6,7 @@ categories: 前端
 > * [系列文章说明](http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/)
 > * [原文](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Styling_HTML_forms)
 
-本文中，我们将学习如何使用[CSS](https://developer.mozilla.org/en-US/docs/CSS)来让[HTML](https://developer.mozilla.org/en-US/docs/HTML)表单看起来更漂亮，这可能需要窍门才能做到。由于历史及技术上的原因，表单组件并不太适合使用CSS；而也正因为有这些困难，许多的开发者会选择[创建定制表单组件]()来获得对外观和体验的控制。然而，在现代浏览器中，网页设计师可以拥有更多对表单元素的控制权了。让我们来深入了解下吧。
+本文中，我们将学习如何使用[CSS](https://developer.mozilla.org/en-US/docs/CSS)来让[HTML](https://developer.mozilla.org/en-US/docs/HTML)表单看起来更漂亮，这可能需要窍门才能做到。由于历史及技术上的原因，表单组件并不太适合使用CSS；而也正因为有这些困难，许多的开发者会选择[创建定制表单组件](http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/)来获得对外观和体验的控制。然而，在现代浏览器中，网页设计师可以拥有更多对表单元素的控制权了。让我们来深入了解下吧。
 
 ## 为何难以使用CSS给表单组件添加样式？
 在web发展的早期，大约1995年，表单控件就已经在[the HTML 2 specification](http://www.ietf.org/rfc/rfc1866.txt)中给添加到HTML了。由于表单组件的复杂性，浏览器开发商们就选择了依靠操作系统来管理和渲染它们。
@@ -36,7 +36,7 @@ categories: 前端
 
 这其中包括了[`<legend>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend)元素；该元素不能在跨平台时被恰当地定位。此外，复选框及单选框不能直接添加样式；然而有了CSS3之后你就可以做到这点了。[placeholder](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder)的内容是不能通过标准方法来添加样式的，但所有实现了它的浏览器都会以私有的CSS伪元素或伪类的形式让你能给它添加样式。
 
-至于要具体如何处理这些特殊情况，我们会在[HTML表单高级样式]()一文中讨论。
+至于要具体如何处理这些特殊情况，我们会在[HTML表单高级样式](http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/)一文中讨论。
 
 #### 丑陋的
 某些元素是不能用CSS添加样式的。它们包括所有的高级UI组件比如范围滑块、颜色、日期控件，以及下拉组件（包括[`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select), [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option), [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup), [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) 等元素）。文件选择器组件也被认为是不能添加样式的，而新的[`<progress>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress)和[`<meter>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter)元素也在此之列。
@@ -47,7 +47,7 @@ categories: 前端
 在用CSS给那些[易于添加样式的元素](./#还好的)的元素以样式时，你不必面对任何困难，因为它们多数表现得和其它HTML元素一样。然而，每个浏览器的用户代理样式表会导致一些不一致的情况，所以，这里会有几个技巧来帮你轻松地给它们添加样式。
 
 ### 搜索框
-搜索框是文本框中唯一一种需要点技巧来添加样式的。在基于webkit的浏览器（chrome, safari等）中，你得用`-webkit-appearance`属性来作下调整。我们将会在[HTML表单高级样式]()一文更深入地探讨该属性。
+搜索框是文本框中唯一一种需要点技巧来添加样式的。在基于webkit的浏览器（chrome, safari等）中，你得用`-webkit-appearance`属性来作下调整。我们将会在[HTML表单高级样式](http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/)一文更深入地探讨该属性。
 
 #### 例子
 ```html
@@ -143,7 +143,7 @@ textarea {
 ![](https://developer.mozilla.org/files/4149/screenshot.png)
 
 ### HTML
-相比[本指南第一篇文章]()，这里的HTML稍微多了点内容；只有几个额外的字段和一个标题而已。
+相比[本指南第一篇文章](http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/)，这里的HTML稍微多了点内容；只有几个额外的字段和一个标题而已。
 
 ```html
 <form>
@@ -349,4 +349,4 @@ button:focus {
 ## 结论
 如你所见，如果我们想构建只含文本框和按钮的表单，那么用CSS来提供样式是件很容易的事。若你还想了解多些能让你更轻松地处理表单组件的CSS技巧，可以参见[normalize.css项目](http://necolas.github.com/normalize.css)的表单部分。
 
-[下篇文章]()，我们会学习如何处理那些属于“比较糟糕的”和“丑陋的”类别的表单组件。
+[下篇文章](http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/)，我们会学习如何处理那些属于“比较糟糕的”和“丑陋的”类别的表单组件。
