@@ -5,10 +5,124 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://levonlin.info/"/>
-  <updated>2017-07-15T16:21:21.000Z</updated>
+  <updated>2017-07-19T16:29:06.000Z</updated>
   <id>http://levonlin.info/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【译】遗留浏览器中的表单</title>
+    <link href="http://levonlin.info/2017/07/16/%E3%80%90%E8%AF%91%E3%80%91%E9%81%97%E7%95%99%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84%E8%A1%A8%E5%8D%95/"/>
+    <id>http://levonlin.info/2017/07/16/【译】遗留浏览器中的表单/</id>
+    <published>2017-07-16T07:53:32.000Z</published>
+    <updated>2017-07-19T16:29:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/HTML_forms_in_legacy_browsers" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p>所有的web开发者都会很快（或者很痛苦地）意识到Web是一个粗糙的环境，其中最糟糕的一点就是老旧的浏览器。提到“老旧浏览器”，我们脑海中往往复现的就是旧版的IE。但其实老旧浏览器不止这一种，一个一年前的Firefox，比如<a href="http://www.mozilla.org/en-US/firefox/organizations/" target="_blank" rel="external">ESR版本</a>也算得上老旧了。至于移动端，由于有些浏览器和操作系统都不能升级，这就导致了许多老旧的安卓手机或iPhone上的浏览器不是最新的，这些也算是老旧浏览器。</p>
+<p>令人沮丧的是，我们工作的一部分都要耗在老旧浏览器这片荒野上。但幸运的是，有一些技巧可以协助解决由老旧浏览器引起的80%的问题。</p>
+<h2 id="了解存在的问题"><a href="#了解存在的问题" class="headerlink" title="了解存在的问题"></a>了解存在的问题</h2><p>实际上，首要的任务是阅读这些浏览器的文档、试着理解其公共部分。比如，CSS的支持程度是HTML表单的一个重大问题，若你刚开始开发，应先检查下要用的元素（或DMO接口）的支持程度。虽然许多web页面要用的元素、属性、API的兼容性表格，MDN上都有；但别的资源也能提供很大的帮助：</p>
+<h3 id="浏览器开发商的文档"><a href="#浏览器开发商的文档" class="headerlink" title="浏览器开发商的文档"></a>浏览器开发商的文档</h3><ul>
+<li>Mozilla：就在你现在所访问的地方啦（译注：<a href="https://developer.mozilla.org/" target="_blank" rel="external">MDN</a>）</li>
+<li>Microsoft：<a href="http://msdn.microsoft.com/en-us/library/ff410218%28v=vs.85%29.aspx" target="_blank" rel="external">Internet Explorer Standards Support Documentation</a></li>
+<li>Opera：<a href="http://www.opera.com/docs/specs/" target="_blank" rel="external">Web specification support in Opera</a></li>
+<li>WebKit：由于该引擎有着几个不同的版本，想找到对应文档需要些技巧：<ul>
+<li><a href="https://www.webkit.org/blog/" target="_blank" rel="external">Webkit博客</a>和<a href="http://planet.webkit.org/" target="_blank" rel="external">Planet Webkit</a>汇总了Webkit内核开发者一些最好的文章。</li>
+<li><a href="http://www.chromium.org/developers/web-platform-status" target="_blank" rel="external">chromium网站</a>也很重要。</li>
+<li>还有<a href="https://developer.apple.com/technologies/safari/" target="_blank" rel="external">Apple的网站</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="第三方文档"><a href="#第三方文档" class="headerlink" title="第三方文档"></a>第三方文档</h3><ul>
+<li><a href="http://caniuse.com/" target="_blank" rel="external">Can I Use</a>上有各类技术的支持程度信息。</li>
+<li><a href="http://www.quirksmode.org/" target="_blank" rel="external">Quirks Mode</a>是关于浏览器兼容性的一个极好资源。其<a href="http://www.quirksmode.org/mobile/" target="_blank" rel="external">移动部分</a>是现在最好的。</li>
+<li><a href="http://positioniseverything.net/" target="_blank" rel="external">Position Is Everything</a>是一份关于老旧浏览器渲染问题及其解决方法的最好资料。</li>
+<li><a href="http://mobilehtml5.org/" target="_blank" rel="external">Mobile HTML5 </a>有着大量移动端浏览器兼容性信息，不只有那些“前5的浏览器”（译注：大概包括苹果、安卓、Nokia、Amazon、Blackberry）</li>
+</ul>
+<h2 id="让事情变得简单"><a href="#让事情变得简单" class="headerlink" title="让事情变得简单"></a>让事情变得简单</h2><p>由于HTML表单包含了大量复杂的交互，我们得记住一条法则：<a href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank" rel="external">keep it as simple as possible</a>。许多情况下我们会想让表单变得“漂亮”或“带有高级功能”，但构建高效的HTML表单并不单靠设计或技术就能解决，建议花点时间阅读下<a href="http://www.uxforthemasses.com/forms-usability/" target="_blank" rel="external">forms usability on UX For The Masses</a>这篇文章.</p>
+<h3 id="优雅降级是web开发者的最佳朋友"><a href="#优雅降级是web开发者的最佳朋友" class="headerlink" title="优雅降级是web开发者的最佳朋友"></a>优雅降级是web开发者的最佳朋友</h3><p><a href="http://www.sitepoint.com/progressive-enhancement-graceful-degradation-choice/" target="_blank" rel="external">优雅降级和渐进增强</a>这两个开发模式通过同时支持众多的浏览器，能让你建立伟大的产品。当你在现代浏览器上构建了一些东西，并想确保它能在老旧浏览器上运行时，你就是在使用优雅降级了。</p>
+<p>接下来我们看些关于HTML表单的例子：</p>
+<h4 id="HTML的输入框类型"><a href="#HTML的输入框类型" class="headerlink" title="HTML的输入框类型"></a>HTML的输入框类型</h4><p>HTML5带来的输入框类型非常酷，因为它们作降级处理的方法是可预见的。若浏览器不认识<code>&lt;input&gt;</code>元素的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type" target="_blank" rel="external">type</a>特性值，就会回退到<code>text</code>类型。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">label</span> <span class="keyword">for</span>=<span class="string">"myColor"</span>&gt;</div><div class="line">  Pick <span class="selector-tag">a</span> <span class="attribute">color</span></div><div class="line">  &lt;<span class="selector-tag">input</span> type=<span class="string">"color"</span> id=<span class="string">"myColor"</span> name=<span class="string">"color"</span>&gt;</div><div class="line">&lt;/label&gt;</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>chrome 24</th>
+<th>Firefox 18</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://developer.mozilla.org/files/4575/color-fallback-chrome.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4577/color-fallback-firefox.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<h4 id="CSS的特性选择器"><a href="#CSS的特性选择器" class="headerlink" title="CSS的特性选择器"></a>CSS的特性选择器</h4><p><a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors" target="_blank" rel="external">CSS的特性选择器</a>对HTML表单来讲非常有用，但某些老旧的浏览器并不支持它。此时我们常会用一个等价的类名来替代该特性：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"number"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"number"</span>&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span>[type=number] &#123;</div><div class="line">  <span class="comment">/* 这里的样式会在某些浏览器下失效 */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.number</span> &#123;</div><div class="line">  <span class="comment">/* 该处样式可以在每个地方都生效 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要注意下面的代码是没有必要的（冗余），而且也会在某些浏览器下失效：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span>[type=number],</div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.number</span> &#123;</div><div class="line">  <span class="comment">/* 这里的样式会在某些浏览器下失效，因为它们若不能失败其中一个选择器，</span></div><div class="line">     就会跳过整段规则 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="表单按钮"><a href="#表单按钮" class="headerlink" title="表单按钮"></a>表单按钮</h4><p>在HTML表单中定义按钮有两种方式：</p>
+<ul>
+<li><code>&lt;input&gt;</code>元素的type特性设为<code>button</code>, <code>submit</code>, <code>reset</code>或<code>image</code></li>
+<li><code>&lt;button&gt;</code>元素</li>
+</ul>
+<p>若你想使用元素选择器来指定CSS，使用<code>&lt;input&gt;</code>元素的话会有些麻烦：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"button"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"button"</span> value=<span class="string">"click me"</span>&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span> &#123;</div><div class="line">  <span class="comment">/* 这处规则会覆盖input定义的按钮的默认样式 */</span></div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#CCC</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.button</span> &#123;</div><div class="line">  <span class="comment">/* 这里并不会恢复默认样式 */</span></div><div class="line">  <span class="attribute">border</span>: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.button</span> &#123;</div><div class="line">  <span class="comment">/* 这里也不会恢复！实际上在所有浏览器下都没有方法来做到这点。 */</span></div><div class="line">  <span class="attribute">border</span>: auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用<code>&lt;button&gt;</code>元素则要面对两个问题：</p>
+<ul>
+<li>老旧IE下会有一个bug，当用户点击按钮时，发送的不是<code>value</code>特性的内容，而是<code>&lt;button&gt;</code>元素起止标签间的HTML内容。当然个问题只有当你想发送<code>value</code>的值时才会凸显，例如，你可能想处理关于用户点击了哪个按钮的数据。</li>
+<li>某些非常老旧的浏览器不会吧<code>submit</code>作为<code>type</code>特性的默认值，故而还是推荐你总是设置<code>&lt;button&gt;</code>元素的<code>type</code>特性。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 有时点击该按钮会发送"&lt;em&gt;Do A&lt;/em&gt;"而不是"A" --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"IWantTo"</span> <span class="attr">value</span>=<span class="string">"A"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">em</span>&gt;</span>Do A<span class="tag">&lt;/<span class="name">em</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>选择这两种元素中的哪种，取决于你项目中的约束。</p>
+<h3 id="放弃CSS"><a href="#放弃CSS" class="headerlink" title="放弃CSS"></a>放弃CSS</h3><p>HTML表单和老旧浏览器的最大问题是对CSS的支持。如你在<a href="http://levonlin.info/2016/08/06/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A1%A8/">表单组件的属性兼容性表</a>一文中所见到的，这很难处理。即使在文本元素上可能可以做些微调（比如大小和颜色），但通常也会有副作用。所以剩下的最佳方式就是不要给HTML表单组件添加一点样式，不过你仍可以给周边元素添加样式。作为专业人士，若你遇到你的客户一定需要给表单组件加样式，可以调研下某些困难的技术，譬如<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">用JavaScript重构表单组件</a>。但其实在这种情况下，你应该毫不犹豫地<a href="http://www.smashingmagazine.com/2011/11/03/%E2%80%9Cbut-the-client-wants-ie-6-support%E2%80%9D/" target="_blank" rel="external">指出客户的愚蠢之处</a>。</p>
+<h2 id="特征检测和polyfill"><a href="#特征检测和polyfill" class="headerlink" title="特征检测和polyfill"></a>特征检测和polyfill</h2><p>虽然在现代浏览器上JavaScript是个很棒的技术，但在老旧浏览器上使用它却有很多问题。</p>
+<h3 id="“不起眼的“JavaScript"><a href="#“不起眼的“JavaScript" class="headerlink" title="“不起眼的“JavaScript"></a>“不起眼的“JavaScript</h3><p>JavaScript最大的问题就是API的可用性。因此，最佳实践是使用”不起眼的“JavaScript。这是一种开发模式，规定了两个要求：</p>
+<ul>
+<li>结构和行为严格分离。</li>
+<li>如果代码挂掉，页面内容和基本的功能必须还有可访问性和可用性。</li>
+</ul>
+<p><a href="http://docs.webplatform.org/wiki/concepts/programming/the_principles_of_unobtrusive_javascript" target="_blank" rel="external">The principles of unobtrusive JavaScript</a>一文很好地阐述了该观点。（该文由Peter-Paul Koch为Dev.Opera.com撰写，现已移至Docs.WebPlatform.org）</p>
+<h3 id="Modernizr库"><a href="#Modernizr库" class="headerlink" title="Modernizr库"></a>Modernizr库</h3><p>多数情况下，一个好的”polyfill“可以帮我们提供那些缺失的API。所谓的<a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/" target="_blank" rel="external">polyfill</a>，是指一小段用于“填补”老旧浏览器功能上的坑的JavaScript。它们可以用于提供任何功能上的支持，相比CSS或HTML的polyfill，为JavaScript使用polyfill会有更小的风险；毕竟JavaScript会在很多情况下挂掉（比如网络问题、代码冲突等等）。但即使不用polyfill，只要你开发时心中存有“不起眼的“JavaScript原则，其实也没什么大不了。</p>
+<p>为缺失的API提供polyfill，最佳的方式是使用<a href="http://modernizr.com/" target="_blank" rel="external">Modernizr</a>库及其衍生项目<a href="http://yepnopejs.com/" target="_blank" rel="external">YepNoep</a>。Modernizr是一个能测试功能可用性、并以此来做相应动作的库。YepNoep则是一个按条件作加载的库。</p>
+<p>举个例子：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">Modernizr</span><span class="selector-class">.load</span>(&#123;</div><div class="line">  <span class="comment">// 此处测试浏览器是否支持HTML5的表单校验API</span></div><div class="line">  <span class="attribute">test </span>: Modernizr.formvalidation,</div><div class="line"> </div><div class="line">  <span class="comment">// 若浏览器不支持，则加载下列polyfill</span></div><div class="line">  <span class="attribute">nope </span>: form-validation-API-polyfill.js,</div><div class="line"> </div><div class="line">  <span class="comment">// 在任何情况下，依赖那个API的核心App文件都会被下载</span></div><div class="line">  <span class="attribute">both </span>: app.js,</div><div class="line"> </div><div class="line">  <span class="comment">// 一旦这些文件都被加载了，下面的函数调用就会来初始化App</span></div><div class="line">  <span class="attribute">complete </span>: function () &#123;</div><div class="line">    app.init();</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Modernizr团队还维护了<a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills" target="_blank" rel="external">一个好用的polyfill列表</a>，请按需自取。</p>
+<blockquote>
+<p><strong>注意：</strong>在使用“不起眼的“JavaScript原则和优雅降级技术时，Modernizr其它一些很棒的特性也能帮到你。请<a href="http://modernizr.com/docs/" target="_blank" rel="external">阅读Modernizr的文档</a></p>
+</blockquote>
+<h3 id="关注性能"><a href="#关注性能" class="headerlink" title="关注性能"></a>关注性能</h3><p>即使像Modernizr已经很注重性能了，但加载200kB的polyfill仍会影响应用的性能，这对老旧浏览器来讲更为严重。许多老旧浏览器的JavaScript引擎很慢，这样会让polyfill的执行给用户造成不好的体验。性能是本身就是一个主题，老旧浏览器对性能更是敏感：首先它们就很慢，再者依赖越多的polyfill它们就得执行更多的JavaScript。所以，相比现代浏览器，老旧浏览器有着双重的负担；也因此对代码在老旧浏览器上的实际运行情况，更要进行测试。甚至有时为了性能，相比在所有浏览器上实现相同功能，还得在老旧浏览器移除某些些会带来更好用户体验的功能。最后还有一个建议，多考虑下你的终端用户吧。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如你所见，处理老旧浏览器所涉及的内容不止有表单。这是一整套的技术，全面掌握它们已经超出了本文的范围。</p>
+<p>如果已经读完了这个<a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">HTML表单指南</a>的全部文章，你应该能很轻松地使用表单了。若你还发现了哪些新技术、新技巧，也请帮助<a href="https://developer.mozilla.org/en-US/docs/Project:How_to_help" target="_blank" rel="external">完善这个指南</a>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC
+    
+    </summary>
+    
+      <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="html" scheme="http://levonlin.info/tags/html/"/>
+    
+      <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+  </entry>
   
   <entry>
     <title>【译】使用FormData对象</title>
@@ -77,7 +191,7 @@
     <link href="http://levonlin.info/2017/06/21/%E3%80%90%E8%AF%91%E3%80%91%E9%80%9A%E8%BF%87JavaScript%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95/"/>
     <id>http://levonlin.info/2017/06/21/【译】通过JavaScript发送表单/</id>
     <published>2017-06-21T07:40:19.000Z</published>
-    <updated>2017-07-09T09:10:33.000Z</updated>
+    <updated>2017-07-19T16:51:21.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
@@ -85,14 +199,14 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript" target="_blank" rel="external">原文</a></li>
 </ul>
 </blockquote>
-<p>在<a href="">发送表单数据</a>一文中，HTML表单可以声明式地发送一个<a href="https://developer.mozilla.org/en-US/docs/HTTP" target="_blank" rel="external">HTTP</a>请求。但表单也可以用JavaScript来准备一个HTTP请求。本文将探索如何做到这点。</p>
+<p>在<a href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/">发送表单数据</a>一文中，HTML表单可以声明式地发送一个<a href="https://developer.mozilla.org/en-US/docs/HTTP" target="_blank" rel="external">HTTP</a>请求。但表单也可以用JavaScript来准备一个HTTP请求。本文将探索如何做到这点。</p>
 <h2 id="表单，不只是表单"><a href="#表单，不只是表单" class="headerlink" title="表单，不只是表单"></a>表单，不只是表单</h2><p>随着<a href="https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/Quickstart/Intro_to_open_web_apps" target="_blank" rel="external">开放式Web应用</a>的出现，现在提供<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms" target="_blank" rel="external">HTML表单</a>、而不是文字表单供用户填写的做法，已经越发普遍了。而越来越多的开发者也获得了数据传输的控制权。</p>
 <h3 id="获得对数据传输的控制权"><a href="#获得对数据传输的控制权" class="headerlink" title="获得对数据传输的控制权"></a>获得对数据传输的控制权</h3><p>标准的HTML表单提交操作会加载数据发送到的URL，这就意味着浏览器的窗口中会进行整个页面的重新加载。而如果避免了页面的重新加载，就会避免页面的闪烁和网络延迟，进而提供更顺畅的用户体验。</p>
 <p>在许多现代的UI设计中，HTML表单只是用来收集用户的输入。当用户要发送数据时，Web应用会进行控制，并在后台异步地发送数据，只更新UI中需要更改的部分。</p>
 <p>能异步地发送任意数据的技术称为<a href="https://developer.mozilla.org/en-US/docs/AJAX" target="_blank" rel="external">AJAX</a>，表示“异步的JavaScript和XML”。</p>
 <h3 id="和传统表单处理的不同"><a href="#和传统表单处理的不同" class="headerlink" title="和传统表单处理的不同"></a>和传统表单处理的不同</h3><p>AJAX使用了<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest" target="_blank" rel="external">XMLHttpRequest</a>(XHR)DOM对象，它可以建立HTTP请求、发送请求并处理结果。</p>
 <blockquote>
-<p><strong>注意：</strong> 老的AJAX技术可能不是用XMLHttpRequest。比如<a href="">JSONP</a>和<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript" target="_blank" rel="external">eval()</a>函数结合起来使用。虽然该方法可行，但不推荐使用它，因为其存在严重的安全问题。所以除非为了兼容那些特别老旧、不支持XMLHttpRequest或<a href="https://developer.mozilla.org/en-US/docs/JSON" target="_blank" rel="external">JSON</a>的浏览器，还是<strong>避免使用该技术</strong>。</p>
+<p><strong>注意：</strong> 老的AJAX技术可能不是用XMLHttpRequest。比如<a href="http://en.wikipedia.org/wiki/JSONP" target="_blank" rel="external">JSONP</a>和<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript" target="_blank" rel="external">eval()</a>函数结合起来使用。虽然该方法可行，但不推荐使用它，因为其存在严重的安全问题。所以除非为了兼容那些特别老旧、不支持XMLHttpRequest或<a href="https://developer.mozilla.org/en-US/docs/JSON" target="_blank" rel="external">JSON</a>的浏览器，还是<strong>避免使用该技术</strong>。</p>
 </blockquote>
 <p>由于历史原因，XMLHttpRequest本是设计用来获取和发送交换格式为<a href="https://developer.mozilla.org/en-US/docs/XML" target="_blank" rel="external">XML</a>的数据的。但现在JSON取代了XML，有着更普遍的使用。</p>
 <p>不过XML和JSON都不符合作为表单数据请求的编码。表单数据（<code>application/x-www-form-urlencoded</code>）是用于构造键值对的URL编码列表的，若是要传输二进制数据，HTTP请求会被重塑为<code>multipart/form-data</code>。</p>
@@ -122,10 +236,10 @@
 </blockquote>
 <h3 id="使用XMLHttpRequest和FormData对象"><a href="#使用XMLHttpRequest和FormData对象" class="headerlink" title="使用XMLHttpRequest和FormData对象"></a>使用XMLHttpRequest和FormData对象</h3><p>手动构建HTTP请求是挺麻烦的，幸运的是，最近的一项<a href="http://www.w3.org/TR/XMLHttpRequest/" target="_blank" rel="external">XMLHttpRequest标准</a>提供了一个处理表单请求的简便方法–FormData对象。</p>
 <p>FormData对象可被用来建立要传输的表单数据，或者从表单元素中获取数据来管理如何发送。要注意FormData对象是“只写”的，这意味着你可以改变它们、但不能访问它们的内容。</p>
-<p>使用FormData对象的方法会在<a href="">使用FormData对象</a>一文中详细介绍，下面有两个例子：</p>
+<p>使用FormData对象的方法会在<a href="http://levonlin.info/2017/07/15/%E3%80%90%E8%AF%91%E3%80%91%E4%BD%BF%E7%94%A8FormData%E5%AF%B9%E8%B1%A1/">使用FormData对象</a>一文中详细介绍，下面有两个例子：</p>
 <h4 id="使用独立的FormData对象"><a href="#使用独立的FormData对象" class="headerlink" title="使用独立的FormData对象"></a>使用独立的FormData对象</h4><figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"sendData(</span></span></span><span class="template-variable">&#123;test:'ok'&#125;</span><span class="xml"><span class="tag"><span class="string">)"</span>&gt;</span>Click Me!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></div></pre></td></tr></table></figure>
 <p>现在你该很熟悉这个HTML的样子了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendData</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> XHR = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  <span class="keyword">var</span> FD  = <span class="keyword">new</span> FormData();</div><div class="line"></div><div class="line">  <span class="comment">// 将数据添加到FormData对象中</span></div><div class="line">  <span class="keyword">for</span>(name <span class="keyword">in</span> data) &#123;</div><div class="line">    FD.append(name, data[name]);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 定义成功的数据提交后会发生什么</span></div><div class="line">  XHR.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">    alert(<span class="string">'Yeah! Data sent and response loaded.'</span>);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="comment">// 定义失败的情况会发生什么</span></div><div class="line">  XHR.addEventListener(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">    alert(<span class="string">'Oups! Something went wrong.'</span>);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="comment">// 配置请求</span></div><div class="line">  XHR.open(<span class="string">'POST'</span>, <span class="string">'https://example.com/cors.php'</span>);</div><div class="line"></div><div class="line">  <span class="comment">// 发送FormData对象，HTTP头会自动设置</span></div><div class="line">  XHR.send(FD);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendData</span><span class="params">(data)</span> </span>&#123;</div><div class="line">  <span class="keyword">var</span> XHR = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  <span class="keyword">var</span> FD  = <span class="keyword">new</span> FormData();</div><div class="line"></div><div class="line">  <span class="comment">// 将数据添加到FormData对象中</span></div><div class="line">  <span class="keyword">for</span>(name <span class="keyword">in</span> data) &#123;</div><div class="line">    FD.append(name, data[name]);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 定义成功的数据提交后会发生什么</span></div><div class="line">  XHR.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>&#123;</div><div class="line">    alert(<span class="string">'Yeah! Data sent and response loaded.'</span>);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="comment">// 定义失败的情况会发生什么</span></div><div class="line">  XHR.addEventListener(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>&#123;</div><div class="line">    alert(<span class="string">'Oups! Something went wrong.'</span>);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="comment">// 配置请求</span></div><div class="line">  XHR.open(<span class="string">'POST'</span>, <span class="string">'https://example.com/cors.php'</span>);</div><div class="line"></div><div class="line">  <span class="comment">// 发送FormData对象，HTTP头会自动设置</span></div><div class="line">  XHR.send(FD);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>结果如下：<br><a href="https://mdn.mozillademos.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript$samples/Using_a_standalone_FormData_object?revision=1226811" target="_blank" rel="external">效果</a></p>
 <h4 id="将FormData绑到表单元素上使用"><a href="#将FormData绑到表单元素上使用" class="headerlink" title="将FormData绑到表单元素上使用"></a>将FormData绑到表单元素上使用</h4><p>你也可以将FormData对象绑定到一个表单元素上，这样做会创建一个FormData对象来表示表单中的数据。</p>
 <p>HTML是典型的表单：</p>
@@ -175,7 +289,7 @@
     <link href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/"/>
     <id>http://levonlin.info/2017/05/31/【译】怎样创建定制表单组件/</id>
     <published>2017-05-31T10:45:53.000Z</published>
-    <updated>2017-06-21T07:26:19.000Z</updated>
+    <updated>2017-07-19T16:57:35.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
@@ -183,7 +297,7 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/How_to_build_custom_form_widgets" target="_blank" rel="external">原文</a></li>
 </ul>
 </blockquote>
-<p>在许多情况下，<a href="">可用的HTML表单组件</a>是不够的。若你想在诸如<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素的组件上<a href="">应用高级样式</a>、或者想定制组件的行为，你就只能选择创建自己的表单组件。</p>
+<p>在许多情况下，<a href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">可用的HTML表单组件</a>是不够的。若你想在诸如<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素的组件上<a href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/">应用高级样式</a>、或者想定制组件的行为，你就只能选择创建自己的表单组件。</p>
 <p>我们将通过本文学习如何构建一个表单组件。为达到目的，我们选择重构<code>&lt;select&gt;</code>元素作为例子。</p>
 <blockquote>
 <p><strong>注意：</strong>我们会专注于构建组件，但不会关注如何保证代码的通用和可重用。构建组件时会涉及到一些特殊的JavaScript代码和未知上下文中的DOM操作，而这些内容已经超出了本文的讨论范围。</p>
@@ -348,11 +462,11 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -542,7 +656,7 @@
     <link href="http://levonlin.info/2016/12/31/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/"/>
     <id>http://levonlin.info/2016/12/31/【译】表单数据校验/</id>
     <published>2016-12-31T06:23:42.000Z</published>
-    <updated>2017-01-20T16:12:03.000Z</updated>
+    <updated>2017-07-19T16:44:21.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
@@ -707,7 +821,7 @@
 <p><iframe width="100%" frameborder="0" src="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation$samples/Example_using_the_constraint_validation_API?revision=1152350" height="130"></iframe></p>
 
 <p>约束验证API给了我们处理表单校验的强大工具，并让我们能有力地控制其用户界面，这就远超过只用HTML和CSS所能做的事了。</p>
-<h3 id="不使用内置API来校验表单"><a href="#不使用内置API来校验表单" class="headerlink" title="不使用内置API来校验表单"></a>不使用内置API来校验表单</h3><p>有时，面对老旧浏览器和<a href="">定制的组件</a>，你不能（或者不想）使用约束验证API。但在这种情况下，你仍然可以使用Javascript来校验你的表单。表单的校验更多是个用户界面的问题、而非真正的数据校验。</p>
+<h3 id="不使用内置API来校验表单"><a href="#不使用内置API来校验表单" class="headerlink" title="不使用内置API来校验表单"></a>不使用内置API来校验表单</h3><p>有时，面对老旧浏览器和<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">定制的组件</a>，你不能（或者不想）使用约束验证API。但在这种情况下，你仍然可以使用Javascript来校验你的表单。表单的校验更多是个用户界面的问题、而非真正的数据校验。</p>
 <p>要校验一个表单，你得先问你自己几个问题：</p>
 <p><strong>我需要进行什么类型的校验？</strong><br>你得先决定如何校验数据，这取决于你：可以用字符串操作、类型转换、正则表达式等等。只要记住表单数据通常是一段文本，而且传到你的脚本里时也是一些字符串就好。</p>
 <p><strong>表单校验未通过时，我应该做什么？</strong><br>这就是个UI的问题了。得靠你决定表单的行为：是不论是否通过都发送数据呢？还是高亮那些出现错误的字段？还是展示一些错误信息？</p>
@@ -769,11 +883,11 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -784,12 +898,12 @@
     <link href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/"/>
     <id>http://levonlin.info/2016/09/24/【译】发送表单数据/</id>
     <published>2016-09-24T11:37:28.000Z</published>
-    <updated>2017-01-20T16:11:43.000Z</updated>
+    <updated>2017-07-19T17:01:05.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
 <li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_and_retrieving_form_data#Where_does_the_data_go" target="_blank" rel="external">原文</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_and_retrieving_form_data" target="_blank" rel="external">原文</a></li>
 </ul>
 </blockquote>
 <p>多数时候，<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms" target="_blank" rel="external">HTML表单</a>的目的只是为了把数据发给服务器，之后服务器再处理这些数据并发送响应给用户。虽然看起来挺简单的，但我们还是得注意一些事情以确保传送的数据不会破坏服务器、或者给你的用户制造麻烦。</p>
@@ -877,7 +991,7 @@
 <li>把上传的文件放沙盒里（将它们存储到放到一个不同的服务器上，并且要访问到它们只有通过一个不同的子域名、或一个完全不同的域名才行）。</li>
 </ul>
 <p>若你能遵循这三条规则，就应该能避免绝大多数问题，但一个更好的办法是让一个有资格的第三方来做安全审查，别以为你能看透所有潜在的问题。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如你所见，发送表单数据时很简单的，但保障一个应用的安全就需要很多技术了。前端开发者不是那种去定义一个数据安全模型的角色，虽然可能得执行<a href="">客户端数据校验</a>，但是服务器也不能信任这些校验，因为它并不能确切知道客户端上到底发生过什么。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如你所见，发送表单数据时很简单的，但保障一个应用的安全就需要很多技术了。前端开发者不是那种去定义一个数据安全模型的角色，虽然可能得执行<a href="http://levonlin.info/2016/12/31/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">客户端数据校验</a>，但是服务器也不能信任这些校验，因为它并不能确切知道客户端上到底发生过什么。</p>
 <h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><p>若你想学习更多关于wep应用安全防护的知识，可以深入了解下面这些资源：</p>
 <ul>
 <li><a href="https://www.owasp.org/index.php/Main_Page" target="_blank" rel="external">The Open Web Application Security Project (OWASP)</a></li>
@@ -986,9 +1100,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="DOM" scheme="http://levonlin.info/tags/DOM/"/>
-    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
+    
+      <category term="DOM" scheme="http://levonlin.info/tags/DOM/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
@@ -1410,9 +1524,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
+      <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -1423,7 +1537,7 @@
     <link href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/"/>
     <id>http://levonlin.info/2016/06/29/【译】HTML表单高级样式/</id>
     <published>2016-06-29T07:44:25.000Z</published>
-    <updated>2017-01-20T16:13:00.000Z</updated>
+    <updated>2017-07-19T16:48:33.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
@@ -1632,9 +1746,9 @@
 <li>若想要给下拉菜单中的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" target="_blank" rel="external"><code>&lt;option&gt;</code></a>元素以样式，则Chrome和Opera在不同系统下的表现不尽相同。</li>
 </ul>
 <p>同时，在本例中，我们只讨论了三个CSS属性；想想要考虑更多的CSS属性会有多么混乱。可见，CSS确实不太适合用来改变这些组件的外观和体验，但它仍让你能做些调整，如果你愿意忍受不同浏览器或不同操作系统上的不同的话。</p>
-<p>我们将在下篇文章：<a href="">表单组件的属性兼容表</a>中尝试指出哪些属性是可用的。</p>
+<p>我们将在下篇文章：<a href="http://levonlin.info/2016/08/06/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A1%A8/">表单组件的属性兼容表</a>中尝试指出哪些属性是可用的。</p>
 <h2 id="通向漂亮表单之路：一些有用的库和拓展工具"><a href="#通向漂亮表单之路：一些有用的库和拓展工具" class="headerlink" title="通向漂亮表单之路：一些有用的库和拓展工具"></a>通向漂亮表单之路：一些有用的库和拓展工具</h2><p>尽管CSS在复选框和单选框上的表现力已经够用了，但离其支持高级表单组件仍然遥遥无期。即使在<code>&lt;select&gt;</code>元素上有一些可能，但文件组件、日期选择器等仍不能被添加样式。</p>
-<p>若你想获得对表单组件的完整控制权，你就得依赖Javascript，别无选择。在<a href="">怎样创建定制表单组件</a>一文中，我们将了解如何自己实现它，而如今有一些很有用的库可以帮到你：</p>
+<p>若你想获得对表单组件的完整控制权，你就得依赖Javascript，别无选择。在<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">怎样创建定制表单组件</a>一文中，我们将了解如何自己实现它，而如今有一些很有用的库可以帮到你：</p>
 <ul>
 <li><a href="http://sprawsm.com/uni-form/" target="_blank" rel="external">Uni-form</a>是一个规范了表单格式和使用CSS给予表单样式的框架。在和jQuery一起使用时，它也提供了些额外的可选特性。</li>
 <li><a href="http://formalize.me/" target="_blank" rel="external">Formalize</a>是一些常见Javascript框架（如jQuery、Dojo、YUI等）的一个插件，用于规范化和定制表单。</li>
@@ -1648,7 +1762,7 @@
 </ul>
 <p>要知道，绑定CSS和Javascript会引起副作用。所以若你选择了上述的一种库，就得时常保证在脚本失效时会可回退的样式表。造成脚本失效的原因很多，特别在移动端，故你的Web站点或app设计得能最好地处理这些情况。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>当在HTML表单上使用CSS仍存在许多坑时，有很多方法可以绕过这些坑。本来是没有确切、通用的解决方案的，但现代浏览器带来了新可能。而现在，最佳方案是研究不同浏览器对用在HTML表单组件的CSS的支持程度。</p>
-<p>下篇文章，我们将探索各种HTML表单组件对那些最重要的CSS属性的支持程度：<a href="">表单组件的属性兼容表</a>。</p>
+<p>下篇文章，我们将探索各种HTML表单组件对那些最重要的CSS属性的支持程度：<a href="http://levonlin.info/2016/08/06/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A1%A8/">表单组件的属性兼容表</a>。</p>
 <h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><ul>
 <li><a href="http://diveintohtml5.info/forms.html" target="_blank" rel="external">Dive into HTML5: Forms</a></li>
 <li><a href="http://www.smashingmagazine.com/2011/06/27/useful-ideas-and-guidelines-for-good-web-form-design/" target="_blank" rel="external">Useful ideas and guidelines for good web form design</a></li>
@@ -1668,9 +1782,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
+      <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -1762,11 +1876,11 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="求职" scheme="http://levonlin.info/tags/%E6%B1%82%E8%81%8C/"/>
     
@@ -1777,7 +1891,7 @@
     <link href="http://levonlin.info/2016/06/05/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%A0%B7%E5%BC%8F/"/>
     <id>http://levonlin.info/2016/06/05/【译】HTML表单样式/</id>
     <published>2016-06-05T06:13:20.000Z</published>
-    <updated>2017-01-20T16:12:46.000Z</updated>
+    <updated>2017-07-19T16:50:33.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
@@ -1785,7 +1899,7 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Styling_HTML_forms" target="_blank" rel="external">原文</a></li>
 </ul>
 </blockquote>
-<p>本文中，我们将学习如何使用<a href="https://developer.mozilla.org/en-US/docs/CSS" target="_blank" rel="external">CSS</a>来让<a href="https://developer.mozilla.org/en-US/docs/HTML" target="_blank" rel="external">HTML</a>表单看起来更漂亮，这可能需要窍门才能做到。由于历史及技术上的原因，表单组件并不太适合使用CSS；而也正因为有这些困难，许多的开发者会选择<a href="">创建定制表单组件</a>来获得对外观和体验的控制。然而，在现代浏览器中，网页设计师可以拥有更多对表单元素的控制权了。让我们来深入了解下吧。</p>
+<p>本文中，我们将学习如何使用<a href="https://developer.mozilla.org/en-US/docs/CSS" target="_blank" rel="external">CSS</a>来让<a href="https://developer.mozilla.org/en-US/docs/HTML" target="_blank" rel="external">HTML</a>表单看起来更漂亮，这可能需要窍门才能做到。由于历史及技术上的原因，表单组件并不太适合使用CSS；而也正因为有这些困难，许多的开发者会选择<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">创建定制表单组件</a>来获得对外观和体验的控制。然而，在现代浏览器中，网页设计师可以拥有更多对表单元素的控制权了。让我们来深入了解下吧。</p>
 <h2 id="为何难以使用CSS给表单组件添加样式？"><a href="#为何难以使用CSS给表单组件添加样式？" class="headerlink" title="为何难以使用CSS给表单组件添加样式？"></a>为何难以使用CSS给表单组件添加样式？</h2><p>在web发展的早期，大约1995年，表单控件就已经在<a href="http://www.ietf.org/rfc/rfc1866.txt" target="_blank" rel="external">the HTML 2 specification</a>中给添加到HTML了。由于表单组件的复杂性，浏览器开发商们就选择了依靠操作系统来管理和渲染它们。</p>
 <p>几年之后，CSS诞生了，这就在技术上使得用原生组件来实现表单的做法也有了样式需求。然而在CSS的早期，给表单控件添加样式并未被优先考虑。</p>
 <p>由于用户们习惯了在交互平台上的视觉体验，浏览器开发商不得不让表单控件可以被添加样式；而说实话，在今天也依然难以重构所有表单控件让它们可被样式化。</p>
@@ -1801,11 +1915,11 @@
 <p>此外，还有所有的文本框组件（单行或多行），以及按钮。</p>
 <h4 id="比较糟糕的"><a href="#比较糟糕的" class="headerlink" title="比较糟糕的"></a>比较糟糕的</h4><p>一些元素只能使用很少的样式，而且得依赖一些复杂的技巧，偶尔还得用到CSS3的高级知识。</p>
 <p>这其中包括了<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend" target="_blank" rel="external"><code>&lt;legend&gt;</code></a>元素；该元素不能在跨平台时被恰当地定位。此外，复选框及单选框不能直接添加样式；然而有了CSS3之后你就可以做到这点了。<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder" target="_blank" rel="external">placeholder</a>的内容是不能通过标准方法来添加样式的，但所有实现了它的浏览器都会以私有的CSS伪元素或伪类的形式让你能给它添加样式。</p>
-<p>至于要具体如何处理这些特殊情况，我们会在<a href="">HTML表单高级样式</a>一文中讨论。</p>
+<p>至于要具体如何处理这些特殊情况，我们会在<a href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/">HTML表单高级样式</a>一文中讨论。</p>
 <h4 id="丑陋的"><a href="#丑陋的" class="headerlink" title="丑陋的"></a>丑陋的</h4><p>某些元素是不能用CSS添加样式的。它们包括所有的高级UI组件比如范围滑块、颜色、日期控件，以及下拉组件（包括<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" target="_blank" rel="external"><code>&lt;option&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup" target="_blank" rel="external"><code>&lt;optgroup&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" target="_blank" rel="external"><code>&lt;datalist&gt;</code></a> 等元素）。文件选择器组件也被认为是不能添加样式的，而新的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress" target="_blank" rel="external"><code>&lt;progress&gt;</code></a>和<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter" target="_blank" rel="external"><code>&lt;meter&gt;</code></a>元素也在此之列。</p>
 <p>这些组件的主要问题在于，它们拥有非常复杂的结构，而CSS没有足够的表现力来给这些组件的各个细节添加样式。若你非得定制这些组件，就只能依靠Javascript来构建一棵能让你添加样式的DOM树。我们将在<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms/How_to_build_custom_form_widgets" target="_blank" rel="external">如何创建定制表单组件</a>一文中学习如何做到这一点。</p>
 <h2 id="基本样式"><a href="#基本样式" class="headerlink" title="基本样式"></a>基本样式</h2><p>在用CSS给那些<a href="./#还好的">易于添加样式的元素</a>的元素以样式时，你不必面对任何困难，因为它们多数表现得和其它HTML元素一样。然而，每个浏览器的用户代理样式表会导致一些不一致的情况，所以，这里会有几个技巧来帮你轻松地给它们添加样式。</p>
-<h3 id="搜索框"><a href="#搜索框" class="headerlink" title="搜索框"></a>搜索框</h3><p>搜索框是文本框中唯一一种需要点技巧来添加样式的。在基于webkit的浏览器（chrome, safari等）中，你得用<code>-webkit-appearance</code>属性来作下调整。我们将会在<a href="">HTML表单高级样式</a>一文更深入地探讨该属性。</p>
+<h3 id="搜索框"><a href="#搜索框" class="headerlink" title="搜索框"></a>搜索框</h3><p>搜索框是文本框中唯一一种需要点技巧来添加样式的。在基于webkit的浏览器（chrome, safari等）中，你得用<code>-webkit-appearance</code>属性来作下调整。我们将会在<a href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/">HTML表单高级样式</a>一文更深入地探讨该属性。</p>
 <h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=search]</span> &#123;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> dotted <span class="number">#999</span>;</div><div class="line">  <span class="attribute">border-radius</span>: <span class="number">0</span>;</div><div class="line"></div><div class="line">  <span class="attribute">-webkit-appearance</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><img src="https://developer.mozilla.org/files/4153/search-chrome-macos.png" alt=""></p>
@@ -1829,7 +1943,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">textarea</span> &#123;</div><div class="line">  <span class="attribute">vertical-align</span>: top;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>来看一个给表单以样式的例子吧，通过例子，许多相关的知识点会更容易理解些。而我们要构建的，是如下图所示的contact表单：</p>
 <p><img src="https://developer.mozilla.org/files/4149/screenshot.png" alt=""></p>
-<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><p>相比<a href="">本指南第一篇文章</a>，这里的HTML稍微多了点内容；只有几个额外的字段和一个标题而已。</p>
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><p>相比<a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">本指南第一篇文章</a>，这里的HTML稍微多了点内容；只有几个额外的字段和一个标题而已。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>to: Mozilla<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"from"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>from:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"user_name"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"reply"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span>reply:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"user_email"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"msg"</span>&gt;</span>Your message:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"msg"</span> <span class="attr">name</span>=<span class="string">"user_message"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"> </div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Send your message<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
 <h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>有趣的部分开始了，但在我们编码之前，还需要三个额外的资源：</p>
 <ol>
@@ -1856,7 +1970,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">button</span> &#123;</div><div class="line">  <span class="attribute">position     </span>: absolute;</div><div class="line">  <span class="attribute">left         </span>: <span class="number">440px</span>;</div><div class="line">  <span class="attribute">top          </span>: <span class="number">360px</span>;</div><div class="line"></div><div class="line">  <span class="attribute">padding      </span>: <span class="number">5px</span>;</div><div class="line"></div><div class="line">  <span class="attribute">font         </span>: bold .<span class="number">6em</span> sans-serif;</div><div class="line">  <span class="attribute">border       </span>: <span class="number">2px</span> solid <span class="number">#333</span>;</div><div class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</div><div class="line">  <span class="attribute">background   </span>: none;</div><div class="line"></div><div class="line">  <span class="attribute">cursor       </span>: pointer;</div><div class="line"></div><div class="line"><span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(-1.5deg);</div><div class="line">   <span class="attribute">-moz-transform</span>: <span class="built_in">rotate</span>(-1.5deg);</div><div class="line">    <span class="attribute">-ms-transform</span>: <span class="built_in">rotate</span>(-1.5deg);</div><div class="line">     <span class="attribute">-o-transform</span>: <span class="built_in">rotate</span>(-1.5deg);</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(-1.5deg);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">button</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">  <span class="attribute">content</span>: <span class="string">" &gt;&gt;&gt;"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">button</span><span class="selector-pseudo">:hover</span>,</div><div class="line"><span class="selector-tag">button</span><span class="selector-pseudo">:focus</span> &#123;</div><div class="line">  <span class="attribute">outline   </span>: none;</div><div class="line">  <span class="attribute">background</span>: <span class="number">#000</span>;</div><div class="line">  <span class="attribute">color   </span>: <span class="number">#FFF</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>随意尝试下吧，试了你才知道你可以做到！</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如你所见，如果我们想构建只含文本框和按钮的表单，那么用CSS来提供样式是件很容易的事。若你还想了解多些能让你更轻松地处理表单组件的CSS技巧，可以参见<a href="http://necolas.github.com/normalize.css" target="_blank" rel="external">normalize.css项目</a>的表单部分。</p>
-<p><a href="">下篇文章</a>，我们会学习如何处理那些属于“比较糟糕的”和“丑陋的”类别的表单组件。</p>
+<p><a href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/">下篇文章</a>，我们会学习如何处理那些属于“比较糟糕的”和“丑陋的”类别的表单组件。</p>
 ]]></content>
     
     <summary type="html">
@@ -1872,9 +1986,9 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
       <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
+      <category term="html" scheme="http://levonlin.info/tags/html/"/>
     
       <category term="翻译" scheme="http://levonlin.info/tags/%E7%BF%BB%E8%AF%91/"/>
     
@@ -1885,7 +1999,7 @@
     <link href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/"/>
     <id>http://levonlin.info/2016/05/24/【译】原生表单组件/</id>
     <published>2016-05-24T09:52:28.000Z</published>
-    <updated>2017-01-20T16:11:50.000Z</updated>
+    <updated>2017-07-19T16:40:58.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
@@ -1894,7 +2008,7 @@
 </ul>
 </blockquote>
 <p><a href="https://developer.mozilla.org/en-US/docs/HTML/Forms" target="_blank" rel="external">HTML表单</a>是由组件构成的，这些组件是各种浏览器都支持的内置控件。本文中我们将深入探讨它们、了解它们的作用、学习如何让各种浏览器更好地支持它们。</p>
-<p>虽然这里我们只探讨内建表单组件，但由于HTML表单有诸多限制、以及不同浏览器间的实现有很多的不同，故web开发者有时也得构建自定义的表单组件。这部分内容将会在<a href="">怎样创建定制表单组件</a>一文中详细讨论。</p>
+<p>虽然这里我们只探讨内建表单组件，但由于HTML表单有诸多限制、以及不同浏览器间的实现有很多的不同，故web开发者有时也得构建自定义的表单组件。这部分内容将会在<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">怎样创建定制表单组件</a>一文中详细讨论。</p>
 <h2 id="文本输入框"><a href="#文本输入框" class="headerlink" title="文本输入框"></a>文本输入框</h2><p>文本输入框是最基本的表单组件，它便于用户输入各种数据。然而一些文本框也可以专门用来实现一些特定需求。</p>
 <p>值得注意的是，HTML文本框只是个纯文本输入控件。这就意味着你不能用它来进行<a href="https://developer.mozilla.org/en-US/docs/Rich-Text_Editing_in_Mozilla" target="_blank" rel="external">富文本编辑</a>（如加粗、斜体等）。所谓的富文本编辑器其实都是自定义的组件。</p>
 <p>所有文本框都共享一些公共行为：</p>
@@ -2074,7 +2188,7 @@
 <blockquote>
 <p>注：URL符合格式并不意味着它指向确切存在的地址。</p>
 </blockquote>
-<p>有特殊约束并处于错误状态的输入框会阻止表单提交；此外，为让错误提示更明显，也可以为它们加些样式，我们将在<a href="">表单数据校验</a>一文中详细讨论这点。</p>
+<p>有特殊约束并处于错误状态的输入框会阻止表单提交；此外，为让错误提示更明显，也可以为它们加些样式，我们将在<a href="http://levonlin.info/2016/12/31/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">表单数据校验</a>一文中详细讨论这点。</p>
 <p><strong>兼容性表</strong></p>
 <table>
 <thead>
@@ -2899,7 +3013,7 @@
 </tbody>
 </table>
 <h2 id="其他组件"><a href="#其他组件" class="headerlink" title="其他组件"></a>其他组件</h2><p>还有一些组件难以被归类，因为它们拥有一些非常特殊的行为；但其实它们也是很有用的。</p>
-<h3 id="文件选择器"><a href="#文件选择器" class="headerlink" title="文件选择器"></a>文件选择器</h3><p>HTML表单可以向服务器发送文件，关于这点，在<a href="">发送表单数据</a>一文中有详细的讨论。文件选择器组件是让用户选择一或多个文件进行发送的一种方式。</p>
+<h3 id="文件选择器"><a href="#文件选择器" class="headerlink" title="文件选择器"></a>文件选择器</h3><p>HTML表单可以向服务器发送文件，关于这点，在<a href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/">发送表单数据</a>一文中有详细的讨论。文件选择器组件是让用户选择一或多个文件进行发送的一种方式。</p>
 <p>文件选择器组件是通过<code>type</code>设置为<code>file</code>的<code>&lt;input&gt;</code>元素创建的。被接收的文件类型可通过使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept" target="_blank" rel="external"><code>accept</code></a>属性进行指定；此外，若你想让用户选择不止一个文件，可以添加<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple" target="_blank" rel="external"><code>multiple</code></a>属性。</p>
 <p>在下面的例子中，我们创建了一个接收图像图形文件的文件选择器，它也允许用户选择多个文件。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/*"</span> <span class="attr">multiple</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -3004,7 +3118,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://foo.com"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 译注：原文是value="pos"，明显是错的，下面已改正 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"image"</span> <span class="attr">name</span>=<span class="string">"pos"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">src</span>=<span class="string">"map.png"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>当你点击这个表单的图像时，你会发送出如下URL：</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">http:</span><span class="comment">//foo.com?pos.x=123&amp;pos.y=456</span></div></pre></td></tr></table></figure>
-<p><code>pos.x</code>和<code>pos.y</code>参数的值取决于你点击了图片上哪个地方。这些数据的发送和检索将在<a href="">发送表单数据</a>一文中讨论。</p>
+<p><code>pos.x</code>和<code>pos.y</code>参数的值取决于你点击了图片上哪个地方。这些数据的发送和检索将在<a href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/">发送表单数据</a>一文中讨论。</p>
 <p><strong>兼容性表</strong></p>
 <table>
 <thead>
@@ -3273,11 +3387,11 @@
     
       <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="css" scheme="http://levonlin.info/tags/css/"/>
+    
       <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
     
       <category term="html" scheme="http://levonlin.info/tags/html/"/>
-    
-      <category term="css" scheme="http://levonlin.info/tags/css/"/>
     
       <category term="求职" scheme="http://levonlin.info/tags/%E6%B1%82%E8%81%8C/"/>
     
@@ -3446,7 +3560,7 @@
     <link href="http://levonlin.info/2016/05/03/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E4%B9%88%E6%A0%B7%E6%9E%84%E5%BB%BAHTML%E8%A1%A8%E5%8D%95/"/>
     <id>http://levonlin.info/2016/05/03/【译】怎么样构建HTML表单/</id>
     <published>2016-05-03T08:04:54.000Z</published>
-    <updated>2017-01-20T16:09:55.000Z</updated>
+    <updated>2017-07-19T16:43:27.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
@@ -3455,7 +3569,7 @@
 </ul>
 </blockquote>
 <p>在建立<a href="https://developer.mozilla.org/en-US/docs/HTML/Forms" target="_blank" rel="external">HTML表单</a>时，最重要的一件事就是如何用正确的方式构建它。而之所以重要，原因有二：一是保证表单能被正确使用、二是这能保证你的表单是无障碍的（可以被能力不同的人使用）。而正因HTML表单的<a href="https://developer.mozilla.org/en-US/docs/Accessibility" target="_blank" rel="external">无障碍性</a>很重要，故在本文中我们将了解如何使一个表单无障碍，这并不很难、只是有几个技巧需要你了解下。</p>
-<p>表单的灵活性决定了它们是<a href="https://developer.mozilla.org/en-US/docs/HTML" target="_blank" rel="external">HTML</a>中最复杂的结构。通过使用专门的表单元素和属性，我们可以建立任何形式的表单。也确实有过一些更丰富多彩的脚本技术如<a href="https://developer.mozilla.org/en-US/docs/XForms" target="_blank" rel="external">XForms</a>（现已过时），但很不幸这些表单技术并未被各大浏览器广泛应用。因此，我们往往得依赖Javascript来处理表单；但在本文中，我们只会详细讨论如何使用表单元素，若你想知道如何构建自定义表单组件，可参阅<a href="">怎样创建定制表单组件</a>。</p>
+<p>表单的灵活性决定了它们是<a href="https://developer.mozilla.org/en-US/docs/HTML" target="_blank" rel="external">HTML</a>中最复杂的结构。通过使用专门的表单元素和属性，我们可以建立任何形式的表单。也确实有过一些更丰富多彩的脚本技术如<a href="https://developer.mozilla.org/en-US/docs/XForms" target="_blank" rel="external">XForms</a>（现已过时），但很不幸这些表单技术并未被各大浏览器广泛应用。因此，我们往往得依赖Javascript来处理表单；但在本文中，我们只会详细讨论如何使用表单元素，若你想知道如何构建自定义表单组件，可参阅<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">怎样创建定制表单组件</a>。</p>
 <h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><h3 id="from元素"><a href="#from元素" class="headerlink" title="from元素"></a>from元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form" target="_blank" rel="external"><code>&lt;form&gt;</code></a>元素是用来正式定义表单的元素，其属性决定了表单会有什么行为。当你想要建立一个HTML表单时，就必须以该元素开头。很多无障碍技术或浏览器插件能够检测到<code>&lt;form&gt;</code>元素，同时他们也实现了特殊的方式来让表单更易于使用。</p>
 <blockquote>
 <p>注：严禁把一个form元素嵌套在另一个里边。那样会导致不可预知的行为，具体取决于用户使用了何种浏览器。</p>
@@ -3594,7 +3708,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Payment form<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Required fields are followed by <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"> </div><div class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Contact information<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"title_1"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"title_1"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">value</span>=<span class="string">"M."</span> /&gt;</span></div><div class="line">            Mister</div><div class="line">          <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"title_2"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"title_2"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">value</span>=<span class="string">"Ms."</span> /&gt;</span></div><div class="line">            Miss</div><div class="line">          <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Name: <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">required</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    </div><div class="line">     <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>E-mail: <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"usermail"</span> <span class="attr">required</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line"> </div><div class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Payment information<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"card"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Card type:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"card"</span> <span class="attr">name</span>=<span class="string">"usercard"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"visa"</span>&gt;</span>Visa<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"mc"</span>&gt;</span>Mastercard<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"amex"</span>&gt;</span>American Express<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"number"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Card number:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"number"</span> <span class="attr">name</span>=<span class="string">"cardnumber"</span> <span class="attr">required</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"date"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>Expiration date:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"date"</span> <span class="attr">name</span>=<span class="string">"expiration"</span> <span class="attr">required</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">em</span>&gt;</span>formated as mm/yy<span class="tag">&lt;/<span class="name">em</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line"> </div><div class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">button</span>&gt;</span>Validate the payment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>看一看执行效果吧（这里加了点CSS）</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_structure_an_HTML_form/Example" target="_blank" rel="external">演示</a></p>
-<h2 id="HTML组件"><a href="#HTML组件" class="headerlink" title="HTML组件"></a>HTML组件</h2><p>构建表单时，我们需要一些组件来从用户那儿收集数据。所以在本文中，我们还将看到如何呈现这些组件；若你想了解这些组件是如何工作的，可参见<a href="">原生表单组件</a>。</p>
+<h2 id="HTML组件"><a href="#HTML组件" class="headerlink" title="HTML组件"></a>HTML组件</h2><p>构建表单时，我们需要一些组件来从用户那儿收集数据。所以在本文中，我们还将看到如何呈现这些组件；若你想了解这些组件是如何工作的，可参见<a href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">原生表单组件</a>。</p>
 <h3 id="input元素"><a href="#input元素" class="headerlink" title="input元素"></a>input元素</h3><p>这个元素相当特殊，因为它可以变成不少东西。只要简单设置下其<code>type</code>属性，它就能发生大变化。为简单起见，<code>type</code>的值可归为四种类型：单行文本框、无文本输入的控件、日期控件和按钮。而正因这种多样性，<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank" rel="external"><code>&lt;input&gt;</code></a>元素支持众多属性，但我们很难知道其中那个是相关的、哪个是必须的，这取决于<code>type</code>属性的值。</p>
 <p>下面的表格就是一个汇总（要获得完整的属性列表，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank" rel="external"><code>&lt;input&gt;</code></a>元素的页面）：</p>
 <table>
@@ -3809,7 +3923,7 @@
 </ul>
 <p>下面这个例子中，<code>&lt;textarea&gt;</code>元素会以相同形式渲染出来：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"text_1"</span>&gt;</span>With regular HTML<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"text_1"</span> <span class="attr">name</span>=<span class="string">"regular"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>I'm a paragraphe<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"text_2"</span>&gt;</span>With escaped HTML<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"text_2"</span> <span class="attr">name</span>=<span class="string">"escaped"</span>&gt;</span>&amp;lt;p&amp;gt;I'm a paragraphe&amp;lt;/p&amp;gt;<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>Send me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="select-option和optgroup元素"><a href="#select-option和optgroup元素" class="headerlink" title="select, option和optgroup元素"></a>select, option和optgroup元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素能让你构建选择框（也叫组合框）。选择框是一种让用户选择一或多个预定义的值的组件。单值和多值选择框的不同将在<a href="">原生表单组件</a>一文中进行讨论。</p>
+<h3 id="select-option和optgroup元素"><a href="#select-option和optgroup元素" class="headerlink" title="select, option和optgroup元素"></a>select, option和optgroup元素</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" target="_blank" rel="external"><code>&lt;select&gt;</code></a>元素能让你构建选择框（也叫组合框）。选择框是一种让用户选择一或多个预定义的值的组件。单值和多值选择框的不同将在<a href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">原生表单组件</a>一文中进行讨论。</p>
 <p>选择框中的每个值都会用一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" target="_blank" rel="external"><code>&lt;option&gt;</code></a>元素进行定义，而这些<code>&lt;option&gt;</code>元素也可以置于<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup" target="_blank" rel="external"><code>&lt;optgroup&gt;</code></a>元素中进行分组。</p>
 <p>来看个例子：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"myFruit"</span>&gt;</span>Pick a fruit<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"myFruit"</span> <span class="attr">name</span>=<span class="string">"fruit"</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 这里耍了个小把戏，你以为你选择了根香蕉，其实你是吃了个橘子 &gt;:-) --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"orange"</span>&gt;</span>Banana<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">option</span>&gt;</span>Cherry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">optgroup</span> <span class="attr">label</span>=<span class="string">"berries"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Blueberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Raspberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span>&gt;</span>Strawberry<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">optgroup</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -4010,7 +4124,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="使用ARIA来构建HTML表单"><a href="#使用ARIA来构建HTML表单" class="headerlink" title="使用ARIA来构建HTML表单"></a>使用ARIA来构建HTML表单</h2><p><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA" target="_blank" rel="external">ARIA</a>是一项<a href="http://www.w3.org/TR/wai-aria/" target="_blank" rel="external">W3C候选推荐标准</a>，用于添加到HTML以增强富Internet应用的可访问性。我们将在<a href="">怎样创建定制表单组件</a>一文中更具体地讨论它的使用，但这里有一些基础知识需要先知道。</p>
+<h2 id="使用ARIA来构建HTML表单"><a href="#使用ARIA来构建HTML表单" class="headerlink" title="使用ARIA来构建HTML表单"></a>使用ARIA来构建HTML表单</h2><p><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA" target="_blank" rel="external">ARIA</a>是一项<a href="http://www.w3.org/TR/wai-aria/" target="_blank" rel="external">W3C候选推荐标准</a>，用于添加到HTML以增强富Internet应用的可访问性。我们将在<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">怎样创建定制表单组件</a>一文中更具体地讨论它的使用，但这里有一些基础知识需要先知道。</p>
 <p>在开始之前，要注意浏览器上对ARIA和无障碍技术的支持虽然还远称不上完美，但也已在持续改进之中了。出现这种问题就是因为，浏览器在遇到ARIA属性时，必须给操作系统的无障碍访问层发送消息，而并不是所有浏览器都能跨平台地做好这点。同时无障碍设备自身只能链接到操作系统的无障碍访问层去处理浏览器传来的消息。让人吃惊的是，有些无障碍设备连这点都做不好。</p>
 <p>所以使用无障碍技术并不意味着你的web应用就是无障碍的，而是意味着你已经尽力来做到这点了。暂时来讲，ARIA只是尽最大努力的技术，但还是聊胜于无吧。</p>
 <p>若你还想深入了解ARIA和HTML表单的结合使用，请自行阅读<a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/forms" target="_blank" rel="external">ARIA文档的相关章节</a>。</p>
@@ -4021,7 +4135,7 @@
 <h3 id="aria-label属性"><a href="#aria-label属性" class="headerlink" title="aria-label属性"></a><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute" target="_blank" rel="external">aria-label</a>属性</h3><p>该属性用于给定的组件在DOM中没有明确的label时，它能让你提供一个能通过无障碍设备使用的组件，而无需专门为其创建一个节点来做到这点。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span> <span class="attr">name</span>=<span class="string">"q"</span> <span class="attr">aria-label</span>=<span class="string">"Search"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Go"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
 <h3 id="role属性"><a href="#role属性" class="headerlink" title="role属性"></a><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques" target="_blank" rel="external">role</a>属性</h3><p>这是最重要的一个ARIA属性了，它能让你为给定的HTML元素提供无障碍设备可理解的、特定的语义信息。现在已经有不少可用的role了，且其中一些是表单专用的。</p>
-<p>ARIA致力于给那些在HTML中尚不可用的组件、或已经存在的元素提供语法，我们将会在<a href="">怎样创建定制表单组件</a>一文中看到如何使用这些role。</p>
+<p>ARIA致力于给那些在HTML中尚不可用的组件、或已经存在的元素提供语法，我们将会在<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">怎样创建定制表单组件</a>一文中看到如何使用这些role。</p>
 <p>用于表单组件的role有：</p>
 <ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role" target="_blank" rel="external">Button</a></li>
@@ -4038,7 +4152,7 @@
 <li>Radiogroup</li>
 </ul>
 <p>若你觉得这些role很好用，可在这里了解更多；ARIA是个很庞大的规范，深入探索它能帮你为远超HTML表单之外的领域增强无障碍性。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>现在你已经拥有了所有可用于构建你的HTML表单的知识；下篇文章将会深入其实现细节和功能需求：<a href="">原生表单组件</a>。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>现在你已经拥有了所有可用于构建你的HTML表单的知识；下篇文章将会深入其实现细节和功能需求：<a href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">原生表单组件</a>。</p>
 <h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><ul>
 <li><a href="http://www.alistapart.com/articles/sensibleforms/" target="_blank" rel="external">A List Apart: Sensible Forms: A Form Usability Checklist</a></li>
 </ul>
@@ -4068,28 +4182,28 @@
     <link href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/"/>
     <id>http://levonlin.info/2016/04/28/【译】HTML表单指南-第一个HTML表单/</id>
     <published>2016-04-28T11:30:09.000Z</published>
-    <updated>2017-01-20T16:12:24.000Z</updated>
+    <updated>2017-07-19T16:46:31.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这个系列译自<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Forms" target="_blank" rel="external">mdn上的一份表单指南</a>，原文详尽阐述了表单相关的基础知识。而表单作为一个经典的页面交互方式，是每个前端工程师绕不开的话题，通过翻译这个系列的文章既是有助于扫清自己的知识盲区，也希望借此能让更多人受惠吧~</p>
 <p>先列下目录：</p>
 <ul>
 <li><a href="./#第一个HTML表单">第一个HTML表单</a></li>
-<li><a href="">怎样构建HTML表单</a></li>
-<li><a href="">原生表单组件</a></li>
+<li><a href="http://levonlin.info/2016/05/03/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E4%B9%88%E6%A0%B7%E6%9E%84%E5%BB%BAHTML%E8%A1%A8%E5%8D%95/">怎样构建HTML表单</a></li>
+<li><a href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">原生表单组件</a></li>
 <li>HTML表单的CSS<ul>
-<li><a href="">HTML表单样式</a></li>
-<li><a href="">HTML表单高级样式</a></li>
-<li><a href="">表单组件的属性兼容表</a></li>
+<li><a href="http://levonlin.info/2016/06/05/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%A0%B7%E5%BC%8F/">HTML表单样式</a></li>
+<li><a href="http://levonlin.info/2016/06/29/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E9%AB%98%E7%BA%A7%E6%A0%B7%E5%BC%8F/">HTML表单高级样式</a></li>
+<li><a href="http://levonlin.info/2016/08/06/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A1%A8/">表单组件的属性兼容表</a></li>
 </ul>
 </li>
-<li><a href="">发送表单数据</a></li>
-<li><a href="">表单数据校验</a></li>
-<li><a href="">怎样创建定制表单组件</a></li>
-<li><a href="">通过JavaScript发送表单</a><ul>
-<li><a href="">使用FormData对象</a></li>
+<li><a href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/">发送表单数据</a></li>
+<li><a href="http://levonlin.info/2016/12/31/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">表单数据校验</a></li>
+<li><a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">怎样创建定制表单组件</a></li>
+<li><a href="http://levonlin.info/2017/06/21/%E3%80%90%E8%AF%91%E3%80%91%E9%80%9A%E8%BF%87JavaScript%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95/">通过JavaScript发送表单</a><ul>
+<li><a href="http://levonlin.info/2017/07/15/%E3%80%90%E8%AF%91%E3%80%91%E4%BD%BF%E7%94%A8FormData%E5%AF%B9%E8%B1%A1/">使用FormData对象</a></li>
 </ul>
 </li>
-<li><a href="">遗留浏览器中的表单</a></li>
+<li><a href="http://levonlin.info/2017/07/16/%E3%80%90%E8%AF%91%E3%80%91%E9%81%97%E7%95%99%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84%E8%A1%A8%E5%8D%95/">遗留浏览器中的表单</a></li>
 </ul>
 <blockquote>
 <p><strong>声明</strong>：本文源于mdn，遵循mdn的<a href="https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses" target="_blank" rel="external">相关协议</a>，翻译过程可能会加入我个人的理解，转载请注明出处。</p>
@@ -4102,7 +4216,7 @@
 <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><h3 id="啥是HTML表单？"><a href="#啥是HTML表单？" class="headerlink" title="啥是HTML表单？"></a>啥是HTML表单？</h3><p>HTML表单是用户和网站或引用的一个主要交互点。表单允许用户发送数据给网站，大多数时候数据会发到服务器上，然而页面也可以把数据拦下来给自己用。</p>
 <p>一个HTML表单由一或多个部件组成，这些部件可以是文本框（单行或多行）、选择框、按钮、复选框、或单选按钮。通常，部件们会伴随一个描述它们使用目的的label出现。</p>
 <h3 id="处理表单需要什么？"><a href="#处理表单需要什么？" class="headerlink" title="处理表单需要什么？"></a>处理表单需要什么？</h3><p>处理HTML时，你只需一个文本编辑器和一个浏览器即可。当然，你也也可以使用诸如<a href="http://www.microsoft.com/visualstudio" target="_blank" rel="external">Visual Studio</a>、 <a href="http://www.eclipse.org/" target="_blank" rel="external">Eclipse</a>，<a href="http://www.aptana.com/" target="_blank" rel="external">Aptana</a>之类的IDE。</p>
-<p>此外，HTML表单和常规的HTML的主要区别在于表单收集的数据往往会被发送到服务器，这时你就需要搭个服务器来接受和处理这些数据了。至于如何搭建服务器，本文不作讨论，欲知详情，你可以看一篇这方面的文章：<a href="">发送表单数据</a>。</p>
+<p>此外，HTML表单和常规的HTML的主要区别在于表单收集的数据往往会被发送到服务器，这时你就需要搭个服务器来接受和处理这些数据了。至于如何搭建服务器，本文不作讨论，欲知详情，你可以看一篇这方面的文章：<a href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/">发送表单数据</a>。</p>
 <h2 id="设计你的表单"><a href="#设计你的表单" class="headerlink" title="设计你的表单"></a>设计你的表单</h2><p>在开始撸代码前，最好先花点时间来构思下我们的表单。一个快速设计模型有助于你定义希望从用户那获得的数据集。从用户体验（UX）的观点来看，要知道你的表单越大，你越有可能失去用户。所以你应该保持简单和专注，只问你真想要的内容。要具体讨论表单的用户体验已超出本文的范围，给几篇这方面的文章把：</p>
 <ul>
 <li>Smashing Magazine有不少<a href="http://uxdesign.smashingmagazine.com/tag/forms/" target="_blank" rel="external">和表单UX有关的好文章</a>，但其中最重要的莫属<a href="Extensive Guide To Web Form Usability">Extensive Guide To Web Form Usability</a>啦。</li>
@@ -4119,13 +4233,13 @@
 <li><code>action</code>属性定义了表单收集的数据会被送往的地址（URL）</li>
 <li><code>method</code>属性则定义了用什么http方式来发送数据（比如”get”或”post”方式）</li>
 </ul>
-<p>若你还想知道这些属性是如何工作的，请阅读<a href="">发送表单数据</a>。</p>
+<p>若你还想知道这些属性是如何工作的，请阅读<a href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/">发送表单数据</a>。</p>
 <h3 id="添加label、input和textarea元素"><a href="#添加label、input和textarea元素" class="headerlink" title="添加label、input和textarea元素"></a>添加label、input和textarea元素</h3><p>我们简单的contact表单只有三个带label的文本框：用于姓名输入域的是个基本的单行文本框；用于邮箱的输入域也是单行文本框，不过它只能填入邮箱地址；最后用于发生消息的输入域则是个基本的多行文本框。</p>
 <p>HTML代码如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/my-handling-form-page"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>Name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span>E-mail:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"msg"</span>&gt;</span>Message:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><code>&lt;div&gt;</code>元素在这里用于结构化我们的代码并方便我们定义样式。此外还要注意<code>&lt;label&gt;</code>元素<code>for</code>属性的使用，该属性是一种显式联系label和表单组件的方法，可以给它赋予想要关联组件的<code>id</code>值。这样一来，用户就可以通过点击label来激活表单组件了。如果你还想了解<code>for</code><br>属性的其他好处，就参考这篇文章吧：<a href="">怎样构建HTML表单</a></p>
-<p>至于<code>&lt;input&gt;</code>元素，<code>type</code>属性是其最重要的属性，因为该属性定义了<code>input</code>元素的行为。欲知更多，请阅读<a href="">原生表单组件</a>。</p>
-<p>在我们的示例里，一个文本框中用了该属性的默认值<code>text</code>，该值表示一个基本的单行文本框，用于接收无控制或验证的任何文本。而另外一个文本框则使用了值<code>email</code>，表示定义一个只接收合法邮箱地址单行文本框，也就是说它会对用户输入的数据进行一些检查。我们会在<a href="">表单数据校验</a>这篇文章里讨论更多和表单验证有关的内容，</p>
+<p><code>&lt;div&gt;</code>元素在这里用于结构化我们的代码并方便我们定义样式。此外还要注意<code>&lt;label&gt;</code>元素<code>for</code>属性的使用，该属性是一种显式联系label和表单组件的方法，可以给它赋予想要关联组件的<code>id</code>值。这样一来，用户就可以通过点击label来激活表单组件了。如果你还想了解<code>for</code><br>属性的其他好处，就参考这篇文章吧：<a href="http://levonlin.info/2016/05/03/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E4%B9%88%E6%A0%B7%E6%9E%84%E5%BB%BAHTML%E8%A1%A8%E5%8D%95/">怎样构建HTML表单</a></p>
+<p>至于<code>&lt;input&gt;</code>元素，<code>type</code>属性是其最重要的属性，因为该属性定义了<code>input</code>元素的行为。欲知更多，请阅读<a href="http://levonlin.info/2016/05/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8E%9F%E7%94%9F%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">原生表单组件</a>。</p>
+<p>在我们的示例里，一个文本框中用了该属性的默认值<code>text</code>，该值表示一个基本的单行文本框，用于接收无控制或验证的任何文本。而另外一个文本框则使用了值<code>email</code>，表示定义一个只接收合法邮箱地址单行文本框，也就是说它会对用户输入的数据进行一些检查。我们会在<a href="http://levonlin.info/2016/12/31/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">表单数据校验</a>这篇文章里讨论更多和表单验证有关的内容，</p>
 <p>最后，我们来比较下<code>&lt;input/&gt;</code>和<code>&lt;textarea&gt;&lt;/textarea&gt;</code>间的语法差别。<code>&lt;input/&gt;</code>就是所谓的自动闭合元素，这种元素需要你加个”/“而不是结束标签来闭合（译注：这只是xhtml的强制要求，但在html里不用”/“也是可以的）；而<code>&lt;textarea&gt;</code>与之相反，并非自动闭合，这时你就得乖乖加上结束标签来闭合了。这点语法差别，其实决定了这两种元素在表单上设定默认值方法有所不同。</p>
 <p>若要定义<code>&lt;input&gt;</code>元素的默认值，你得和下面的示例一样使用<code>value</code>属性：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"by default this element is filled with this text"</span> /&gt;</span></div></pre></td></tr></table></figure>
@@ -4148,7 +4262,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">form</span> <span class="selector-tag">div</span> + <span class="selector-tag">div</span> &#123;</div><div class="line">    <span class="attribute">margin-top</span>: <span class="number">1em</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后再来解决label们，最佳做法是设置所有label为统一大小并沿同一方向对齐。这里我们使用右对齐，但某些情况下使用左对齐也可以：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">label</span> &#123;</div><div class="line">    <span class="comment">/* 确保所有label大小相同并适当对齐 */</span></div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    <span class="attribute">width</span>: <span class="number">90px</span>;</div><div class="line">    <span class="attribute">text-align</span>: right;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>其实HTML表单的组件样式还是蛮难整的，其中文本框还算简单、但其他组件就难说了，若想深入了解如何设置表单组件样式，可见<a href="">HTML表单样式</a>。</p>
+<p>其实HTML表单的组件样式还是蛮难整的，其中文本框还算简单、但其他组件就难说了，若想深入了解如何设置表单组件样式，可见<a href="http://levonlin.info/2016/06/05/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%A0%B7%E5%BC%8F/">HTML表单样式</a>。</p>
 <p>首先我们进行下一些通用配置：协调字体、大小和边框：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span>, <span class="selector-tag">textarea</span> &#123;</div><div class="line">    <span class="comment">/* 确保所有文本框有相同的字体设置</span></div><div class="line">       默认设置一个等宽字体 */</div><div class="line">    <span class="attribute">font</span>: <span class="number">1em</span> sans-serif;</div><div class="line"></div><div class="line">    <span class="comment">/* 给所有文本框设置相同的大小 */</span></div><div class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</div><div class="line">    <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">    <span class="attribute">box-sizing</span>: border-box;</div><div class="line"></div><div class="line">    <span class="comment">/* 协调文本框边框的外形 */</span></div><div class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#999</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>HTML表单还支持不少伪类，用以表现各元素的状态。比如，我们可以在组件被激活时作突出显示，这样可以方便用户知道表单填到哪一步了：</p>
@@ -4166,7 +4280,7 @@
 <p>要给你的数据命名，就得给那些需要收集特定数据的表单组件加上<code>name</code>属性：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/my-handling-form-page"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>Name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"user_name"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mail"</span>&gt;</span>E-mail:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"mail"</span> <span class="attr">name</span>=<span class="string">"user_email"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"msg"</span>&gt;</span>Message:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"msg"</span> <span class="attr">name</span>=<span class="string">"user_message"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Send your message<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>在本例中，表单会发送三组数据，依次命名为user_name、user_email和user_message，他们会以HTTP POST的方式发送到URL”/my-handling-form-page”。</p>
-<p>而在服务端，负责处理URL”/my-handling-form-page”的脚本会从HTTP请求中以3组键/值对的形式接收这些数据。至于脚本如何处理这些数据就取决于你的需求了，各种服务端语言（PHP, Python, Ruby, Java, C#等）有它们自有的机制来做这件事。要深入探究这方面就不是本文的主题了，欲知详情，我们会在<a href="">发送表单数据</a>这篇文章中给你一些例子。</p>
+<p>而在服务端，负责处理URL”/my-handling-form-page”的脚本会从HTTP请求中以3组键/值对的形式接收这些数据。至于脚本如何处理这些数据就取决于你的需求了，各种服务端语言（PHP, Python, Ruby, Java, C#等）有它们自有的机制来做这件事。要深入探究这方面就不是本文的主题了，欲知详情，我们会在<a href="http://levonlin.info/2016/09/24/%E3%80%90%E8%AF%91%E3%80%91%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE/">发送表单数据</a>这篇文章中给你一些例子。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>恭喜！你终于完成你的第一个HTML表单啦~下面就是最终效果的在线演示：</p>
 <p><a href="https://mdn.mozillademos.org/en-US/docs/Web/Guide/HTML/Forms/My_first_HTML_form/Example$samples/A_simple_form?revision=1012447" target="_blank" rel="external">演示</a></p>
 <p>接下来是时候更上一层楼了，其实HTML表单远比我们在这里展现的强大，<a href="./#前言">本指南的其他文章</a>将会帮助你掌握剩下的内容。</p>
@@ -4211,88 +4325,6 @@
     <summary type="html">
     
       &lt;p&gt;在DOM操作中，我们如果要获取和修改节点的的文本，就离不开&lt;code&gt;textContent&lt;/code&gt;或&lt;code&gt;innerText&lt;/code&gt;属性。其中&lt;code&gt;textContent&lt;/code&gt;作为标准方法，但无奈要IE8+；而&lt;code&gt;innerText
-    
-    </summary>
-    
-      <category term="前端" scheme="http://levonlin.info/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="http://levonlin.info/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="javascript" scheme="http://levonlin.info/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>原生js练习题---第六课</title>
-    <link href="http://levonlin.info/2016/04/27/%E5%8E%9F%E7%94%9Fjs%E7%BB%83%E4%B9%A0%E9%A2%98-%E7%AC%AC%E5%85%AD%E8%AF%BE/"/>
-    <id>http://levonlin.info/2016/04/27/原生js练习题-第六课/</id>
-    <published>2016-04-27T04:55:15.000Z</published>
-    <updated>2016-12-24T09:45:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x1完美拖拽"><a href="#0x1完美拖拽" class="headerlink" title="0x1完美拖拽"></a>0x1完美拖拽</h2><p>实现效果：</p>
-<p></p><p data-height="300" data-theme-id="17410" data-slug-hash="GZYNGW" data-default-tab="result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/GZYNGW/" target="_blank" rel="external">6-01完美拖动</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-<p>这里没有使用h5的拖动，毕竟原题也是考察借助鼠标事件实现自定义的拖动，所以就借鉴了《js高级程序设计》里的自定义拖动自己封装了个拖动api，当然由于做这个系列题目使用的都是es5的语法，所以IE8往下就兼容不到了（有兴趣的可以自己一试）。</p>
-<p>首先有一个自定义的事件对象构造函数<code>EventTarget</code>，内部封装了事件的监听、触发、移除监听三个基本操作。再由<code>EventTarget</code>拓展一个和拖动操作有关的单例对象，这个对象是的主要任务就是把指定元素上的触发的鼠标事件转换为触发我们自定义的拖动事件，该对象接口方法介绍如下：</p>
-<ul>
-<li><code>enable()</code>：开启整个文档上拖动事件与鼠标事件的关联</li>
-<li><code>disable()</code>：关闭拖动事件与鼠标事件的关联，也就是点击时不再触发自定义的拖动操作</li>
-<li><code>addHandler(eventName, handler)</code>：给相应拖动事件添加处理函数。<em>注意由于拖动事件是全局关联，所以若处理函数是针对指定元素的操作，不仅要先在该元素上添加<code>class=&quot;draggable&quot;</code>，而且在处理函数里还要判断触发事件的就是该元素才行</em></li>
-<li><code>removeHandler(eventName, handler)</code>：移除指定的拖动事件上的某个处理函数</li>
-</ul>
-<p>再介绍下三个自定义的拖动事件：</p>
-<ul>
-<li><code>dragstart</code>：由<code>mousedown</code>转换而来，事件对象的属性有：<ul>
-<li>type: ‘dragstart’</li>
-<li>target: 鼠标点击的draggable元素</li>
-<li>clientX, clientY: 同<code>mousedown</code></li>
-</ul>
-</li>
-<li><code>drag</code>：由<code>mousemove</code>转换而来，事件对象的属性有：<ul>
-<li>type: ‘drag’</li>
-<li>target: 鼠标点击的draggable元素</li>
-<li>clientX, clientY: 同<code>mousemove</code></li>
-<li>diffX, diffY: 用于校正<code>clientX</code>, <code>clientY</code>与实际要达到的拖动位置的偏差。需在<code>dragstart</code>做指定，否则默认值为0</li>
-</ul>
-</li>
-<li><code>dragend</code>：由<code>mouseup</code>转换而来，事件对象的属性有：<ul>
-<li>type: ‘dragend’</li>
-<li>target: 鼠标点击的draggable元素</li>
-<li>clientX, clientY: 同<code>mouseup</code></li>
-</ul>
-</li>
-</ul>
-<p>api有了，我们就可以调用<code>enable</code>开启拖动，再和原生的事件一样给题目中的拖动块添加三个事件处理函数即可。只是要注意由于<code>addHandler</code>方法不能指定元素，所以还得在拖动块上添加<code>class=&quot;draggable&quot;</code>、并在处理函数里做个判断才行。利器在手，接下来要做的限制移动范围、展示坐标、回放拖动等都是小case啦，这题的代码就当是这套api的示例了。</p>
-<h2 id="0x2仿腾讯微博效果"><a href="#0x2仿腾讯微博效果" class="headerlink" title="0x2仿腾讯微博效果"></a>0x2仿腾讯微博效果</h2><p>实现效果:</p>
-<p></p><p data-height="300" data-theme-id="17410" data-slug-hash="KzEPQM" data-default-tab="result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/KzEPQM/" target="_blank" rel="external">6-02仿腾讯微博效果</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-<p>这次来个大制作，只要再搭个后台弄点数据交互，几乎就是一个完整的webApp了。就页面而言，主要就是实现表单获取数据和数据列表的展现，所以这里分别封装了两个单例<code>MsgForm</code>和<code>MsgList</code>对应表单和展示列表，来实现相关的功能。</p>
-<p><code>MsgForm</code>只提供了<code>init</code>方法来添加各个表单组件的事件监听。该部件最重要的就是对表单的验证了，既要有提交时的验证，也要保证能在输入时即时给出字数提醒。正则用的溜的话其实也不难。</p>
-<p>至于<code>MsgList</code>则主要实现增删DOM的操作，难点就是呈现和隐藏两个动画的实现。这里利用<code>setTimeout</code>手动调节出了效果，写得还是比较ugly的，拓展性还不强。</p>
-<p>最后注意几个语法上的问题，一是键盘事件也是可以使用辅助按键属性：<code>ctrlKey</code>, <code>altKey</code>, <code>shiftKey</code>, <code>metaKey</code>，而不用像第五课做过的一题那样去缓存按键了。第二就是用js获取的css属性值，不论是通过<code>element.style</code>还是<code>window.getComputedStyle()</code>，返回的都是字符串，所以要进行运算只能手动转为数字；这一点和js中获取宽高、位置的属性如<code>offsetWidth</code>等直接返回数字不同。</p>
-<h2 id="0x3自定义多级右键菜单"><a href="#0x3自定义多级右键菜单" class="headerlink" title="0x3自定义多级右键菜单"></a>0x3自定义多级右键菜单</h2><p>实现效果：</p>
-<p></p><p data-height="300" data-theme-id="17410" data-slug-hash="eZoZqR" data-default-tab="result" data-user="levonlin" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/levonlin/pen/eZoZqR/" target="_blank" rel="external">6-03自定义多级右键菜单</a> by levonlin (<a href="http://codepen.io/levonlin" target="_blank" rel="external">@levonlin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-<p>第五课第六题中已经通过<code>contextmenu</code>事件实现了一级右键菜单，所以这题只要在上面再添加事件唤出子菜单即可。</p>
-<p>首先解决第五课第六题题在实现时留下的一个bug：菜单有时会显示到容器外。原因很简单，由于是先定位菜单再显示菜单，导致要依靠宽高的定位并不能起作用；所以这里保证菜单先显现出来拥有宽高即可。</p>
-<p>然后就是实现多级子菜单了，这里直接使用css的<code>hover</code>伪类控制显隐，只把定位交给<code>mouseover</code>事件来做即可。因为如果使用<code>mouseover</code>和<code>mouseout</code>控制显隐，由于冒泡的特性会导致移到子菜单前父菜单就已经消失的问题，虽然前面做过的题目有用过<code>setTimeout</code>延迟消失来解决这一问题的，但这样写起来实在太丑陋了，不考虑兼容老旧浏览器情况下还是用css做更清晰高效。</p>
-<p>至于如何定位，也是沿用第五课的思路：设置各级子菜单绝对定位；显示菜单时先计算容器右侧和底部的剩余空间；再分别判断能否容得下子菜单的宽高，若容得下则子菜单出现在父元素右下角，否则就做出相应的变化。</p>
-<p>最后再总结遇到的几个问题：</p>
-<ul>
-<li>子菜单定位时遇到的问题：js的<code>offsetTop</code>, <code>offsetLeft</code>属性获得的都是相对父容器的位置而不是绝对位置，要获取绝对位置必须进行向上遍历。</li>
-<li>子菜单<code>li</code>元素的宽度不能容得下其文本内容，导致文本折叠：不设置宽度的绝对定位元素，其宽度是由<strong>最长的文本内容</strong>决定的。若文本自动换行那最长文本就是最长单词而已，所以得设置<code>white-space: nowrap;</code>使文本不换行，才能保证<code>li</code>元素的宽度能够容得下其所有文本内容。而具体关于元素宽高为<code>auto</code>时其宽高在不同情况会受到什么影响，我会专门写一篇文章来分析分析~</li>
-</ul>
-<p>—第六课完—</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x1完美拖拽&quot;&gt;&lt;a href=&quot;#0x1完美拖拽&quot; class=&quot;headerlink&quot; title=&quot;0x1完美拖拽&quot;&gt;&lt;/a&gt;0x1完美拖拽&lt;/h2&gt;&lt;p&gt;实现效果：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;p data-height=&quot;300&quot; data-theme-i
     
     </summary>
     

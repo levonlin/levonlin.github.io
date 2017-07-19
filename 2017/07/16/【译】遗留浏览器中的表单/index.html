@@ -1,0 +1,435 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【译】遗留浏览器中的表单 | 荒村</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    
+    <meta name="description" content="系列文章说明
+原文
+
+
+所有的web开发者都会很快（或者很痛苦地）意识到Web是一个粗糙的环境，其中最糟糕的一点就是老旧的浏览器。提到“老旧浏览器”，我们脑海中往往复现的就是旧版的IE。但其实老旧浏览器不止这一种，一个一年前的Firefox，比如ESR版本也算得上老旧了。至于移动端，由于有些浏览器和">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="荒村" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+  
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d182ed77fc48758bf45a33835ee35745";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','Rr85pzY1M1tZC1UWGo8f');
+</script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="荒村">荒村</a></h1>
+				<h2 class="blog-motto">新草掩旧路，野鬼吟残书。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="st-search-inpu" maxlength="20" placeholder="Search" />
+						</form>
+					
+					</li>
+                <!--<li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>-->
+
+				</ul>
+			</nav>	
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/16/【译】遗留浏览器中的表单/" title="【译】遗留浏览器中的表单" itemprop="url">【译】遗留浏览器中的表单</a>
+  </h1>
+  <p class="article-time">
+    <time datetime="2017-07-16T07:53:32.000Z" itemprop="datePublished">2017年 7月 16日</time>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title"></strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#了解存在的问题"><span class="toc-number">1.</span> <span class="toc-text">了解存在的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器开发商的文档"><span class="toc-number">1.1.</span> <span class="toc-text">浏览器开发商的文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三方文档"><span class="toc-number">1.2.</span> <span class="toc-text">第三方文档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让事情变得简单"><span class="toc-number">2.</span> <span class="toc-text">让事情变得简单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优雅降级是web开发者的最佳朋友"><span class="toc-number">2.1.</span> <span class="toc-text">优雅降级是web开发者的最佳朋友</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTML的输入框类型"><span class="toc-number">2.1.1.</span> <span class="toc-text">HTML的输入框类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS的特性选择器"><span class="toc-number">2.1.2.</span> <span class="toc-text">CSS的特性选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表单按钮"><span class="toc-number">2.1.3.</span> <span class="toc-text">表单按钮</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#放弃CSS"><span class="toc-number">2.2.</span> <span class="toc-text">放弃CSS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特征检测和polyfill"><span class="toc-number">3.</span> <span class="toc-text">特征检测和polyfill</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#“不起眼的“JavaScript"><span class="toc-number">3.1.</span> <span class="toc-text">“不起眼的“JavaScript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modernizr库"><span class="toc-number">3.2.</span> <span class="toc-text">Modernizr库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关注性能"><span class="toc-number">3.3.</span> <span class="toc-text">关注性能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">4.</span> <span class="toc-text">结论</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<ul>
+<li><a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">系列文章说明</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/HTML_forms_in_legacy_browsers" target="_blank" rel="external">原文</a></li>
+</ul>
+</blockquote>
+<p>所有的web开发者都会很快（或者很痛苦地）意识到Web是一个粗糙的环境，其中最糟糕的一点就是老旧的浏览器。提到“老旧浏览器”，我们脑海中往往复现的就是旧版的IE。但其实老旧浏览器不止这一种，一个一年前的Firefox，比如<a href="http://www.mozilla.org/en-US/firefox/organizations/" target="_blank" rel="external">ESR版本</a>也算得上老旧了。至于移动端，由于有些浏览器和操作系统都不能升级，这就导致了许多老旧的安卓手机或iPhone上的浏览器不是最新的，这些也算是老旧浏览器。</p>
+<p>令人沮丧的是，我们工作的一部分都要耗在老旧浏览器这片荒野上。但幸运的是，有一些技巧可以协助解决由老旧浏览器引起的80%的问题。</p>
+<h2 id="了解存在的问题"><a href="#了解存在的问题" class="headerlink" title="了解存在的问题"></a>了解存在的问题</h2><p>实际上，首要的任务是阅读这些浏览器的文档、试着理解其公共部分。比如，CSS的支持程度是HTML表单的一个重大问题，若你刚开始开发，应先检查下要用的元素（或DMO接口）的支持程度。虽然许多web页面要用的元素、属性、API的兼容性表格，MDN上都有；但别的资源也能提供很大的帮助：</p>
+<h3 id="浏览器开发商的文档"><a href="#浏览器开发商的文档" class="headerlink" title="浏览器开发商的文档"></a>浏览器开发商的文档</h3><ul>
+<li>Mozilla：就在你现在所访问的地方啦（译注：<a href="https://developer.mozilla.org/" target="_blank" rel="external">MDN</a>）</li>
+<li>Microsoft：<a href="http://msdn.microsoft.com/en-us/library/ff410218%28v=vs.85%29.aspx" target="_blank" rel="external">Internet Explorer Standards Support Documentation</a></li>
+<li>Opera：<a href="http://www.opera.com/docs/specs/" target="_blank" rel="external">Web specification support in Opera</a></li>
+<li>WebKit：由于该引擎有着几个不同的版本，想找到对应文档需要些技巧：<ul>
+<li><a href="https://www.webkit.org/blog/" target="_blank" rel="external">Webkit博客</a>和<a href="http://planet.webkit.org/" target="_blank" rel="external">Planet Webkit</a>汇总了Webkit内核开发者一些最好的文章。</li>
+<li><a href="http://www.chromium.org/developers/web-platform-status" target="_blank" rel="external">chromium网站</a>也很重要。</li>
+<li>还有<a href="https://developer.apple.com/technologies/safari/" target="_blank" rel="external">Apple的网站</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="第三方文档"><a href="#第三方文档" class="headerlink" title="第三方文档"></a>第三方文档</h3><ul>
+<li><a href="http://caniuse.com/" target="_blank" rel="external">Can I Use</a>上有各类技术的支持程度信息。</li>
+<li><a href="http://www.quirksmode.org/" target="_blank" rel="external">Quirks Mode</a>是关于浏览器兼容性的一个极好资源。其<a href="http://www.quirksmode.org/mobile/" target="_blank" rel="external">移动部分</a>是现在最好的。</li>
+<li><a href="http://positioniseverything.net/" target="_blank" rel="external">Position Is Everything</a>是一份关于老旧浏览器渲染问题及其解决方法的最好资料。</li>
+<li><a href="http://mobilehtml5.org/" target="_blank" rel="external">Mobile HTML5 </a>有着大量移动端浏览器兼容性信息，不只有那些“前5的浏览器”（译注：大概包括苹果、安卓、Nokia、Amazon、Blackberry）</li>
+</ul>
+<h2 id="让事情变得简单"><a href="#让事情变得简单" class="headerlink" title="让事情变得简单"></a>让事情变得简单</h2><p>由于HTML表单包含了大量复杂的交互，我们得记住一条法则：<a href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank" rel="external">keep it as simple as possible</a>。许多情况下我们会想让表单变得“漂亮”或“带有高级功能”，但构建高效的HTML表单并不单靠设计或技术就能解决，建议花点时间阅读下<a href="http://www.uxforthemasses.com/forms-usability/" target="_blank" rel="external">forms usability on UX For The Masses</a>这篇文章.</p>
+<h3 id="优雅降级是web开发者的最佳朋友"><a href="#优雅降级是web开发者的最佳朋友" class="headerlink" title="优雅降级是web开发者的最佳朋友"></a>优雅降级是web开发者的最佳朋友</h3><p><a href="http://www.sitepoint.com/progressive-enhancement-graceful-degradation-choice/" target="_blank" rel="external">优雅降级和渐进增强</a>这两个开发模式通过同时支持众多的浏览器，能让你建立伟大的产品。当你在现代浏览器上构建了一些东西，并想确保它能在老旧浏览器上运行时，你就是在使用优雅降级了。</p>
+<p>接下来我们看些关于HTML表单的例子：</p>
+<h4 id="HTML的输入框类型"><a href="#HTML的输入框类型" class="headerlink" title="HTML的输入框类型"></a>HTML的输入框类型</h4><p>HTML5带来的输入框类型非常酷，因为它们作降级处理的方法是可预见的。若浏览器不认识<code>&lt;input&gt;</code>元素的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type" target="_blank" rel="external">type</a>特性值，就会回退到<code>text</code>类型。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">label</span> <span class="keyword">for</span>=<span class="string">"myColor"</span>&gt;</div><div class="line">  Pick <span class="selector-tag">a</span> <span class="attribute">color</span></div><div class="line">  &lt;<span class="selector-tag">input</span> type=<span class="string">"color"</span> id=<span class="string">"myColor"</span> name=<span class="string">"color"</span>&gt;</div><div class="line">&lt;/label&gt;</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>chrome 24</th>
+<th>Firefox 18</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://developer.mozilla.org/files/4575/color-fallback-chrome.png" alt=""></td>
+<td><img src="https://developer.mozilla.org/files/4577/color-fallback-firefox.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<h4 id="CSS的特性选择器"><a href="#CSS的特性选择器" class="headerlink" title="CSS的特性选择器"></a>CSS的特性选择器</h4><p><a href="https://developer.mozilla.org/en-US/docs/CSS/Attribute_selectors" target="_blank" rel="external">CSS的特性选择器</a>对HTML表单来讲非常有用，但某些老旧的浏览器并不支持它。此时我们常会用一个等价的类名来替代该特性：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"number"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"number"</span>&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span>[type=number] &#123;</div><div class="line">  <span class="comment">/* 这里的样式会在某些浏览器下失效 */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.number</span> &#123;</div><div class="line">  <span class="comment">/* 该处样式可以在每个地方都生效 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要注意下面的代码是没有必要的（冗余），而且也会在某些浏览器下失效：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span>[type=number],</div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.number</span> &#123;</div><div class="line">  <span class="comment">/* 这里的样式会在某些浏览器下失效，因为它们若不能失败其中一个选择器，</span></div><div class="line">     就会跳过整段规则 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="表单按钮"><a href="#表单按钮" class="headerlink" title="表单按钮"></a>表单按钮</h4><p>在HTML表单中定义按钮有两种方式：</p>
+<ul>
+<li><code>&lt;input&gt;</code>元素的type特性设为<code>button</code>, <code>submit</code>, <code>reset</code>或<code>image</code></li>
+<li><code>&lt;button&gt;</code>元素</li>
+</ul>
+<p>若你想使用元素选择器来指定CSS，使用<code>&lt;input&gt;</code>元素的话会有些麻烦：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"button"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"button"</span> value=<span class="string">"click me"</span>&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span> &#123;</div><div class="line">  <span class="comment">/* 这处规则会覆盖input定义的按钮的默认样式 */</span></div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#CCC</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.button</span> &#123;</div><div class="line">  <span class="comment">/* 这里并不会恢复默认样式 */</span></div><div class="line">  <span class="attribute">border</span>: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.button</span> &#123;</div><div class="line">  <span class="comment">/* 这里也不会恢复！实际上在所有浏览器下都没有方法来做到这点。 */</span></div><div class="line">  <span class="attribute">border</span>: auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用<code>&lt;button&gt;</code>元素则要面对两个问题：</p>
+<ul>
+<li>老旧IE下会有一个bug，当用户点击按钮时，发送的不是<code>value</code>特性的内容，而是<code>&lt;button&gt;</code>元素起止标签间的HTML内容。当然个问题只有当你想发送<code>value</code>的值时才会凸显，例如，你可能想处理关于用户点击了哪个按钮的数据。</li>
+<li>某些非常老旧的浏览器不会吧<code>submit</code>作为<code>type</code>特性的默认值，故而还是推荐你总是设置<code>&lt;button&gt;</code>元素的<code>type</code>特性。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 有时点击该按钮会发送"&lt;em&gt;Do A&lt;/em&gt;"而不是"A" --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"IWantTo"</span> <span class="attr">value</span>=<span class="string">"A"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">em</span>&gt;</span>Do A<span class="tag">&lt;/<span class="name">em</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>选择这两种元素中的哪种，取决于你项目中的约束。</p>
+<h3 id="放弃CSS"><a href="#放弃CSS" class="headerlink" title="放弃CSS"></a>放弃CSS</h3><p>HTML表单和老旧浏览器的最大问题是对CSS的支持。如你在<a href="http://levonlin.info/2016/08/06/%E3%80%90%E8%AF%91%E3%80%91%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A1%A8/">表单组件的属性兼容性表</a>一文中所见到的，这很难处理。即使在文本元素上可能可以做些微调（比如大小和颜色），但通常也会有副作用。所以剩下的最佳方式就是不要给HTML表单组件添加一点样式，不过你仍可以给周边元素添加样式。作为专业人士，若你遇到你的客户一定需要给表单组件加样式，可以调研下某些困难的技术，譬如<a href="http://levonlin.info/2017/05/31/%E3%80%90%E8%AF%91%E3%80%91%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E5%AE%9A%E5%88%B6%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6/">用JavaScript重构表单组件</a>。但其实在这种情况下，你应该毫不犹豫地<a href="http://www.smashingmagazine.com/2011/11/03/%E2%80%9Cbut-the-client-wants-ie-6-support%E2%80%9D/" target="_blank" rel="external">指出客户的愚蠢之处</a>。</p>
+<h2 id="特征检测和polyfill"><a href="#特征检测和polyfill" class="headerlink" title="特征检测和polyfill"></a>特征检测和polyfill</h2><p>虽然在现代浏览器上JavaScript是个很棒的技术，但在老旧浏览器上使用它却有很多问题。</p>
+<h3 id="“不起眼的“JavaScript"><a href="#“不起眼的“JavaScript" class="headerlink" title="“不起眼的“JavaScript"></a>“不起眼的“JavaScript</h3><p>JavaScript最大的问题就是API的可用性。因此，最佳实践是使用”不起眼的“JavaScript。这是一种开发模式，规定了两个要求：</p>
+<ul>
+<li>结构和行为严格分离。</li>
+<li>如果代码挂掉，页面内容和基本的功能必须还有可访问性和可用性。</li>
+</ul>
+<p><a href="http://docs.webplatform.org/wiki/concepts/programming/the_principles_of_unobtrusive_javascript" target="_blank" rel="external">The principles of unobtrusive JavaScript</a>一文很好地阐述了该观点。（该文由Peter-Paul Koch为Dev.Opera.com撰写，现已移至Docs.WebPlatform.org）</p>
+<h3 id="Modernizr库"><a href="#Modernizr库" class="headerlink" title="Modernizr库"></a>Modernizr库</h3><p>多数情况下，一个好的”polyfill“可以帮我们提供那些缺失的API。所谓的<a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/" target="_blank" rel="external">polyfill</a>，是指一小段用于“填补”老旧浏览器功能上的坑的JavaScript。它们可以用于提供任何功能上的支持，相比CSS或HTML的polyfill，为JavaScript使用polyfill会有更小的风险；毕竟JavaScript会在很多情况下挂掉（比如网络问题、代码冲突等等）。但即使不用polyfill，只要你开发时心中存有“不起眼的“JavaScript原则，其实也没什么大不了。</p>
+<p>为缺失的API提供polyfill，最佳的方式是使用<a href="http://modernizr.com/" target="_blank" rel="external">Modernizr</a>库及其衍生项目<a href="http://yepnopejs.com/" target="_blank" rel="external">YepNoep</a>。Modernizr是一个能测试功能可用性、并以此来做相应动作的库。YepNoep则是一个按条件作加载的库。</p>
+<p>举个例子：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">Modernizr</span><span class="selector-class">.load</span>(&#123;</div><div class="line">  <span class="comment">// 此处测试浏览器是否支持HTML5的表单校验API</span></div><div class="line">  <span class="attribute">test </span>: Modernizr.formvalidation,</div><div class="line"> </div><div class="line">  <span class="comment">// 若浏览器不支持，则加载下列polyfill</span></div><div class="line">  <span class="attribute">nope </span>: form-validation-API-polyfill.js,</div><div class="line"> </div><div class="line">  <span class="comment">// 在任何情况下，依赖那个API的核心App文件都会被下载</span></div><div class="line">  <span class="attribute">both </span>: app.js,</div><div class="line"> </div><div class="line">  <span class="comment">// 一旦这些文件都被加载了，下面的函数调用就会来初始化App</span></div><div class="line">  <span class="attribute">complete </span>: function () &#123;</div><div class="line">    app.init();</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Modernizr团队还维护了<a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills" target="_blank" rel="external">一个好用的polyfill列表</a>，请按需自取。</p>
+<blockquote>
+<p><strong>注意：</strong>在使用“不起眼的“JavaScript原则和优雅降级技术时，Modernizr其它一些很棒的特性也能帮到你。请<a href="http://modernizr.com/docs/" target="_blank" rel="external">阅读Modernizr的文档</a></p>
+</blockquote>
+<h3 id="关注性能"><a href="#关注性能" class="headerlink" title="关注性能"></a>关注性能</h3><p>即使像Modernizr已经很注重性能了，但加载200kB的polyfill仍会影响应用的性能，这对老旧浏览器来讲更为严重。许多老旧浏览器的JavaScript引擎很慢，这样会让polyfill的执行给用户造成不好的体验。性能是本身就是一个主题，老旧浏览器对性能更是敏感：首先它们就很慢，再者依赖越多的polyfill它们就得执行更多的JavaScript。所以，相比现代浏览器，老旧浏览器有着双重的负担；也因此对代码在老旧浏览器上的实际运行情况，更要进行测试。甚至有时为了性能，相比在所有浏览器上实现相同功能，还得在老旧浏览器移除某些些会带来更好用户体验的功能。最后还有一个建议，多考虑下你的终端用户吧。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如你所见，处理老旧浏览器所涉及的内容不止有表单。这是一整套的技术，全面掌握它们已经超出了本文的范围。</p>
+<p>如果已经读完了这个<a href="http://levonlin.info/2016/04/28/%E3%80%90%E8%AF%91%E3%80%91HTML%E8%A1%A8%E5%8D%95%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%80%E4%B8%AAHTML%E8%A1%A8%E5%8D%95/">HTML表单指南</a>的全部文章，你应该能很轻松地使用表单了。若你还发现了哪些新技术、新技巧，也请帮助<a href="https://developer.mozilla.org/en-US/docs/Project:How_to_help" target="_blank" rel="external">完善这个指南</a>。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a><a href="/tags/html/">html</a><a href="/tags/翻译/">翻译</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://levonlin.info/2017/07/16/【译】遗留浏览器中的表单/" data-title="【译】遗留浏览器中的表单 | 荒村" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/07/15/【译】使用FormData对象/"  title="【译】使用FormData对象">
+ <strong>旧一篇:</strong><br/> 
+ <span>【译】使用FormData对象
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="【译】遗留浏览器中的表单" data-thread-key="【译】遗留浏览器中的表单" data-author-key="null" data-url="http://levonlin.info/post/【译】遗留浏览器中的表单"></div>
+	
+</section>
+
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	<div class="copyright">
+		<span>Powered by <a href="https://github.com/hexojs/hexo">Hexo</a> and theme by 
+		<a href="https://github.com/levonlin/Tinnypp">Tinnypp</a>.</span>
+		
+			<span>© Levon</span>
+		
+	<div>
+</div></footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"levonlingithubio"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+<script type="text/javascript">
+  function footerPosition() {
+    var contentHeight = document.documentElement.scrollHeight,
+        winHeight = window.innerHeight;
+    if(contentHeight <= winHeight) {
+      $('footer').addClass('fixed-bottom');
+    } else {
+      $('footer').removeClass('fixed-bottom');
+    }
+  }
+  footerPosition();
+  $(window).resize(footerPosition);
+</script>
+
+
+  </body>
+</html>
